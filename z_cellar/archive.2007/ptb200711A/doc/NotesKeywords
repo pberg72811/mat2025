@@ -1,0 +1,160 @@
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+# NotesKeywords.
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+
+Here is an example of using keywords.
+
+    erase keywordtest
+    const keywordtest sl 16 10
+
+    key keywordtest add D:SOI_TIME           2005:05:11::10:10:10.76554
+    key keywordtest add F:SOI_TIME_DELTA     60.0
+
+    key keywordtest add D:STATE_VECTOR_TIME  2005:05:11::00:00:00.00
+    key keywordtest add D:STATE_VECTOR_X0    3.5677473837738839e4
+    key keywordtest add D:STATE_VECTOR_Y0    4.5677473837738839e4
+    key keywordtest add D:STATE_VECTOR_Z0    5.5677473837738839e4
+    key keywordtest add D:STATE_VECTOR_XD    3.5677473837738839e2
+    key keywordtest add D:STATE_VECTOR_YD    4.5677473837738839e2
+    key keywordtest add D:STATE_VECTOR_ZD    5.5677473837738839e2
+
+    key keywordtest add F:LATITUDE           0.000000000000000000
+    key keywordtest add F:LONGITUDE          0.000000000000000000
+    key keywordtest add F:ALTITUDE           0.000000000000000000
+
+    key keywordtest add F:CALIB_VECTOR_R(1)  1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_I(1)  2.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_R(2)  3.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_I(2)  4.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_R(3)  1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_I(3)  1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_R(4)  1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_I(4)  1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_R(5)  1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_I(5)  1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_R(6)  1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_I(6)  1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_R(7)  1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_I(7)  1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_R(8)  1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_I(8)  1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_R(9)  1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_I(9)  1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_R(10) 1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_I(10) 1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_R(11) 1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_I(11) 1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_R(12) 1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_I(12) 1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_R(13) 1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_I(13) 1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_R(14) 1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_I(14) 1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_R(15) 1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_I(15) 1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_R(16) 1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_I(16) 1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_R(17) 1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_I(17) 1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_R(18) 1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_I(18) 1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_R(19) 1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_I(19) 1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_R(20) 1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_I(20) 1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_R(21) 1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_I(21) 1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_R(22) 1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_I(22) 1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_R(23) 1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_I(23) 1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_R(24) 1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_I(24) 1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_R(25) 1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_I(25) 1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_R(26) 1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_I(26) 1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_R(27) 1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_I(27) 1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_R(28) 1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_I(28) 1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_R(29) 1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_I(29) 1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_R(30) 1.000000000000000000
+    key keywordtest add F:CALIB_VECTOR_I(30) 1.000000000000000000
+
+    key keywordtest add F:NOISE_VECTOR(1)    0.300000000000000000
+    key keywordtest add F:NOISE_VECTOR(2)    0.300000000000000000
+    key keywordtest add F:NOISE_VECTOR(3)    0.300000000000000000
+    key keywordtest add F:NOISE_VECTOR(4)    0.300000000000000000
+    key keywordtest add F:NOISE_VECTOR(5)    0.300000000000000000
+    key keywordtest add F:NOISE_VECTOR(6)    0.300000000000000000
+    key keywordtest add F:NOISE_VECTOR(7)    0.300000000000000000
+    key keywordtest add F:NOISE_VECTOR(8)    0.300000000000000000
+    key keywordtest add F:NOISE_VECTOR(9)    0.300000000000000000
+    key keywordtest add F:NOISE_VECTOR(10)   0.300000000000000000
+    key keywordtest add F:NOISE_VECTOR(11)   0.300000000000000000
+    key keywordtest add F:NOISE_VECTOR(12)   0.300000000000000000
+    key keywordtest add F:NOISE_VECTOR(13)   0.300000000000000000
+    key keywordtest add F:NOISE_VECTOR(14)   0.300000000000000000
+    key keywordtest add F:NOISE_VECTOR(15)   0.300000000000000000
+    key keywordtest add F:NOISE_VECTOR(16)   0.300000000000000000
+    key keywordtest add F:NOISE_VECTOR(17)   0.300000000000000000
+    key keywordtest add F:NOISE_VECTOR(18)   0.300000000000000000
+    key keywordtest add F:NOISE_VECTOR(18)   0.300000000000000000
+    key keywordtest add F:NOISE_VECTOR(19)   0.300000000000000000
+    key keywordtest add F:NOISE_VECTOR(20)   0.300000000000000000
+    key keywordtest add F:NOISE_VECTOR(21)   0.300000000000000000
+    key keywordtest add F:NOISE_VECTOR(22)   0.300000000000000000
+    key keywordtest add F:NOISE_VECTOR(23)   0.300000000000000000
+    key keywordtest add F:NOISE_VECTOR(24)   0.300000000000000000
+    key keywordtest add F:NOISE_VECTOR(25)   0.300000000000000000
+    key keywordtest add F:NOISE_VECTOR(26)   0.300000000000000000
+    key keywordtest add F:NOISE_VECTOR(27)   0.300000000000000000
+    key keywordtest add F:NOISE_VECTOR(28)   0.300000000000000000
+    key keywordtest add F:NOISE_VECTOR(29)   0.300000000000000000
+    key keywordtest add F:NOISE_VECTOR(30)   0.300000000000000000
+
+    key keywordtest add B:ELEMENT_STATUS     (1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1)
+
+    key keywordtest add L:FLIGHT_ID          3
+
+    key keywordtest add L:PNID               1133
+    key keywordtest add F:CF                 2287.5e6
+    key keywordtest add L:MODE               4
+
+
+Performing the status command with the "key" switch yields the following:
+
+    status/key keywordtest
+
+    Filespec (BLUE)    :  /data11/steswd/keywordtest.tmp
+    Number of elements :  16
+    File type          :  1000
+    Data format        :  SL - Scalar Long Int - (I*04)      
+    Write protected    :  F
+    Abscissa units     :  Time (sec)                         
+    Abscissa start     :     0.000000000000000    
+    Abscissa delta     :      1.00000000000000    
+    SOI_TIME==1746958210.76554
+    SOI_TIME_DELTA==60
+    STATE_VECTOR_TIME==1746921600
+    STATE_VECTOR_X0==35677.4738377388
+    STATE_VECTOR_Y0==45677.4738377388
+    STATE_VECTOR_Z0==55677.4738377388
+    STATE_VECTOR_XD==356.774738377388
+    STATE_VECTOR_YD==456.774738377388
+    STATE_VECTOR_ZD==556.774738377388
+    LATITUDE==0
+    LONGITUDE==0
+    CALIB_VECTOR_R==(1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1)
+    CALIB_VECTOR_I==(1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1)
+    NOISE_VECTOR==(0.30,0.30,0.30,0.30,0.30,0.30,0.30,0.30,0.30,0.30,0.30,0.30,0.30,
+    +  0.30,0.30,0.30,0.30,0.30,0.30,0.30,0.30,0.30,0.30,0.30,0.30,0.30,0.30,0.30,
+    +  0.30,0.30)
+    ELEMENT_STATUS==(1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1)
+    FLIGHT_ID==3
+    PNID==1133
+    FREQUENCY_NB==2287500000

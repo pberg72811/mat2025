@@ -1,0 +1,265 @@
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+# NotesBootKernelBuild (Perform after BootSTE).
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+
+export VERSION="2"
+export PATCHLEVEL="4"
+export SUBLEVEL="21"
+export EXTRAVERSION="27.0.2.EL"
+export CUSTMVERSION="27.0.2.200508A.smp"
+export LINUXCUR=linux-$VERSION.$PATCHLEVEL.$SUBLEVEL-$EXTRAVERSION
+export LINUXNEW=linux-$VERSION.$PATCHLEVEL.$SUBLEVEL-$CUSTMVERSION
+export WHOGINEW="200508A.smp"
+
+#-------------------------------------------------------------------------------
+# Latest and greatest kernel should be installed.
+#-------------------------------------------------------------------------------
+
+#-------------------------------------------------------------------------------
+# Make a copy of the source tree for building purposes.
+#-------------------------------------------------------------------------------
+    cd /usr/src
+
+    cp -r $LINUXCUR $LINUXNEW
+
+    rm -f linux-2.4
+    ln -s $LINUXNEW linux-2.4 
+    ln -s linux-2.4 linux
+
+#-------------------------------------------------------------------------------
+# Copy a generic config file.
+#-------------------------------------------------------------------------------
+    cd /usr/src/linux
+    cp ./configs/kernel-2.4.21-i686-smp.config config.$WHOGINEW
+
+#-------------------------------------------------------------------------------
+# Edit the make file to change the variable EXTRAVERSION to something meaningful.
+#-------------------------------------------------------------------------------
+    EXTRAVERSION = -27.0.2.EL
+     *** Becomes. ***
+    EXTRAVERSION = -27.0.2.200508A.smp
+
+#-------------------------------------------------------------------------------
+# Start the build process for the kernel.
+#-------------------------------------------------------------------------------
+     make mrproper
+     make clean
+
+#-------------------------------------------------------------------------------
+# User either "make xconfig" or "make menuconfig"
+#-------------------------------------------------------------------------------
+     make xconfig
+**OR**
+     make menuconfig
+
+
+#-------------------------------------------------------------------------------
+# Settings for configuration file.
+#-------------------------------------------------------------------------------
+
+Processor type and features ###########################################
+# #-------------------(Pentium-III/Celeron(Coppermine)) Processor family                    # #
+# #                   [*] Machine Check Exception                                           # #
+# #                   CPU Frequency scaling  --->                                           # #
+# #-------------------< > Toshiba Laptop support                                            # #
+# #-------------------< > Dell laptop support                                               # #
+# #                   <M> /dev/cpu/microcode - Intel IA32 CPU microcode support             # #
+# #                   <M> /dev/cpu/*/msr - Model-specific register support                  # #
+# #                   <M> /dev/cpu/*/cpuid - CPU information support                        # #
+# #                   [ ] E820 proc support                                                 # #
+# #                   <M> BIOS Enhanced Disk Drive calls determine boot disk (EXPERIMENTAL) # #
+# #-------------------(4GB) High Memory Support                                             # #
+# #                   [*] HIGHMEM I/O support                                               # #
+# #-------------------[*] 4 GB kernel-space and 4 GB user-space virtual memory support      # #
+# #                   [ ] Math emulation                                                    # #
+# #                   [*] MTRR (Memory Type Range Register) support                         # #
+# #                   [*] Symmetric multi-processing support                                # #
+# #                   (2-siblings) Hyperthreading Support                                   # #
+# #                   [*] Clustered APIC support                                            # #
+# #                   [*] Multi-node NUMA system support                                    # #
+# #                   [ ]  Multiquad (IBM/Sequent) NUMAQ support                            # #
+# #                   [*]  IBM x440 (Summit/EXA) support                                    # #
+# #                                                                                         # #
+
+Telephony Support ################################################
+# #                                        < > Linux telephony support                      # #
+  
+SCSI support ###################################################
+# #                     <M> SCSI support                                                    # #
+# #                     --- SCSI support type (disk, tape, CD-ROM)                          # #
+# #                     <M>   SCSI disk support                                             # #
+# #                     (256) Maximum number of SCSI disks that can be loaded as modules    # #
+# #                     <M>   SCSI dump support                                             # #
+# #                     <M>   SCSI tape support                                             # #
+# #                     <M>   SCSI OnStream SC-x0 tape support                              # #
+# #                     <M>   SCSI CD-ROM support                                           # #
+# #                     [*]     Enable vendor-specific extensions (for SCSI CDROM)          # #
+# #                     (4) Maximum number of CDROM devices that can be loaded as modules   # #
+# #                     <M>   SCSI generic support                                          # #
+# #                     --- Some SCSI devices (e.g. CD jukebox) support multiple LUNs       # #
+# #                     [ ]   Enable extra checks in new queueing code                      # #
+# #---------------------[*]   Probe all LUNs on each SCSI device                            # #
+# #                     [*]   Verbose SCSI error reporting (kernel size +=12K)              # #
+# #                     [*]   SCSI logging facility                                         # #
+# #                     SCSI low-level drivers  --->                                        # #
+# #                     PCMCIA SCSI adapter support  --->                                   # #
+# #                                                                                         # #
+# #
+
+IEEE 1394 (FireWire) support (EXPERIMENTAL) ###################################
+# #                              < > IEEE 1394 (FireWire) support (EXPERIMENTAL)            # #
+  
+Amateur Radio support ##############################################
+# #                                         [ ] Amateur Radio support                       # #
+  
+IrDA (infrared) support #############################################
+# #                                        < > IrDA subsystem support                       # #
+
+File systems #######################################################
+                       [ ] Quota support                                                    # #   
+Network File Systems ###############################################
+# #                    <M> Coda file system support (advanced network fs)                   # #
+# #                    < > InterMezzo file system support (replicating fs) (EXPERIMENTAL)   # #
+# #--------------------<*> NFS file system support                                          # #
+# #                    [*]   Provide NFSv3 client support                                   # #
+# #                    [*]   Allow direct I/O on NFS files (EXPERIMENTAL)                   # #
+# #                    [*]   Solaris ACL RPCs (EXPERIMENTAL)                                # #
+# #                    <M> NFS server support                                               # #
+# #                    [*]   Provide NFSv3 server support                                   # #
+# #                    [*]   Solaris ACL RPCs (EXPERIMENTAL)                                # #
+# #                    [*]   Provide NFS server over TCP support (EXPERIMENTAL)             # #
+# #                    <M> SMB file system support (to mount Windows shares etc.)           # #
+# #                    [ ]   Use a default NLS                                              # #
+# #                    <M> NCP file system support (to mount NetWare volumes)               # #
+# #                    [*]   Packet signatures                                              # #
+# #                    [*]   Proprietary file locking                                       # #
+# #                    [*]   Clear remove/delete inhibit when needed                        # #
+# #                    [*]   Use NFS namespace if available                                 # #
+# #                    [*]   Use LONG (OS/2) namespace if available                         # #
+# #                    [*]   Lowercase DOS filenames                                        # #
+# #                    [*]   Use Native Language Support                                    # #
+# #                    [*]   Enable symbolic links and execute flags                        # #
+# #                                                                                         # #
+  
+Bluetooth support ################################################
+# #                                      < > Bluetooth subsystem support                    # #
+
+#-------------------------------------------------------------------------------
+# Continue.
+#-------------------------------------------------------------------------------
+Copy new 3-ware drivers to kernel driver directory.
+
+     cp /root/rpm/3w-xxxx.* /usr/src/linux/drivers/scsi/
+
+Continue with kernel build.
+
+     make dep 2>&1             | tee logMakeDep
+     make bzImage 2>&1         | tee logMakeBzImage
+     make modules 2>&1         | tee logMakeModules
+     make modules_install 2>&1 | tee logMakeModulesInstall
+
+Install the new kernel
+
+     export TEMP_VERSION=$VERSION.$PATCHLEVEL.$SUBLEVEL-$CUSTMVERSION
+
+     cp /usr/src/linux-$TEMP_VERSION/System.map              /boot/System.map-$TEMP_VERSION
+     cp /usr/src/linux-$TEMP_VERSION/.config                 /boot/config-$TEMP_VERSION
+     cp /usr/src/linux-$TEMP_VERSION/arch/i386/boot/bzImage  /boot/vmlinuz-$TEMP_VERSION
+
+Create an initial ramdisk for the new kernel.
+
+     mkinitrd -v                /boot/initrd-$TEMP_VERSION.img     $TEMP_VERSION
+     mkinitrd -v --with=lvm-mod /boot/initrd-$TEMP_VERSION.img     $TEMP_VERSION
+     mkinitrd -v --with=3w-xxxx /boot/initrd-$TEMP_VERSION.img     $TEMP_VERSION
+     mkinitrd -v --with=qla2300 /boot/initrd-$TEMP_VERSION.img     $TEMP_VERSION
+     mkinitrd -v --with=dpt_i2o /boot/initrd-$TEMP_VERSION.img     $TEMP_VERSION
+     mkinitrd -v --with=lvm-mod --with=qla2300 --with=3w-xxxx --with=dpt_i2o /boot/initrd-$TEMP_VERSION.img   $TEMP_VERSION
+
+Add new kernel to the "/etc/grub.conf" or "/etc/lilo.conf files".
+
+     *** Make changes to "grub.conf" or "lilo.conf". ***
+
+Reboot.
+
+     shutdown -r now
+
+#----------------------------------------------------------------------------------------------
+#----------------------------------------------------------------------------------------------
+# The following was necessay to allow the SLIM PIC to run on the IBM ThinkPad.
+#----------------------------------------------------------------------------------------------
+#----------------------------------------------------------------------------------------------
+
+Processor type and features ###########################################
+# ########################################################################################### #
+# #                   (Pentium-4) Processor family                                          # #
+# #                   [*] Machine Check Exception                                           # #
+# #                   CPU Frequency scaling  --->                                           # #
+# #                   < > Toshiba Laptop support                                            # #
+# #                   < > Dell laptop support                                               # #
+# #                   <M> /dev/cpu/microcode - Intel IA32 CPU microcode support             # #
+# #                   <M> /dev/cpu/*/msr - Model-specific register support                  # #
+# #                   <M> /dev/cpu/*/cpuid - CPU information support                        # #
+# #                   [ ] E820 proc support                                                 # #
+# #                   <M> BIOS Enhanced Disk Drive calls determine boot disk (EXPERIMENTAL) # #
+# #                   (4GB) High Memory Support                                             # #
+# #                   [*] HIGHMEM I/O support                                               # #
+# #                   [*] 4 GB kernel-space and 4 GB user-space virtual memory support      # #
+# #                   [ ] Math emulation                                                    # #
+# #                   [*] MTRR (Memory Type Range Register) support                         # #
+# #                   [ ] Symmetric multi-processing support                                # #
+# #                   [*] Local APIC support on uniprocessors (NEW)                         # #
+# #                   [*] IO-APIC support on uniprocessors                                  # #
+# #                                                                                         # #
+
+General setup ##################################################
+# ########################################################################################### #
+# #                             [*] Networking support                                      # #
+# #                             [*] PCI support                                             # #
+# #                             (Any)   PCI access mode                                     # #
+# #                             [*] ISA bus support                                         # #
+# #                             < > NatSemi SCx200 support                                  # #
+# #                             [*] PCI device name database                                # #
+# #                             [*] EISA support                                            # #
+# #                             [ ] MCA support                                             # #
+# #                             [*] Support for hot-pluggable devices                       # #
+# #                             PCMCIA/CardBus support  --->                                # #
+# #                             PCI Hotplug Support  --->                                   # #
+# #                             [*] System V IPC                                            # #
+# #                             [*] BSD Process Accounting                                  # #
+# #                             [*] Sysctl support                                          # #
+# #                             (ELF) Kernel core (/proc/kcore) format                      # #
+# #                             <M> Kernel support for a.out binaries                       # #
+# #                             <*> Kernel support for ELF binaries                         # #
+# #                             <M> Kernel support for MISC binaries                        # #
+# #                             [ ] Kernel .config support                                  # #
+# #                             <M> System call auditing                                    # #
+# #                             [*] Power Management support                                # #
+# #                             <*>   Advanced Power Management BIOS support                # #
+# #                             [ ]     Ignore USER SUSPEND                                 # #
+# #                             [ ]     Enable PM at boot time                              # #
+# #                             [*]     Make CPU Idle calls when idle                       # #
+# #                             [ ]     Enable console blanking using APM                   # #
+# #                             [*]     RTC stores time in GMT                              # #
+# #                             [ ]     Allow interrupts during APM BIOS calls              # #
+# #                             [ ]     Use real mode APM BIOS call to power off            # #
+
+
+
+PCMCIA/CardBus support ##############################################
+# ########################################################################################### #
+# #                                  <*> PCMCIA/CardBus support                             # #
+# #                                  [*]   CardBus support                                  # #
+# #                                  [*]   Databook TCIC host bridge support                # #
+# #                                  [*]   i82092 compatible bridge support                 # #
+# #                                  [*]   i82365 compatible bridge support                 # #
+
+
+PCI Hotplug Support ###############################################
+# ########################################################################################### #
+# #                          <*> Support for PCI Hotplug (EXPERIMENTAL)                     # #
+# #                          <M>   Compaq PCI Hotplug driver                                # #
+# #                          [ ]     Save configuration into NVRAM on Compaq servers        # #
+# #                          <*>   IBM PCI Hotplug driver                                   # #
+# #                          < >   ACPI PCI Hotplug driver                                  # #

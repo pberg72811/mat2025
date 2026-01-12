@@ -1,0 +1,61 @@
+#!/bin/bash
+#-------------------------------------------------------------------------------------------------
+# File: example.bashrc.user
+# Desc: BASH startup script.
+# Hist: When       Who  What
+#       09/13/2021 ptb  Latest updates.
+#-------------------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------------------------
+# System Operation System ENV.
+#-------------------------------------------------------------------------------------------------
+export SYSTEMOS=LINUX
+export HISTSIZE=4096
+export HISTFILESIZE=4096
+
+#-------------------------------------------------------------------------------------------------
+# DIR COLORS
+#-------------------------------------------------------------------------------------------------
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+#-------------------------------------------------------------------------------------------------
+# Alias
+#-------------------------------------------------------------------------------------------------
+alias ll='ls -l --color=tty'
+alias rm='rm -i'
+alias grep='grep --color=auto'
+
+#-------------------------------------------------------------------------------------------------
+# Set Prompt.
+#-------------------------------------------------------------------------------------------------
+export PS1='\u> '
+
+#-------------------------------------------------------------------------------------------------
+# Set Path.
+#-------------------------------------------------------------------------------------------------
+export PATH=
+export PATH=$PATH:/bin
+export PATH=$PATH:/sbin
+export PATH=$PATH:/usr/bin
+export PATH=$PATH:/usr/sbin
+export PATH=$PATH:/usr/local/bin
+
+export PATH=/opt/conda/bin:$PATH
+
+#-------------------------------------------------------------------------------------------------
+# Set Library Path.
+#-------------------------------------------------------------------------------------------------
+export LD_LIBRARY_PATH=
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/libexec
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib64
+
+export QT_QPA_PLATFORM=offscreen
+
+cd

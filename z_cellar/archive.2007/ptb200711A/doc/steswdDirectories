@@ -1,0 +1,18 @@
+bin : Directory for STESWD  executables.
+cfg : Directory for X-Midas configuration files.
+dev : Directory for STESWD  development routines.
+doc : Directory for STESWD  general documents.  Could include X-Midas information.
+ds  : Directory for X-Midas data streams.  Not currently used.
+exp : Directory for X-Midas explain files.
+host: Directory for X-Midas host primitives.
+inc : Directory for X-Midas global include files.
+jev : Directory for STESWD  Java development.
+lib : Directory for STESWD  libraries.
+mcr : Directory for X-Midas macros.
+oct : Directory for STESWD  Octave development.
+src : Directory for STESWD  executable source code.  Actual executables end up in "bin".
+ssp : Directory for X-Midas ssp primitives.  No idea what this is.
+sys : Directory for STESWD  system includes.
+test: Directory for STESWD  test executable source code.
+unx : Directory for X-Midas unix specific build files and shell scripts.
+

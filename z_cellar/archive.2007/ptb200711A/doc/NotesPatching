@@ -1,0 +1,39 @@
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+# NotesPatching
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+
+To create a patch file.
+
+    diff -Naur oldDirectory newDirectory > patch-oldDirectory-to-newDirectory
+
+Flag explanation for the "diff" command:
+-N
+--new-file
+       In directory comparison, if a file is found in only  one  directory, 
+       treat it as present but empty in the other directory.
+
+-a     Treat  all  files as text and compare them line-by-line, even if they
+       do not seem to be text.
+
+-u     Use the unified output format.
+
+-r     When comparing directories, recursively compare any  subdirectories
+       found.
+
+For complete discription see manual pages for "diff" command.
+
+    man diff
+
+To use patch file.
+
+    patch -p0 < patch-oldDirectory-to-newDirectory
+
+Example.
+
+    diff -Naur /opt/thisOne/steswd200503A /opt/thatOne/steswd200504A > /opt/patchDir/patch-steswd200503A-to-steswd200504A
+
+    cd /opt/thisOne
+
+    patch -p0 < /opt/patchDir/patch-steswd200503A-to-steswd200504A

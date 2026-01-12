@@ -1,0 +1,102 @@
+# To perform a data capture.
+################################################################################
+pipe on
+iccpixrecord/pipeprio=5/flags=cpc=1/ci _stream(ps=64M) 40e6 PIC1_A2D_TUN1i 10.2e6 4 2
+headermod _stream 1000 ci
+iccarchive/pipeprio=5 _stream pictest 1024*1024*1024 /data12/steswd/ 25
+iccpipefunc/ts=1024*16/dtl1=512/stl1=0 _stream _timeseries
+ubiquitous/pipeprio=3 _timeSeries(ps=2M) _freqSeries(ps=2M) 1024*16 hann 0 DC 
+xrtplot/grid/fast/xs=4/xn="Power Spectrum" _freqSeries(ps=2M) -100 50 log
+pipe off
+
+
+# merge files
+################################################################################
+files/f=filelist /data11/steswd/pictest*
+forall filelist say #
+forall filelist merge # yfintest_20050328_184850
+
+
+# Perform a course psd for finding signals.
+################################################################################
+res file2use       yfintest_20050328_184850
+res psdfile2use psdyfintest_20050328_184850 
+
+pipe on 
+
+sourcefile file2use _stream01
+
+blockdec _stream01 _stream02 32*1024 1 15
+
+ubi _stream02 psdfile2use 32*1024 hann
+
+pipe off
+
+headermod psdfile2use ,,,,,,,, 0 3.276799999999999E-03*16
+
+
+# Newrate and tune
+################################################################################
+
+res ifile2use yfintest_20050328_184850
+res ofile2use rtyfintest_20050328_184850_13
+
+pipe on 
+
+sourcefile ifile2use _stream01
+
+newrate _stream01 _stream02 13.5168e6
+
+cxtune _stream02 _stream03 3.3168e6
+
+demux _stream03 ofile2use
+
+pipe off
+
+#########################################################
+
+
+# Simple test using PLL.
+################################################################################
+pll pictest_20050223_131736_CFLT32 dtri dtrq pllerr pllvco -.2e6 1024
+
+
+
+#RDS test
+
+pipe on
+
+sourcefile/inmem/replay=2 noisefile16a _stream(ps=8M)
+iccarchive/TS=1024*1024*2 _stream(ps=8M) santest 1024*1024*1024 /data12/steswd/ 25
+pipe off
+
+
+
+pipe on
+
+sourcefile/inmem/replay=2 noisefile16b _stream(ps=8M)
+iccarchive/TS=1024*1024*2 _stream(ps=8M) santest 1024*1024*1024 /data13/steswd/ 25
+pipe off
+
+
+
+# YFN001 partition table.
+################################################################################
+# partition table of /dev/sda
+unit: sectors
+
+/dev/sda1 : start=       63, size= 16771797, Id=83, bootable
+/dev/sda2 : start= 16771860, size= 16771860, Id=82
+/dev/sda3 : start= 33543720, size= 38218635, Id=83
+/dev/sda4 : start=        0, size=        0, Id= 0
+
+
+# ICCPIXRECORD TEST.
+################################################################################
+pipe on
+iccpixrecord/ci/pipeprio=5/flags=cpc=1 _stream(ps=64M) 40e6 PIC1_A2D_TUN1I 10.2e6 2 2 2
+iccarchive/pipeprio=5 _stream pictest 1024*1024*1024 /data12/steswd/ 25
+iccpipefunc/ts=1024*16/dtl1=512/stl1=0 _stream _timeseries
+ubiquitous/pipeprio=3 _timeSeries(ps=2M) _freqSeries(ps=2M) 1024*16 hann 0 DC 
+xrtplot/auto=2/grid/fast/xs=4/xn="Power Spectrum" _freqSeries(ps=2M) -100 50 log
+pipe off

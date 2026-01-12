@@ -1,0 +1,2 @@
+/* Define to 1 if gdal is present. */
+#undef HAVE_GDAL

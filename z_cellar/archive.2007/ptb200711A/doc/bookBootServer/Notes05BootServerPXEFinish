@@ -1,0 +1,52 @@
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+# NotesBootServerPXEFinish.
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+You need to create files in the "/tftpboot/pxelinux.cfg" directory that have names that
+correspond to the IP address of all the machine that you want to be able to boot off your
+boot server.  To get 192.9.214.210 to be able to boot make a file named "C009D6D2".  This 
+value happens to be in HEX.  192 = C0, 9 = 09, 214 = D6, 210 = D2.
+
+	touch /tftpboot/pxelinux.cfg/C009D6D2
+	touch /tftpboot/pxelinux.cfg/C009D6D3
+	touch /tftpboot/pxelinux.cfg/C009D6D4
+
+In each file write the configuration information.
+
+	default linux-test
+	prompt 1
+	timeout 5
+	display boot/boot.msg
+	F1 boot/boot.msg
+	F2 boot/options.msg
+	F3 boot/general.msg
+	F4 boot/param.msg
+	F5 boot/rescue.msg
+	F7 boot/snake.msg
+	label linux
+	  kernel boot/vmlinuz
+	  append initrd=boot/initrd.img lang= devfs=nomount ramdisk_size=9216
+	label text
+	  kernel boot/vmlinuz
+	  append initrd=boot/initrd.img lang= text devfs=nomount ramdisk_size=9216
+	label expert
+	  kernel boot/vmlinuz
+	  append expert initrd=boot/initrd.img lang= devfs=nomount ramdisk_size=9216
+	label ks
+	  kernel boot/vmlinuz
+	  append ks=nfs:192.9.200.66:/tftpboot/t21m.cfg initrd=boot/initrd.img lang= devfs=nomount ramdisk_size=9216 idebus=66
+	label nofb vga=0x340
+	  kernel boot/vmlinuz
+	  append initrd=boot/initrd.img lang= devfs=nomount nofb ramdisk_size=9216
+	label lowres
+	  kernel boot/vmlinuz
+	  append initrd=boot/initrd.img lang= lowres devfs=nomount ramdisk_size=9216
+	label linux-test
+	  kernel boot/vmlinuz
+	  append initrd=boot/initrd.img lang=text ramdisk_size=9216
+
+# Test the boot process.
+##########################################################################################
+
+

@@ -1,0 +1,72 @@
+! X-Midas startup macro
+!------------------------------------------------------------------------------
+startmacro
+
+! Set up the auxillary disks.
+! NOTE:  See the "midas.cfg" file for what auxillary disks are set. 
+!        If changes are made to "midas.cfg" you need to perform  the 
+!        "configure m" command. 
+!------------------------------------------------------------------------------
+aux 1 all !!!Write aux is 1 and read aux is all
+aux ,, +0 !!!Add user directory (0) as a read aux.
+
+! Set up X-Midas option trees.
+!------------------------------------------------------------------------------
+xmopt acq    /iex/xmidas/xmopts/acq114
+xmopt aibot  /iex/xmidas/xmopts/aibot160
+xmopt beta   /iex/xmidas/xmopts/beta-2_0_1
+xmopt hbot   /iex/xmidas/xmopts/hbot0_1_3
+xmopt ice    /iex/xmidas/xmopts/ice320
+xmopt ipc    /iex/xmidas/xmopts/ipc019a
+xmopt mxmap  /iex/xmidas/xmopts/mxmap-2_0_1
+xmopt psm    /iex/xmidas/xmopts/psm-1_8_0u
+xmopt spot   /iex/xmidas/xmopts/spot-1_3_3
+xmopt xmpy   /iex/xmidas/xmopts/xmpy-3_0_6
+xmopt xmpyqt /iex/xmidas/xmopts/xmpyqt-2_4_0
+
+xmopt del      /iex/xmidas/xmopts/del-1_5_3
+xmopt dsl      /iex/xmidas/xmopts/dsl200
+xmopt dslutil  /iex/xmidas/xmopts/dslutil123
+xmopt isyslite /iex/xmidas/xmopts/isyslite-2_1_0
+xmopt vpcut    /iex/xmidas/xmopts/vpcut124
+xmopt vpdsl    /iex/xmidas/xmopts/vpdsl103
+
+!xmopt mxmap /iex/xmopts/mxmap
+!xmopt sdds  /iex/xmopts/sdds
+!xmopt spot  /iex/xmopts/spot
+!xmopt xmpy  /iex/xmopts/xmpy
+
+xmopt ptb   /iex/xmidas/myopts/ptb
+xmopt xcc   /iex/xmidas/myopts/xcc
+xmopt xmc   /iex/xmidas/myopts/xmc   !! Do not xmpath xmc.
+
+! Set up the X-Midas path.
+!------------------------------------------------------------------------------
+xmpath acq aibot beta hbot ice ipc mxmap psm spot xmpy xmpyqt &
+       del dsl dslutil isyslite vpcut vpdsl ptb xcc
+
+! Set up the X-Midas ramdisk.  See midas.cfg.
+!------------------------------------------------------------------------------
+result l:ramaux 3
+
+! Set up hardware configuration for ice.
+!------------------------------------------------------------------------------
+local myhw
+fname a:myhw dat hwconfig prm ice
+hw file "^{myhw}"
+
+! Make sure the command line editor has INSERT ON set.
+! Set other environment variables.
+!------------------------------------------------------------------------------
+os setenv SHELL         /bin/tcsh
+os setenv XM_INSERT     ON
+os setenv XM_DEBUGGER "ddd -d $XMAREA/lib/dbgLib"
+os setenv XM_DEBUGGER "$XM_DEBUGGER -d $XMAREA_XCC/host"
+os setenv XM_DEBUGGER "$XM_DEBUGGER -d $XMAREA/host"
+os unsetenv COLORTERM
+
+! Setup Python.
+!------------------------------------------------------------------------------
+!PYENV
+
+endmacro

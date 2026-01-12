@@ -1,0 +1,12 @@
+tk
+matplotlib
+numpy
+scipy
+pytest
+python=3.11
+pandas
+stonesoup
+ipython
+ipykernel
+nbformat
+h5py

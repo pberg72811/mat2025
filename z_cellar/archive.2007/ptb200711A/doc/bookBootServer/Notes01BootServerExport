@@ -1,0 +1,69 @@
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+# NotesBootServerExport
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+Create a NFS export directory to stick the RedHat distribution in.
+
+    mkdir /export
+    mkdir /export/RH9
+
+Copy the RELEASE-NOTES.html file from the Redhat distribution disk 1.
+
+    cp /mnt/cdrom/RELEASE-NOTES.html /export/RH9
+
+Copy the "RedHat" directory from the Redhat distribution disk 1.
+
+    cp -r /mnt/cdrom/RedHat /export/RH9
+
+Copy the "RedHat" directory from the Redhat distribution disk 2.
+
+    cp -r /mnt/cdrom/RedHat /export/RH9
+
+Copy the "RedHat" directory from the Redhat distribution disk 3.
+
+    cp -r /mnt/cdrom/RedHat /export/RH9
+
+Create the "Update" dirctory.
+
+    mkdir /export/Updates
+
+Copy the redhat updates to the "Updates" directory
+
+    cp -r /mnt/cdrom/*.rpm /export/RH9/Updates
+
+Create the directory "TahDer".
+
+    mkdir /export/RH9/TahDer
+
+Copy the octave source rpm from the Redhat SRPM disk 2.
+
+    cp /mnt/cdrom/SRPMS/octave-2.1.40-4.src.rpm /export/RH9/TahDer
+
+Copy the java sdk rpm from the steswd distribution disk.
+
+    cp /mnt/cdrom/j2sdk-1_4_2_04-linux-i586.rpm /export/RH9/TahDer/
+
+Copy the ice drivers from the steswd distribution disk.
+
+    cp /mnt/cdrom/ice*.zip /export/RH9/TahDer/
+
+Copy the XMPY archives from the steswd distribution disk.
+
+    cp /mnt/cdrom/xmpy* /export/RH9/TahDer/
+
+    cp /mnt/cdrom/xm3* /export/RH9/TahDer/
+
+
+Set up the "/export/RH9" directory as a NFS export directory. (AS ROOT).
+
+    echo "/export         *(rw,no_root_squash,no_all_squash)" >> /etc/exports
+    echo "/export/RH9     *(rw,no_root_squash,no_all_squash)" >> /etc/exports
+    echo "/export/RHEL3U3 *(rw,no_root_squash,no_all_squash)" >> /etc/exports
+    echo "/export/TahDer  *(rw,no_root_squash,no_all_squash)" >> /etc/exports
+
+Restart or start the NFS server.
+
+    service nfs restart
+
+

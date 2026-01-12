@@ -1,0 +1,37 @@
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+# NotesSSH.
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+To allow steswd@pmp001 to ssh to steswd@rds001 without passwords.
+
+Make sure you are currently logged onto steswd@pmp001
+
+    ssh-keygen -t dsa -f ~/.ssh/id_dsa
+    scp ~/.ssh/id_dsa.pub steswd@rds001:.ssh/tempkey
+    <ENTER PASSWORD BEACAUSE YOU ARE NOT TOTALLY SET UP YET.>
+
+
+    ssh steswd@rds001
+    <ENTER PASSWORD BEACAUSE YOU ARE NOT TOTALLY SET UP YET.>
+    cd ~/.ssh
+    cat tempkey >> authorized_keys2
+    chmod 640 authorized_keys2
+    rm tempkey
+
+
+To allow steswd@rds001 to ssh to steswd@pmp001 without passwords.
+
+Make sure you are currently logged onto steswd@rds001
+
+    ssh-keygen -t dsa -f ~/.ssh/id_dsa
+    scp ~/.ssh/id_dsa.pub steswd@pmp001:.ssh/tempkey
+    <ENTER PASSWORD BEACAUSE YOU ARE NOT TOTALLY SET UP YET.>
+
+
+    ssh steswd@pmp001
+    <ENTER PASSWORD BEACAUSE YOU ARE NOT TOTALLY SET UP YET.>
+    cd ~/.ssh
+    cat tempkey >> authorized_keys2
+    chmod 640 authorized_keys2
+    rm tempkey

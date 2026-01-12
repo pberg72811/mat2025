@@ -1,0 +1,80 @@
+!!----------------------------------------UNCLASSIFIED-------------------------------------------
+!! File: test_lla.txt                                                                           -
+!!                                                                                              -
+!! Desc: This macro tests the icclla5000 primitive.                                             -
+!!                                                                                              -
+!! Args: NONE  - No input arguments.              <A:>                                          -
+!!                                                                                              -
+!! Swch: None                                                                                   -
+!!                                                                                              -
+!! Hist : When       Who  What                                                                  -
+!!        05/17/2006 ptb  Initial Code.                                                         -
+!!                                                                                              -
+!! Note: Currently icclla5000 uses a spherical earth model.  X-Midas, however,                  -
+!!       uses a more accurate ellipsoid model.  The current error for this                      -
+!!       macro is around 23 kilometers.                                                         -
+!!                                                                                              -
+!!                                                                                              -
+!! Examples: test_lla                                                                           -
+!!                                                                                              -
+!!01.0 Description                                                                              -
+!!02.0 Requirements                                                                             -
+!!03.0 Interfaces                                                                               -
+!!04.0 Design Description                                                                       -
+!!05.0 Unit Code                                                                                -
+!!06.0 Unit Test Plan                                                                           -
+!!07.0 Test Results                                                                             -
+!!08.0 Build Procedures                                                                         -
+!!09.0 Notes                                                                                    -
+!!10.0 Reviewers.                                                                               -
+!!-----------------------------------------------------------------------------------------------
+startmacro 
+
+!!-----------------------------------------------------------------------------------------------
+local d:timeThen
+
+!! Generate a test location file strictly in X-Midas.
+!!-----------------------------------------------------------------------------------------------
+location test_locationA 41.07694626 -85.12305450 500.00000
+timex 2006:05:16::00:00:00 timethen
+timecode test_locationA timethen
+merge test_locationA test_locationA
+merge test_locationA test_locationA
+merge test_locationA test_locationA
+merge test_locationA test_locationA
+merge test_locationA test_locationA
+merge test_locationA test_locationA
+merge test_locationA test_locationA
+merge test_locationA test_locationA
+merge test_locationA test_locationA
+merge test_locationA test_locationA
+merge test_locationA test_locationA
+merge test_locationA test_locationA
+merge test_locationA test_locationA
+merge test_locationA test_locationA
+merge test_locationA test_locationA
+merge test_locationA test_locationA
+merge test_locationA test_locationA
+noop test_locationA(1:60*60*24) temp
+erase test_locationA
+noop temp test_locationA
+erase temp
+status test_locationA
+
+!! Generate a test location file using icclla5000
+!!-----------------------------------------------------------------------------------------------
+ICCLLA5000 test_locationB 41.07694626 -85.12305450 500.00000 2006:05:16::00:00:00 60*60*24 1
+
+!! Calculate the range between the two points.
+!!-----------------------------------------------------------------------------------------------
+dual5000 test_locationA test_locationB test_error R
+
+!! Set the abscissa units to seconds
+!!-----------------------------------------------------------------------------------------------
+headermod test_error xu=1
+
+!! Plot the error.
+!!-----------------------------------------------------------------------------------------------
+xplot/all/xn="ICCLLA500 ERROR"  test_error ,,,,, 5
+
+endmacro

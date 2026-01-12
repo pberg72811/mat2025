@@ -1,0 +1,25 @@
+#!/bin/csh -f
+# File: xmstart
+# Desc: This script is run when X-Midas starts up and should be found in the 
+#       $XMDISK/xm/sitemods/unix directory.
+#------------------------------------------------------------------------------------------------
+# xmstart file located in "$XMDISK/sitemods/unix/"
+
+xmopt xmpy    $XMDISK/localopts/xmpy
+xmopt adp     $XMDISK/localopts/adp
+xmopt beta    $XMDISK/localopts/beta
+xmopt dsp     $XMDISK/localopts/dsp
+xmopt ice     $XMDISK/localopts/ice
+xmopt nmfft   $XMDISK/localopts/nmfft
+xmopt sysadd  $XMDISK/localopts/sysadd
+xmopt spot    $XMDISK/localopts/spot
+
+#xmopt cgeo    $XMDISK/localopts/cgeo
+#xmopt dted    $XMDISK/localopts/dted
+#xmopt hbs     $XMDISK/localopts/hbs
+#xmopt psm     $XMDISK/localopts/psm
+#xmopt sbs     $XMDISK/localopts/sbs
+#xmopt ssrib   $XMDISK/localopts/ssrib
+#xmopt xcs     $XMDISK/localopts/xcs
+
+#source $XMAREA_XSTL/unix/stlsetup

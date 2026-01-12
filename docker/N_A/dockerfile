@@ -1,0 +1,17 @@
+FROM ubuntu:24.04
+
+RUN apt update
+RUN apt install -y tcsh
+RUN apt install -y ncal
+RUN apt install -y libx11-dev
+RUN apt install -y x11-apps
+
+WORKDIR /home/xmidas
+
+RUN groupadd xmidas
+RUN useradd -d /home/xmidas -g xmidas -s /bin/tcsh xmidas
+RUN chown xmidas:xmidas /home/xmidas	
+
+USER xmidas
+
+CMD ["/bin/cal"]

@@ -1,0 +1,28 @@
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+# NotesCrash.
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+
+When you get the "UNEXPECTED INCONSISTENCY; RUN fsck MANUALLY" notification.
+
+Do the "df" command.
+
+You will get something that looks like:
+
+	Filesystem           1K-blocks      Used Available Use% Mounted on
+	/dev/hda3             55501752   5212072  47470276  10% /
+	/dev/hda1               124427     10663    107340  10% /boot
+	/dev/vg0/lv0         117429280  41200080  70357176  37% /data0
+	none                   1032356         0   1032356   0% /dev/shm
+
+
+Do the "fsck" command on the partition that is having the problem.
+
+Example:
+
+	fsck /dev/hda3
+
+or if you do not want to answer all the questions.
+
+	fsck -a /dev/dha3

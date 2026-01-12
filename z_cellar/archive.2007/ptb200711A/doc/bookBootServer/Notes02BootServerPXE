@@ -1,0 +1,35 @@
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+# NotesBootServerPXE.
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+You need to get PXELINUX.
+
+Look up 
+	"http://syslinux.zytor.com/pxe.php"
+and 
+	"http://syslinux.zytor.com/faq.php"
+
+to read up and get the latest downloads.
+
+Untar syslinux
+
+	tar -xvf syslinux-2.08.tar
+
+As root create a /tftpboot direcitory with the proper ownership and accesses.
+
+	su root
+	cd /
+	mkdir tftpboot
+	chown nobody:nobody /tftpboot -R
+	chmod ugo+wrx /tftpboot
+
+Copy the pxelinux.0 file to the /tftpboot directory
+
+	cp syslinux-2.08/pxelinux.0 /tftpboot
+
+Create a pxe configuration directory
+
+	mkdir /tftpboot/pxelinux.cfg
+
+

@@ -1,0 +1,12 @@
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+# NotesLUN.
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+Short for logical unit number, a unique identifier used on a SCSI bus to distinguish between devices that share the same bus. 
+SCSI is a parallel interface that allows up to 16 devices to be connected along a single cable. The cable and the host adapter 
+form the SCSI bus, and this operates independently of the rest of the computer. Each of the eight devices is given a unique 
+address by the SCSI BIOS, ranging from 0 to 7 for an 8-bit bus or 0 to 15 for a 16-bit bus. Devices that request I/O processes 
+are called initiators. Targets are devices that perform operations requested by initiators. Each target can accommodate up to 
+eight other devices, known as logical units, and each is assigned an LUN. Commands that are sent to the SCSI controller identify 
+devices based on their LUNs.

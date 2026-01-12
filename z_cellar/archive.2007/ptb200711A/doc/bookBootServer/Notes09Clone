@@ -1,0 +1,222 @@
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+# NotesClone
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+
+# Create a list of files to put into initrd
+
+    cd
+    echo "/bin/"                      >  list-o-files
+    echo "/bin/bash"                  >> list-o-files
+    echo "/bin/clone"                 >> list-o-files
+    echo "/bin/dd"                    >> list-o-files
+    echo "/bin/df"                    >> list-o-files
+    echo "/bin/gzip"                  >> list-o-files
+    echo "/bin/mkdir"                 >> list-o-files
+    echo "/bin/mknod"                 >> list-o-files
+    echo "/bin/mount"                 >> list-o-files
+    echo "/bin/umount"                >> list-o-files
+    echo "/bin/ping"                  >> list-o-files
+    echo "/bin/rm"                    >> list-o-files
+    echo "/bin/tftp"                  >> list-o-files
+    echo "/bin/ls"                    >> list-o-files
+    echo "/bin/vi"                    >> list-o-files
+    echo "/dev/"                      >> list-o-files
+    echo "/dev/cciss/"                >> list-o-files
+    echo "/dev/console"               >> list-o-files
+    echo "/dev/null"                  >> list-o-files
+    echo "/etc/"                      >> list-o-files
+    echo "/etc/dhcpc/"                >> list-o-files
+    echo "/etc/hosts"                 >> list-o-files
+    echo "/etc/nsswitch.conf"         >> list-o-files
+    echo "/etc/protocols"             >> list-o-files
+    echo "/etc/services"              >> list-o-files
+    echo "/lib/"                      >> list-o-files
+    echo "/lib/3c59x.o"               >> list-o-files
+    echo "/lib/i686/"                 >> list-o-files
+    echo "/lib/i686/libc-2.3.2.so"    >> list-o-files
+    echo "/lib/i686/libc.so.6"        >> list-o-files
+    echo "/lib/ld-2.3.2.so"           >> list-o-files
+    echo "/lib/ld-linux.so.2"         >> list-o-files
+    echo "/lib/libdl-2.3.2.so"        >> list-o-files
+    echo "/lib/libdl.so.2"            >> list-o-files
+    echo "/lib/libnss_files-2.3.2.so" >> list-o-files
+    echo "/lib/libnss_files.so.2"     >> list-o-files
+    echo "/lib/libtermcap.so.2"       >> list-o-files
+    echo "/lib/libtermcap.so.2.0.8"   >> list-o-files
+    echo "/lib/libacl.so.1.0.3"       >> list-o-files
+    echo "/lib/libacl.so.1"           >> list-o-files
+    echo "/lib/libacl.so"             >> list-o-files
+    echo "/lib/libattr.so.1.0.1"      >> list-o-files
+    echo "/lib/libattr.so.1"          >> list-o-files
+    echo "/lib/libattr.so"            >> list-o-files
+    echo "/lib/libresolv-2.3.2.so"    >> list-o-files
+    echo "/lib/libresolv.so.2"        >> list-o-files
+    echo "/proc/"                     >> list-o-files
+    echo "/sbin/"                     >> list-o-files
+    echo "/sbin/dhcpcd"               >> list-o-files
+    echo "/sbin/fdisk"                >> list-o-files
+    echo "/sbin/ifconfig"             >> list-o-files
+    echo "/sbin/insmod"               >> list-o-files
+    echo "/sbin/lsmod"                >> list-o-files
+    echo "/tmp/"                      >> list-o-files
+    echo "/var/"                      >> list-o-files
+    echo "/var/run/"                  >> list-o-files
+    echo "/mnt/"                      >> list-o-files
+
+# Create a list of files to put into initrd for Redhat 4u2
+
+    cd
+    echo "/bin/"                      >  list-o-files
+    echo "/bin/bash"                  >> list-o-files
+    echo "/bin/clone"                 >> list-o-files
+    echo "/bin/dd"                    >> list-o-files
+    echo "/bin/df"                    >> list-o-files
+    echo "/bin/gzip"                  >> list-o-files
+    echo "/bin/mkdir"                 >> list-o-files
+    echo "/bin/mknod"                 >> list-o-files
+    echo "/bin/mount"                 >> list-o-files
+    echo "/bin/nc"                    >> list-o-files
+    echo "/bin/ping"                  >> list-o-files
+    echo "/bin/rm"                    >> list-o-files
+    echo "/bin/tar"                   >> list-o-files
+    echo "/bin/tftp"                  >> list-o-files
+    echo "/bin/ls"                    >> list-o-files
+    echo "/bin/umount"                >> list-o-files
+    echo "/bin/vi"                    >> list-o-files
+    echo "/dev/"                      >> list-o-files
+    echo "/dev/cciss/"                >> list-o-files
+    echo "/dev/console"               >> list-o-files
+    echo "/dev/null"                  >> list-o-files
+    echo "/etc/"                      >> list-o-files
+    echo "/etc/dhcpc/"                >> list-o-files
+    echo "/etc/hosts"                 >> list-o-files
+    echo "/etc/nsswitch.conf"         >> list-o-files
+    echo "/etc/protocols"             >> list-o-files
+    echo "/etc/services"              >> list-o-files
+    echo "/lib/"                      >> list-o-files
+    echo "/lib/3c59x.o"               >> list-o-files
+    echo "/lib/i686/"                 >> list-o-files
+    echo "/lib/i686/libc-2.3.4.so"    >> list-o-files
+    echo "/lib/i686/libc.so.6"        >> list-o-files
+    echo "/lib/ld-2.3.4.so"           >> list-o-files
+    echo "/lib/ld-linux.so.2"         >> list-o-files
+    echo "/lib/libdl-2.3.4.so"        >> list-o-files
+    echo "/lib/libdl.so.2"            >> list-o-files
+    echo "/lib/libnss_files-2.3.4.so" >> list-o-files
+    echo "/lib/libnss_files.so.2"     >> list-o-files
+    echo "/lib/libtermcap.so.2"       >> list-o-files
+    echo "/lib/libtermcap.so.2.0.8"   >> list-o-files
+    echo "/lib/libacl.so.1.1.0"       >> list-o-files
+    echo "/lib/libacl.so.1"           >> list-o-files
+    echo "/lib/libacl.so"             >> list-o-files
+    echo "/lib/libattr.so.1.1.0"      >> list-o-files
+    echo "/lib/libattr.so.1"          >> list-o-files
+    echo "/lib/libattr.so"            >> list-o-files
+    echo "/lib/libresolv-2.3.4.so"    >> list-o-files
+    echo "/lib/libresolv.so.2"        >> list-o-files
+    echo "/lib/librt-2.3.4.so"        >> list-o-files
+    echo "/lib/librt.so.1"            >> list-o-files
+    echo "/lib/libselinux.so.1"       >> list-o-files
+    echo "/lib/libpthread-0.10.so"    >> list-o-files
+    echo "/lib/libpthread.so.0"       >> list-o-files
+    echo "/lib/libnsl-2.3.4.so"       >> list-o-files
+    echo "/lib/libnsl.so.1"           >> list-o-files
+    echo "/usr/"                      >> list-o-files
+    echo "/usr/lib/"                  >> list-o-files
+    echo "/usr/lib/libreadline.so.4.3" >> list-o-files
+    echo "/usr/lib/libreadline.so.4"   >> list-o-files
+    echo "/usr/lib/libreadline.so"     >> list-o-files
+    echo "/proc/"                     >> list-o-files
+    echo "/sbin/"                     >> list-o-files
+    echo "/sbin/dhcpcd"               >> list-o-files
+    echo "/sbin/fdisk"                >> list-o-files
+    echo "/sbin/ifconfig"             >> list-o-files
+    echo "/sbin/insmod"               >> list-o-files
+    echo "/sbin/lsmod"                >> list-o-files
+    echo "/sbin/rmmod"                >> list-o-files
+    echo "/sbin/portmap"              >> list-o-files
+    echo "/tmp/"                      >> list-o-files
+    echo "/var/"                      >> list-o-files
+    echo "/var/run/"                  >> list-o-files
+    echo "/mnt/"                      >> list-o-files
+
+# Check the existance of these files
+
+    ls -d $(<list-o-files) > /dev/null
+
+# Create an initial ram disk (initrd).
+
+    dd if=/dev/zero of=initrd bs=1024 count=32768
+
+    yes | mkfs initrd
+
+    mkdir /mnt/mp4initrd
+
+    mount -o loop initrd /mnt/mp4initrd
+
+    egrep -v "clone|3c59x|tftp|dhcp" list-o-files | cpio -pdm /mnt/mp4initrd
+
+    cp -p /usr/bin/tftp /mnt/mp4initrd/bin/.
+
+    cp -p /lib/modules/2.6.9-20051216.smp/kernel/drivers/net/e1000/e1000.ko /mnt/mp4initrd/lib/.
+    cp -p /lib/modules/2.6.9-20051216.smp/kernel/drivers/net/e100.ko        /mnt/mp4initrd/lib/.
+    cp -p /lib/modules/2.6.9-20051216.smp/kernel/drivers/block/cciss.ko     /mnt/mp4initrd/lib/.
+    cp -p /lib/modules/2.6.9-20051216.smp/kernel/drivers/scsi/sd_mod.ko     /mnt/mp4initrd/lib/.
+    cp -p /lib/modules/2.6.9-20051216.smp/kernel/drivers/scsi/scsi_mod.ko   /mnt/mp4initrd/lib/.
+    cp -p /lib/modules/2.6.9-20051216.smp/kernel/fs/jbd/jbd.ko              /mnt/mp4initrd/lib/.
+    cp -p /lib/modules/2.6.9-20051216.smp/kernel/fs/ext3/ext3.ko            /mnt/mp4initrd/lib/.
+    cp -p /lib/modules/2.6.9-20051216.smp/kernel/drivers/net/mii.ko         /mnt/mp4initrd/lib/.
+    cp -p /lib/modules/2.6.9-20051216.smp/kernel/drivers/net/tg3.ko         /mnt/mp4initrd/lib/.
+
+# Make a little script
+
+    echo "/bin/mount -t proc proc /proc"     > /mnt/mp4initrd/theScript
+    echo "/sbin/insmod /lib/tg3.ko"         >> /mnt/mp4initrd/theScript
+    echo "/sbin/portmap"                    >> /mnt/mp4initrd/theScript
+    echo "mkdir /mnt/{hd1,hd2,hd3,nfs}"     >> /mnt/mp4initrd/theScript
+
+    echo "/bin/mknod /dev/c0d0   b 104 0"   >> /mnt/mp4initrd/theScript
+    echo "/bin/mknod /dev/c0d0p1 b 104 1"   >> /mnt/mp4initrd/theScript
+    echo "/bin/mknod /dev/c0d0p2 b 104 2"   >> /mnt/mp4initrd/theScript
+    echo "/bin/mknod /dev/c0d0p3 b 104 3"   >> /mnt/mp4initrd/theScript
+
+    echo "/sbin/insmod /lib/scsi_mod.ko"    >> /mnt/mp4initrd/theScript
+    echo "/sbin/insmod /lib/cciss.ko"       >> /mnt/mp4initrd/theScript
+    echo "/sbin/insmod /lib/jbd.ko"         >> /mnt/mp4initrd/theScript
+    echo "/sbin/insmod /lib/ext3.ko"        >> /mnt/mp4initrd/theScript
+
+    chmod ugo+wrx /mnt/mp4initrd/theScript
+
+
+#### /theScript
+#### /sbin/ifconfig eth0 inet 192.9.214.204
+#### mount 192.9.214.113:/data12 /mnt/nfs
+#### dd if=/mnt/nfs/image01 | gzip -c -d > /dev/c0d0 
+
+# Finish
+
+    umount /mnt/mp4initrd
+
+    gzip initrd -S .clone.img
+
+
+#################################################################################################
+#################################################################################################
+# Deprecated Notes:
+# 
+    echo "/sbin/insmod /lib/sd_mod.ko"   >> /mnt/mp4initrd/theScript
+
+# Deprecated Notes: Make the tftp script
+# 
+    echo "tftp_server=192.9.214.113"                    >> /mnt/mp4initrd/tftpScript
+    echo "image=imag001"                                >> /mnt/mp4initrd/tftpScript
+    echo "device_name=/dev/c0d0"                        >> /mnt/mp4initrd/tftpScript
+    echo "tftp \${tftp_server} <<-EOT &"                >> /mnt/mp4initrd/tftpScript
+    echo "binary"                                       >> /mnt/mp4initrd/tftpScript
+    echo "put \${image}"                                >> /mnt/mp4initrd/tftpScript
+    echo "EOT"                                          >> /mnt/mp4initrd/tftpScript
+    echo "dd if=\${device_name} | gzip -c > \${image}"  >> /mnt/mp4initrd/tftpScript
+
+    chmod ugo+wrx /mnt/mp4initrd/tftpScript

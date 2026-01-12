@@ -1,0 +1,95 @@
+#!/usr/bin/perl
+#2345678901234567890123456789012345678901234567890123456789012345678901234567890
+#-------------------------------------------------------------------------------
+# Use:
+#
+# First test with:
+#   perl $STESWD/dev/perlReverseCommonCode programFile.c
+#
+# Make changes permenate with:
+#   perl -i $STESWD/dev/perlReverseCommonCode programFile.c
+#-------------------------------------------------------------------------------
+# Initialize the code line counter.
+#-------------------------------------------------------------------------------
+$noPrintFlag = 0;
+
+#-------------------------------------------------------------------------------
+# Step through each line of the file.
+#-------------------------------------------------------------------------------
+while (<>)
+{
+
+    #---------------------------------------------------------------------------
+    # If COMMON-CODE_ASM START line is found uncomment and stop printing.
+    #---------------------------------------------------------------------------
+    if(/COMMON-CODE_ASM/ && /START/)
+    {
+      $temp = $_;                               # Copy $_ to $temp.
+      $temp =~ s|;COMMON-CODE_ASM|  COMMON_CODE_ASM|g; # Uncomment the COMMON-CODE.
+      $temp =~ s|; COMMON-CODE_ASM|   COMMON_CODE_ASM|g; # Uncomment the COMMON-CODE.
+      $temp =~ s|;  COMMON-CODE_ASM|    COMMON_CODE_ASM|g; # Uncomment the COMMON-CODE.
+      $temp =~ s|;   COMMON-CODE_ASM|     COMMON_CODE_ASM|g; # Uncomment the COMMON-CODE.
+      $temp =~ s|;------------------------------- COMMON-CODE_ASM|  COMMON_CODE_ASM|g; # Uncomment the COMMON-CODE.
+      $temp =~ s|;-------------------------------  COMMON-CODE_ASM|   COMMON_CODE_ASM|g; # Uncomment the COMMON-CODE.
+      $temp =~ s|;-------------------------------   COMMON-CODE_ASM|    COMMON_CODE_ASM|g; # Uncomment the COMMON-CODE.
+      $temp =~ s|;-------------------------------    COMMON-CODE_ASM|     COMMON_CODE_ASM|g; # Uncomment the COMMON-CODE.
+      $temp =~ s/START.//;                      # Get rid of the word START.
+      print("$temp");                           # Print back the original line.
+      $noPrintFlag = 1;                         # Set the no print flag.
+    }
+    #---------------------------------------------------------------------------
+    # If COMMON-CODE STOP line is found uncomment and resume printing.
+    #---------------------------------------------------------------------------
+    elsif(/COMMON-CODE_ASM/ && /STOP/)
+    {
+      $temp = $_;                             # Copy $_ to $temp.
+      $temp =~ s|;COMMON-CODE_ASM|COMMON_CODE_ASM|g; # Uncomment the COMMON-CODE.
+      $temp =~ s/STOP.//;                     # Get rid of the word STOP.
+      #print("$temp");                        # Do not print back the original line.
+      $noPrintFlag = 0;                       # Set the no print flag to off.
+    }
+    #---------------------------------------------------------------------------
+    # If COMMON-CODE START line is found uncomment and stop printing.
+    #---------------------------------------------------------------------------
+    elsif(/COMMON-CODE/ && /START/)
+    {
+      $temp = $_;                               # Copy $_ to $temp.
+      $temp =~ s|//COMMON-CODE|  COMMON_CODE|g; # Uncomment the COMMON-CODE.
+      $temp =~ s|// COMMON-CODE|   COMMON_CODE|g; # Uncomment the COMMON-CODE.
+      $temp =~ s|//  COMMON-CODE|    COMMON_CODE|g; # Uncomment the COMMON-CODE.
+      $temp =~ s|//   COMMON-CODE|     COMMON_CODE|g; # Uncomment the COMMON-CODE.
+      $temp =~ s|//------------------------------- COMMON-CODE|  COMMON_CODE|g; # Uncomment the COMMON-CODE.
+      $temp =~ s|//-------------------------------  COMMON-CODE|   COMMON_CODE|g; # Uncomment the COMMON-CODE.
+      $temp =~ s|//-------------------------------   COMMON-CODE|    COMMON_CODE|g; # Uncomment the COMMON-CODE.
+      $temp =~ s|//-------------------------------    COMMON-CODE|     COMMON_CODE|g; # Uncomment the COMMON-CODE.
+      $temp =~ s/START.//;                      # Get rid of the word START.
+      print("$temp");                           # Print back the original line.
+      $noPrintFlag = 1;                         # Set the no print flag.
+    }
+    #---------------------------------------------------------------------------
+    # If COMMON-CODE STOP line is found uncomment and resume printing.
+    #---------------------------------------------------------------------------
+    elsif(/COMMON-CODE/ && /STOP/)
+    {
+      $temp = $_;                             # Copy $_ to $temp.
+      $temp =~ s|//COMMON-CODE|COMMON_CODE|g; # Uncomment the COMMON-CODE.
+      $temp =~ s/STOP.//;                     # Get rid of the word STOP.
+      #print("$temp");                        # Do not print back the original line.
+      $noPrintFlag = 0;                       # Set the no print flag to off.
+    }
+
+    #---------------------------------------------------------------------------
+    # Print the line if noPrintFlag is off.
+    #---------------------------------------------------------------------------
+    else
+    {
+      if( $noPrintFlag eq 0 )
+      {
+	print("$_");
+      }
+    }
+
+#-------------------------------------------------------------------------------
+# Done
+#-------------------------------------------------------------------------------
+}

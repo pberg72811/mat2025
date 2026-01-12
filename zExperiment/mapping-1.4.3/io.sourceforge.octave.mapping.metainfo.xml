@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright 2023 The Octave Project Developers
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.  This file is offered as-is,
+without any warranty.
+-->
+<component type="addon">
+  <id>io.sourceforge.octave.mapping</id>
+  <extends>org.octave.Octave</extends>
+  <name>Mapping</name>
+  <summary>Mapping functions</summary>
+  <description>
+    <p>Provides functions for coordinate systems,
+    coordinate transforms, paths and curves, lengths,
+    angles and dimensions, GIS files I/O, and various
+    mapping-related utilities.</p>
+  </description>
+    <keywords>
+    <keyword>arc length</keyword>
+    <keyword>coordinate systems</keyword>
+    <keyword>coordinate transform</keyword>
+    <keyword>dimensions</keyword>
+    <keyword>ellipsoid</keyword>
+    <keyword>geodetic</keyword>
+    <keyword>GIS file I/O</keyword>
+    <keyword>GIS raster file</keyword>
+    <keyword>GIS vector file</keyword>
+    <keyword>GPX</keyword>
+    <keyword>KML</keyword>
+    <keyword>latitude</keyword>
+    <keyword>longitude</keyword>
+    <keyword>mapping</keyword>
+    <keyword>meridian</keyword>
+    <keyword>polygon</keyword>
+    <keyword>spheroid</keyword>
+  </keywords>
+  <url type="homepage">http://octave.sourceforge.net/mapping</url>
+  <url type="bugtracker">https://savannah.gnu.org/bugs/?func=additem&amp;group=octave</url>
+  <developer_name>Octave-Forge Community</developer_name>
+  <update_contact>octave-maintainers@gnu.org</update_contact>
+  <metadata_license>FSFAP</metadata_license>
+  <project_license>various</project_license>
+</component>

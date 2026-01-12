@@ -1,0 +1,27 @@
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+# NotesMakeEtherNetCable.
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+
+
+#-------------------------------------------------------------------------------
+# Here is the wire alignment for a straight through Ethernet cable.
+# This is the arrangement you want if plugging into a switch or hub.
+# Both ends of the wire need to be the same.  
+# Example is to look at both ends of the cable with the tab side down and 
+# pointed in the same direction.  The wire should layout the same. 
+#-------------------------------------------------------------------------------
+
+
+       |O W| O |G W| B |B W| G |B W| B |
+       |R H| R |R H| L |L H| R |R H| R |
+       |A I| A |E I| U |U I| E |O I| O |
+       |N T| N |E T| E |E T| E |W T| W |
+       |G E| G |N E|   |  E| N |N E| N |
+       |E  | E |   |   |   |   |   |   |
+       |   |   |   |   |   |   |   |   |
+       |   |   |   |   |   |   |   |   |
+       \                               /
+        \                             /
+ 

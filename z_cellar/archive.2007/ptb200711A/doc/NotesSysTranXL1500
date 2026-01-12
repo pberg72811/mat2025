@@ -1,0 +1,290 @@
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+# NotesSysTranXL1500.
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+================================================================================
+COM SETTINGS.
+================================================================================
+/dev/ttyS0
+38400 8N1
+HFC NO
+SFC NO
+VT102 (Minicom)
+VT100 (Otherwise)
+
+Host
+vt100
+Flow control none
+baud 38400
+data 8
+parity none
+stop 1
+
+================================================================================
+QUICK START.
+================================================================================
+================================================================================
+Command                  Description
+===========              ===========
+H                        HELP.
+
+H command                Help on command.  Example "h st".
+
+ST                       Status.
+
+P port# port#            Port assignment. Example "p 1a 1b".
+
+M port# portList         Multicast port assignment.  Example "m 1a 1b1c1d2b".
+
+CC portList portList     Complex connect.  Example "cc 1a1b 2a2b 3a3b"
+
+================================================================================
+HELP SCREEN.
+================================================================================
+================================================================================
+LX1500e (NTS) COMMANDS
+  ___________________________ROUTING_________________________________________
+AL [Loop# [Plist [out]]]                      Auto-Loop (with auto-bypassing)
+CC [Plist [..Plist]] | [Plist r|out]          Complex Connect
+M  Port# [Plist [out]]                        Multicast (input)
+OE [Plist [out]]                              Output (laser) Enable control
+P  Port# [Port#]                              Port configuration
+SL [Loop# [Plist [out]]]                      SCRAMNet Loop
+S  Port# [Port#]                              SCRAMNet port configuration
+  ___________________________STATUS___________________________________________
+ST [d | v | l]                                Status (signal detects / loops)
+  _______________________CONFIGURATION________________________________________
+BC [pc|pf [n# text]] | [vr|vs|vsl] |          Box Configuration and setup
+   [tm [time]] | [cs|cr n#] | [pw password] | [x text]
+UI [am |be |ec |vt |vb |dw |pr n#]            User Interface configuration
+  ____________________________________________________________________________
+   Port# - port ID e.g. 1a                    Plist - list of ports e.g. 1a2c5d
+   Loop# - loop ID e.g. 23                    n# - numeric value e.g. 0
+   Type h comand_name for details             Type h 1,2,3,4 for all notes
+
+================================================================================
+COMMAND REFERENCE.
+================================================================================
+================================================================================
+AL - Auto-Loop, SL - SCRAMNet Loop (with auto-bypassing) setup
+
+   al [Loop# [Plist [out]]]
+   sl [Loop# [Plist [out]]]        - for SCRAMNet loop
+
+DESCRIPTION
+   Adds/removes ports to/from the loop. Port auto-bypassing feature is
+   activated. Without optional parameters it returns the loop status.
+
+OPTIONS
+   out   - reverse action switch (remove rather than add).
+
+EXAMPLES
+   al5 1a2b3c4d - add ports 1a, 2b, 3c, and 4d to loop 5.
+   al5          - show members of loop 5 e.g. L05=1a2b4d 3c (active ports
+                  listed first.
+   al           - returns all currently configured loops
+   al6 all      - places all ports on loop 6.
+   al6 1a out   - removes port 1a from loop 6 and places it in wrap mode.
+   al6 all out  - removes only ports currently configured on Loop# 6 (AL06).
+
+NOTES
+   Switch <out> will place listed ports in internal loopback (wrap) mode.
+   If sl is substituted in the above examples, only SCRAMNet info is returned.
+
+================================================================================
+BC - Box Configuration
+
+   bc pc [n# text]    - user port card information display or update
+   bc pf [n# text]    - factory port card information display or update
+   bc tm [time]       - time (and date) display or update
+   bc vr              - firmware version
+   bc vs|vsl          - vital statistics for the session or lifetime
+   bc cs|cr n#        - active configuration save or recall (from n# bank)
+   bc pw password     - locks/unlocks factory configuration fields
+   bc x text          - echo host-generated pattern for synchronization
+
+DESCRIPTION
+   Returns or sets information or settings.
+
+NOTES
+   See individual helps for help concerning a specific command by typing:
+  "h bc xx" where xx is a command from the list above.
+
+================================================================================
+CC - Complex Copy configure
+
+   cc [Plist [..Plist]] | [Plist r|out]
+
+DESCRIPTION
+   In its regular form, for every Plist, cc connects output of given port to
+   input of the next port on the Plist. The last port output gets connected to
+   the input of the first port on Plist. In its 'r' form cc will accept a
+   Plist consisting of 32 ports only. Input of a port specified on the list
+   will connect to the output of a port determined by the position on the Plist.
+   Out places all ports in PList in internal loopback mode.
+
+EXAMPLES
+   cc 3a3b 6a7b8a   - sets two independent loops with 2 and 3 ports.
+   cc 3a3b7d...4c r - conects output of port 1a to input of 3a, output of 1b to
+      input of 3b, output of 1c to input of 7d,... output of 8d to input of 4c.
+   cc 1a2b2c1b out  - sets 1a, 2b, 2c, and 1b into internal loopback mode.
+   cc               - returns routing vector e.g. 1a1a1a1a7b7c7d7a......3a4a.
+
+NOTES
+   Very little if any error checking is provided.  Without a PList, an
+   appropriate status vector is returned.  Port auto-bypass feature is
+   deactivated for all affected (output) ports.
+
+================================================================================
+M - Multicast (input) configure
+
+   m Port# [Plist [out]]
+
+DESCRIPTION
+   Configures Multicast routing of the specified port or returns the multicast
+   routing vector.
+
+EXAMPLES
+   m1a 1a2b3c4d - adds ports 1a 2b 3c 4d to multicast list of port (input) 1a.
+   m1a          - returns a list of all the ports (outputs) copying signal from
+                  port 1a input - e.g. M1a=1a1b2b3c4d7d.
+   m2a all      - multicasts 2a to all 32 ports
+   m1a 1a2b out - removes ports 1a 2b from multicast list of 1a and places them
+                  in internal loopback (wrap) mode.
+
+NOTES
+   Ports listed with <out> switch will be placed in wrap mode only if they are
+   copies of the Port#.
+
+================================================================================
+OE - Output (transmiter/laser) Enable control
+
+   oe [Plist [out]]
+
+DESCRIPTION
+   Turns laser  ransmitter accordingly for all the ports from Plist. Without
+   parameters the laser state vector is displayed representing the state of
+   all transmitters (bit set to 1 if enabled). By default all lasers will be
+   turned on when LX1500e boots regardless of prior shutdown states.
+
+EXAMPLES
+   oe 1a2b3c4d - turns laser of 1a, 2b, 3c, and 4d on.
+   oe          - returns the status of all lasers e.g. OE=fff61fff.
+   oe 1a6b out - turns laser of 1a and 6b off.
+
+NOTES
+   OE command will enable/disable signal routing on any port card. Active
+   laser operation (on and off) requires appropriate port card.
+
+================================================================================
+P - Port (output),  S - SCRAMNet port (output) configure
+
+   p Port# [Port#]
+   s Port# [Port#]    -  for SCRAMNet ports
+
+DESCRIPTION
+   Modify the configuration of a port.
+   If only the first Port# is specified the status of the port is returned
+
+EXAMPLES
+   p4a 4c - configures port 4A as a copy of 4C.
+   p4a    - returns the status of 4a.
+   s5a 5c - configure port pair 5a-5b a copy of the port pair 5c-5d.
+
+NOTES
+   See application notes for more information on the returned status.
+
+================================================================================
+P - Port (output),  S - SCRAMNet port (output) configure
+
+   p Port# [Port#]
+   s Port# [Port#]    -  for SCRAMNet ports
+
+DESCRIPTION
+   Modify the configuration of a port.
+   If only the first Port# is specified the status of the port is returned
+
+EXAMPLES
+   p4a 4c - configures port 4A as a copy of 4C.
+   p4a    - returns the status of 4a.
+   s5a 5c - configure port pair 5a-5b a copy of the port pair 5c-5d.
+
+NOTES
+   See application notes for more information on the returned status.
+
+================================================================================
+AL - Auto-Loop, SL - SCRAMNet Loop (with auto-bypassing) setup
+
+   al [Loop# [Plist [out]]]
+   sl [Loop# [Plist [out]]]        - for SCRAMNet loop
+
+DESCRIPTION
+   Adds/removes ports to/from the loop. Port auto-bypassing feature is
+   activated. Without optional parameters it returns the loop status.
+
+OPTIONS
+   out   - reverse action switch (remove rather than add).
+
+EXAMPLES
+   al5 1a2b3c4d - add ports 1a, 2b, 3c, and 4d to loop 5.
+   al5          - show members of loop 5 e.g. L05=1a2b4d 3c (active ports
+                  listed first.
+   al           - returns all currently configured loops
+   al6 all      - places all ports on loop 6.
+   al6 1a out   - removes port 1a from loop 6 and places it in wrap mode.
+   al6 all out  - removes only ports currently configured on Loop# 6 (AL06).
+
+NOTES
+   Switch <out> will place listed ports in internal loopback (wrap) mode.
+   If sl is substituted in the above examples, only SCRAMNet info is returned.
+
+================================================================================
+ST - Status
+
+   st [d|v|l]
+
+DESCRIPTION
+   Displays the switch status and/or signal detects.
+
+OPTIONS
+   []- State of all ports including routing and signal detect information.
+       See application notes for help reading the returned status.
+   d - The signal detect vector in hex form e.g SD=00FFFFFe. The leftmost bit
+       corresponds to port 1a and the rightmost bit corresponds to port 8d.
+   v - Positional vector of signal detects with port code present if its input
+       detects signal and "__" otherwise.
+   l - Positional vector of port loop assignments. Loop ID present if the port
+       is configured in the loop and "__" otherwise.
+
+EXAMPLES
+   st d - returns the signal detect vector e.g. SD=ffff1f00.
+   st v - returns signal detect vector e.g. SV=1a1b_1d__...__8c8d.
+   st l - returns loop assignment vector e.g. LA=01__1224__01...__23.
+
+NOTES
+   ST without parameters is not recommended in computer-driven applications.
+
+================================================================================
+UI - User Interface Configuration
+
+   ui [am|be|ec|vt|vb|dw|pr n#]
+
+DESCRIPTION
+   Sets multiple and mostly static user interface options.
+
+OPTIONS
+   am  - auto-messaging (formerly ds - display signal), n#={0,1,2,8}
+   be  - beeping, n#={0,1}
+   ec  - echo host characters, n#={0,1}
+   vt  - VT100 escape codes, n#={0,1}
+   vb  - verbose level, n#={0,1,8} 
+   dw  - display window, n#={0,1,2,3,4}
+   pr  - display window update period, n#={10 to 300} seconds.
+
+EXAMPLES
+   ui      - returns status vector with all the option values
+   ui dw 0 - turns display window off.
+
+NOTES
+   General rule: n#=0 turns a feature off. Use ui option_name for more help.

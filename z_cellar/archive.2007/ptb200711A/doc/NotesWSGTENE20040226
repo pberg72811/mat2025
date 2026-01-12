@@ -1,0 +1,148 @@
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+# NotesWSGTENE20040226.
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+
+Find out which recorder and which IBU to use.
+
+Find out the BFG IP address (Pretty sure: 192.9.212.200).
+From front panel boot screen:
+
+	<LEFT ARROW>
+	1  <ENTER>
+	<DOWN arrow>
+	<DOWN arrow>
+	<DOWN arrow>
+	<DOWN arrow>
+	1
+
+Stop and verify IP.
+
+	<HOME>
+	<HOME>
+	1 <ENTER>
+
+Put BFG in enhanced display mode.
+From front panel boot screen:
+
+	<LEFT ARROW>
+	1  <ENTER>
+	<DOWN arrow>
+	<DOWN arrow>
+	<DOWN arrow>
+	<DOWN arrow>
+	6
+	2
+	012345
+	<HOME>
+	<HOME>
+	1 <ENTER>
+        <LEFT ARROW>
+        <UP ARROW>
+        <UP ARROW>
+        <UP ARROW>
+
+You should now see direction cosines.
+
+
+Set up the laptop and network in.
+
+Bring down the BFG status archiver running on DSP(??).
+
+Bring down the BFG pointer running on DSP(??).
+
+Bring down the Archiver on the recorder that you will be using.
+
+scp over the files "opt.tgz" and "home.steswd.tgz" to the "/" directory of the recorder.
+
+
+AS ROOT on the recorder.
+
+Add the "ste" group to this machine.
+
+     groupadd ste
+
+Add the steswd user.
+
+     useradd -d /home/steswd steswd         # Setup the user and home directory.
+     usermod -g ste -s /bin/bash steswd     # Setup the group and shell.
+     passwd steswd                          # Setup the password. (Make it steswd).
+
+Unpack the tar files.
+
+    cd /
+    tar -zxvf opt.tgz
+    tar -zxvf home.steswd.tgz
+
+Chage ownership of "opt" directory.
+
+     chown steswd:ste /opt -R
+
+Create directory.
+
+     mkdir /midas/data/steswd
+
+Chage permissions.
+
+     chmod ugo+wrx /midas
+     chmod ugo+wrx /midas/data
+     chmod ugo+wrx /midas/ramdisk
+
+Edit file "/opt/xmidas/xm/cfg/diskunx.cfg".  Changes are in the file.
+
+Edit file "/opt/xmidas/xm/cfg/midas.cfg".  Changes are in the file.
+
+Edit file "/opt/midas/localopts/ice/drv/lnx/icepic".
+
+     # RAM For the OS in Mbytes
+     ram_start=2060
+     # RAMDISK RAM in Mbytes
+     ram_sized=1770
+     # Mappable RAM in Mbytes (at least 4 for PIC self tests)
+     ram_sizem=16
+
+     **BECOMES**
+
+     # RAM For the OS in Mbytes
+     ram_start=2924
+     # RAMDISK RAM in Mbytes
+     ram_sized=1020
+     # Mappable RAM in Mbytes (at least 4 for PIC self tests)
+     ram_sizem=16
+
+Rebuild ice driver.
+
+     cd /opt/xmidas/localopts/ice/drv/lnx
+
+     ./icepic stop
+     ./icepic remove
+     ./icepic make
+     ./icepic install
+     ./icepic start
+
+Drop out of current session and log in a steswd and bring up X.
+
+     exit, logout , whatever.
+
+Become steswd user and test.
+
+Start X windows
+
+Bring up a terminal.
+
+     tcsh
+     xms
+     xm
+     configure m
+     pic test
+     pic test/mod/rt
+     pic snap
+
+Set Format to SI
+Hit the RTSpectra button.
+
+
+Perform ENE.
+
+     autoene/WSGT 1 "192.9.212.200" "TDRS 4"

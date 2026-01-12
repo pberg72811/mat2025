@@ -1,0 +1,32 @@
+Open Support Ticket
+
+Get help when you need it
+
+Please submit a ticket on the yellow network through the Sphinx system for 
+all MRE Platform incidents and requests.
+
+Incidents: These tickets should only be used when an application or system 
+has broken where it was working in the past, but is no longer working
+
+Requests: These tickets should be used for everything else. This includes 
+requests for new functionality, new accounts, onboarding, etc.
+
+To submit an Incident ticket, follow these steps:
+
+Navigate to the NASIC SharePoint home page
+Select the Sphinx Gateway tile
+Select the Get Help icon. This will direct you to the “Submit an Incident” form.
+In the Descriptions field, please describe your issue and include the following:
+Request that the ticket be routed to the AG-SUP-Platform Services assignment group.
+How you would like to be contacted (if other than through Sphinx)
+To submit a Request ticket, follow these steps:
+
+Navigate to the NASIC SharePoint home page
+Select the Sphinx Gateway tile
+Select the Request Something icon
+On the left panel, expand Information Technology and then select Services
+Select the Platform Services tile
+Be sure to include in the request on how you would like to be contacted if other than through Sphinx
+The Platform Team will receive these tickets and reach out to you.
+
+12345678901234567890123456789012345678901234567890123456789012345678901234567890

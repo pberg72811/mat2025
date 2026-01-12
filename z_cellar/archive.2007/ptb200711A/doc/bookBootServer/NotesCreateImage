@@ -1,0 +1,127 @@
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+# Create an Image.
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+Create an initial ram disk. This is kernel dependant so you may/may not need this.
+
+Boot Box to be imaged vi soirlinux.
+
+mount /dev/hda1 /mnt/mp4hda1
+
+mount /dev/hda3 /mnt/mp4hda3
+
+cd /mnt/mp4hda3
+
+tar --preserve --atime-preserve -cvzf /mnt/mp4hda1/soir1u_system.tgz .
+
+cd /mnt/mp4hda1
+
+tar --preserve --atime-preserve -cvzf /mnt/mp4hda3/soir1u_boot.tgz .
+
+copy over the soir1u_system.tgz and soir1u_boot.tgz to laptop.
+
+#-------------------------------------------------------------------------------
+# Reformat the drives.  I had problems using the "Holly" method.
+#-------------------------------------------------------------------------------
+Boot Box to have image copied to using isolinux and format drives.
+
+Kill the install process after drives are formated.
+
+#-------------------------------------------------------------------------------
+# Re-image the drives. 1U hda proceedures
+#-------------------------------------------------------------------------------
+Reboot using soirlinux.
+
+ifconfig to a "good" address
+
+portmap
+
+alias ll='ls -al'
+
+mount /dev/hda1 /mnt/mp4hda1
+
+mount /dev/hda3 /mnt/mp4hda3
+
+mount 192.9.244.50:/export/RH9 /mnt/mp4nfs
+
+cp /mnt/mp4nfs/soir1u_boot.tgz /mnt/mp4hda1/
+
+cp /mnt/mp4nfs/soir1u_system.tgz /mnt/mp4hda3/
+
+cd /mnt/mp4hda1/
+
+tar -zxvf soir1u_boot.tgz
+
+cd /mnt/mp4hda3/
+
+tar -zxvf soir1u_system.tgz
+
+/mnt/mp4hda3/sbin/grub --device-map=/mnt/mp4hda1/grub/device.map --config-file=/mnt/mp4hda1/grub/grub.conf --batch <<EOT
+root (hd0,0)
+setup (hd0)
+quit
+EOT
+
+reboot
+
+as root
+
+redhat-config-network (network and hostname)
+
+change /etc/hosts
+
+#-------------------------------------------------------------------------------
+# Re-image the drives. 2U sda procedures
+#-------------------------------------------------------------------------------
+Reboot using soirlinux.
+
+ifconfig to a "good" address
+
+portmap
+
+alias ll='ls -al'
+
+mount /dev/sda1 /mnt/mp4sda1
+
+mount /dev/sda3 /mnt/mp4sda3
+
+mount 192.9.244.50:/export/RH9 /mnt/mp4nfs
+
+cp /mnt/mp4nfs/soir2u_boot.tgz /mnt/mp4sda1/
+
+cp /mnt/mp4nfs/soir2u_system.tgz /mnt/mp4sda3/
+
+cd /mnt/mp4sda1/
+
+tar -zxvf soir2u_boot.tgz
+
+cd /mnt/mp4sda3/
+
+tar -zxvf soir2u_system.tgz
+
+/mnt/mp4sda3/sbin/grub --device-map=/mnt/mp4sda1/grub/device.map --config-file=/mnt/mp4sda1/grub/grub.conf --batch <<EOT
+root (hd0,0)
+setup (hd0)
+quit
+EOT
+
+reboot
+
+as root
+
+redhat-config-network (network and hostname)
+
+change /etc/hosts
+
+#-------------------------------------------------------------------------------
+# Final thoughts
+#-------------------------------------------------------------------------------
+reboot
+
+as root
+
+redhat-config-network (network and hostname)
+
+change /etc/hosts
+

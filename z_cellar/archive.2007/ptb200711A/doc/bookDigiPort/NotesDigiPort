@@ -1,0 +1,39 @@
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+# NotesDigiPort.
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+
+#To get the arrow keys to work.
+#-------------------------------------------------------------------------------
+A user will need to be added with the escape key settings changed.  In the below
+example the user name is "rdsuser". 
+
+    set user name=xmuser 
+    set user name=xmuser commandline=on 
+    set user name=xmuser defaultaccess=commandline 
+    set user name=xmuser telnetesc=^o 
+    set user name=xmuser connectesc=^z 
+    set user name=xmuser password=off
+    set user name=xmuser outgoing=on
+    set user name=xmuser autoconnect=off
+    set user name=xmuser ports=1-16
+
+Note:
+It turns out that "outgoing=on" is very important!
+
+# To remove a user.
+#-------------------------------------------------------------------------------
+    set user rmuser=xmsuser
+    remove user name=xmsuser
+
+
+# Control keys for moving around.
+#-------------------------------------------------------------------------------
+forward    Cntl-f
+backward   Cntl-b
+next       Cntl-n
+previous   Cntl-p
+
+
+dbps

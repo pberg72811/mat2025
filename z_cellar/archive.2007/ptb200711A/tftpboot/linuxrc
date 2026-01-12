@@ -1,0 +1,99 @@
+#!/bin/bash
+# File: linuxrc
+# Goes: In the "/" dirctory of a ramdisk (initrd).
+# Desc: This "linuxrc" file was created for the SOIR project.
+# Hist:  When       Who  What
+#        01/27/2004 ptb  Initial Code.
+################################################################################
+
+# Load the scsi_mod kernel module.
+#-------------------------------------------------------------------------------
+echo loading scsi_mod
+insmod /lib/scsi_mod.o
+
+# Load the sd_mod kernel module.
+#-------------------------------------------------------------------------------
+echo loading sd_mod
+insmod /lib/sd_mod.o
+
+# Load the 3w-xxxx kernel module.
+#-------------------------------------------------------------------------------
+echo loading 3w-xxxx
+insmod /lib/3w-xxxx.o
+
+# Load the diskdump kernel module.
+#-------------------------------------------------------------------------------
+echo loading diskdumplib
+insmod /lib/diskdumplib.o
+
+# Load the adaptec kernel module.
+#-------------------------------------------------------------------------------
+echo loading dpt_i2o
+insmod /lib/dpt_i2o.o
+
+# Load the jbd kernel module.
+#-------------------------------------------------------------------------------
+echo loading jbd
+insmod /lib/jbd.o
+
+# Load the ext3 kernel module.
+#-------------------------------------------------------------------------------
+echo loading ext3
+insmod /lib/ext3.o
+
+# Load the aic7xxx module.
+#-------------------------------------------------------------------------------
+echo "Loading aic7xxx module"
+insmod /lib/aic7xxx.o
+
+# Load the lvm-mod module.
+#------------------------------------------------------------------------------- 
+echo "Loading lvm-mod module"
+insmod /lib/lvm-mod.o
+
+# Load the e1000 module.
+#------------------------------------------------------------------------------- 
+echo "Loading lvm-mod module"
+insmod /lib/e1000.o
+
+# Show what has been loaded.
+#------------------------------------------------------------------------------- 
+lsmod # Provide some feed back.
+sleep 2 # Pause for 2 seconds.
+
+# Mount the /proc filesystem.
+#-------------------------------------------------------------------------------
+echo Mounting /proc filesystem
+mount -t proc /proc /proc
+
+# 
+#-------------------------------------------------------------------------------
+ifconfig lo 127.0.0.1 up
+
+ifconfig
+sleep 1
+
+# Create the dev directory.
+# This is commented out for the SOIR project because the dev directory is set
+# up in the ramdisk already.
+#-------------------------------------------------------------------------------
+####  echo Creating block devices
+####  mkdevices /dev
+
+# Create the root device.
+#-------------------------------------------------------------------------------
+echo Creating root device
+#mkrootdev /dev/root
+echo 0x0100 > /proc/sys/kernel/real-root-dev
+
+# Mount the root filesystem.
+#-------------------------------------------------------------------------------
+##echo Mounting root filesystem
+##mount -o defaults --ro -t ext2 /dev/root /sysroot
+
+# Pivot onto the root filesystem and unmount ramdisk.
+#-------------------------------------------------------------------------------
+##pivot_root /sysroot /sysroot/initrd
+##umount /initrd/proc
+alias ll="ls -al"
+alias llh="ls -alh"

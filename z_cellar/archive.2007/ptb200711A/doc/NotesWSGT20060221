@@ -1,0 +1,44 @@
+
+      ICCPICRECORD <A: oFileName> <A: iPICName> <D: fs> <A: dataType>
+                   <D: nSamples> <D: tfreq> <L: tdeci> <L: tgain>
+
+
+      ICCARCHIVE <A: iFileName> <A: oFileName> <D: nBytes> <A: oDireName1>
+                 <D: nFiles> <A: oDireName2> <D: nFiles> <A: ...>
+
+      ICCUDPRECORD <A: oFileName> <D: fileType> <A: dataType> <N: absInc>
+                   <D: thePort>
+
+      ICCDATAREG <A: iFileName> <A: oFileName> <L: mode>
+
+pipe on
+
+
+iccpicrecord/dmabytes=16M/flags=cpc=1|ovsr=2 _s1(ps=32M) pic1_e2T1_A 34e6 ci 0 8.5e6 2 0
+
+iccarchive/tl=4M _s1(ps=32M) adparchive 1024*1024*1024 /data11/xmidas 30
+
+pipe off
+
+
+
+pipe on
+
+iccpicrecord/pprio=7/dmabytes=16M/flags=cpc=1|ovsr=2 _s1(ps=64M) pic1_e2T1_A 34e6 ci 0 8.5e6 2 0
+
+fmti2b/pprio=7/tl=2M _s1(ps=64M) _s2(ps=64M)
+
+iccarchive/pprio=7/tl=2M _s2(ps=64M) adparchive 1024*1024*1024 /data12/steswd 30
+
+pipe off
+
+
+pipe on
+
+iccudprecord _s1 1000 sl 1 5050
+
+iccdatareg/tl=7568 _s1 _s2(ps=1M) 1
+
+iccarchive/tl=4M _s2(ps=1M) commondata 7568*60*60*12 /data11/xmidas 30
+
+pipe off

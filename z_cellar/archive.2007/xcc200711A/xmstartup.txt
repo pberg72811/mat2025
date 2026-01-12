@@ -1,0 +1,64 @@
+! X-Midas startup macro
+!------------------------------------------------------------------------------
+startmacro
+
+! Set up the auxillary disks.
+! NOTE:  See the "midas.cfg" file for what auxillary disks are set. 
+!        If changes are made to "midas.cfg" you need to perform  the 
+!        "configure m" command. 
+!------------------------------------------------------------------------------
+aux 1 all !!!Write aux is 1 and read aux is all
+aux ,, +0 !!!Add user directory (0) as a read aux.
+
+! Set up X-Midas option trees.
+!------------------------------------------------------------------------------
+xmopt ged  ~/xmopts/ged
+xmopt bdw  ~/xmopts/bdw
+xmopt bms  ~/xmopts/bms
+xmopt bfg  ~/xmopts/bfg
+xmopt rds  ~/xmopts/rds
+xmopt sdds ~/xmopts/sdds
+!!xmopt spg  ~/xmopts/spg
+xmopt xmc  ~/xmopts/xmc
+
+! Set up the X-Midas path.
+!------------------------------------------------------------------------------
+xmpath xmpy adp beta ice sysadd sys spot ucl
+xmpath bdw+
+xmpath bfg+
+xmpath bms+
+xmpath ged+
+xmpath rds+
+xmpath sdds+
+!!xmpath spg+
+!! Do not xmpath xmc.
+
+! Set up the X-Midas ramdisk.  See midas.cfg.
+!------------------------------------------------------------------------------
+result l:ramaux 3
+
+! Set up hardware configuration for ice.
+!------------------------------------------------------------------------------
+local myhw
+fname a:myhw dat hwconfig prm ice
+hw file "^{myhw}"
+
+! Make sure the command line editor has INSERT ON set.
+! Set other environment variables.
+!------------------------------------------------------------------------------
+os setenv SHELL         /bin/tcsh
+os setenv XM_INSERT     ON
+os setenv XM_DEBUGGER "ddd -d $XMAREA/lib/dbgLib"
+os setenv XM_DEBUGGER "$XM_DEBUGGER -d $XMAREA_RDS/host"
+os setenv XM_DEBUGGER "$XM_DEBUGGER -d $XMAREA_BFG/host"
+os setenv XM_DEBUGGER "$XM_DEBUGGER -d $XMAREA_GED/host"
+os setenv XM_DEBUGGER "$XM_DEBUGGER -d $XMAREA_SDDS/host"
+os setenv XM_DEBUGGER "$XM_DEBUGGER -d $XMAREA_BMS/host"
+os setenv XM_DEBUGGER "$XM_DEBUGGER -d $XMAREA/host"
+os unsetenv COLORTERM
+
+! Setup Python.
+!------------------------------------------------------------------------------
+PYENV
+
+endmacro

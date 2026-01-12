@@ -1,0 +1,346 @@
+#!/usr/bin/perl
+#------------------------------------------UNCLASSIFIED------------------------------------------
+# File: perlMakeExplainFile                                                                     -
+#                                                                                               -
+# Desc: This perl script creates an X-Midas explain file given a "*.cc", a "*.py",              -
+#       or a "*.txt" input file.                                                                -
+#                                                                                               -
+# Args: iFile - Input file name.                                                                -
+#       opt   - Option tree directory.                                                          -
+#                                                                                               -
+# Hist: When       Who  What                                                                    -
+#       06/21/2005 ptb  Initial code.                                                           -
+#       04/24/2006 ptb  Stack based design.                                                     -
+#                                                                                               -
+# Note: None.                                                                                   -
+#                                                                                               -
+# Examples: perl perlMakeExplainFile $STESWD/host/iccpixrecord.cc                               -
+#------------------------------------------------------------------------------------------------
+#/*----------------------------------------UNCLASSIFIED----------------------------------------*/
+#// File: iccpixrecord.cc                                                                       -
+#// Desc: This primitive records buffered data from a PIC card.                                 -
+#//       This primitive configures a Peripheral Interconnect Component (PIC) card and sends    -
+#//       the contents of the DMA buffer to a file or pipe.  The PIC card can have numerous     -
+#//       types of Input/Output Modules (IOMs) to allow for the acquisition of, to name a few,  -
+#//       analog, TTL, ECL, PECL, LHVDS, fibre, and ethernet data.  In the case of the PIC 4T   -
+#//       there are two on board Gray Chip Tuners (GC4016).  Each GC4016 is capable of producing-
+#//       4 channels of tuned output for a total of 8 channels of tuned output for the PIC 4T.  -
+#//       Clocking of data can come from a on board clock or external source through a connector-
+#//       on the back of the card.  In the case of digital data the input cable usually has the -
+#//       clock line on it.  These different configuration are controlled by a command line     -
+#//       input string or an entry in the ICE option tree's hardware configuration file.        -
+#// Args: oFileName - The name of the output file.         <A:>                                 -
+#//       iPICName  - Which PIC to use for input.          <A:>                                 -
+#//       fs        - Sample rate.                         <D:>                                 -
+#//       dataType  - Data type (sb,si,ci).                <A:>                                 -
+#//       tfreq     - Frequency for tuner     (Optional).  <D:>                                 -
+#//       tdeci     - Decimation after tuner  (Optional).  <L:>                                 -
+#//       tgain     - Gain of tuner           (Optional).  <L:>                                 -
+#//       tovrs     - Oversample before tuner (Optional).  <L:>                                 -
+#// Swch: /DMABYTES                                                                             -
+#//       /FLAGS                                                                                -
+#// Hist: When       Who  What                                                                  -
+#//       12/23/2003 ptb  Initial Code.                                                         -
+#//       04/28/2004 ptb  Added no reset option.                                                -
+#//       09/13/2004 ptb  Added tuner option.                                                   -
+#//       02/03/2005 ptb  Added dubble buffer thread scheme.                                    -
+#//       02/24/2005 ptb  Yellowfin inspired changes.                                           -
+#//       03/24/2005 ptb  Massive rewrite.                                                      -
+#//                                                                                             -
+#//                            oFileName                                                        -
+#//                            iPICName                                                         -
+#//                            fs                                                               -
+#//                            dataType                                                         -
+#//                            tfreq                                                            -
+#//                            tdec                                                             -
+#//                            tgain                                                            -
+#//                            tovrs                                                            -
+#//                            /DMABYTES                                                        -
+#//                            /FLAGS                                                           -
+#//                              |                                                              -
+#//                              V                                                              -
+#//    :----------:     :------------------:     :-----------:                                  -
+#//    | PIC Card |---> | iccpixrecord.cc  |---> | file/pipe |                                  -
+#//    :----------:     :------------------:     :-----------:                                  -
+#//                              |                                                              -
+#//                              V                                                              -
+#//                       Debug Statements                                                      -
+#// Note:                                                                                       -
+#//                                                                                             -
+#// Examples:                                                                                   -
+#// icclla25000 test1 38.0 77.0 0.0  2005:06:20::00:00:00 60*60*24 1                            -
+#//01.0 Description                                                                             -
+#//02.0 Requirements                                                                            -
+#//03.0 Interfaces                                                                              -
+#//04.0 Design Description                                                                      -
+#//05.0 Unit Code                                                                               -
+#//06.0 Unit Test Plan                                                                          -
+#//07.0 Test Results                                                                            -
+#//08.0 Build Procedures                                                                        -
+#//09.0 Notes                                                                                   -
+#//10.0 Reviewers.                                                                              -
+#/*--------------------------------------------------------------------------------------------*/
+$NARG        = scalar(@ARGV);
+$SCRIPT_NAME = $0;
+$inputFile   = $ARGV[0];
+$OPTDIR      = $ARGV[1];
+$STESWD      = $ENV{'STESWD'};
+
+
+printf("NARG       is %s \n", $NARG);
+printf("Input file is %s \n", $inputFile);
+printf("OPTDIR     is %s \n", $OPTDIR);
+#------------------------------------------------------------------------------------------------
+# Figure out what the output "explain" file should be called based on the input file name.
+#------------------------------------------------------------------------------------------------
+@pathName = split("/",$inputFile);       # Break the inputFile argument at every "/" character.
+$l = scalar(@pathName);                  # Get then number of strings created.
+$t = $pathName[$l-1];                    # Set "$t" to the last string
+printf("%s \n", $t);                     # Print "$t" out to make sure we got the correct one.
+$t =~ s/\.cc//g;                         # Remove the ".cc" for c++ files.
+$t =~ s/\.py//g;                         # Remove the ".py" for python files.
+$t =~ s/\.txt//g;                        # Remove the ".py" for python files.
+printf("%s \n", $t);                     # Print "$t" again to see how it looks.
+$t = sprintf("%s.exp",$t);               # Create the name of the explain file use sprintf.
+printf("%s \n", $t);                     # Print "$t" again to see how it looks.
+$t = sprintf("$OPTDIR/exp/%s",$t);       # Create the full path name of the explain file.
+printf("%s \n", $t);                     # Print "$t" again to see how it looks.
+$outputFile = $t;                        # Set "$outputFile" to "$t".
+printf("%s \n", $outputFile);            #
+
+#------------------------------------------------------------------------------------------------
+# See if the output file already exist.
+#------------------------------------------------------------------------------------------------
+stat($outputFile);
+
+if (-e _)
+{
+  print("The file $outputFile exists.\n");
+  print("Delete the file $outputFile and rerun program.\n");
+  exit(0);
+}
+else
+{
+  print("An explain file does not already exist.\n");
+  print("Creating explain file.\n");
+}
+
+#------------------------------------------------------------------------------------------------
+# Initialize stackNumber.
+#------------------------------------------------------------------------------------------------
+$stackNumber = 0;
+
+#------------------------------------------------------------------------------------------------
+# Step through each line of STDIN.
+#------------------------------------------------------------------------------------------------
+while (<>)
+{
+
+  if (/File:/)	            # Handle the "File:" line.
+  {                         #
+    push(@fileStack, $_);
+    $stackNumber = 1;
+  }
+  elsif (/Desc:/)	    # Handle the "Desc:" line.
+  {	                    #
+    push(@descStack, $_);
+    $stackNumber = 2;
+  }
+  elsif (/Args:/)	    # Handle the "Args:" line.
+  {	                    #
+    push(@argsStack, $_);
+    $stackNumber = 3;
+  }
+  elsif (/Swch:/)	    # Handle the "Swch:" line.
+  {	                    #
+    push(@swchStack, $_);
+    $stackNumber = 4;
+  }
+  elsif (/Hist:/)	    # Handle the "Hist:" line.
+  {	                    #
+    push(@histStack, $_);
+    $stackNumber = 5;
+  }
+  elsif (/Note:/)	    # Handle the "Note:" line.
+  {	                    #
+    push(@noteStack, $_);
+    $stackNumber = 6;
+  }
+  elsif (/Examples:/)	    # Handle the "Example:" line.
+  {	                    #
+    push(@examStack, $_);
+    $stackNumber = 7;
+  }
+  elsif (/0 Description/)   # Done
+  {	                    #
+    $stackNumber = 8;
+  }
+  else
+  {
+    if ($stackNumber==1)
+    {
+      push(@fileStack, $_);
+    }
+    elsif ($stackNumber==2)
+    {	                    #
+      push(@descStack, $_);
+    }
+    elsif ($stackNumber==3)
+    {	                    #
+      push(@argsStack, $_);
+    }
+    elsif ($stackNumber==4)
+    {	                    #
+      push(@swchStack, $_);
+    }
+    elsif ($stackNumber==5)
+    {	                    #
+      push(@histStack, $_);
+    }
+    elsif ($stackNumber==6)
+    {	                    #
+      push(@noteStack, $_);
+    }
+    elsif ($stackNumber==7)
+    {	                    #
+      push(@examStack, $_);
+    }
+    elsif ($stackNumber==8)
+    {
+      print "Done\n"
+    }
+  }
+
+}
+
+#------------------------------------------------------------------------------------------------
+# Make STDIN = $inputFile and STDOUT = $outputFile.
+#------------------------------------------------------------------------------------------------
+open(STDIN,  "< $inputFile")  || die "can’t open datafile: $!";
+open(STDOUT, "> $outputFile") || die "can’t open output: $!";
+
+#------------------------------------------------------------------------------------------------
+# Print out fileStack.
+#------------------------------------------------------------------------------------------------
+for($ii=0; $ii < scalar(@fileStack); $ii++)
+{
+  $fileStack[$ii] =~ s/\/\/ //g;         # Remove the "// " string. (C++ comment string).
+  $fileStack[$ii] =~ s/\#\# //g;         # Remove the "## " string.  (Python comment string).
+  $fileStack[$ii] =~ s/\!\! //g;         # Remove the "!! " string.  (XMidas comment string).
+  $fileStack[$ii] =~ s/File: //g;        # Remove the "File:" string.
+  $fileStack[$ii] =~ s/\.cc//g;          # Remove the ".cc" string.
+  $fileStack[$ii] =~ s/\.py//g;          # Remove the ".py" string.
+  $fileStack[$ii] =~ s/\.txt//g;         # Remove the ".txt" string.
+  $fileStack[$ii] =~ s/ -//g;            # Remove the ending "-" character.
+  $fileStack[$ii] =~ s/ //g;             # Remove any whitespaces.
+  chomp($fileStack[$ii]);                # Remove the new line.
+  $fileStack[$ii] = uc($fileStack[$ii]); # Convert to upper case.
+  print $fileStack[$ii];                 # Print out the line.
+}
+
+#------------------------------------------------------------------------------------------------
+# Print out first line of "descStack" as a summary.
+#------------------------------------------------------------------------------------------------
+$whogi = $descStack[0];                  #
+$whogi =~s/\/\/ //g;                     # Remove the "// " string. (C++ comment string).
+$whogi =~s/\#\# //g;                     # Remove the "## " string.  (Python comment string).
+$whogi =~s/\!\! //g;                     # Remove the "!!" string.  (XMidas comment string).
+$whogi =~s/Desc: //g;                    # Remove the "Desc:" string.
+$whogi =~s/ -//g;                        # Remove the ending "-" character.
+$whogi =~s/   //g;                       # Remove overly abundant spaces.
+print(" - $whogi");                      # Print out the description text.
+print("\n");                             # Print a blank line.
+#               1         2         3         4         5         6         7         8
+#      12345678901234567890123456789012345678901234567890123456789012345678901234567890
+print("================================================================================\n");
+
+#------------------------------------------------------------------------------------------------
+# Print out all of "descStack".
+#------------------------------------------------------------------------------------------------
+for($ii=0; $ii < scalar(@descStack); $ii++)
+{                                        #
+  $descStack[$ii] =~ s/\/\/ //g;         # Remove the "// " string. (C++ comment string).
+  $descStack[$ii] =~ s/\#\# //g;         # Remove the "## " string.  (Python comment string).
+  $descStack[$ii] =~ s/\!\! //g;         # Remove the "!!" string.  (XMidas comment string).
+  $descStack[$ii] =~ s/-\n/\n/g;         # Remove the ending "-" character.
+  $descStack[$ii] =~s/   //g;            # Remove overly abundant spaces.
+  if( $ii == (scalar(@descStack)-1) )    # On last line of description
+  {                                      #
+    chomp($descStack[$ii]);              # Remove the new line.
+  }                                      #
+  printf("%s",$descStack[$ii]);          # Print out the line.
+}                                        #
+print("                                                                               .\n");
+
+#------------------------------------------------------------------------------------------------
+# Print out argsStack.
+#------------------------------------------------------------------------------------------------
+for($ii=0; $ii < scalar(@argsStack); $ii++)
+{                                        #
+  $argsStack[$ii] =~ s/Args:/ /g;        # Replace the "Args:" string with a space.
+  @whogi  = split(' ',$argsStack[$ii]);  # Split the line into words.
+  $nWords =scalar(@whogi);               # Count the words
+  $temp1 = $whogi[$nWords-2];            # This should be "<X:>" type string.
+  $temp2 = $whogi[1];                    # This should be the argument name.
+  printf("%s %s> ", substr($temp1,0,3), $temp2); # Print...
+  for($jj=3; $jj<$nWords-2; $jj++)       #
+  {                                      #
+    printf("%s ",$whogi[$jj]);           #
+  }                                      #
+  printf("\n");                          #
+}                                        #
+  printf("\n");                          #
+
+#------------------------------------------------------------------------------------------------
+# Print out swchStack.
+#------------------------------------------------------------------------------------------------
+for($ii=0; $ii < scalar(@swchStack); $ii++)
+{
+  $swchStack[$ii] =~ s/\/\/ //g;         # Remove the "// " string. (C++ comment string).
+  $swchStack[$ii] =~ s/\#\# //g;         # Remove the "## " string.  (Python comment string).
+  $swchStack[$ii] =~ s/\!\! //g;         # Remove the "!!" string.  (XMidas comment string).
+  $swchStack[$ii] =~ s/-\n/\n/g;         # Remove the ending "-" character.
+}
+print(@swchStack);
+
+#------------------------------------------------------------------------------------------------
+# Print out histStack.
+#------------------------------------------------------------------------------------------------
+for($ii=0; $ii < scalar(@histStack); $ii++)
+{
+  $histStack[$ii] =~ s/\/\/ //g;         # Remove the "// " string. (C++ comment string).
+  $histStack[$ii] =~ s/\#\# //g;         # Remove the "## " string.  (Python comment string).
+  $histStack[$ii] =~ s/\!\! //g;         # Remove the "!!" string.  (XMidas comment string).
+  $histStack[$ii] =~ s/-\n/\n/g;         # Remove the ending "-" character.
+}
+print(@histStack);
+
+#------------------------------------------------------------------------------------------------
+# Print out noteStack.
+#------------------------------------------------------------------------------------------------
+for($ii=0; $ii < scalar(@noteStack); $ii++)
+{
+  $noteStack[$ii] =~ s/\/\/ //g;         # Remove the "// " string. (C++ comment string).
+  $noteStack[$ii] =~ s/\#\# //g;         # Remove the "## " string.  (Python comment string).
+  $noteStack[$ii] =~ s/\!\! //g;         # Remove the "!!" string.  (XMidas comment string).
+  $noteStack[$ii] =~ s/-\n/\n/g;         # Remove the ending "-" character.
+}
+print(@noteStack);
+
+#------------------------------------------------------------------------------------------------
+# Print out examStack.
+#------------------------------------------------------------------------------------------------
+for($ii=0; $ii < scalar(@examStack); $ii++)
+{
+  $examStack[$ii] =~ s/\/\/ //g;         # Remove the "// " string. (C++ comment string).
+  $examStack[$ii] =~ s/\#\# //g;         # Remove the "## " string.  (Python comment string).
+  $examStack[$ii] =~ s/\!\! //g;         # Remove the "!!" string.  (XMidas comment string).
+  $examStack[$ii] =~ s/-\n/\n/g;         # Remove the ending "-" character.
+}
+print(@examStack);
+
+#------------------------------------------------------------------------------------------------
+# Done.
+#------------------------------------------------------------------------------------------------
+print("================================================================================\n");
+print("================================================================================\n");

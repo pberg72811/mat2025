@@ -1,0 +1,36 @@
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+# NotesSerial.
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+
+# Server 1
+  996  cat < /dev/mouse0
+  997  cat < /dev/ttyS0 
+  998  man setserial
+  999  setserial /dev/ttyS0
+ 1000  man setserial
+ 1001  setserial -a /dev/ttyS0
+ 1002  man setserial
+ 1003  man echo
+ 1004  man setserial
+ 1005  history
+
+
+
+# Server 2
+    5  minicom
+    6  cat < /dev/ttyS0 
+    7  man setty
+    8  settty
+    9  man settty
+   10  setserial 
+   11  man setserial
+   12  cat < /dev/ttyS0 
+   13  setserial /dev/ttyS0 baud_base 9600
+   14  cat < /dev/ttyS0 
+   15  setserial -a /dev/ttyS0
+   16  cat < /dev/ttyS0 
+   17  reset
+   18  fg
+   19  history

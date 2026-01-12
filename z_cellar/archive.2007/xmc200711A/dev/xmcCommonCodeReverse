@@ -1,0 +1,8 @@
+#!/bin/sh
+# This script runs the common code preprocessor reverser.
+#------------------------------------------------------------------------------------------------
+if [ "$1" == "-i" ]; then                           # Check for "inline" flag
+  perl -i $XMOPTS/xmc/dev/perlReverseCommonCode $2; # Use with    "-i" to make changes.
+else                                                # Else
+  perl    $XMOPTS/xmc/dev/perlReverseCommonCode $1; # Use without "-i" to test.
+fi

@@ -1,0 +1,4 @@
+#!/bin/sh
+# This script runs the iccMakeExplainFile code.
+#-------------------------------------------------------------------------------
+perl  $XMOPTS/xmc/dev/perlMEF  $1 $2

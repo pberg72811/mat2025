@@ -1,0 +1,16 @@
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+# NotesJava.
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+
+Must be root to execute the jdk*.rpm.bin file.
+
+Must be root to rpm -i the jdk* file.
+
+Add link "ln -s /usr/java/jdk1.3.1_02 /usr/java/jdk" to make path to the development kit more generic.
+
+If you have something like:
+"Font specified in font.properties not found [--symbol-medium-r-normal--*-%d-*-*-p-*-adobe-fontspecific]"
+appear when you run a gui, go to "/usr/java/jdk/jre/lib/font.properties" and comment out the lines that have references to adobe fonts.
+Getting abode fonts may be an option also.

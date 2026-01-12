@@ -1,0 +1,13 @@
+perl -pi -e "s/iccOrbitUtils/orbit_utils/ge" iccOrbitUtils.c
+perl -pi -e "s/iccOrbitUtils/orbit_utils/ge" iccSatStack.c
+perl -pi -e "s/iccOrbitUtils/orbit_utils/ge" iccSatUpdateJ2.c
+perl -pi -e "s/iccOrbitUtils/orbit_utils/ge" iccSatUpdateSGP.c
+perl -pi -e "s/iccOrbitUtils/orbit_utils/ge" iccStatDataList.c
+perl -pi -e "s/iccOrbitUtils/orbit_utils/ge" iccStatUpdate.c
+perl -pi -e "s/iccOrbitUtils/orbit_utils/ge" iccTrueToFromMeanAnomaly.c
+perl -pi -e "s/iccOrbitUtils/orbit_utils/ge" iccvLatLonAlt2XYZ.c
+perl -pi -e "s/iccOrbitUtils/orbit_utils/ge" iccvPitchXYZ.c
+perl -pi -e "s/iccOrbitUtils/orbit_utils/ge" iccvRollXYZ.c
+perl -pi -e "s/iccOrbitUtils/orbit_utils/ge" iccvXYZ2LatLonAlt.c
+perl -pi -e "s/iccOrbitUtils/orbit_utils/ge" iccvYawXYZ.c
+perl -pi -e "s/iccOrbitUtils/orbit_utils/ge" Makefile

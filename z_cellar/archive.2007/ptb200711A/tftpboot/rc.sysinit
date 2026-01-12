@@ -1,0 +1,19 @@
+#!/bin/nash
+#
+# /etc/rc.d/rc.sysinit - run once at boot time
+#
+# File: rc.sysinit
+# Goes: In the "/etc/rc.d/rc.sysinit" dirctory of a ramdisk (initrd).
+# Desc: This "rc.sysinit" file was created for the SOIR project.
+# Hist:  When       Who  What
+#        02/12/2004 ptb  Initial Code.
+################################################################################
+
+echo HELLO from rc.sysinit!
+echo HELLO from rc.sysinit!
+echo HELLO from rc.sysinit!
+
+bash -i
+
+wait
+

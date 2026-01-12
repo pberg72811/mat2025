@@ -1,0 +1,34 @@
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+# NotesCDRecord.
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+
+To make an "ISO" image of three files and two directories.
+
+    mkisofs -l -r -v -o cdImage.iso file1.prm file2.prm file3.prm directory1 directory2
+
+To burn a CD.
+
+    cdrecord -v speed=12 dev=2,0,0 -data cdImage.iso
+
+To burn a DVD using an ISO image called dvdImage.iso.
+
+    dvdrecord -dao -v -speed=2 dev=2,0,0 dvdImage.iso
+
+To copy an ISO image from CD to Disk.
+
+    dd if=/dev/hdc of=Redhat3.iso
+
+Or an alternate form.
+
+    dd if=/dev/cdrom of=cdImage.iso
+
+To find out the device number with
+
+    cdrecord  -scanbus
+    dvdrecord -scanbus
+
+To mount an "iso" image.
+
+    mount -o loop /opt/cvs/cdImage.iso /mnt/loop

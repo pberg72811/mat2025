@@ -1,0 +1,1032 @@
+#------------------------------------------------------------------------------------------------
+#------------------------------------------------------------------------------------------------
+# NotesBootBaseStation.
+#------------------------------------------------------------------------------------------------
+#------------------------------------------------------------------------------------------------
+Boot machine with RHEL ES 4 Update 2 installation CD in drive.
+
+Type "text askmethod" at prompt.  This will allow you to choose an NFS install.  If you do not 
+want an NFS installation you will have the choice not to select it.
+
+Before you go to much further with an NFS installation make sure you know:
+
+  1.) The intended IP of the machine you are installing on.
+
+  2.) The IP of the server with the NFS drive for installation.
+
+  3.) The name of the NFS drive for installation.
+
+General guidelines for installaion.
+
+  1.) follow a simple "/boot", "swap", "/" scheme for partions of your drive.
+
+  2.) "/boot" gets 128M
+
+  3.) "swap" gets twice the amount of RAM in machine.  4Gig machines gets 8192M.
+
+  4.) "/" gets rest.
+
+  5.) Any extra drives or arrays get the "/data12", "/data13",etc.,  naming convention. 
+
+  6.)"/data11" will be placed on the root partition, "/".
+
+  7.) Select the "Customize software selection" when prompted and select "EVERYTHING".
+
+Follow the installation menu until complete.
+
+Login in as root and perform the following
+
+
+#------------------------------------------------------------------------------------------------
+# These exports are used in the following script notes.
+#------------------------------------------------------------------------------------------------
+    export EXTRAVERSION=20051216.smp
+    export srcDir='/basestation'
+    export XMIDASVER=xm389
+    export CVSROOT="$srcDir/ittcvs"
+    export XMDISK=/opt/xmidas
+
+#------------------------------------------------------------------------------------------------
+# Create /basestation directory.
+#------------------------------------------------------------------------------------------------
+    cd
+    mkdir /basestation
+    mkdir /basestation/ittcvs
+    mkdir /basestation/TahDer
+    chmod ugo+wrx /basestation -R
+
+#------------------------------------------------------------------------------------------------
+# If you have the "ittcvs" and "TahDer" on CD then:
+#------------------------------------------------------------------------------------------------
+#------------------------------------------------------------------------------------------------
+# Copy the contents of the "ittcvs" CD into "/basestation/ittcvs".
+#------------------------------------------------------------------------------------------------
+    # Manually load ittcvs CD 
+    cp -r /media/cdrom/. /basestation/ittcvs/.
+    # Manually load TahDer CD
+    cp -r /media/cdrom/. /basestation/TahDer/.
+
+#------------------------------------------------------------------------------------------------
+# If you have the "ittcvs" and "TahDer" on an NFS then:
+#------------------------------------------------------------------------------------------------
+#------------------------------------------------------------------------------------------------
+# Copy the contents of the "ittcvs" NFS mount into "/basestation/ittcvs".
+#------------------------------------------------------------------------------------------------
+    export IP_OF_NFS_BASESTATION="10.1.1.202"
+
+    mkdir /mnt/nfs_basestation
+    mount $IP_OF_NFS_BASESTATION:/basestation /mnt/nfs_basestation
+    cp -r /mnt/nfs_basestation/ittcvs/. /basestation/ittcvs/.
+    cp -r /mnt/nfs_basestation/TahDer/. /basestation/TahDer/.
+    umount /mnt/nfs_basestation
+    unset IP_OF_NFS_BASESTATION
+
+    ll /basestation
+
+#------------------------------------------------------------------------------------------------
+# Make sure ownership and permissions of the "/basestation" directory is set correctly.
+#------------------------------------------------------------------------------------------------
+    chown root:users /basestation/ittcvs -R
+    chmod ug+wr      /basestation/ittcvs -R
+    chmod o-wrx      /basestation/ittcvs -R
+
+#------------------------------------------------------------------------------------------------
+# Grab the BaseStation notes (These notes!) to help with the build procedures.
+#------------------------------------------------------------------------------------------------
+    cvs -d "/basestation/ittcvs/" export -D today steswd200603A/doc/bookBootServer
+    cp ./steswd200603A/doc/bookBootServer/Notes07BootBaseStation .
+
+#------------------------------------------------------------------------------------------------
+# Add the steswd user.  If the steswd user already exist then this will have
+#                       no affect.
+#------------------------------------------------------------------------------------------------
+    useradd -d /home/steswd steswd         # Setup the user and home directory.
+    usermod -s /bin/bash steswd            # Setup the shell.
+    usermod -g users steswd                # Setup the group.
+    chown steswd:users /home/steswd -R     # Make ownership consistent.
+    echo steswd | passwd --stdin steswd    # Setup the password.
+
+#------------------------------------------------------------------------------------------------
+# Add the xmidas user.  If the xmidas user already exist then this will have
+#                       no affect.
+#------------------------------------------------------------------------------------------------
+    useradd -d /home/xmidas xmidas         # Setup the user and home directory.
+    usermod -s /bin/tcsh xmidas            # Setup the shell.
+    usermod -g users xmidas                # Setup the group.
+    chown xmidas:users /home/xmidas -R     # Make ownership consistent.
+    echo password | passwd --stdin xmidas  # Setup the password.
+
+#------------------------------------------------------------------------------------------------
+# Add a line to the /etc/sysctl.conf to increased shared memory for XMidas.
+#------------------------------------------------------------------------------------------------
+    echo " "                                                    >> /etc/sysctl.conf
+    echo "# Increase the amount of shared memory space to 250M" >> /etc/sysctl.conf
+    echo "kernel.shmmax =  0x10000000"                          >> /etc/sysctl.conf
+
+#------------------------------------------------------------------------------------------------
+# Set proper time zone.
+#------------------------------------------------------------------------------------------------
+    rm -rf /etc/localtime
+    ln -sf /usr/share/zoneinfo/Zulu /etc/localtime
+
+#------------------------------------------------------------------------------------------------
+# If you have NTP server without time code card then:
+#------------------------------------------------------------------------------------------------
+#------------------------------------------------------------------------------------------------
+# NTP server without time code card.
+#------------------------------------------------------------------------------------------------
+    export TIMESERVERIP1="192.009.244.40" # Make TIMESERVERIP1 what you need
+    export TIMESERVERIP2="192.009.244.40" # Make TIMESERVERIP2 what you need
+
+    mv /etc/ntp.conf /etc/ntp.old.conf
+
+    echo "# Permit all access over the loopback interface.  This could"                      > /etc/ntp.conf
+    echo "# be tightened as well, but to do so would effect some of"                        >> /etc/ntp.conf
+    echo "# the administrative functions."                                                  >> /etc/ntp.conf
+    echo "#-------------------------------------------------------------------------------" >> /etc/ntp.conf
+    echo "restrict 127.0.0.1"                                                               >> /etc/ntp.conf
+    echo " "                                                                                >> /etc/ntp.conf
+    echo "# GENERAL CONFIGURATION"                                                          >> /etc/ntp.conf
+    echo "#-------------------------------------------------------------------------------" >> /etc/ntp.conf
+    echo "server $TIMESERVERIP1"                                                            >> /etc/ntp.conf
+    echo "server $TIMESERVERIP2"                                                            >> /etc/ntp.conf
+    echo " "                                                                                >> /etc/ntp.conf
+    echo "# Drift file.  Put this in a directory which the daemon can write to."            >> /etc/ntp.conf
+    echo "# No symbolic links allowed, either, since the daemon updates the file"           >> /etc/ntp.conf
+    echo "# by creating a temporary in the same directory and then rename()'ing"            >> /etc/ntp.conf
+    echo "# it to the file."                                                                >> /etc/ntp.conf
+    echo "#-------------------------------------------------------------------------------" >> /etc/ntp.conf
+    echo "driftfile /etc/ntp/drift"                                                         >> /etc/ntp.conf
+    echo "broadcastdelay  0.008"                                                            >> /etc/ntp.conf
+
+    unset TIMESERVERIP
+
+#------------------------------------------------------------------------------------------------
+# If you have NTP server with time code card then:
+#------------------------------------------------------------------------------------------------
+#------------------------------------------------------------------------------------------------
+# NTP server with time code card.
+#------------------------------------------------------------------------------------------------
+    mv /etc/ntp.conf /etc/ntp.old.conf
+
+    echo "# Permit all access over the loopback interface.  This could"                      > /etc/ntp.conf
+    echo "# be tightened as well, but to do so would effect some of"                        >> /etc/ntp.conf
+    echo "# the administrative functions."                                                  >> /etc/ntp.conf
+    echo "#-------------------------------------------------------------------------------" >> /etc/ntp.conf
+    echo "restrict 127.0.0.1"                                                               >> /etc/ntp.conf
+    echo " "                                                                                >> /etc/ntp.conf
+    echo "# GENERAL CONFIGURATION"                                                          >> /etc/ntp.conf
+    echo "#-------------------------------------------------------------------------------" >> /etc/ntp.conf
+    echo "server 127.127.1.0"                                                               >> /etc/ntp.conf
+    echo "fudge 127.127.1.0 stratum 2"                                                      >> /etc/ntp.conf
+    echo " "                                                                                >> /etc/ntp.conf
+    echo "# Drift file.  Put this in a directory which the daemon can write to."            >> /etc/ntp.conf
+    echo "# No symbolic links allowed, either, since the daemon updates the file"           >> /etc/ntp.conf
+    echo "# by creating a temporary in the same directory and then rename()'ing"            >> /etc/ntp.conf
+    echo "# it to the file."                                                                >> /etc/ntp.conf
+    echo "#-------------------------------------------------------------------------------" >> /etc/ntp.conf
+    echo "driftfile /etc/ntp/drift"                                                         >> /etc/ntp.conf
+    echo "broadcastdelay  0.008"                                                            >> /etc/ntp.conf
+
+#------------------------------------------------------------------------------------------------
+# Set up "/etc/hosts" file.  Modify "Local Host" for current host.
+#
+# Make sure to change local host to be correct!!!!!!
+# Make sure to change local host to be correct!!!!!!
+# Make sure to change local host to be correct!!!!!!
+#------------------------------------------------------------------------------------------------
+    echo "# Do not remove the Local Host Section of this file, "                  >  /etc/hosts
+    echo "# or various programs that require network functionality will fail."    >> /etc/hosts
+    echo ""                                                                       >> /etc/hosts
+    echo "#---------------------------------------------------------------------" >> /etc/hosts
+    echo "# Local Host."                                                          >> /etc/hosts
+    echo "#---------------------------------------------------------------------" >> /etc/hosts
+    echo "127.0.0.1 fender localhost.localdomain localhost"                       >> /etc/hosts
+    echo ""                                                                       >> /etc/hosts
+    echo "#---------------------------------------------------------------------" >> /etc/hosts
+    echo "# Other Hosts."                                                         >> /etc/hosts
+    echo "#---------------------------------------------------------------------" >> /etc/hosts
+    echo "192.168.1.60    ovation"                                                >> /etc/hosts
+    echo "192.168.1.61    hbs001"                                                 >> /etc/hosts
+    echo "192.168.1.62    hbs002"                                                 >> /etc/hosts
+    echo "192.168.1.63    xmprinter"                                              >> /etc/hosts
+    echo "192.168.1.64    fender"                                                 >> /etc/hosts
+    echo "192.168.1.65    snowwhite"                                              >> /etc/hosts
+    echo "192.168.1.66    gibson"                                                 >> /etc/hosts
+    echo "192.168.1.67    doc"                                                    >> /etc/hosts
+    echo "192.168.1.68    icebox"                                                 >> /etc/hosts
+    echo "192.168.1.69    sbs001"                                                 >> /etc/hosts
+    echo "192.168.1.70    sbs002"                                                 >> /etc/hosts
+    echo "192.168.1.71    rds001"                                                 >> /etc/hosts
+    echo "192.168.1.72    rds002"                                                 >> /etc/hosts
+    echo "###.192.168.1.73 TBD"                                                   >> /etc/hosts
+    echo "###.192.168.1.74 TBD"                                                   >> /etc/hosts
+    echo "###.192.168.1.75 TBD"                                                   >> /etc/hosts
+    echo "###.192.168.1.76 TBD"                                                   >> /etc/hosts
+    echo "###.192.168.1.77 TBD"                                                   >> /etc/hosts
+    echo "###.192.168.1.78 TBD"                                                   >> /etc/hosts
+    echo "192.168.1.79     digi"                                                  >> /etc/hosts
+
+# Make sure to change local host to be correct!!!!!!
+# Make sure to change local host to be correct!!!!!!
+# Make sure to change local host to be correct!!!!!!
+
+#------------------------------------------------------------------------------------------------
+# Setup "/data11" directory properly.
+#------------------------------------------------------------------------------------------------
+    mkdir /data11
+    mkdir /data11/{steswd,xmidas,common,icedisk,ramdisk}
+
+    chown steswd:users /data11/steswd
+    chown xmidas:users /data11/xmidas
+    chown root:users   /data11/common
+    chown root:users   /data11/icedisk
+    chown root:users   /data11/ramdisk
+
+    chmod u+wrx   /data11/steswd
+    chmod go-wrx  /data11/steswd
+    chmod u+wrx   /data11/xmidas
+    chmod go-wrx  /data11/xmidas
+    chmod ugo+wrx /data11/icedisk
+    chmod ugo+wrx /data11/ramdisk
+    chmod ugo+wrx /data11/common
+
+#------------------------------------------------------------------------------------------------
+# Directories for "/data12".
+#------------------------------------------------------------------------------------------------
+    mkdir /data12
+
+##------------------------------------------------------------------------------------------------
+## Install TFTP.
+##------------------------------------------------------------------------------------------------
+##    rpm -i $srcDir/TahDer/extras/tftp-server-0.32-4.i386.rpm
+
+#------------------------------------------------------------------------------------------------
+# Link up tftpboot. To be filled later.
+#------------------------------------------------------------------------------------------------
+    ln -s /home/steswd/steswd/tftpboot /tftpboot
+
+##------------------------------------------------------------------------------------------------
+## Install XOSVIEW.
+##------------------------------------------------------------------------------------------------
+##    rpm -i $srcDir/TahDer/extras/xosview-1.8.0-11.i386.rpm
+
+#------------------------------------------------------------------------------------------------
+# Install HEXEDIT.
+#------------------------------------------------------------------------------------------------
+    rpm -i $srcDir/TahDer/extras/hexedit-1.2.2-8.i386.rpm
+
+#------------------------------------------------------------------------------------------------
+# Install Java.
+#------------------------------------------------------------------------------------------------
+    rpm -i $srcDir/TahDer/extras/jdk-1_5_0_01-linux-i586.rpm
+    ln -s /usr/java/jdk1.5.0_01 /usr/java/jdk
+
+#------------------------------------------------------------------------------------------------
+# Remove old Java.
+#------------------------------------------------------------------------------------------------
+    rm -f /usr/bin/java
+    rm -f /etc/alternatives/java
+    rm -f /usr/bin/javac
+    rm -f /etc/alternatives/javac
+
+#------------------------------------------------------------------------------------------------
+# Install octave source.
+#------------------------------------------------------------------------------------------------
+    rpm -i $srcDir/TahDer/extras/octave-2.1.57-7.src.rpm
+    ln -s /usr/include/octave-2.1.57/octave /usr/include/octave
+
+#------------------------------------------------------------------------------------------------
+# Re-link python include direcotry.
+#------------------------------------------------------------------------------------------------
+    ln -s /usr/include/python2.3 /usr/include/python
+
+## Broken for 2.6
+##------------------------------------------------------------------------------------------------
+## Install Symetricom driver.
+##------------------------------------------------------------------------------------------------
+#    mkdir /opt/bc635pci/
+#    tar -zxvf $srcDir/TahDer/symmetricom/BCPCIV602.tgz  --directory /opt/bc635pci/
+#    cd /opt/bc635pci/drvr
+#    make
+#    cd /opt/bc635pci/sample
+#
+#    # Patch the bc635lib.c file.  
+#    # Make changes to "bcIntHandlerRoutine" and comment out "bcShowInt(hBC_PCI);"
+#    ############################
+#    dos2unix bc635lib.c
+#    perl -ni -e '{
+#                   if(/bcShow/)
+#                   {
+#                     printf("//$_");
+#                   }
+#                   else
+#                   {
+#                     printf("$_");
+#                   }
+#    }' bc635lib.c
+#
+#    make
+
+#------------------------------------------------------------------------------------------------
+# KERNEL:
+# Install latest and greatest kernel and kernel source.
+#------------------------------------------------------------------------------------------------
+    rpm -i $srcDir/TahDer/kernel-2.6.9-22.0.1.EL.i686.rpm
+    rpm -i $srcDir/TahDer/kernel-doc-2.6.9-22.0.1.EL.noarch.rpm
+    rpm -i $srcDir/TahDer/kernel-2.6.9-22.0.1.EL.src.rpm
+    rpm -i $srcDir/TahDer/kernel-hugemem-2.6.9-22.0.1.EL.i686.rpm
+    rpm -i $srcDir/TahDer/kernel-hugemem-devel-2.6.9-22.0.1.EL.i686.rpm
+    rpm -i $srcDir/TahDer/kernel-smp-2.6.9-22.0.1.EL.i686.rpm
+    rpm -i $srcDir/TahDer/kernel-smp-devel-2.6.9-22.0.1.EL.i686.rpm
+
+#------------------------------------------------------------------------------------------------
+# KERNEL:
+# "rpmbuild" new kernel.  New for 2.6 Kernels.
+#------------------------------------------------------------------------------------------------
+    rpmbuild -bp --target=noarch /usr/src/redhat/SPECS/kernel-2.6.spec
+
+    mv /usr/src/redhat/BUILD/kernel-2.6.9/linux-2.6.9 /usr/src/kernels/2.6.9-22.0.1.EL
+
+    cp -r /usr/src/kernels/2.6.9-22.0.1.EL /usr/src/kernels/2.6.9-20051216.smp
+
+    cd /usr/src/kernels
+    ln -s 2.6.9-20051216.smp linux2.6.9
+    ln -s linux2.6.9 linux
+
+    cd linux
+
+    cp /boot/config-2.6.9-22.0.1.ELsmp .
+
+#------------------------------------------------------------------------------------------------
+# KERNEL:
+# Create an export to help manage things.
+#------------------------------------------------------------------------------------------------
+    export EXTRAVERSION=20051216.smp
+
+#------------------------------------------------------------------------------------------------
+# KERNEL:
+# Update Makefile
+#------------------------------------------------------------------------------------------------
+    ### Add to top of make file: EXTRAVERSION = -20051216.smp
+    ### Add to top of make file: NAME = base_station
+
+#------------------------------------------------------------------------------------------------
+# KERNEL:
+# Copy config file.
+# Note: kernel config is modified version of "config/kernel-2.6.9-i686.config".
+#------------------------------------------------------------------------------------------------
+    cp config-2.6.9-22.0.1.ELsmp config-2.6.9-$EXTRAVERSION
+
+#------------------------------------------------------------------------------------------------
+# KERNEL:
+# Start making.
+#------------------------------------------------------------------------------------------------
+    make clean
+    make mrproper
+    make menuconfig
+
+#------------------------------------------------------------------------------------------------
+# KERNEL:
+# Continue with kernel build.
+#------------------------------------------------------------------------------------------------
+    ### NO LONGER NEEDED ### make dep 2>&1             | tee logMakeDep
+    make bzImage 2>&1         | tee logMakeBzImage
+    make modules 2>&1         | tee logMakeModules
+    make modules_install 2>&1 | tee logMakeModulesInstall
+
+#------------------------------------------------------------------------------------------------
+# KERNEL:
+# Install the new kernel
+#------------------------------------------------------------------------------------------------
+    cp /usr/src/kernels/linux/System.map              /boot/System.map-2.6.9-$EXTRAVERSION
+    cp /usr/src/kernels/linux/.config                 /boot/config-2.6.9-$EXTRAVERSION
+    cp /usr/src/kernels/linux/arch/i386/boot/bzImage  /boot/vmlinuz-2.6.9-$EXTRAVERSION
+
+#------------------------------------------------------------------------------------------------
+# KERNEL:
+# Create an initial ramdisk for the new kernel.  One of the following.
+#------------------------------------------------------------------------------------------------
+    mkinitrd -v                /boot/initrd-2.6.9-$EXTRAVERSION.img     2.6.9-$EXTRAVERSION
+    mkinitrd -v --with=lvm-mod /boot/initrd-2.6.9-$EXTRAVERSION.img     2.6.9-$EXTRAVERSION
+    mkinitrd -v --with=3w-xxxx /boot/initrd-2.6.9-$EXTRAVERSION.img     2.6.9-$EXTRAVERSION
+    mkinitrd -v --with=qla2300 /boot/initrd-2.6.9-$EXTRAVERSION.img     2.6.9-$EXTRAVERSION
+    mkinitrd -v --with=dpt_i2o /boot/initrd-2.6.9-$EXTRAVERSION.img     2.6.9-$EXTRAVERSION
+
+#------------------------------------------------------------------------------------------------
+# KERNEL:
+# Add new kernel to the "/etc/grub.conf" or "/etc/lilo.conf files".
+#------------------------------------------------------------------------------------------------
+    echo "title Red Hat Enterprise Linux ES (2.6.9-$EXTRAVERSION)"             >> /etc/grub.conf
+    echo "    root (hd0,0)"                                                    >> /etc/grub.conf
+    echo "    kernel /vmlinuz-2.6.9-$EXTRAVERSION ro root=LABEL=/ rhgb quiet"  >> /etc/grub.conf
+    echo "    initrd /initrd-2.6.9-$EXTRAVERSION.img"                          >> /etc/grub.conf
+
+    #  Set the "default=" line properly!!!!!
+
+#------------------------------------------------------------------------------------------------
+# Install Promula FORTRAN compiler.
+#------------------------------------------------------------------------------------------------
+    tar -zxvf $srcDir/TahDer/xmidas/pfc614b.tz --directory /
+
+#------------------------------------------------------------------------------------------------
+# Install XMidas needed RPMS.
+#------------------------------------------------------------------------------------------------
+    rpm -i $srcDir/TahDer/xmidas/RPMS/ld.so-1.9.5-13.i386.rpm
+    rpm -i $srcDir/TahDer/xmidas/RPMS/libc-5.3.12-31.i386.rpm
+
+#------------------------------------------------------------------------------------------------
+# Unpack XMidas 389.
+#------------------------------------------------------------------------------------------------
+    export XMIDASVER=xm389
+    tar -zxvf $srcDir/TahDer/xmidas/xm-3_8_9.tgz --directory /opt/
+    mv /opt/xm-3_8_9 /opt/$XMIDASVER
+
+#------------------------------------------------------------------------------------------------
+# Link the current XMidas to /opt/xmidas.
+#------------------------------------------------------------------------------------------------
+    ln -s /opt/$XMIDASVER /opt/xmidas
+
+#------------------------------------------------------------------------------------------------
+# Make an "/opt/xmopts" directory.
+#------------------------------------------------------------------------------------------------
+    mkdir /opt/xmopts
+
+#------------------------------------------------------------------------------------------------
+# Unpack ICE drivers 318b8.
+#------------------------------------------------------------------------------------------------
+    unzip $srcDir/TahDer/ice/ice318b8.zip -d /opt/xmopts
+    cd /opt/xmopts/ice318b8/test
+    ./build.lnx
+
+#------------------------------------------------------------------------------------------------
+# Unpack XMPY 2_10_2.
+#------------------------------------------------------------------------------------------------
+    tar -zxvf $srcDir/TahDer/xmidas/xmpy-2_10_2.tgz --directory /opt/xmopts
+    mv /opt/xmopts/xmpy-2_10_2 /opt/xmopts/xmpy2102
+
+#------------------------------------------------------------------------------------------------
+# Unpack XMPYQT 104.
+#------------------------------------------------------------------------------------------------
+    tar -zxvf $srcDir/TahDer/xmidas/xmpyqt104.tz --directory /opt/xmopts
+
+#------------------------------------------------------------------------------------------------
+# Unpack BETA 146.
+#------------------------------------------------------------------------------------------------
+    mkdir /opt/xmopts/beta146
+    tar -xvf $srcDir/TahDer/xmidas/mccbopts/beta146.tar --directory /opt/xmopts/beta146
+
+#------------------------------------------------------------------------------------------------
+# Unpack SPOT 121.
+#------------------------------------------------------------------------------------------------
+    mkdir /opt/xmopts/spot121
+    tar -zxvf $srcDir/TahDer/xmidas/spot121.tar.gz --directory /opt/xmopts/
+
+#------------------------------------------------------------------------------------------------
+# Copy itt option trees from cvs.
+#------------------------------------------------------------------------------------------------
+    cd /opt/xmopts
+    export CVSROOT="$srcDir/ittcvs"
+    cvs export -D today adp015
+    cvs export -D today dsp200406
+    cvs export -D today nmfft109
+    cvs export -D today sysadd001
+
+##------------------------------------------------------------------------------------------------
+## Copy itt option trees from cvs.
+##------------------------------------------------------------------------------------------------
+#    cvs export -D today bfg200605A
+#    cvs export -D today ged200605A
+#    cvs export -D today rds200605A
+#    cvs export -D today sdds200605A
+#    cvs export -D today steswd200605A
+#    cvs export -D today xmc200605A
+
+#------------------------------------------------------------------------------------------------
+# Copy over the TMS directory.
+#------------------------------------------------------------------------------------------------
+    cp -r $srcDir/TahDer/tms /opt/
+
+#------------------------------------------------------------------------------------------------
+# Make sure ownership and permissions of the "/opt" directory is set correctly.
+#------------------------------------------------------------------------------------------------
+    chown xmidas:users /opt/. -R
+    chmod ug+wr        /opt/. -R
+    chmod o-wrx        /opt/. -R
+
+#------------------------------------------------------------------------------------------------
+# Switch over to steswd.
+#------------------------------------------------------------------------------------------------
+    su steswd
+    cd ~
+
+#------------------------------------------------------------------------------------------------
+# Prepare steswd directory.
+#------------------------------------------------------------------------------------------------
+    rm -rf .bashrc
+    rm -rf .cshrc
+    rm -rf .xemacs
+    rm -rf .zshrc
+    mkdir xmopts
+    mkdir xmhistdir
+    cd xmopts
+    cvs export -D today steswd200606A
+    cvs export -D today bdw200606A
+    cvs export -D today bfg200606A
+    cvs export -D today bms200606A
+    cvs export -D today ged200606A
+    cvs export -D today rds200606A
+    cvs export -D today sdds200606A
+    cvs export -D today spg200606A
+    cvs export -D today xmc200606A
+    ln -s steswd200606A ste
+    ln -s bdw200606A  bdw
+    ln -s bfg200606A  bfg
+    ln -s bms200606A  bms
+    ln -s ged200606A  ged
+    ln -s rds200606A  rds
+    ln -s sdds200606A sdds
+    ln -s spg200606A  spg
+    ln -s xmc200606A  xmc
+    cd
+    ln -s ~/xmopts/steswd200606A steswd
+    ln -s steswd/.cshrc  .cshrc
+    ln -s steswd/.bashrc .bashrc
+    ln -s steswd/.xemacs .xemacs
+    ln -s steswd/xmstartup.txt xmstartup.txt
+    source ~/.bashrc
+
+    exit # Exit to root.
+
+#------------------------------------------------------------------------------------------------
+# Switch over to xmidas.
+#------------------------------------------------------------------------------------------------
+    su xmidas
+    cd ~
+
+#------------------------------------------------------------------------------------------------
+# Prepare xmidas directory.
+#------------------------------------------------------------------------------------------------
+    rm -rf .bashrc
+    rm -rf .cshrc
+    rm -rf .xemacs
+    rm -rf .zshrc
+    mkdir xmopts
+    mkdir xmhistdir
+    cd xmopts
+    cvs export -D today steswd200606A
+    cvs export -D today bdw200606A
+    cvs export -D today bfg200606A
+    cvs export -D today bms200606A
+    cvs export -D today ged200606A
+    cvs export -D today rds200606A
+    cvs export -D today sdds200606A
+    cvs export -D today spg200606A
+    cvs export -D today xmc200606A
+    ln -s steswd200606A ste
+    ln -s bdw200606A  bdw
+    ln -s bfg200606A  bfg
+    ln -s bms200606A  bms
+    ln -s ged200606A  ged
+    ln -s rds200606A  rds
+    ln -s sdds200606A sdds
+    ln -s spg200606A  spg
+    ln -s xmc200606A  xmc
+    cd
+    ln -s ~/xmopts/steswd200606A steswd
+    ln -s steswd/.cshrc  .cshrc
+    ln -s steswd/.bashrc .bashrc
+    ln -s steswd/.xemacs .xemacs
+    ln -s steswd/xmstartup.txt xmstartup.txt
+    source ~/.cshrc
+    
+#------------------------------------------------------------------------------------------------
+# Copy some XMidas configuration files.
+#------------------------------------------------------------------------------------------------
+    cd /opt/xmidas/xm/cfg
+    cp ~/xmopts/xmc200606A/example.midas.cfg   midas.cfg
+    cp ~/xmopts/xmc200606A/example.diskunx.cfg diskunx.cfg
+    ll
+
+#------------------------------------------------------------------------------------------------
+# Copy XMidas start up and end scripts.
+#------------------------------------------------------------------------------------------------
+    cd  /opt/xmidas/xm/sitemods/unix
+    cp ~/xmopts/xmc200606A/xmstart xmstart
+    cp ~/xmopts/xmc200606A/xmend   xmend
+    ll
+
+#------------------------------------------------------------------------------------------------
+# Set up localopts directory.
+#------------------------------------------------------------------------------------------------
+    mkdir /opt/xmidas/localopts
+    ln -s /opt/xmopts/adp015        /opt/xmidas/localopts/adp
+    ln -s /opt/xmopts/beta146       /opt/xmidas/localopts/beta
+    ln -s /opt/xmopts/dsp200406     /opt/xmidas/localopts/dsp
+    ln -s /opt/xmopts/ice318b8      /opt/xmidas/localopts/ice
+    ln -s /opt/xmopts/nmfft109      /opt/xmidas/localopts/nmfft
+    ln -s /opt/xmopts/sysadd001     /opt/xmidas/localopts/sysadd
+    ln -s /opt/xmopts/spot121       /opt/xmidas/localopts/spot
+    ln -s /opt/xmopts/xmpy2102      /opt/xmidas/localopts/xmpy
+    ln -s /opt/xmopts/xmpyqt104     /opt/xmidas/localopts/xmpyqt
+
+    ll /opt/xmidas/localopts
+
+#------------------------------------------------------------------------------------------------
+# Set up localopts directory. Other.
+#------------------------------------------------------------------------------------------------
+    ln -s /opt/xmopts/cgeo1_4_10  /opt/xmidas/localopts/cgeo
+    ln -s /opt/xmopts/geo211      /opt/xmidas/localopts/geo
+    ln -s /opt/xmopts/hbs112      /opt/xmidas/localopts/hbs
+    ln -s /opt/xmopts/psm001      /opt/xmidas/localopts/psm
+    ln -s /opt/xmopts/ssrib2_2_2  /opt/xmidas/localopts/ssrib
+    ln -s /opt/xmopts/xcs5xx      /opt/xmidas/localopts/xcs
+    ln -s /opt/xmopts/xmdted2_6_1 /opt/xmidas/localopts/xmdted
+
+#------------------------------------------------------------------------------------------------
+# Build XMidas.
+#------------------------------------------------------------------------------------------------
+    cd /opt/xmidas/xm/unix/
+    source ./xminstall
+
+#------------------------------------------------------------------------------------------------
+# Run confidence test.
+#
+#------------------------------------------------------------------------------------------------
+    setenv DISPLAY :0.0
+#OR
+    setenv DISPLAY fender:0.0 ### Remember to "xhost +" ###
+
+    xm
+    %confidence
+    xmend
+
+#------------------------------------------------------------------------------------------------
+# Make sure XMidas' "xmpriority" files are owned and permission correctly.  
+#------------------------------------------------------------------------------------------------
+    exit
+    export XMDISK=/opt/xmidas
+    chown root:root $XMDISK/xm/unix/xmpriority
+    chown root:root $XMDISK/xm/unix/xmpriority.allow
+    chmod +s        $XMDISK/xm/unix/xmpriority
+    chmod ogu=r     $XMDISK/xm/unix/xmpriority.allow
+    chmod u+w       $XMDISK/xm/unix/xmpriority.allow
+    su xmidas                                        # Become XMIDAS again.
+
+#------------------------------------------------------------------------------------------------
+# Build XMPY.
+#------------------------------------------------------------------------------------------------
+    xms
+    cd /opt/xmidas/localopts/xmpy
+    xm xmbopt xmpy
+
+#------------------------------------------------------------------------------------------------
+# Build option trees.
+#------------------------------------------------------------------------------------------------
+    xm xmbopt adp
+    xm xmbopt beta
+    xm xmbopt ice
+    xm xmbopt dsp
+    xm xmbopt nmfft
+    xm xmbopt spot
+    xm xmbopt sysadd
+
+#------------------------------------------------------------------------------------------------
+# Build option trees.
+# You need to change XMOPTS to XMREL_OPTS.
+# cd /opt/xmopts
+# grep -r XMOPTS * | awk -F : '{printf("perl -pi -e \"s/XMOPTS/XMREL_OPTS/ge\" %s\n",$1)}' | uniq
+#------------------------------------------------------------------------------------------------
+    xm xmbopt ged
+    xm xmbopt bdw
+    xm xmbopt bfg
+    xm xmbopt bms
+    xm xmbopt rds
+    xm xmbopt sdds
+    xm xmbopt spg
+
+    ## xm xmbopt xmpy   ## Already built!
+    ## xm xmbopt xmpyqt ## Takes a really long time!
+
+#------------------------------------------------------------------------------------------------
+# Build other option trees.
+#------------------------------------------------------------------------------------------------
+    xm xmbopt cgeo
+    xm xmbopt geo
+    xm xmbopt hbs
+    xm xmbopt psm
+    xm xmbopt ssrib
+    xm xmbopt xcs
+    xm xmbopt xmdted
+    xmend
+
+**** BUILD KERNEL ****
+**** BUILD ICE ****
+
+
+#------------------------------------------------------------------------------------------------
+#------------------------------------------------------------------------------------------------
+# Done.
+#------------------------------------------------------------------------------------------------
+#------------------------------------------------------------------------------------------------
+ head /var/log/dmesg
+
+ octave
+ hexString = "f7ef9000"
+ x = hex2dec(hexString)/1024/1024;
+ x = x -16;
+ x = x - 64;
+ x = x - 512;
+ x = x -16;
+ x/8;
+ system    = fix(x/8)*8;
+ ram_start = system + 8;
+ ram_sized = 512;
+ ram_sizem = 64;
+
+ printf("\n\n\n");...
+ printf("Put \"mem=%dM\"      in /etc/grub.conf\n",system);...
+ printf("\n");...
+ printf("Put \"ram_start=%d\" in icepic driver.\n",ram_start);...
+ printf("Put \"ram_sized=%d\" in icepic driver.\n",ram_sized);...
+ printf("Put \"ram_sizem=%d\" in icepic driver.\n",ram_sizem);...
+ printf("\n");...
+ printf("Put \"/data11/icedisk/ RAM /dev/mem %dM %dM\" in diskunx.cfg file.\n",ram_start,ram_sized);...
+ printf("\n\n\n");
+
+
+
+#------------------------------------------------------------------------------------------------
+#------------------------------------------------------------------------------------------------
+# Linux Kernel v2.6.9-22.20051216.smp Configuration
+#------------------------------------------------------------------------------------------------
+#------------------------------------------------------------------------------------------------
+
+#------------------------------------------------------------------------------------------------
+# Alternate configuration file is 
+#------------------------------------------------------------------------------------------------
+
+    config-2.6.9-20051216.smp
+
+#------------------------------------------------------------------------------------------------
+# Kernel configuration.
+#------------------------------------------------------------------------------------------------
+
+ ------------------------------------------------------------------------------
+  +---------------------- Linux Kernel Configuration -----------------------+
+  |  Arrow keys navigate the menu.  <Enter> selects submenus --->.          |
+  |  Highlighted letters are hotkeys.  Pressing <Y> includes, <N> excludes, |
+  |  <M> modularizes features.  Press <Esc><Esc> to exit, <?> for Help, </> |
+  |  for Search.  Legend: [*] built-in  [ ] excluded  <M> module  < >       |
+  | +---------------------------------------------------------------------+ |
+  | |            Code maturity level options  --->                        | |
+  | |            General setup  --->                                      | |
+  | |            Loadable module support  --->                            | |
+  | |            Processor type and features  --->                        | |
+  | |            Power management options (ACPI, APM)  --->               | |
+  | |            Bus options (PCI, PCMCIA, EISA, MCA, ISA)  --->          | |
+  | |            Executable file formats  --->                            | |
+  | |            Device Drivers  --->                                     | |
+  | |            File systems  --->                                       | |
+  | |            Profiling support  --->                                  | |
+  | |            Kernel hacking  --->                                     | |
+  | |            Security options  --->                                   | |
+  | |            Cryptographic options  --->                              | |
+  | |            Library routines  --->                                   | |
+  | |        ---                                                          | |
+  | |            Load an Alternate Configuration File                     | |
+  | |            Save Configuration to an Alternate File                  | |
+  | +--------v(+)---------------------------------------------------------+ |
+
+                                        Processor type and features
+				   
+  | |     [*] Memory Mirroring (memory tracking support)
+  | |         Subarchitecture Type (Generic architecture (Summit, bigsmp, ES7000, default))  --->
+  |*|         Processor family (Pentium-4/Celeron(P4-based)/Pentium-4 M/Xeon)  --->
+  | |     [*] Generic x86 support
+  | |     [ ] 4 GB kernel-space and 4 GB user-space virtual memory support
+  | |     [*] HPET Timer Support
+  | |     [*]   Provide RTC interrupt
+  | |     [*] Symmetric multi-processing support
+  | |     (32)  Maximum number of CPUs (2-255)
+  | |     [*]   SMT (Hyperthreading) scheduler support
+  |*|     [*] Preemptible Kernel
+  | |     [*]   Voluntary Kernel Preemption
+  | |     [*] Machine Check Exception
+  | |     < >   Check for non-fatal errors on AMD Athlon/Duron / Intel Pentium 4
+  | |     [*]   check for P4 thermal throttling interrupt.
+  |*|     < > Toshiba Laptop support
+  |*|     < > Dell laptop support
+  | |     <M> /dev/cpu/microcode - Intel IA32 CPU microcode support
+  | |     <M> /dev/cpu/*/msr - Model-specific register support
+  | |     <M> /dev/cpu/*/cpuid - CPU information support
+  | |         Firmware Drivers  ---> 
+  | |         High Memory Support (64GB)  --->
+  | |     [ ] Numa Memory Allocation and Scheduler Support
+  | |     [*] Allocate 3rd-level pagetables from highmem  
+  | |     [ ] Math emulation
+  | |     [*] MTRR (Memory Type Range Register) support 
+  | |     [ ] Boot from EFI support (EXPERIMENTAL)  
+  | |     [ ] Enable kernel irq balancing  
+  |*|     [ ] Use register arguments (EXPERIMENTAL) 
+
+     +------------------------- Processor family -------------------------+
+     |  Use the arrow keys to navigate this window or press the hotkey of |
+     |  the item you wish to select followed by the <SPACE BAR>. Press    |
+     |  <?> for additional information about this option.                 |
+     | +----------^(-)--------------------------------------------------+ |
+     | |      ( ) 586/K5/5x86/6x86/6x86MX                               | |
+     | |      ( ) Pentium-Classic                                       | |
+     | |      ( ) Pentium-MMX                                           | |
+     | |      ( ) Pentium-Pro                                           | |
+     | |      ( ) Pentium-II/Celeron(pre-Coppermine)                    | |
+     | |      (X) Pentium-4/Celeron(P4-based)/Pentium-4 M/Xeon          | |
+     | +--------v(+)----------------------------------------------------+ |
+
+  +--------------- Bus options (PCI, PCMCIA, EISA, MCA, ISA) ---------------+
+  |  Arrow keys navigate the menu.  <Enter> selects submenus --->.          |
+  |  Highlighted letters are hotkeys.  Pressing <Y> includes, <N> excludes, |
+  |  <M> modularizes features.  Press <Esc><Esc> to exit, <?> for Help, </> |
+  |  for Search.  Legend: [*] built-in  [ ] excluded  <M> module  < >       |
+  | +---------------------------------------------------------------------+ |
+  | |       [*] PCI support                                               | |
+  | |             PCI access mode (Any)  --->                             | |
+  | |       [*] Message Signaled Interrupts (MSI and MSI-X) (NEW)         | |
+  | |       [*] Legacy /proc/pci interface                                | |
+  |*|       [*] PCI device name database                                  | |
+  | |       [*] ISA support                                               | |
+  | |       [ ]   EISA support                                            | |
+  | |       [ ] MCA support                                               | |
+  | |       < > NatSemi SCx200 support                                    | |
+  | |           PCMCIA/CardBus support  --->                              | |
+  | |           PCI Hotplug Support  --->                                 | |
+  | +---------------------------------------------------------------------+ |
+  +-------------------------------------------------------------------------+
+
+  +---------------------------- Device Drivers -----------------------------+
+  |  Arrow keys navigate the menu.  <Enter> selects submenus --->.          |
+  |  Highlighted letters are hotkeys.  Pressing <Y> includes, <N> excludes, |
+  |  <M> modularizes features.  Press <Esc><Esc> to exit, <?> for Help, </> |
+  |  for Search.  Legend: [*] built-in  [ ] excluded  <M> module  < >       |
+  | +---------^(-)--------------------------------------------------------+ |
+  | |             Memory Technology Devices (MTD)  --->                   | |
+  | |             Parallel port support  --->                             | |
+  | |             Plug and Play support  --->                             | |
+  | |             Block devices  --->                                     | |
+  | |             ATA/ATAPI/MFM/RLL support  --->                         | |
+  | |             SCSI device support  --->                               | |
+  | |             Old CD-ROM drivers (not SCSI, not IDE)  --->            | |
+  | |             Multi-device support (RAID and LVM)  --->               | |
+  | |             Fusion MPT device support  --->                         | |
+  | |             IEEE 1394 (FireWire) support  --->                      | |
+  | |             I2O device support  --->                                | |
+  | |             Networking support  --->                                | |
+  | |             ISDN subsystem  --->                                    | |
+  | |             Telephony Support  --->                                 | |
+  | |             Input device support  --->                              | |
+  | |             Character devices  --->                                 | |
+  | |             I2C support  --->                                       | |
+  | |             Dallas's 1-wire bus  --->                               | |
+  | |             Misc devices  --->                                      | |
+  | |             Multimedia devices  --->                                | |
+  | |             Graphics support  --->                                  | |
+  | |             Sound  --->                                             | |
+  | |             USB support  --->                                       | |
+  |
+
+  +-------------------------- SCSI device support --------------------------+
+  |  Arrow keys navigate the menu.  <Enter> selects submenus --->.          |
+  |  Highlighted letters are hotkeys.  Pressing <Y> includes, <N> excludes, |
+  |  <M> modularizes features.  Press <Esc><Esc> to exit, <?> for Help, </> |
+  |  for Search.  Legend: [*] built-in  [ ] excluded  <M> module  < >       |
+  | +---------------------------------------------------------------------+ |
+  | |  <M> SCSI device support                                            | |
+  | |  [*]   legacy /proc/scsi/ support                                   | |
+  | |  ---   SCSI support type (disk, tape, CD-ROM)                       | |
+  | |  <M>   SCSI disk support                                            | |
+  | |  <M>   SCSI dump support                                            | |
+  | |  <M>   SCSI tape support                                            | |
+  | |  <M>   SCSI OnStream SC-x0 tape support                             | |
+  | |  <M>   SCSI CDROM support                                           | |
+  | |  [*]     Enable vendor-specific extensions (for SCSI CDROM)         | |
+  | |  <M>   SCSI generic support                                         | |
+  | |  ---   Some SCSI devices (e.g. CD jukebox) support multiple LUNs    | |
+  |*|  [*]   Probe all LUNs on each SCSI device                           | |
+  | |  [*]   Verbose SCSI error reporting (kernel size +=12K)             | |
+  | |  [*]   SCSI logging facility                                        | |
+  | |        SCSI Transport Attributes  --->                              | |
+  | |        SCSI low-level drivers  --->                                 | |
+  | |        PCMCIA SCSI adapter support  --->                            | |
+  | +
+  | +--v(+)---------------------------------------------------------------+ |
+
+  +----------------------------- File systems ------------------------------+
+  |  Arrow keys navigate the menu.  <Enter> selects submenus --->.          |
+  |  Highlighted letters are hotkeys.  Pressing <Y> includes, <N> excludes, |
+  |  <M> modularizes features.  Press <Esc><Esc> to exit, <?> for Help, </> |
+  |  for Search.  Legend: [*] built-in  [ ] excluded  <M> module  < >       |
+  | +---------------------------------------------------------------------+ |
+  | |    <*> Second extended fs support                                   | |
+  | |    [*]   Ext2 extended attributes                                   | |
+  | |    [*]     Ext2 POSIX Access Control Lists                          | |
+  | |    [*]     Ext2 Security Labels                                     | |
+  | |    <M> Ext3 journalling file system support                         | |
+  | |    [*]   Ext3 extended attributes                                   | |
+  | |    [*]     Ext3 POSIX Access Control Lists                          | |
+  | |    [*]     Ext3 Security Labels                                     | |
+  | |    [ ] JBD (ext3) debugging support                                 | |
+  | |    < > Reiserfs support                                             | |
+  | |    [ ]   Enable reiserfs debug mode (NEW)                           | |
+  | |    [ ]   Enable reiserfs debug mode (NEW)                           | |
+  | |    [ ]   Stats in /proc/fs/reiserfs (NEW)                           | |
+  | |    [ ]   ReiserFS extended attributes (NEW)                         | |
+  | |    < > JFS filesystem support                                       | |
+  | |    [ ]   JFS POSIX Access Control Lists (NEW)                       | |
+  | |    [ ]   JFS debugging (NEW)                                        | |
+  | |    [ ]   JFS statistics (NEW)                                       | |
+  | |    < > XFS filesystem support                                       | |
+  | |    < > Minix fs support                                             | |
+  | |    < > ROM file system support                                      | |
+  |*|    [ ] Quota support                                                | |
+  | |    < > Kernel automounter support                                   | |
+  | |    <M> Kernel automounter version 4 support (also supports v3)      | |
+  | |        CD-ROM/DVD Filesystems  --->                                 | |
+  | |        DOS/FAT/NT Filesystems  --->                                 | |
+  | |        Pseudo filesystems  --->                                     | |
+  | |        Miscellaneous filesystems  --->                              | |
+  | |        Network File Systems  --->                                   | |
+  | |        Partition Types  --->                                        | |
+  | |        Native Language Support  --->                                | |
+  | +----v(+)-------------------------------------------------------------+ |
+  
+
+  +-------------------------Network File Systems----------------------------+
+  |  Arrow keys navigate the menu.  <Enter> selects submenus --->.          |
+  |  Highlighted letters are hotkeys.  Pressing <Y> includes, <N> excludes, |
+  |  <M> modularizes features.  Press <Esc><Esc> to exit, <?> for Help, </> |
+  |  for Search.  Legend: [*] built-in  [ ] excluded  <M> module  < >       |
+  | +---------------------------------------------------------------------+ |
+  |*|    <*> NFS file system support                                      | |
+  | |    [*]   Provide NFSv3 client support                               | |
+  | |    [*]   Provide NFSv4 client support (EXPERIMENTAL)                | |
+  | |    [*]   Allow direct I/O on NFS files (EXPERIMENTAL)               | |
+  | |    <M> NFS server support                                           | |
+  | |    [*]   Provide NFSv3 server support                               | |
+  | |    [*]     Provide NFSv4 server support (EXPERIMENTAL)              | |
+  | |     ---   Provide NFS server over TCP support                       | |
+  | |    --- Secure RPC: Kerberos V mechanism (EXPERIMENTAL)              | |
+  | |    <M> Secure RPC: SPKM3 mechanism (EXPERIMENTAL)                   | |
+  | |    <M> SMB file system support (to mount Windows shares etc.)       | |
+  | |    [ ]   Use a default NLS                                          | |
+  | |    <M> CIFS support (advanced network filesystem for Samba, Window and other CIFS compliant servers) | |
+  | |    [ ]   CIFS statistics                                            | |
+  | |    [*]   CIFS extended attributes (EXPERIMENTAL)                    | |
+  | |    [*]   CIFS POSIX Extensions (EXPERIMENTAL)                       | |
+  | |    < > NCP file system support (to mount NetWare volumes)           | |
+  | |    < > Coda file system support (advanced network fs)               | |
+  | |    < > Andrew File System support (AFS) (Experimental)              | |
+  | +----v(+)-------------------------------------------------------------+ |
+
+#------------------------------------------------------------------------------------------------
+#------------------------------------------------------------------------------------------------
+# Add users to non-NIS computers.
+#------------------------------------------------------------------------------------------------
+#------------------------------------------------------------------------------------------------
+
+#------------------------------------------------------------------------------------------------
+# As root:
+# Get back to home directory.
+#------------------------------------------------------------------------------------------------
+    cd
+
+#------------------------------------------------------------------------------------------------
+# Get the add user perl script.
+#------------------------------------------------------------------------------------------------
+    cvs -d "/basestation/ittcvs/" export -D today steswd200606A/dev/perlAddUserBS
+    cp ./steswd200606A/dev/perlAddUserBS .
+
+#------------------------------------------------------------------------------------------------
+# Create a user table.
+#------------------------------------------------------------------------------------------------
+    echo "bgribble        600     /home/bgribble    /bin/tcsh" >  UsersTable
+    echo "cmiller         601     /home/cmiller     /bin/tcsh" >> UsersTable
+    echo "dtaylor         602     /home/dtaylor     /bin/tcsh" >> UsersTable
+    echo "freeland        603     /home/freeland    /bin/tcsh" >> UsersTable
+    echo "gmyers          604     /home/gmyers      /bin/bash" >> UsersTable
+    echo "harkness        605     /home/harkness    /bin/tcsh" >> UsersTable
+    echo "pbergman        606     /home/pbergman    /bin/tcsh" >> UsersTable
+    echo "sfisher         607     /home/sfisher     /bin/tcsh" >> UsersTable
+    echo "sramsey         608     /home/sramsey     /bin/tcsh" >> UsersTable
+    echo "weingart        609     /home/weingart    /bin/tcsh" >> UsersTable
+    echo "flanders        610     /home/flanders    /bin/tcsh" >> UsersTable
+    echo "treed"          612     /home/treed       /bin/tcsh" >> UsersTable
+    echo "xmidas"         613     /home/xmidas      /bin/tcsh" >> UsersTable
+
+#------------------------------------------------------------------------------------------------
+# Add users.
+#------------------------------------------------------------------------------------------------
+    perl perlAddUserBS UsersTable > makeItSo
+
+    chmod u+x makeItSo
+
+    makeItSo

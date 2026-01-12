@@ -1,0 +1,42 @@
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+# NotesMakeTreeSTE
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+export REV=001
+export CURRENT_STESWD=/home/steswd/steswd/
+
+mkdir ste$REV 
+mkdir ste$REV/{cfg,dat,exp,host,mcr,test,udf}
+
+
+echo "!******************************************************************************" >  ste$REV/cfg/commands.cfg
+echo "! File: commands.cfg                                                             >> ste$REV/cfg/commands.cfg
+echo "! Desc: Command definition file for the X-Midas STE option tree.                 >> ste$REV/cfg/commands.cfg
+echo "! Hist: When       Who  What                                                     >> ste$REV/cfg/commands.cfg
+echo "!       11/26/2003 ptb  Initial file.                                            >> ste$REV/cfg/commands.cfg
+echo "!                                                                                >> ste$REV/cfg/commands.cfg
+echo "!   FORMAT                                                                       >> ste$REV/cfg/commands.cfg
+echo "!   Category  Name  Support,#parameters   default1,default2,...,defaultN         >> ste$REV/cfg/commands.cfg
+echo "!                                                                                >> ste$REV/cfg/commands.cfg
+echo "!   Support Keys:                                                                >> ste$REV/cfg/commands.cfg
+echo "!   I-Intrinsic      H-Host           G-Gold            M-Macro                  >> ste$REV/cfg/commands.cfg
+echo "!   F-FPS            S-SSP            C-Cray            D-Datastream             >> ste$REV/cfg/commands.cfg
+echo "!                                                                                >> ste$REV/cfg/commands.cfg
+echo "!   See xmhlp:category.doc for Category codes                                    >> ste$REV/cfg/commands.cfg
+echo "!                                                                                >> ste$REV/cfg/commands.cfg
+echo "!******************************************************************************" >> ste$REV/cfg/commands.cfg
+15	BUILDOPT*	M,1	,STE,#A
+11      ICCARCHIVE	H,5+	,,,,#AANAN+
+11      ICCPICPLAY	H,4	,,,,,#ANNA
+11      ICCPICPLAYRTN	H,4	,,,,,,#AANA
+11      ICCPICRECORD	H,8	,,,#ANNANNNN
+11      ICCPIPEFUNC	H,2+	,,,#AA+
+11      ICCPIXPLAY	H,4	,,,,,#ANNA
+11      ICCPIXRECORD	H,7	,,,#ANANNNN
+11      ICCSDDSRECORD   H,4     ,,,,,#AAAN
+11	LOOPBACK	M,4	,,,,,#ANAA
+11	PICPLAY		M,1	,,#A
+11	PICREC*ORD	M,6	,,,,,,,#ANANAA
+11	SIMPLEPLAY	M,3	,,,,#ANA
+11	SIMPLERECORD  	M,3	,,,,#ANA

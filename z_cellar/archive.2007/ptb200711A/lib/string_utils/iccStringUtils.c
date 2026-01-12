@@ -1,0 +1,97 @@
+/*-------------------------------UNCLASSIFIED---------------------------------*/
+// File: iccStringUtils.c
+// Desc: This file contains the code for the iccArrayInit routine.
+// Hist: When       Who  What
+//       06/30/2001 ptb  Initial Code.
+/*----------------------------------------------------------------------------*/
+/* Preprocessor directives ---------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
+/* Include files -------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
+#include "string_utils.h"
+
+/* Constants -----------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
+/* Type defines --------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
+/* Macros --------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
+/* Prototypes ----------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
+/* Routines ------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------*/
+
+VOID iccStringUpper( CHR08 *string )
+{
+  INT32 ii;
+  INT32 len;
+  len = strlen(string);
+  for(ii=0; ii<len; ii++)
+  {
+    string[ii] = toupper(string[ii]);
+  }
+}
+
+VOID iccStringLower( CHR08 *string )
+{
+  INT32 ii;
+  INT32 len;
+  len = strlen(string);
+  for(ii=0; ii<len; ii++)
+  {
+    string[ii] = tolower(string[ii]);
+  }
+}
+
+VOID iccStringInit( CHR08 *string, INT32 length )
+{
+  INT32 ii;
+  for(ii=0;ii<(length-1);ii++) string[ii]='S';
+  string[length-1] = '\0';
+  return;
+}
+
+INT32 iccStringNotEqual(const char *str1, const char *str2, INT32 n)
+{
+  if( strncmp( str1, str2, n ) != 0 ) return(TRUE );
+  else                                return(FALSE);
+}
+
+INT32 iccStringEqual(const char *str1, const char *str2, INT32 n)
+{
+  if( strncmp( str1, str2, n ) == 0 ) return(TRUE );
+  else                                return(FALSE);
+}
+
+INT32 iccStringsANumber(CHR08 *string)
+{
+  INT32 x=0;
+  INT32 ii=0;
+  INT32 l=strlen(string);
+  
+  for(ii=0; ii<l; ii++)
+  {
+    x += (isdigit(string[ii]) > 0);
+  }
+  if(x==l) return(1);
+  else     return(0);
+}
+
+INT32 iccStringsAHexNumber(CHR08 *string)
+{
+  INT32 x=0;
+  INT32 ii=0;
+  INT32 l=strlen(string);
+  
+  for(ii=0; ii<l; ii++)
+  {
+    x += isxdigit(string[ii]);
+  }
+  if(x==l) return(1);
+  else     return(0);
+}
+
+/* End preprocessor directives -----------------------------------------------*/
+/*----------------------------------------------------------------------------*/
+ 
+/*-------------------------------UNCLASSIFIED---------------------------------*/

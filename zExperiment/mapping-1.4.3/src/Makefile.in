@@ -1,0 +1,17 @@
+MKOCTFILE = @MKOCTFILE@
+CXXFLAGS = @CXXFLAGS@
+
+GDAL_LIBS = @GDAL_LIBS@
+GDAL_CFLAGS = @GDAL_CFLAGS@
+DEFS = @DEFS@
+
+gdalread.oct : gdalread.cc misc.cpp
+	$(MKOCTFILE) $(DEFS) $(CXXFLAGS) $(GDAL_CFLAGS) $(GDAL_LIBS) -o $@ $^
+
+clean:
+	-rm misc.o gdalread.o gdalread.oct
+
+distclean: clean
+	-rm Makefile config.h config.log config.status
+
+.PHONY: clean distclean

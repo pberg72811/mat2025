@@ -1,0 +1,54 @@
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+# NotesBootPartition.
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+As root.
+
+#-------------------------------------------------------------------------------
+# Create a partion table file.
+# Notes: 
+# The number of bytes in a Block can differ.  In this case blocks are 1024 bytes.
+#    8032.5 Blocks/Cylinder
+#   16065   "512 Bytes"/Cylinder
+# 8225280   Bytes/Cylinder
+#-------------------------------------------------------------------------------
+    echo "# partition table of /dev/sdb"                        > partitionTable
+    echo "unit: sectors"                                       >> partitionTable
+    echo " "                                                   >> partitionTable
+    echo "/dev/sdb1 : start=       63, size=3418760457, Id=83" >> partitionTable
+    echo "/dev/sdb2 : start=        0, size=        0, Id= 0"  >> partitionTable
+    echo "/dev/sdb3 : start=        0, size=        0, Id= 0"  >> partitionTable
+    echo "/dev/sdb4 : start=        0, size=        0, Id= 0"  >> partitionTable
+
+#-------------------------------------------------------------------------------
+# Perform the partitioning on /dev/sdb.  This Nukes the disk.
+# Notes: 
+# "sfdisk: ERROR sector 0 does not have msdos signature"     can be ignored.
+# "Warning: partition 1 does not end at a cylinder boundary" can be ignored.
+# "sfdisk: I don't like these partitions - nothing changed." override with --force
+#-------------------------------------------------------------------------------
+    sfdisk /dev/sdb < partitionTable
+
+    mke2fs -v -b 4096 -m 1 -T largefile4 -j /dev/sdb1
+
+#-------------------------------------------------------------------------------
+# Create the mount point "/data12"
+#-------------------------------------------------------------------------------
+    mkdir /data12
+
+#-------------------------------------------------------------------------------
+# fstabs file.
+#-------------------------------------------------------------------------------
+    LABEL=/                 /                       ext3    defaults        1 1
+    LABEL=/boot             /boot                   ext3    defaults        1 2
+    none                    /dev/pts                devpts  gid=5,mode=620  0 0
+    none                    /proc                   proc    defaults        0 0
+    none                    /dev/shm                tmpfs   defaults        0 0
+    /dev/sda2               swap                    swap    defaults        0 0
+    /dev/sdb1               /data12                 ext3    defaults        1 2
+
+#-------------------------------------------------------------------------------
+# Shutdown.
+#-------------------------------------------------------------------------------
+    shutdown -r now

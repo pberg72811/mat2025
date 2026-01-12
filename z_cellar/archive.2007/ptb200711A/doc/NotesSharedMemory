@@ -1,0 +1,25 @@
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+# NotesSharedMemory.
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+
+#include "sys/ipc.h"
+#include "sys/shm.h"
+
+typedef struct
+{
+  INT32              flag;
+  CHR08              commandString[64];
+  iccBFGControlSpec  bfgControlSpec;
+} shmDataStructure;
+
+key_t shmKey;
+INT32 shmID;
+shmDataStructure *shm;
+
+shmKey = ftok("/home/steswd/shmtest", 'P');
+shmID  = shmget(shmKey,1024*1024, 0644|IPC_CREAT);
+shm    = (shmDataStructure *)shmat(shmID, 0, 0);
+
+shmdt(shm);

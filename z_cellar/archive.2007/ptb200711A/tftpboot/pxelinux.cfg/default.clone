@@ -1,0 +1,29 @@
+#-------------------------------------------------------------------------------
+# PXE Boot up configuration file.
+# LILO type format.
+#-------------------------------------------------------------------------------
+default linux-RHEL4U2-clone
+
+prompt 1
+timeout 5
+display boot/boot.msg
+F1 boot/boot.msg
+F2 boot/options.msg
+F3 boot/general.msg
+F4 boot/param.msg
+F5 boot/rescue.msg
+F7 boot/snake.msg
+
+serial --unit=0 --speed=9600 --word=8 --parity=no --stop=1
+terminal --timeout=15 serial console
+
+# Normal console
+# Comment out "terminal" line above
+label linux-RHEL4U2-clone
+  kernel isolinuxRHEL4U2/vmlinuz.clone
+  append initrd=isolinuxRHEL4U2/initrd.clone.img rw root=/dev/ram init=/bin/bash ramdisk_size=65011712
+
+# Serial console
+label linux-RHEL4U2-clone-serial
+  kernel isolinuxRHEL4U2/vmlinuz.clone
+  append initrd=isolinuxRHEL4U2/initrd.clone.img rw root=/dev/ram init=/bin/bash ramdisk_size=65011712 console=ttyS0

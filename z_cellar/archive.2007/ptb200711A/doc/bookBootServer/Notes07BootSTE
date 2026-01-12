@@ -1,0 +1,705 @@
+#------------------------------------------------------------------------------------------------
+#------------------------------------------------------------------------------------------------
+# NotesBootSTE.
+#------------------------------------------------------------------------------------------------
+#------------------------------------------------------------------------------------------------
+
+#------------------------------------------------------------------------------------------------
+# Add the "ste" group to this machine.
+#------------------------------------------------------------------------------------------------
+    groupadd ste
+    groupadd users
+
+#------------------------------------------------------------------------------------------------
+# Add the steswd user.  If the steswd user already exist then this will have
+#                       no affect.
+#------------------------------------------------------------------------------------------------
+    useradd -d /home/steswd steswd         # Setup the user and home directory.
+    usermod -s /bin/bash steswd            # Setup the shell.
+    usermod -g users -s steswd             # Setup the group.
+    chown steswd:users /home/steswd -R     # Make ownership consistent.
+    echo steswd | passwd --stdin steswd    # Setup the password.
+
+#------------------------------------------------------------------------------------------------
+# Add the xmidas user.  If the xmidas user already exist then this will have
+#                       no affect.
+#------------------------------------------------------------------------------------------------
+    useradd -d /home/xmidas xmidas         # Setup the user and home directory.
+    usermod -s /bin/tcsh xmidas            # Setup the shell.
+    usermod -g users  xmidas               # Setup the group.
+    chown xmidas:users /home/xmidas        # Make ownership consistent.
+    echo password | passwd --stdin xmidas  # Setup the password.
+
+#------------------------------------------------------------------------------------------------
+# Add a line to the /etc/sysctl.conf to increased shared memory for XMidas.
+#------------------------------------------------------------------------------------------------
+    echo " "                                                    >> /etc/sysctl.conf
+    echo "# Increase the amount of shared memory space to 250M" >> /etc/sysctl.conf
+    echo "kernel.shmmax =  0x10000000"                          >> /etc/sysctl.conf
+
+#------------------------------------------------------------------------------------------------
+# VNC server setup for xmidas.
+#------------------------------------------------------------------------------------------------
+    echo " "                                          >> /etc/sysconfig/vncservers
+    echo "VNCSERVERS=\"1:xmidas\""                    >> /etc/sysconfig/vncservers
+    echo "VNCFLAGS=\"-geometry 1024x768 -depth 16\""  >> /etc/sysconfig/vncservers
+
+#------------------------------------------------------------------------------------------------
+# Set proper time zone.
+#------------------------------------------------------------------------------------------------
+    rm -rf /etc/localtime
+    ln -sf /usr/share/zoneinfo/Zulu /etc/localtime
+
+#------------------------------------------------------------------------------------------------
+# NTP server without time code card.
+#------------------------------------------------------------------------------------------------
+    ##Make TIMESERVERIP what you need.##
+    export TIMESERVERIP="192.009.214.100"
+
+    mv /etc/ntp.conf ntp.old.conf
+
+    echo "# Permit all access over the loopback interface.  This could"                      > /etc/ntp.conf
+    echo "# be tightened as well, but to do so would effect some of"                        >> /etc/ntp.conf
+    echo "# the administrative functions."                                                  >> /etc/ntp.conf
+    echo "#-------------------------------------------------------------------------------" >> /etc/ntp.conf
+    echo "restrict 127.000.000.001"                                                         >> /etc/ntp.conf
+    echo " "                                                                                >> /etc/ntp.conf
+    echo "# GENERAL CONFIGURATION"                                                          >> /etc/ntp.conf
+    echo "#-------------------------------------------------------------------------------" >> /etc/ntp.conf
+    echo "server $TIMESERVERIP prefer"                                                      >> /etc/ntp.conf
+    echo " "                                                                                >> /etc/ntp.conf
+    echo "# Drift file.  Put this in a directory which the daemon can write to."            >> /etc/ntp.conf
+    echo "# No symbolic links allowed, either, since the daemon updates the file"           >> /etc/ntp.conf
+    echo "# by creating a temporary in the same directory and then rename()'ing"            >> /etc/ntp.conf
+    echo "# it to the file."                                                                >> /etc/ntp.conf
+    echo "#-------------------------------------------------------------------------------" >> /etc/ntp.conf
+    echo "driftfile /etc/ntp/drift"                                                         >> /etc/ntp.conf
+    echo "broadcastdelay  0.008"                                                            >> /etc/ntp.conf
+
+    unset TIMESERVERIP
+
+#------------------------------------------------------------------------------------------------
+# NTP server with time code card.
+#------------------------------------------------------------------------------------------------
+    mv /etc/ntp.conf /etc/ntp.old.conf
+
+    echo "# Permit all access over the loopback interface.  This could"                      > /etc/ntp.conf
+    echo "# be tightened as well, but to do so would effect some of"                        >> /etc/ntp.conf
+    echo "# the administrative functions."                                                  >> /etc/ntp.conf
+    echo "#-------------------------------------------------------------------------------" >> /etc/ntp.conf
+    echo "restrict 127.000.000.001"                                                         >> /etc/ntp.conf
+    echo " "                                                                                >> /etc/ntp.conf
+    echo "# GENERAL CONFIGURATION"                                                          >> /etc/ntp.conf
+    echo "#-------------------------------------------------------------------------------" >> /etc/ntp.conf
+    echo "server 127.127.001.000 prefer"                                                    >> /etc/ntp.conf
+    echo " "                                                                                >> /etc/ntp.conf
+    echo "# Drift file.  Put this in a directory which the daemon can write to."            >> /etc/ntp.conf
+    echo "# No symbolic links allowed, either, since the daemon updates the file"           >> /etc/ntp.conf
+    echo "# by creating a temporary in the same directory and then rename()'ing"            >> /etc/ntp.conf
+    echo "# it to the file."                                                                >> /etc/ntp.conf
+    echo "#-------------------------------------------------------------------------------" >> /etc/ntp.conf
+    echo "driftfile /etc/ntp/drift"                                                         >> /etc/ntp.conf
+    echo "broadcastdelay  0.008"                                                            >> /etc/ntp.conf
+
+#------------------------------------------------------------------------------------------------
+# Set up "/etc/hosts" file.  Modify "Local Host" for current host.
+#------------------------------------------------------------------------------------------------
+    echo "# Do not remove the Local Host Section of this file, "                  >  /etc/hosts
+    echo "# or various programs that require network functionality will fail."    >> /etc/hosts
+    echo ""                                                                       >> /etc/hosts
+    echo "#---------------------------------------------------------------------" >> /etc/hosts
+    echo "# Local Host."                                                          >> /etc/hosts
+    echo "#---------------------------------------------------------------------" >> /etc/hosts
+    echo "127.0.0.1 ste001  localhost.localdomain  localhost"                     >> /etc/hosts
+    echo ""                                                                       >> /etc/hosts
+    echo "#---------------------------------------------------------------------" >> /etc/hosts
+    echo "# GRGT Rack."                                                           >> /etc/hosts
+    echo "# 211 is 10/100 and 212 is GBE."                                        >> /etc/hosts
+    echo "#---------------------------------------------------------------------" >> /etc/hosts
+    echo "192.9.211.10 BFG001  bfg001"                                            >> /etc/hosts
+    echo "192.9.211.11 KVM001  kvm001"                                            >> /etc/hosts
+    echo "192.9.211.12 PDU001  pdu001"                                            >> /etc/hosts
+    echo "192.9.211.13 PDU002  pdu002"                                            >> /etc/hosts
+    echo "192.9.211.14 PDU003  pdu003"                                            >> /etc/hosts
+    echo ""                                                                       >> /etc/hosts
+    echo "192.9.211.20 REC001  rec001"                                            >> /etc/hosts
+    echo "192.9.211.21 REC002  rec002"                                            >> /etc/hosts
+    echo "192.9.211.22 REC003  rec003"                                            >> /etc/hosts
+    echo "192.9.211.23 REC004  rec004"                                            >> /etc/hosts
+    echo "192.9.211.24 REC005  rec005"                                            >> /etc/hosts
+    echo "192.9.211.25 REC006  rec006"                                            >> /etc/hosts
+    echo ""                                                                       >> /etc/hosts
+    echo "192.9.211.40 DSP001  dsp001"                                            >> /etc/hosts
+    echo "192.9.211.41 DSP002  dsp002"                                            >> /etc/hosts
+    echo "192.9.211.42 DSP003  dsp003"                                            >> /etc/hosts
+    echo "192.9.211.43 DSP004  dsp004"                                            >> /etc/hosts
+    echo ""                                                                       >> /etc/hosts
+    echo "#---------------------------------------------------------------------" >> /etc/hosts
+    echo "# WSGT Rack."                                                           >> /etc/hosts
+    echo "# 244 is 10/100 and 245 is GBE."                                        >> /etc/hosts
+    echo "#---------------------------------------------------------------------" >> /etc/hosts
+    echo "192.9.244.10 BFG101  bfg101"                                            >> /etc/hosts
+    echo "192.9.244.11 KVM101  kvm101"                                            >> /etc/hosts
+    echo "192.9.244.12 PDU101  pdu101"                                            >> /etc/hosts
+    echo "192.9.244.13 PDU102  pdu102"                                            >> /etc/hosts
+    echo "192.9.244.14 PDU103  pdu103"                                            >> /etc/hosts
+    echo ""                                                                       >> /etc/hosts
+    echo "192.9.244.20 REC101  rec101"                                            >> /etc/hosts
+    echo "192.9.244.21 REC102  rec102"                                            >> /etc/hosts
+    echo "192.9.244.22 REC103  rec103"                                            >> /etc/hosts
+    echo ""                                                                       >> /etc/hosts
+    echo "192.9.244.40 DSP101  dsp101"                                            >> /etc/hosts
+    echo "192.9.244.41 DSP102  dsp102"                                            >> /etc/hosts
+    echo "192.9.244.42 DSP103  dsp103"                                            >> /etc/hosts
+    echo ""                                                                       >> /etc/hosts
+    echo "#---------------------------------------------------------------------" >> /etc/hosts
+    echo "# PS Factory."                                                          >> /etc/hosts
+    echo "#---------------------------------------------------------------------" >> /etc/hosts
+    echo "192.9.248.10 PSF001 psf001"                                             >> /etc/hosts
+    echo "192.9.248.11 PSF002 psf002"                                             >> /etc/hosts
+    echo " "                                                                      >> /etc/hosts
+    echo "#---------------------------------------------------------------------" >> /etc/hosts
+    echo "# MOP."                                                                 >> /etc/hosts
+    echo "#---------------------------------------------------------------------" >> /etc/hosts
+    echo "192.9.246.5 MOP001 mop001"                                              >> /etc/hosts
+    echo " "                                                                      >> /etc/hosts
+    echo "#---------------------------------------------------------------------" >> /etc/hosts
+    echo "# Operation and Maintenance Rack."                                      >> /etc/hosts
+    echo "# 214 is 10/100 and 215 is GBE."                                        >> /etc/hosts
+    echo "#---------------------------------------------------------------------" >> /etc/hosts
+    echo "192.9.214.10 BFG201  bfg201"                                            >> /etc/hosts
+    echo "192.9.214.11 KVM201  kvm201"                                            >> /etc/hosts
+    echo "192.9.214.12 PDU201  pdu201"                                            >> /etc/hosts
+    echo ""                                                                       >> /etc/hosts
+    echo "192.9.214.20 REC201  rec201"                                            >> /etc/hosts
+    echo "192.9.214.40 DSP201  dsp201"                                            >> /etc/hosts
+    echo ""                                                                       >> /etc/hosts
+    echo "192.9.214.201 DIGI    digi"                                             >> /etc/hosts
+    echo ""                                                                       >> /etc/hosts
+    echo ""                                                                       >> /etc/hosts
+    echo "192.9.214.101 PMP002  pmp002"                                           >> /etc/hosts
+    echo "192.9.214.102 PMP003  pmp003"                                           >> /etc/hosts
+    echo "192.9.214.103 PMP004  pmp004"                                           >> /etc/hosts
+    echo "192.9.214.104 PMP005  pmp005"                                           >> /etc/hosts
+    echo "192.9.214.105 SAM500  sam500"                                           >> /etc/hosts
+    echo "192.9.214.106 LAP001  lap001"                                           >> /etc/hosts
+    echo "192.9.214.107 LAP002  lap002"                                           >> /etc/hosts
+    echo "192.9.215.100 PMP001  pmp001"                                           >> /etc/hosts
+    echo "192.9.215.101 PMP002  pmp002"                                           >> /etc/hosts
+    echo "192.9.215.102 PMP003  pmp003"                                           >> /etc/hosts
+    echo "192.9.215.103 PMP004  pmp004"                                           >> /etc/hosts
+    echo "192.9.215.104 PMP005  pmp005"                                           >> /etc/hosts
+    echo ""                                                                       >> /etc/hosts
+    echo "192.9.214.120 DIGI01  digi01"                                           >> /etc/hosts
+    echo ""                                                                       >> /etc/hosts
+    echo "192.9.214.201 EDAS01  edas01"                                           >> /etc/hosts
+    echo "192.9.214.202 EDAS02  edas02"                                           >> /etc/hosts
+    echo "192.9.214.203 EDAS03  edas03"                                           >> /etc/hosts
+    echo "192.9.214.204 EDAS04  edas04"                                           >> /etc/hosts
+    echo "192.9.214.205 EDAS05  edas05"                                           >> /etc/hosts
+    echo ""                                                                       >> /etc/hosts
+    echo "192.9.214.113 STE001  ste001"                                           >> /etc/hosts
+
+#------------------------------------------------------------------------------------------------
+#------------------------------------------------------------------------------------------------
+# Dealing with Partitions on data drives.
+#------------------------------------------------------------------------------------------------
+#------------------------------------------------------------------------------------------------
+
+#------------------------------------------------------------------------------------------------
+# Create a partion table file.
+# Notes:
+# Sectors are 512 bytes.
+# The number of bytes in a Block can differ.  In this case blocks are 1024 bytes.
+#    8032.5 Blocks/Cylinder
+#   16065   "512 Bytes"/Cylinder
+# 8225280   Bytes/Cylinder
+# sfdisk -d gives you a dump that can be in turn used as a partition table.
+#------------------------------------------------------------------------------------------------
+    echo "# partition table of /dev/sdb"                        > partitionTable
+    echo "unit: sectors"                                       >> partitionTable
+    echo " "                                                   >> partitionTable
+    echo "/dev/sdb1 : start=       63, size=3418760457, Id=83" >> partitionTable
+    echo "/dev/sdb2 : start=        0, size=        0, Id= 0"  >> partitionTable
+    echo "/dev/sdb3 : start=        0, size=        0, Id= 0"  >> partitionTable
+    echo "/dev/sdb4 : start=        0, size=        0, Id= 0"  >> partitionTable
+
+#------------------------------------------------------------------------------------------------
+# Perform the partitioning on /dev/sdb.  This Nukes the disk.
+# Notes: 
+# "sfdisk: ERROR sector 0 does not have msdos signature"     can be ignored.
+# "Warning: partition 1 does not end at a cylinder boundary" can be ignored.
+# "sfdisk: I don't like these partitions - nothing changed." override with --force
+#------------------------------------------------------------------------------------------------
+    sfdisk /dev/sdb < partitionTable
+
+    mke2fs -v -b 4096 -m 1 -T largefile4 -j /dev/sdb1
+
+#------------------------------------------------------------------------------------------------
+# Create the mount point "/data12"
+#------------------------------------------------------------------------------------------------
+    mkdir /data12
+
+#------------------------------------------------------------------------------------------------
+# fstabs file.
+#------------------------------------------------------------------------------------------------
+    LABEL=/                 /                       ext3    defaults        1 1
+    LABEL=/boot             /boot                   ext3    defaults        1 2
+    none                    /dev/pts                devpts  gid=5,mode=620  0 0
+    none                    /proc                   proc    defaults        0 0
+    none                    /dev/shm                tmpfs   defaults        0 0
+    /dev/sda2               swap                    swap    defaults        0 0
+    /dev/sdb1               /data12                 ext3    defaults        1 2
+
+#------------------------------------------------------------------------------------------------
+# Moun the partition.
+#------------------------------------------------------------------------------------------------
+    mount /dev/sdb1
+
+#------------------------------------------------------------------------------------------------
+#------------------------------------------------------------------------------------------------
+# Data disk directories.
+#------------------------------------------------------------------------------------------------
+#------------------------------------------------------------------------------------------------
+
+#-------------------------------------------------------------------------------
+# Setup "/data11" directory properly.
+#-------------------------------------------------------------------------------
+    mkdir /data11
+    mkdir /data11/{steswd,xmidas,common,icedisk,ramdisk}
+
+    chown steswd:users /data11/steswd
+    chown xmidas:users /data11/xmidas
+    chown xmidas:users /data11/icedisk
+    chown xmidas:users /data11/ramdisk
+    chown xmidas:users /data11/common
+
+    chmod u+wrx   /data11/steswd
+    chmod u+wrx   /data11/xmidas
+    chmod ugo+wrx /data11/icedisk
+    chmod ugo+wrx /data11/ramdisk
+    chmod ugo+wrx /data11/common
+
+#-------------------------------------------------------------------------------
+# Setup "/data11/adp" directory properly (If needed).
+#-------------------------------------------------------------------------------
+    mkdir /data11/adp
+
+    mkdir /data11/adp/{ctl,edr,ene,log,psd,raw,rpt,sft,soi,tmp}
+
+    mkdir /data11/adp/ctl/{archive,incoming,inprocess,stage}
+
+    mkdir /data11/adp/edr/{archive,incoming,inprocess,stage}
+
+    mkdir /data11/adp/rpt/{archive,incoming,inprocess,stage}
+
+    mkdir /data11/adp/soi/{archive,incoming,inprocess,stage}
+
+    mkdir /data11/adp/sft/{archive,incoming,inprocess,stage}
+
+    chown xmidas:users /data11/adp -R
+
+#-------------------------------------------------------------------------------
+# Directories for "/data12".
+#-------------------------------------------------------------------------------
+    mkdir /data12
+
+    chmod ugo+wrx /data12
+
+    mkdir /data12/adp
+
+    mkdir /data12/adp/{ctl,edr,ene,log,psd,raw,rpt,sft,soi,tmp}
+
+    mkdir /data12/adp/ctl/{archive,incoming,inprocess,stage}
+
+    mkdir /data12/adp/edr/{archive,incoming,inprocess,stage}
+
+    mkdir /data12/adp/rpt/{archive,incoming,inprocess,stage}
+
+    mkdir /data12/adp/sft/{archive,incoming,inprocess,stage}
+
+    mkdir /data12/adp/soi/{archive,incoming,inprocess,stage}
+
+    chown xmidas:users /data12/adp -R
+
+    chmod ug+wrx /data12/adp -R
+
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+# STESWD.
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+
+#-------------------------------------------------------------------------------
+# Put in the STESWD distribution disk or set up NFS mount.
+#-------------------------------------------------------------------------------
+
+#-------------------------------------------------------------------------------
+# The following steps can be done from an NFS mount or CDRom.
+#-------------------------------------------------------------------------------
+    export srcDir='/mnt/cdrom'
+OR
+    export srcDir='/export/TahDer'
+OR
+    export srcDir='/mnt/mp4nfs/TahDer'
+
+#-------------------------------------------------------------------------------
+# Install TFTP.
+#-------------------------------------------------------------------------------
+    rpm -i $srcDir/tftp-server-0.32-4.i386.rpm
+
+#-------------------------------------------------------------------------------
+# Link up tftpboot. To be filled later.
+#-------------------------------------------------------------------------------
+    ln -s /home/steswd/steswd/tftpboot /tftpboot
+
+#-------------------------------------------------------------------------------
+# Install XOSVIEW.
+#-------------------------------------------------------------------------------
+    rpm -i $srcDir/xosview-1.8.0-11.i386.rpm
+
+#-------------------------------------------------------------------------------
+# Install HEXEDIT.
+#-------------------------------------------------------------------------------
+    rpm -i $srcDir/hexedit-1.2.2-8.i386.rpm
+
+#-------------------------------------------------------------------------------
+# Install Java.
+#-------------------------------------------------------------------------------
+    rpm -i $srcDir/jdk-1_5_0_01-linux-i586.rpm
+    ln -s /usr/java/jdk1.5.0_01 /usr/java/jdk
+
+#-------------------------------------------------------------------------------
+# Remove old Java.
+#-------------------------------------------------------------------------------
+    rm -f /usr/bin/java
+    rm -f /etc/alternatives/java
+    rm -f /usr/bin/javac
+    rm -f /etc/alternatives/javac
+
+#-------------------------------------------------------------------------------
+# Install octave source.
+#-------------------------------------------------------------------------------
+    rpm -i $srcDir/octave-2.1.50-6.src.rpm
+    ln -s /usr/include/octave-2.1.50/octave /usr/include/octave
+
+#-------------------------------------------------------------------------------
+# Re-link python include direcotry.
+#-------------------------------------------------------------------------------
+    ln -s /usr/include/python2.2 /usr/include/python
+
+#-------------------------------------------------------------------------------
+# Install Symetricom driver .
+#-------------------------------------------------------------------------------
+    mkdir /opt/bc635pci/
+    tar -zxvf $srcDir/symmetricom/BCPCIV602.tgz  --directory /opt/bc635pci/
+    cd /opt/bc635pci/drvr
+    make
+    cd /opt/bc635pci/sample
+
+    # Patch the bc635lib.c file.  
+    # Make changes to "bcIntHandlerRoutine" and comment out "bcShowInt(hBC_PCI);"
+    ############################
+    dos2unix bc635lib.c
+    perl -ni -e '{
+                   if(/bcShow/)
+                   {
+                     printf("//$_");
+                   }
+                   else
+                   {
+                     printf("$_");
+                   }
+    }' bc635lib.c
+
+    make
+
+#-------------------------------------------------------------------------------
+# Install latest and greatest kernel and kernel source.
+#-------------------------------------------------------------------------------
+    rpm -i $srcDir/kernel-2.4.21-27.0.2.EL.i686.rpm
+    rpm -i $srcDir/kernel-doc-2.4.21-27.0.2.EL.i386.rpm
+    rpm -i $srcDir/kernel-source-2.4.21-27.0.2.EL.i386.rpm
+
+#-------------------------------------------------------------------------------
+# Install Promula FORTRAN compiler.
+#-------------------------------------------------------------------------------
+    tar -zxvf $srcDir/xmidas/pfc614b.tz --directory /
+
+#-------------------------------------------------------------------------------
+# Install XMidas needed RPMS.
+#-------------------------------------------------------------------------------
+    rpm -i $srcDir/xmidas/RPMS/ld.so-1.9.5-13.i386.rpm
+    rpm -i $srcDir/xmidas/RPMS/libc-5.3.12-31.i386.rpm
+
+#-------------------------------------------------------------------------------
+# Unpack XMidas 389.
+#-------------------------------------------------------------------------------
+    export XMIDASVER=xm389
+    tar -zxvf $srcDir/xmidas/xm-3_8_9.tgz --directory /opt/
+    mv /opt/xm-3_8_9 /opt/$XMIDASVER
+
+#-------------------------------------------------------------------------------
+# Link the current XMidas to /opt/xmidas.
+#-------------------------------------------------------------------------------
+    ln -s /opt/$XMIDASVER /opt/xmidas
+
+#-------------------------------------------------------------------------------
+# Make an "/opt/xmopts" directory.
+#-------------------------------------------------------------------------------
+    mkdir /opt/xmopts
+
+#-------------------------------------------------------------------------------
+# Unpack ICE drivers 317.
+#-------------------------------------------------------------------------------
+    unzip $srcDir/ice/ice317.zip -d /opt/xmopts
+
+#-------------------------------------------------------------------------------
+# Unpack XMPY 2_10_1.
+#-------------------------------------------------------------------------------
+    tar -zxvf $srcDir/xmidas/xmpy-2_10_1.tgz --directory /opt/xmopts
+    mv /opt/xmopts/xmpy-2_10_1 /opt/xmopts/xmpy2101
+
+#-------------------------------------------------------------------------------
+# Unpack XMPYQT 104.
+#-------------------------------------------------------------------------------
+    tar -zxvf $srcDir/xmidas/xmpyqt104.tz --directory /opt/xmopts
+
+#-------------------------------------------------------------------------------
+# Unpack BETA 146.
+#-------------------------------------------------------------------------------
+    mkdir /opt/xmopts/beta146
+    tar -xvf $srcDir/xmidas/mccbopts/beta146.tar --directory /opt/xmopts/beta146
+
+#-------------------------------------------------------------------------------
+# Unpack SPOT 120.
+#-------------------------------------------------------------------------------
+    mkdir /opt/xmopts/spot120
+    tar -zxvf $srcDir/xmidas/spot120.tgz --directory /opt/xmopts/
+
+#-------------------------------------------------------------------------------
+# Copy over the cvs directory.
+#-------------------------------------------------------------------------------
+    mkdir /opt/cvs
+    cp -r $srcDir/ittcvs/adp015    /opt/cvs/
+    cp -r $srcDir/ittcvs/dsp200406 /opt/cvs/
+    cp -r $srcDir/ittcvs/ibug007   /opt/cvs/
+    cp -r $srcDir/ittcvs/nmfft109  /opt/cvs/
+    cp -r $srcDir/ittcvs/sysadd001 /opt/cvs/
+
+#-------------------------------------------------------------------------------
+# Copy over the TMS directory.
+#-------------------------------------------------------------------------------
+    mkdir /opt/tms
+    cp -r $srcDir/tms /opt/
+
+#-------------------------------------------------------------------------------
+# Make sure ownership and permissions of the "/opt" directory is set correctly.
+#-------------------------------------------------------------------------------
+    chown steswd:users /opt/. -R
+    chmod ug+wr        /opt/. -R
+    chmod o-wrx        /opt/. -R
+
+#-------------------------------------------------------------------------------
+# Switch over to STESWD.
+#-------------------------------------------------------------------------------
+    su steswd
+    cd ~
+
+#-------------------------------------------------------------------------------
+# Check out STESWD.
+#-------------------------------------------------------------------------------
+    export STESWDCUR=steswd200509B
+    export CVSROOT="/opt/cvs"
+    export CVSROOT="steswd@192.9.214.100:/opt/cvs"
+    export CVS_RSH=ssh
+    cvs -d "$CVSROOT" checkout $STESWDCUR
+
+#-------------------------------------------------------------------------------
+# Prepare steswd directory.
+#-------------------------------------------------------------------------------
+    rm -rf .bashrc
+    rm -rf .cshrc
+    rm -rf .xemacs
+    rm -rf .zshrc
+    ln -s $STESWDCUR steswd
+    ln -s steswd/.cshrc  .cshrc
+    ln -s steswd/.bashrc .bashrc
+    ln -s steswd/.xemacs .xemacs
+    ln -s steswd/xmstartup.txt xmstartup.txt
+    source /home/steswd/.bashrc
+    mkdir xmhistdir
+    
+#-------------------------------------------------------------------------------
+# Copy some XMidas configuration files.
+#-------------------------------------------------------------------------------
+    cd /opt/xmidas/xm/cfg
+    cp /home/steswd/steswd/cfg/example.midas.cfg   midas.cfg
+    cp /home/steswd/steswd/cfg/example.diskunx.cfg diskunx.cfg
+
+#-------------------------------------------------------------------------------
+# Link XMidas start up and end scripts.
+#-------------------------------------------------------------------------------
+    cd  /opt/xmidas/xm/sitemods/unix
+    ln -s /home/steswd/steswd/xmstart xmstart
+    ln -s /home/steswd/steswd/xmend   xmend
+
+#-------------------------------------------------------------------------------
+# Bring in the option trees.
+#-------------------------------------------------------------------------------
+    mkdir /opt/cvs/CVSROOT
+    export CVSROOT="/opt/cvs"
+    cd /opt/xmopts
+    cvs export -D today adp015
+    cvs export -D today bfg001
+    cvs export -D today dsp200406
+    cvs export -D today ene001
+    cvs export -D today ibug007
+    cvs export -D today nmfft109
+    cvs export -D today rds001
+    cvs export -D today steswd200511A
+    cvs export -D today sysadd001
+
+#-------------------------------------------------------------------------------
+# Set up localopts directory.
+#-------------------------------------------------------------------------------
+    mkdir /opt/xmidas/localopts
+    ln -s /opt/xmopts/adp015    /opt/xmidas/localopts/adp
+    ln -s /opt/xmopts/beta146   /opt/xmidas/localopts/beta
+    ln -s /opt/xmopts/bfg001    /opt/xmidas/localopts/bfg
+    ln -s /opt/xmopts/dsp200406 /opt/xmidas/localopts/dsp
+    ln -s /opt/xmopts/ene001    /opt/xmidas/localopts/ene
+    ln -s /opt/xmopts/ibug007   /opt/xmidas/localopts/ibug
+    ln -s /opt/xmopts/ice318b8  /opt/xmidas/localopts/ice
+    ln -s /opt/xmopts/nmfft109  /opt/xmidas/localopts/nmfft
+    ln -s /opt/xmopts/rds001    /opt/xmidas/localopts/rds
+    ln -s /opt/xmopts/sysadd001 /opt/xmidas/localopts/sysadd
+    ln -s /home/steswd/steswd   /opt/xmidas/localopts/ste
+    ln -s /opt/xmopts/spot121   /opt/xmidas/localopts/spot
+    ln -s /opt/xmopts/xmpy2101  /opt/xmidas/localopts/xmpy
+    ln -s /opt/xmopts/xmpyqt104 /opt/xmidas/localopts/xmpyqt
+
+#-------------------------------------------------------------------------------
+# Set up localopts directory. Other.
+#-------------------------------------------------------------------------------
+    ln -s /opt/xmopts/cgeo1_4_10  /opt/xmidas/localopts/cgeo
+    ln -s /opt/xmopts/geo211      /opt/xmidas/localopts/geo
+    ln -s /opt/xmopts/hbs112      /opt/xmidas/localopts/hbs
+    ln -s /opt/xmopts/psm001      /opt/xmidas/localopts/psm
+    ln -s /opt/xmopts/ssrib2_2_2  /opt/xmidas/localopts/ssrib
+    ln -s /opt/xmopts/xcs5xx      /opt/xmidas/localopts/xcs
+    ln -s /opt/xmopts/xmdted2_6_1 /opt/xmidas/localopts/xmdted
+
+#-------------------------------------------------------------------------------
+# Build XMidas.
+#-------------------------------------------------------------------------------
+    tcsh
+    cd /opt/xmidas/xm/unix/
+    source ./xminstall
+
+#-------------------------------------------------------------------------------
+# Run confidence test.
+#-------------------------------------------------------------------------------
+    #xm
+    #%confidence
+    xmend
+
+#-------------------------------------------------------------------------------
+# Make sure XMidas' "xmpriority" files are owned and permission correctly.  
+#-------------------------------------------------------------------------------
+     exit
+     exit
+     export XMDISK=/opt/xmidas
+     chown root:root $XMDISK/xm/unix/xmpriority
+     chown root:root $XMDISK/xm/unix/xmpriority.allow
+     chmod +s        $XMDISK/xm/unix/xmpriority
+     chmod ogu=r     $XMDISK/xm/unix/xmpriority.allow
+     chmod u+w       $XMDISK/xm/unix/xmpriority.allow
+     su steswd                                        # Become STESWD again.
+
+#-------------------------------------------------------------------------------
+# Build XMPY.
+#-------------------------------------------------------------------------------
+    tcsh
+    xms
+    cd /opt/xmidas/localopts/xmpy
+    xm xmbopt xmpy
+
+#-------------------------------------------------------------------------------
+# Build option trees.
+#-------------------------------------------------------------------------------
+    xm xmbopt adp
+    xm xmbopt beta
+    xm xmbopt bfg
+    xm xmbopt dsp
+    xm xmbopt ene
+    xm xmbopt ice
+    xm xmbopt nmfft
+    xm xmbopt rds
+    xm xmbopt spot
+    xm xmbopt steswd
+    xm xmbopt sysadd
+    xm xmbopt xmpy
+    xm xmbopt xmpyqt
+
+#-------------------------------------------------------------------------------
+# Build other option trees.
+#-------------------------------------------------------------------------------
+    xm xmbopt cgeo
+    xm xmbopt geo
+    xm xmbopt hbs
+    xm xmbopt psm
+    xm xmbopt ssrib
+    xm xmbopt xcs
+    xm xmbopt xmdted
+    xmend
+
+#-------------------------------------------------------------------------------
+# Polish up the xmidas account
+#-------------------------------------------------------------------------------
+    exit 
+    exit 
+    cd /home
+    chmod -R g+r ./steswd
+    chmod g+x ./steswd
+    su xmidas
+    cd ~
+    cp /home/steswd/.cshrc .
+    cp /home/steswd/xmstartup.txt .
+    mkdir xmhistdir
+    source .cshrc
+
+
+**** BUILD KERNEL ****
+**** BUILD ICE ****
+
+
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+# Done.
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+ head /var/log/dmesg
+
+ octave
+ hexString = "f7ef9000"
+ x = hex2dec(hexString)/1024/1024;
+ x = x -16;
+ x = x - 64;
+ x = x - 512;
+ x = x -16;
+ x/8;
+ system    = fix(x/8)*8;
+ ram_start = system + 16;
+ ram_sized = 512;
+ ram_sizem = 64;
+
+ printf("\n\n\n");...
+ printf("Put \"mem=%dM\"      in /etc/grub.conf\n",system);...
+ printf("\n");...
+ printf("Put \"ram_start=%d\" in icepic driver.\n",ram_start);...
+ printf("Put \"ram_sized=%d\" in icepic driver.\n",ram_sized);...
+ printf("Put \"ram_sizem=%d\" in icepic driver.\n",ram_sizem);...
+ printf("\n");...
+ printf("Put \"/data11/icedisk/ RAM /dev/mem %dM %dM\" in diskunx.cfg file.\n",ram_start,ram_sized);...
+ printf("\n\n\n");

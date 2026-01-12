@@ -1,0 +1,53 @@
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+# NotesBootServerTFTP.
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+Setup the tftpd server.
+
+Install the tftpd rpm if it is not already installed.
+
+	rpm -i tftp-server-0.29-3.i386.rpm
+
+Make sure the "/etc/xinetd.d/tftp" file looks like the following:
+
+
+	# default: off
+	# description: The tftp server serves files using the trivial file transfer \
+	#       protocol.  The tftp protocol is often used to boot diskless \
+	#       workstations, download configuration files to network-aware printers, \
+	#       and to start the installation process for some operating systems.
+	service tftp
+	{
+	        disable                 = no
+	        socket_type             = dgram
+	        protocol                = udp
+	        wait                    = yes
+	        user                    = root
+	        server                  = /usr/sbin/in.tftpd
+	        server_args             = -s /tftpboot 
+	        per_source              = 11
+	        cps                     = 100 2
+	}
+
+Pay special attention to the 
+
+	disable = no
+
+line and the
+
+	server_args             = -s /tftpboot
+line.
+
+Start the tftp server by restarting "xinetd".  "xinetd" takes care of a couple common TCPIP
+deamons.
+
+	service xinetd start
+
+Test out the tftp server from another machine
+
+	ssh 192.9.214.210
+        tftp 192.9.214.100
+	tftp> get pxelinux.0
+
+

@@ -1,0 +1,34 @@
+#-------------------------------------------------------------------------------
+# PXE Boot up configuration file.
+# LILO type format.
+#-------------------------------------------------------------------------------
+default linux-RHEL4U2-install-serial
+
+prompt 1
+timeout 5
+display boot/boot.msg
+F1 boot/boot.msg
+F2 boot/options.msg
+F3 boot/general.msg
+F4 boot/param.msg
+F5 boot/rescue.msg
+F7 boot/snake.msg
+
+serial --unit=0 --speed=9600 --word=8 --parity=no --stop=1
+terminal --timeout=15 serial console
+
+label isolinux.serial
+  kernel isolinux/vmlinuz
+  append initrd=isolinux/initrd.img ramdisk_size=65011712 text console=ttyS0
+
+label isolinux.200502A.serial
+  kernel isolinux/vmlinuz.200502A.smp
+  append initrd=isolinux/initrd.200502A.smp.img ramdisk_size=65011712 text console=ttyS0
+
+label linux-RHEL3U3-install-serial
+  kernel isolinuxRHEL3U3/vmlinuz
+  append initrd=isolinuxRHEL3U3/initrd.img ramdisk_size=65011712 text console=ttyS0
+
+label linux-RHEL4U2-install-serial
+  kernel isolinuxRHEL4U2/vmlinuz
+  append initrd=isolinuxRHEL4U2/initrd.img ramdisk_size=65011712 text console=ttyS0

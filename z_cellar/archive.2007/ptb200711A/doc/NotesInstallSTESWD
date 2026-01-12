@@ -1,0 +1,453 @@
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+# NotesInstallSTESWD.
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Set up directories and copy needed files.
+--------------------------------------------------------------------------------
+Step 00: Become root user.
+
+Step 01: Place the XMidas 364 CD-ROM in the CD-ROM drive.
+
+Step 02: Create the following directories if not present:
+		mkdir /opt
+		mkdir /opt/xm364
+		mkdir /opt/xm364/xm
+		mkdir /opt/cvs
+		mkdir /opt/tms
+		mkdir /opt/beta142c
+	 ***Important-Names need to be lowercase. ***
+
+Step 03: Change directory (cd) to "/opt/xm364/xm".
+		cd /opt/xm364/xm
+
+Step 04: Restore the XMidas tar file:
+		tar -xvf /mnt/cdrom/xm364.tar
+
+Step 05: Change directory (cd) to "/opt/beta142c"
+		cd /opt/beta142c
+
+Step 06: Restore the beta142c tar file:
+		tar -xvf /mnt/cdrom/beta142c.tar
+
+Step 07: Change directory (cd) to "/".
+
+Step 08: Install PROMULA Fortran package from the XMidas CD-ROM:
+		tar -xvzf /mnt/cdrom/pfc614b.tz
+
+Step 09: Install the needed linux libraries from the XMidas CD-ROM:
+		rpm -i /mnt/cdrom/RPMS/ld.si-1.9.5-13.i386.rpm
+		rpm -i /mnt/cdrom/RPMS/libc-5.3.12-31.i386.rpm
+
+Step 10: Eject the XMidas 364 CD-ROM and insert the ICE309 CD-ROM.
+
+Step 11: Change directory (cd) to "/opt".
+		cd /opt
+
+Step 12: Copy (cp) the ICE309 zip file from the CD-ROM.
+		cp /mnt/cdrom/ice309.zip .
+
+Step 13: Unzip the ICE309 zip file.  You should have an ice309 directory after this.
+		unzip ice309
+
+Step 14: Delete the ice309.zip file because you do not need it anymore.
+		rm ice309.zip
+
+Step 15: Eject the ICE309 CD-ROM and insert the TMS CD-ROM.
+
+Step 16: Change directory (cd) to "/opt/tms".
+		cd /opt/tms
+
+Step 17: Copy the "linux" and "doc" directories from the TMS CD-ROM.
+		cp -r /mnt/cdrom/linux .
+		cp -r /mnt/cdrom/docs .
+
+Step 18: Eject the TMS CD-ROM and insert the STESWD CD-ROM.
+
+Step 19: Change directory (cd) to "/".
+		cd /
+
+Step 20: Copy the STESWD CVS directory.
+		tar zxvf /mnt/cdrom/opt.tgz opt/cvs
+
+Step 21: Change directory (cd) to "/opt".
+		cd /opt
+
+Step 22: Set up the following symbolic links:
+		ln -s xm364    xmidas
+		ln -s ice309   ice
+		ln -s beta142c beta
+
+Step 23: Change ownership of all directories and files:
+		chown xmidas:ste . -R
+
+Step 24: Change read and write permisions on all directories and files:
+		chmod ug+rw . -R
+
+The /opt directory should now look similar to:
+
+drwxr-xr-x   10 root     root         4096 Oct 10 18:35 .
+drwxr-xr-x   21 root     root         4096 Oct  9 14:53 ..
+lrwxrwxrwx    1 xmidas   ste             7 Oct 10 18:35 beta -> beta142c
+drwxrwxr-x   10 xmidas   ste          4096 Oct 10 19:17 beta142c
+drwxrwxr-x    4 xmidas   ste          4096 Jun 20 19:00 cvs
+lrwxrwxrwx    1 xmidas   ste             6 Oct  9 15:42 ice -> ice309
+drwxrwxr-x   15 xmidas   ste          4096 Aug 15 16:14 ice309
+drwxrwxr-x    4 xmidas   ste          4096 Jun 20 19:00 tms
+drwxrwxr-x    3 xmidas   ste          4096 Aug 19 20:50 xm364
+lrwxrwxrwx    1 xmidas   ste             6 Oct  9 15:42 xmidas -> xm364
+
+--------------------------------------------------------------------------------
+Get the midas.cshrc into the /etc directory
+--------------------------------------------------------------------------------
+Step 00: Copy the sample midas.cshrc file to the /etc directory.
+		cp /opt/xmidas/xm/unix/linx/midas_cshrc.sample /etc/midas.cshrc
+
+Step 01: Might need to change midas.cshrc file:
+
+if (! $?prompt) then
+   set path = ( $XMDISK/xm/unix/linx $XMDISK/xm/unix $XMDISK/xm/util $path )
+endif
+
+BECOMES:
+
+#if (! $?prompt) then
+   set path = ( $XMDISK/xm/unix/linx $XMDISK/xm/unix $XMDISK/xm/util $path )
+#endif
+
+--------------------------------------------------------------------------------
+Set up an XMidas user account.
+--------------------------------------------------------------------------------
+Step 00: Become root user.
+		su root
+		<root password>
+
+Step 01: Create a ste group.
+		groupadd ste or /usr/sbin/groupadd ste
+
+Step 02: Create an xmidas account.
+		useradd -d /home/xmidas -g ste -s /bin/tcsh xmidas
+
+Step 03: Set the password for the xmidas account.
+		passwd xmidas
+                <setup password>
+
+--------------------------------------------------------------------------------
+xxxxxx
+--------------------------------------------------------------------------------
+Step 02: Become xmidas user.
+		su xmidas
+
+Step 04: Do a cvs export for steswd
+		cvs -d /opt/cvs export -D now steswd	
+
+Step 05: Change directories to steswd/unx
+		cd steswd/unx
+
+Step 06: Copy the example.cshrc to /home/xmidas/.cshrc
+		cp example.cshrc ~/.cshrc
+
+Step 07: Copy the example.xmstartup.txt to /home/xmidas/xmstartup.txt
+		cp example.xmstartup.txt ~/xmstartup.txt
+
+Step 08: Change directory to /home/xmidas
+		cd ~
+
+Step 09: Source the .cshrc file
+		source ~/.cshrc
+
+--------------------------------------------------------------------------------
+Build XMidas
+--------------------------------------------------------------------------------
+Step 00: Login under xmidas account
+
+Step 01: Change to the /opt/xmidas/xm/unix directory
+         cd /opt/xmidas/xm/unix
+
+Step 02: Perform a make
+         make
+
+Step 03: Change directory to linx
+         cd linx
+
+Step 04: Perform a make
+         make
+
+Step 05: source the xminstall 
+         source xminstall
+
+Step 06: Answer questions
+         Example
+         Name of current X-Midas root is: /home/xm362
+         Continue [Y]/N ? y
+         There is no support for TMS SAMnet interfaces (ECL60 & ECL62).
+         Continue [Y]/N ? y
+         Edit version for UNIX configurations [Y]/N ? n
+         Edit midas.cfg for disk configurations, etc. [Y]/N ? y
+         Edit dsmengines.cfg for foreign datastream engines [Y]/N ? y
+         Edit netdisks.cfg for foreign datastream disks [Y]/N ? y
+         Edit diskunx.cfg for SAM/RAM disks [Y]/N ? y
+         The rest is non-interactive. Continue [Y]/N/R ? y
+
+Step 07: Run the confidence test by typing
+	 xm
+	 %confidence
+
+         Read screen prompts carefully and answer (beware of the ENDSUSPEND prompt)
+
+Step 08: Become root user.
+		su root
+		<root password>
+
+Step 09: Change the ownership of xmpriority
+         chown root:root /opt/xmidas/xm/unix/xmpriority
+         chown root:root /opt/xmidas/xm/unix/xmpriority.allow
+
+Step 10: Change file access permisions as follows
+         chmod +s     /opt/xmidas/xm/unix/xmpriority
+         chmod ogu=r  /opt/xmidas/xm/unix/xmpriority.allow
+         chmod u+w    /opt/xmidas/xm/unix/xmpriority.allow
+
+--------------------------------------------------------------------------------
+Edit xmstart
+--------------------------------------------------------------------------------
+cd /xmidas/xm/sitemods/unix
+cp xmstart.sample xmstart
+vi xmstart
+Make it look like
+
+#!/bin/csh -f
+#---------------------------------------
+
+setenv XM_NONSUPPORT "GC"
+xm xmpath/redo
+
+xmopt beta /opt/beta
+xmopt ice  /opt/ice
+xmopt ste  ${HOME}/steswd
+	 
+
+
+--------------------------------------------------------------------------------
+Setup Java
+--------------------------------------------------------------------------------
+Step 00: Become root user
+	 su
+	 <root password>
+
+Step 01: Change to home directory
+         cd
+
+Step 02: Copy the Java bin file form the CD.
+         cp /mnt/cdrom/j2sdk1*.bin .
+
+Step 03: Execute the java bin file
+         j2sdk1*.bin
+
+Step 04: Answer questions.  This will produce an rpm file.
+
+Step 05: Install the rpm package
+         rpm -i j2sdk1*.rpm
+
+Step 06: Change directory to /usr/java
+         cd /usr/java
+
+Step 07: Setup a link called "jdk" to the "j2sdk1" directoy
+         ln -s j2sdk1* jdk
+
+--------------------------------------------------------------------------------
+Setup octave source
+--------------------------------------------------------------------------------
+Step 00: Insert linux source CD
+
+Step 01: Become root user
+	 su
+	 <root password>
+
+Step 02: Change to cdrom directory
+         cd /mnt/cdrom
+
+Step 03: Change to the SRPM directory
+         cd SRPMS
+
+Step 04: Install the octave rpm package
+	 rpm -i octave*.rpm
+
+Step 05: Change directory to /usr/src/redhat/SOURCES
+          cd /usr/src/redhat/SOURCES
+
+Step 06: Setup a link called "octave" to the "octave2.1.36" directory.
+         ln -s octave2.1.36 octave 
+
+Step 07: Change directory to /usr/include
+         cd /usr/include
+
+Step 08: Setup a link called "octave" to the "octave2.1.36/octave" directory.
+         ln -s octave2.1.36/octave octave
+
+Step 09: Edit the "/usr/include/octave/error.h" file to use sstream.
+         vi /usr/include/octave/error.h
+	 replace "<strstream>" with just "<sstream>".
+
+--------------------------------------------------------------------------------
+xxxxxx
+--------------------------------------------------------------------------------
+
+
+
+
+
+
+                       Installing X-Midas on UNIX
+
+
+ Installation Steps
+
+If you have installed X-Midas previously and/or are installing onto a system
+which already has an X-Midas baseline running; the following high level steps 
+should allow you install this baseline onto your system.  If further 
+instructions are required read the remainder of this document else there will 
+be difficulties.
+
+Please report any errors or short-comings in this document to the MCCB.  This 
+can be done via MidasForge or by e-mailing xmidas@mrsl.com
+
+Note: Steps 0-3 and 5 need to be run as root
+
+Step 0: (linux only, if PROMULA will be used)
+   Install PROMULA Fortran package:
+
+      example% cd /
+      example% tar -xvzf /mnt/cdrom/pfc614b.tz
+
+Step 1:
+   Create directory for installation
+   Note: Installation directory must be all lower case
+
+      example% mkdir /home/xm362
+      example% mkdir /home/xm362/xm
+
+   Restore tar file
+
+      example% cd /home/xm362/xm
+      example% tar -xvf /mnt/cdrom/xm362h.tar
+
+Step 2:
+   Create account to be used for installation if it does not already exist 
+   X-Midas requires the use of the C shell
+   See sample .cshrc (cshrc.sample) and /etc/midas.cshrc (midas_cshrc.sample)
+   in $XMDISK/xm/unix/osf or $XMDISK/xm/unix/sol or $XMDISK/xm/unix/linx
+
+Step 3:
+   Change owner and group of installation directory to account that will be
+   used to install X-Midas
+
+      example% chown -R xmmgr /home/xm362
+      example% chgrp -R midas /home/xm362
+
+   Set protection on files (add group write access)
+      example% chmod -R g+w /home/xm362
+
+Step 4:  
+   If updating X-Midas on a system copy the current configuration files from 
+   the old X-Midas directories:
+ 
+   $XMDISK/xm/cfg/midas.cfg
+   $XMDISK/xm/cfg/dsmengines.cfg
+   $XMDISK/xm/cfg/netdisks.cfg
+   $XMDISK/xm/dat/hwconfig*.*
+
+
+
+Step 5:
+   Login under installation account
+
+   Build X-Midas
+
+      example% cd $XMDISK/xm/unix
+      example% make
+      example% cd osf or cd sol or cd linx
+      example% make
+      example% source xminstall
+
+   Sample installation without SAM support
+
+      example% source xminstall
+      Name of current X-Midas root is: /home/xm362
+      Continue [Y]/N ? y
+      There is no support for TMS SAMnet interfaces (ECL60 & ECL62).
+      Continue [Y]/N ? y
+      Edit version for UNIX configurations [Y]/N ? n
+      Edit midas.cfg for disk configurations, etc. [Y]/N ? y
+      Edit dsmengines.cfg for foreign datastream engines [Y]/N ? y
+      Edit netdisks.cfg for foreign datastream disks [Y]/N ? y
+      Edit diskunx.cfg for SAM/RAM disks [Y]/N ? y
+      The rest is non-interactive. Continue [Y]/N/R ? y
+
+   Sample installation with SAM support
+
+      example% source xminstall
+      Name of current X-Midas root is /home/xm362
+      Continue [Y]/N ? y
+      Name of TMS SAMnet root is: /usr/tms505
+      Continue [Y]/N ? y
+      Edit version for UNIX configurations [Y]/N ? n
+      Edit midas.cfg for disk configurations, etc. [Y]/N ? y
+      Edit dsmengines.cfg for foreign datastream engines [Y]/N ? y
+      Edit netdisks.cfg for foreign datastream disks [Y]/N ? y
+      Edit diskunx.cfg for SAM/RAM disks [Y]/N ? y
+      The rest is non-interactive. Continue [Y]/N/R ? y
+
+	* The environmental variables for TMS is set in the /etc/midas.cshrc see the
+	  sample mentioned in step 2 for details.
+
+Step 6: 
+
+    Run the confidence test
+
+      xm
+      %confidence
+	 
+    read screen prompts carefully and answer (beware of the ENDSUSPEND prompt)
+
+Step 7:
+   Login in as root
+
+   chown root $XMDISK/xm/unix/xmpriority
+   chown root $XMDISK/xm/unix/xmpriority.allow
+
+   Note : On some systems, the root user may be in a group other than root
+          subsitute that group (ex system) for root in the following two commands
+   chgrp root $XMDISK/xm/unix/xmpriority
+   chgrp root $XMDISK/xm/unix/xmpriority.allow
+
+   chmod +s $XMDISK/xm/unix/xmpriority
+   chmod ogu=r $XMDISK/xm/unix/xmpriority.allow
+   chmod u+w $XMDISK/xm/unix/xmpriority.allow
+
+   You may wish to modify $XMDISK/xm/unix/xmpriority.allow to change which users
+     can raise their process priority. The default is to allow all users. 
+
+
+     The following allows all users to raise their priority
+
+     UID  USERNAME
+     ---- --------
+     +all  +all
+
+     The following allows the account xmmgr to raise priority
+
+     UID  USERNAME
+     ---- --------
+     200  xmmgr
+
+Step 8:
+   Install option tree(s)
+
+   Edit xmstart and xmend in $XMDISK/xm/sitemods/unix directory to reflect local
+   configuration 
+	
+   Configure hardware
+

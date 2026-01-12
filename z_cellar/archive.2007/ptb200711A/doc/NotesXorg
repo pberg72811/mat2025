@@ -1,0 +1,111 @@
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+# NotesXorg 
+# From Linux Documentation The X Server Configuration HOWTO.
+# www.gentoo.org/doc/en/xorg-config.xml
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+The configuration file of Xorg is called "xorg.conf" and it resides in
+"/etc/X11"
+
+The man page can be accessed by
+
+    man 5 xorg.conf
+
+Xorg itself is able to guess most parameters for you.  In most cases, you will
+only have to change some lines to get the resolution you want up and running.
+
+    Xorg -configure
+
+Alternatives
+
+    xorgconfig
+
+    xorgcfg
+
+    xorgcfg -textmode
+
+If you feel that the screen resolution is wrong, you will need to check two
+sections in your configuration.  First of all, you have Screen section which
+lists the resolutions, if any that your X server will run at.  by default, this
+section might not list any resolutions at all.  If this is the case, Xorg will
+estimate the resolution based on the information in the second section, Monitor.
+
+What happens is that Xorg checks the settings of HorizSync and VertRefresh in
+the Monitor section to compute valid resolutions.  For now, leave these settings
+as-is.  Only when the changes to the Screen section (which we will describe in a
+minute) don't work, then you will need to look up the specs for your monitor and
+fill in the correct values.  You can also use a tool that searches for your
+monitor's specs, such as "sys-apps/ddcxinfo-knoppix"
+
+Warning: Do  not "just" change the values of these two monitor related variables
+without consulting the technical specifications of your monitor.  Setting
+incorrect values lead to out-of-sync errors at best and smoked up screens at
+worst.
+
+Now let us change the resolutions.  In the next example from /etc/X11/xorg.conf
+we add the "Modes" lines and the "DefaultDepth" so that our X server starts with
+24 bits at 1024x768 by default.  Don't mind the given strings--they are examples
+and will most likely differ from the settings on your system.
+
+  Section "Screen"
+    Identifier   "Default Screen"
+    Device       "S3 Inc. ProSavage KN133 [Twister K]"
+    Monitor      "Generic Monitor"
+    DefaultDepth 24
+  
+    SubSection "Display"
+      Depth 24
+      Modes "1024x768"
+    EndSubSection
+
+  EndSection
+
+Run X (startx) to discover if it uses the resolution you want.
+
+Configure your Keyboard
+
+To setup X to use an international keyboard, search for the InputDevice section
+that configures the keyboard and add the XkbLayout option to point to the
+keyboard layout you want.  As an example, we show you how to apply for the
+Belgian layout.  Just substitute the country-keycode with yours:
+
+  Section "InputDevice"
+    Identifier "Generic Keyboard"
+    Driver     "keyboard"
+    Option     "CoreKeyboard"
+    Option     "XkbRules"  "xorg"
+    Option     "XkbModel"  "pc105"
+    Option     "XkbLayout" "be"
+  EndSection
+
+
+Configure your mouse
+
+If your mouse isn't working, you will first need to find out if it is detected
+by the kernel at all.  Mice are (device-wise) seen as /dev/input/mouse0 (or
+/dev/input/mice if you want to use several mice).  In some cases /dev/psaux is
+used.  In either case you can check if the devices do represent your mouse by
+checking the output of those files when you move your mouse.  You will usually
+see some junk on your screen.  To end the session press "ctrl-c".
+
+    cat /dev/input/mouse0
+
+If your mouse isn't detected, verify if all the necessary modules are loaded.
+
+If your mouse is detected, fill in the device in the appropriate InputDevice
+section.  In the next example you'll see we also set two other options: Protocol
+(which lists the mouse protocol to be used -- most users will use PS/2 or
+IMPS/2) and ZAxmisMapping (which allows for the mousewheel (if applicable) to 
+be used).
+
+  Section "InputDevice"
+    Identifier "TouchPad Mouse"
+    Driver     "mouse"
+    Option     "CorePointer"
+    Option     "Device" "/dev/input/mouse0"
+    Option     "Protocol" "IMPS/2"
+    Option     "ZAxisMapping" "4 5"
+  EndSection
+
+Run startx and be happy about the result.

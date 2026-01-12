@@ -1,0 +1,15 @@
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+# NotesMagTape.
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+The LINUX command for dealing with magnetic tapes is "mt".
+
+To status the magnetic tape try the following:
+
+    mt -f /dev/st0 status
+
+If the tape drive is SCSI you can use the "cdrecord" command to detect it.
+
+    cdrecord -scanbus
+

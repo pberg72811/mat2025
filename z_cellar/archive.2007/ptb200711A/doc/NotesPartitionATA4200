@@ -1,0 +1,193 @@
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+# NotesPartitionATA4200
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+
+Create the partitions
+
+    echo "# partition table of /dev/sda"                        > partitionTable_sda
+    echo "unit: sectors"                                       >> partitionTable_sda
+    echo " "                                                   >> partitionTable_sda
+    echo "/dev/sda1 : start=       63, size=3906445662, Id=83" >> partitionTable_sda
+    echo "/dev/sda2 : start=        0, size=        0, Id= 0"  >> partitionTable_sda
+    echo "/dev/sda3 : start=        0, size=        0, Id= 0"  >> partitionTable_sda
+    echo "/dev/sda4 : start=        0, size=        0, Id= 0"  >> partitionTable_sda
+
+    echo "# partition table of /dev/sdb"                        > partitionTable_sdb
+    echo "unit: sectors"                                       >> partitionTable_sdb
+    echo " "                                                   >> partitionTable_sdb
+    echo "/dev/sdb1 : start=       63, size=3906445662, Id=83" >> partitionTable_sdb
+    echo "/dev/sdb2 : start=        0, size=        0, Id= 0"  >> partitionTable_sdb
+    echo "/dev/sdb3 : start=        0, size=        0, Id= 0"  >> partitionTable_sdb
+    echo "/dev/sdb4 : start=        0, size=        0, Id= 0"  >> partitionTable_sdb
+
+    echo "# partition table of /dev/sdc"                        > partitionTable_sdc
+    echo "unit: sectors"                                       >> partitionTable_sdc
+    echo " "                                                   >> partitionTable_sdc
+    echo "/dev/sdc1 : start=       63, size=3906445662, Id=83" >> partitionTable_sdc
+    echo "/dev/sdc2 : start=        0, size=        0, Id= 0"  >> partitionTable_sdc
+    echo "/dev/sdc3 : start=        0, size=        0, Id= 0"  >> partitionTable_sdc
+    echo "/dev/sdc4 : start=        0, size=        0, Id= 0"  >> partitionTable_sdc
+
+    echo "# partition table of /dev/sdd"                        > partitionTable_sdd
+    echo "unit: sectors"                                       >> partitionTable_sdd
+    echo " "                                                   >> partitionTable_sdd
+    echo "/dev/sdd1 : start=       63, size=3906445662, Id=83" >> partitionTable_sdd
+    echo "/dev/sdd2 : start=        0, size=        0, Id= 0"  >> partitionTable_sdd
+    echo "/dev/sdd3 : start=        0, size=        0, Id= 0"  >> partitionTable_sdd
+    echo "/dev/sdd4 : start=        0, size=        0, Id= 0"  >> partitionTable_sdd
+
+    echo "# partition table of /dev/sde"                        > partitionTable_sde
+    echo "unit: sectors"                                       >> partitionTable_sde
+    echo " "                                                   >> partitionTable_sde
+    echo "/dev/sde1 : start=       63, size=3125156517, Id=83" >> partitionTable_sde
+    echo "/dev/sde2 : start=        0, size=        0, Id= 0"  >> partitionTable_sde
+    echo "/dev/sde3 : start=        0, size=        0, Id= 0"  >> partitionTable_sde
+    echo "/dev/sde4 : start=        0, size=        0, Id= 0"  >> partitionTable_sde
+
+    echo "# partition table of /dev/sdf"                        > partitionTable_sdf
+    echo "unit: sectors"                                       >> partitionTable_sdf
+    echo " "                                                   >> partitionTable_sdf
+    echo "/dev/sdf1 : start=       63, size=3125156517, Id=83" >> partitionTable_sdf
+    echo "/dev/sdf2 : start=        0, size=        0, Id= 0"  >> partitionTable_sdf
+    echo "/dev/sdf3 : start=        0, size=        0, Id= 0"  >> partitionTable_sdf
+    echo "/dev/sdf4 : start=        0, size=        0, Id= 0"  >> partitionTable_sdf
+
+    echo "# partition table of /dev/sdg"                        > partitionTable_sdg
+    echo "unit: sectors"                                       >> partitionTable_sdg
+    echo " "                                                   >> partitionTable_sdg
+    echo "/dev/sdg1 : start=       63, size=3125156517, Id=83" >> partitionTable_sdg
+    echo "/dev/sdg2 : start=        0, size=        0, Id= 0"  >> partitionTable_sdg
+    echo "/dev/sdg3 : start=        0, size=        0, Id= 0"  >> partitionTable_sdg
+    echo "/dev/sdg4 : start=        0, size=        0, Id= 0"  >> partitionTable_sdg
+
+    echo "# partition table of /dev/sdh"                        > partitionTable_sdh
+    echo "unit: sectors"                                       >> partitionTable_sdh
+    echo " "                                                   >> partitionTable_sdh
+    echo "/dev/sdh1 : start=       63, size=3125156517, Id=83" >> partitionTable_sdh
+    echo "/dev/sdh2 : start=        0, size=        0, Id= 0"  >> partitionTable_sdh
+    echo "/dev/sdh3 : start=        0, size=        0, Id= 0"  >> partitionTable_sdh
+    echo "/dev/sdh4 : start=        0, size=        0, Id= 0"  >> partitionTable_sdh
+
+    echo "# partition table of /dev/sdi"                        > partitionTable_sdi
+    echo "unit: sectors"                                       >> partitionTable_sdi
+    echo " "                                                   >> partitionTable_sdi
+    echo "/dev/sdi1 : start=       63, size=2343867372, Id=83" >> partitionTable_sdi
+    echo "/dev/sdi2 : start=        0, size=        0, Id= 0"  >> partitionTable_sdi
+    echo "/dev/sdi3 : start=        0, size=        0, Id= 0"  >> partitionTable_sdi
+    echo "/dev/sdi4 : start=        0, size=        0, Id= 0"  >> partitionTable_sdi
+
+    echo "# partition table of /dev/sdj"                        > partitionTable_sdj
+    echo "unit: sectors"                                       >> partitionTable_sdj
+    echo " "                                                   >> partitionTable_sdj
+    echo "/dev/sdj1 : start=       63, size=2343867372, Id=83" >> partitionTable_sdj
+    echo "/dev/sdj2 : start=        0, size=        0, Id= 0"  >> partitionTable_sdj
+    echo "/dev/sdj3 : start=        0, size=        0, Id= 0"  >> partitionTable_sdj
+    echo "/dev/sdj4 : start=        0, size=        0, Id= 0"  >> partitionTable_sdj
+
+    echo "# partition table of /dev/sdk"                        > partitionTable_sdk
+    echo "unit: sectors"                                       >> partitionTable_sdk
+    echo " "                                                   >> partitionTable_sdk
+    echo "/dev/sdk1 : start=       63, size=2343867372, Id=83" >> partitionTable_sdk
+    echo "/dev/sdk2 : start=        0, size=        0, Id= 0"  >> partitionTable_sdk
+    echo "/dev/sdk3 : start=        0, size=        0, Id= 0"  >> partitionTable_sdk
+    echo "/dev/sdk4 : start=        0, size=        0, Id= 0"  >> partitionTable_sdk
+
+    echo "# partition table of /dev/sdl"                        > partitionTable_sdl
+    echo "unit: sectors"                                       >> partitionTable_sdl
+    echo " "                                                   >> partitionTable_sdl
+    echo "/dev/sdl1 : start=       63, size=2343867372, Id=83" >> partitionTable_sdl
+    echo "/dev/sdl2 : start=        0, size=        0, Id= 0"  >> partitionTable_sdl
+    echo "/dev/sdl3 : start=        0, size=        0, Id= 0"  >> partitionTable_sdl
+    echo "/dev/sdl4 : start=        0, size=        0, Id= 0"  >> partitionTable_sdl
+
+# Partition the drives.
+#-------------------------------------------------------------------------------
+    sfdisk /dev/sda < partitionTable_sda
+    sfdisk /dev/sdb < partitionTable_sdb
+    sfdisk /dev/sdc < partitionTable_sdc
+    sfdisk /dev/sdd < partitionTable_sdd
+    sfdisk /dev/sde < partitionTable_sde
+    sfdisk /dev/sdf < partitionTable_sdf
+    sfdisk /dev/sdg < partitionTable_sdg
+    sfdisk /dev/sdh < partitionTable_sdh
+    sfdisk /dev/sdi < partitionTable_sdi
+    sfdisk /dev/sdj < partitionTable_sdj
+    sfdisk /dev/sdk < partitionTable_sdk
+    sfdisk /dev/sdl < partitionTable_sdl
+
+# Install the file system.
+#-------------------------------------------------------------------------------
+    mke2fs -v -b 4096 -m 1 -T largefile4 -j /dev/sda1
+    mke2fs -v -b 4096 -m 1 -T largefile4 -j /dev/sdb1
+    mke2fs -v -b 4096 -m 1 -T largefile4 -j /dev/sdc1
+    mke2fs -v -b 4096 -m 1 -T largefile4 -j /dev/sdd1
+    mke2fs -v -b 4096 -m 1 -T largefile4 -j /dev/sde1
+    mke2fs -v -b 4096 -m 1 -T largefile4 -j /dev/sdf1
+    mke2fs -v -b 4096 -m 1 -T largefile4 -j /dev/sdg1
+    mke2fs -v -b 4096 -m 1 -T largefile4 -j /dev/sdh1
+    mke2fs -v -b 4096 -m 1 -T largefile4 -j /dev/sdi1
+    mke2fs -v -b 4096 -m 1 -T largefile4 -j /dev/sdj1
+    mke2fs -v -b 4096 -m 1 -T largefile4 -j /dev/sdk1
+    mke2fs -v -b 4096 -m 1 -T largefile4 -j /dev/sdl1
+
+# Mount the drives.
+#-------------------------------------------------------------------------------
+    mount /dev/sda1 /data12
+    mount /dev/sdb1 /data13
+    mount /dev/sdc1 /data14
+    mount /dev/sdd1 /data15
+    mount /dev/sde1 /data16
+    mount /dev/sdf1 /data17
+    mount /dev/sdg1 /data18
+    mount /dev/sdh1 /data19
+    mount /dev/sdi1 /data20
+    mount /dev/sdj1 /data21
+    mount /dev/sdk1 /data22
+    mount /dev/sdl1 /data23
+
+# Change Permissions
+#-------------------------------------------------------------------------------
+    chmod ugo+rwx /data12
+    chmod ugo+rwx /data13
+    chmod ugo+rwx /data14
+    chmod ugo+rwx /data15
+    chmod ugo+rwx /data16
+    chmod ugo+rwx /data17
+    chmod ugo+rwx /data18
+    chmod ugo+rwx /data19
+    chmod ugo+rwx /data20
+    chmod ugo+rwx /data21
+    chmod ugo+rwx /data22
+    chmod ugo+rwx /data23
+
+# As STESWD make steswd directory.
+#-------------------------------------------------------------------------------
+    mkdir /data12/steswd
+    mkdir /data13/steswd
+    mkdir /data14/steswd
+    mkdir /data15/steswd
+    mkdir /data16/steswd
+    mkdir /data17/steswd
+    mkdir /data18/steswd
+    mkdir /data19/steswd
+    mkdir /data20/steswd
+    mkdir /data21/steswd
+    mkdir /data22/steswd
+    mkdir /data23/steswd
+
+# Unmount the drives.
+#-------------------------------------------------------------------------------
+    umount /dev/sda1 /data12
+    umount /dev/sdb1 /data13
+    umount /dev/sdc1 /data14
+    umount /dev/sdd1 /data15
+    umount /dev/sde1 /data16
+    umount /dev/sdf1 /data17
+    umount /dev/sdg1 /data18
+    umount /dev/sdh1 /data19
+    umount /dev/sdi1 /data20
+    umount /dev/sdj1 /data21
+    umount /dev/sdk1 /data22
+    umount /dev/sdl1 /data23

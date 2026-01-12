@@ -1,0 +1,73 @@
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+# NotesBootServerDHCP.
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+Setup dhcpd on the machine that you are going to boot from (The "boot server").
+
+Install the dhcpd rpm if it is not already installed.
+
+	rpm -i dhcp-3.0pl1-9.i386.rpm
+
+Create a "/etc/dhcpd.conf" file.  Here is an example:
+
+	# DHCP configuration file.
+	#===============================================================================
+	default-lease-time                  864000;
+	max-lease-time                      864005;
+
+	#
+	#===============================================================================
+	allow booting;
+	allow bootp;
+
+	#
+	#===============================================================================
+	option subnet-mask         255.255.255.000;
+	option broadcast-address   192.009.214.255;
+	option routers             192.009.214.254;
+	option domain-name-servers 192.009.214.001;
+	option domain-name         "soirdomain.gov";
+
+	#
+	#===============================================================================
+	ddns-update-style ad-hoc;
+
+	#
+	#===============================================================================
+	subnet 192.009.214.0 netmask 255.255.255.0 {
+ 	       range 192.009.214.000 192.009.214.250;
+	}
+
+	#
+	#===============================================================================
+	group {
+		# PXE-specific configuration directives...
+	      	next-server 192.009.214.100;
+	      	filename "pxelinux.0";
+
+	      	# You need a entry like this for every host
+	      	# unless you're using dynamic addresses
+ 	      	host rec201{
+			hardware ethernet 00:30:48:29:14:90;
+	                fixed-address       192.009.214.210;
+		}
+		host rec201g{
+                	hardware ethernet 00:30:48:29:14:91;
+                	fixed-address       192.009.215.210;
+        	}
+                host dsp201{
+                        hardware ethernet 00:30:48:29:14:A0;
+                        fixed-address       192.009.214.230;
+                }
+                host dsp201g{
+                        hardware ethernet 00:30:48:29:14:A1;
+                        fixed-address       192.009.215.230;
+                }
+	      }
+
+Start the the DHCP server with the command:
+
+	service dhcpd start
+
+

@@ -1,0 +1,79 @@
+-----------------------------------------------------------------------------
+FILE
+-----------------------------------------------------------------------------
+Name        : anaconda-product             Relocations: (not relocatable)
+Version     : 3                                 Vendor: Red Hat, Inc.
+Release     : 2WS                           Build Date: Thu 11 Sep 2003 06:55:16 PM UTC
+Install Date: (not installed)               Build Host: dolly.devel.redhat.com
+Group       : Applications/System           Source RPM: anaconda-product-3-2WS.src.rpm
+Size        : 77214                            License: Copyright 2003 Red Hat, Inc.  All rights reserved.
+Signature   : DSA/SHA1, Wed 24 Sep 2003 07:13:05 PM UTC, Key ID 219180cddb42a60e
+Packager    : Red Hat, Inc. <http://bugzilla.redhat.com/bugzilla>
+Summary     : Product specific data for use during installation
+Description :
+This package contains installclasses and images specific to product.img
+for a specific product including appropriate Red Hat logos.
+-----------------------------------------------------------------------------
+REQUIRES
+-----------------------------------------------------------------------------
+/bin/bash  
+rpmlib(CompressedFileNames) <= 3.0.4-1
+rpmlib(PayloadFilesHavePrefix) <= 4.0-1
+-----------------------------------------------------------------------------
+PROVIDES
+-----------------------------------------------------------------------------
+anaconda-product = 3-2WS
+
+-----------------------------------------------------------------------------
+FILE
+-----------------------------------------------------------------------------
+Name        : comps                        Relocations: (not relocatable)
+Version     : 3WS                               Vendor: Red Hat, Inc.
+Release     : 0.20040902                    Build Date: Thu 02 Sep 2004 09:31:22 PM UTC
+Install Date: (not installed)               Build Host: porkchop.devel.redhat.com
+Group       : Development/System            Source RPM: comps-3WS-0.20040902.src.rpm
+Size        : 24648225                         License: GPL
+Signature   : DSA/SHA1, Thu 02 Sep 2004 09:41:58 PM UTC, Key ID 219180cddb42a60e
+Packager    : Red Hat, Inc. <http://bugzilla.redhat.com/bugzilla>
+Summary     : Comps file and header lists for Red Hat Enterprise Linux.
+Description :
+The comps package contains the comps file and header lists for the Red Hat
+Enterprise Linux distribution.
+-----------------------------------------------------------------------------
+REQUIRES
+-----------------------------------------------------------------------------
+rpmlib(CompressedFileNames) <= 3.0.4-1
+rpmlib(PayloadFilesHavePrefix) <= 4.0-1
+-----------------------------------------------------------------------------
+PROVIDES
+-----------------------------------------------------------------------------
+comps = 1:3WS-0.20040902
+
+-----------------------------------------------------------------------------
+FILE
+-----------------------------------------------------------------------------
+Name        : redhat-release               Relocations: (not relocatable)
+Version     : 3WS                               Vendor: Red Hat, Inc.
+Release     : 7.3                           Build Date: Wed 18 Aug 2004 01:57:01 PM UTC
+Install Date: (not installed)               Build Host: porky.build.redhat.com
+Group       : System Environment/Base       Source RPM: redhat-release-3WS-7.3.src.rpm
+Size        : 1682533                          License: GPL
+Signature   : DSA/SHA1, Wed 25 Aug 2004 03:30:49 AM UTC, Key ID 219180cddb42a60e
+Packager    : Red Hat, Inc. <http://bugzilla.redhat.com/bugzilla>
+Summary     : The Red Hat Enterprise Linux release file.
+Description :
+The redhat-release package identifies the release of Red Hat Enterprise Linux.
+-----------------------------------------------------------------------------
+REQUIRES
+-----------------------------------------------------------------------------
+/bin/sh  
+/bin/sh  
+config(redhat-release) = 3WS-7.3
+rpmlib(CompressedFileNames) <= 3.0.4-1
+rpmlib(PayloadFilesHavePrefix) <= 4.0-1
+-----------------------------------------------------------------------------
+PROVIDES
+-----------------------------------------------------------------------------
+config(redhat-release) = 3WS-7.3
+redhat-release = 3WS-7.3
+

@@ -1,0 +1,127 @@
+!!----------------------------------------UNCLASSIFIED-------------------------------------------
+!! File: dopplerCalc.txt                                                                        -
+!!                                                                                              -
+!! Desc: This macro performs a doppler calculation.                                             -
+!!       This macro performs a doppler calculation in a ground-sat-ground                       -
+!!       type arrangement.                                                                      -
+!!                                                                                              -
+!! Args: outputFile  - Output doppler file.              <A:>                                   -
+!!       emitter     - Location file for the emitter.    <A:>                                   -
+!!       ephemer     - Ephemeris file for satellite..    <A:>                                   -
+!!       grndsta     - Location file for ground station. <A:>                                   -
+!!       epochTime   - Epoch time.                       <A:>                                   -
+!!                                                                                              -
+!! Swch: None                                                                                   -
+!!                                                                                              -
+!! Hist : When       Who  What                                                                  -
+!!        10/04/2005 ptb  Initial Code.                                                         -
+!!                                                                                              -
+!! Note: GEO option tree has site files.                                                        -
+!!                                                                                              -
+!! Examples:                                                                                    -
+!!                                                                                              -
+!!01.0 Description                                                                              -
+!!02.0 Requirements                                                                             -
+!!03.0 Interfaces                                                                               -
+!!04.0 Design Description                                                                       -
+!!05.0 Unit Code                                                                                -
+!!06.0 Unit Test Plan                                                                           -
+!!07.0 Test Results                                                                             -
+!!08.0 Build Procedures                                                                         -
+!!09.0 Notes                                                                                    -
+!!10.0 Reviewers.                                                                               -
+!!----------------------------------------UNCLASSIFIED-------------------------------------------
+startmacro a:outputFile["oFile"] & !! Output file name.
+           a:emitter["there"]    & !! Location file for emitter.
+	   a:ephemer["theBird"]  & !! Ephemeris file for satellite.
+	   a:grndsta["here"]     & !! Location file for ground station.
+           t:epochTime["2000:01:01::00:00:00"]
+
+!! location loc_fort 41.07694626  -85.12305450  500.00000
+!! location loc_mati 35.21666700 -106.40000000 1000.00000
+
+!! Define local variables/results.
+!!-----------------------------------------------------------------------------------------------
+local d:emitterAltitude
+local d:emitterLatitude
+local d:emitterLongitude
+
+local d:grndstaAltitude
+local d:grndstaLatitude
+local d:grndstaLongitude
+
+!! Status the emitter location file to get lat, lon, alt.
+!!-----------------------------------------------------------------------------------------------
+status emitter qw(2)=emitterAltitude
+status emitter qw(3)=emitterLatitude
+status emitter qw(4)=emitterLongitude
+
+!! Status the ground station location file to get lat, lon, alt.
+!!-----------------------------------------------------------------------------------------------
+status grndsta qw(2)=grndstaAltitude
+status grndsta qw(3)=grndstaLatitude
+status grndsta qw(4)=grndstaLongitude
+
+!! Give some feedback.
+!!-----------------------------------------------------------------------------------------------
+say "outputFile         ^outputFile"
+say "emitter            ^emitter"
+say "ephemer            ^ephemer"
+say "grndsta            ^grndsta"
+say "epochTime          ^epochTime"
+say " "
+say "emitterLatitude    ^emitterLatitude"
+say "emitterLongitude   ^emitterLongitude"
+say "emitterAltitude    ^emitterAltitude"
+say "grndstaLatitude    ^grndstaLatitude"
+say "grndstaLongitude   ^grndstaLongitude"
+say "grndstaAltitude    ^grndstaAltitude"
+
+!! Generate ECI X,Y,Z from lat, lon, alt, at one second intervals for 24 hours.
+!!-----------------------------------------------------------------------------------------------
+icclla5000 here  grndstaLatitude grndstaLongitude grndstaAltitude epochTime 24*60*60 1
+icclla5000 there emitterLatitude emitterLongitude emitterAltitude epochTime 24*60*60 1
+
+!! Get the first value from  the state vector file.
+!!-----------------------------------------------------------------------------------------------
+noop      ephemer(1:1) stateVector
+transform stateVector  stateVector eci
+
+!! Generate ECI X,Y,Z ephemeris at one second intervals for 24 hours.
+!!-----------------------------------------------------------------------------------------------
+res pos statevector(1;~pos)
+res vel statevector(1;~vel)
+iccsv5000 theBird pos(1) pos(2) pos(3) vel(1) vel(2) vel(3) epochTime epochTime 24*60*60 1
+
+!! Use dual5000 to calculate Range, Range Rate, Delay.
+!!-----------------------------------------------------------------------------------------------
+dual5000 theBird here  dopplerCalcTemp1 R RR DELT
+headermod dopplerCalcTemp1 c(1)=(GR,SD,1,5) c(2)=(GRR,SD,1,6) c(3)=(GDEL,SD,1,1)
+
+dual5000 theBird there dopplerCalcTemp2 R RR DELT
+headermod dopplerCalcTemp2 c(1)=(ER,SD,1,5) c(2)=(ERR,SD,1,6) c(3)=(EDEL,SD,1,1)
+
+ungroup/t1000 dopplerCalcTemp1 t1 t2 t3
+ungroup/t1000 dopplerCalcTemp2 t4 t5 t6
+fcalc t7 t3 t6 +
+reformat t7 dopplerCalcTemp3 sd
+
+group/quiet outputFile dopplerCalcTemp1 dopplerCalcTemp2 dopplerCalcTemp3
+headermod outputFile c(7)=(TDEL,SD,1,1)
+
+!! Clean up.
+!!-----------------------------------------------------------------------------------------------
+erase/quiet dopplerCalcTemp1 dopplerCalcTemp2 dopplerCalcTemp3 t1 t2 t3 t4 t5 t6 t7
+erase/quiet here there stateVector theBird
+
+!! Tack on some useful keywords.
+!!-----------------------------------------------------------------------------------------------
+key outputFile replace D:GS_LATITUDE  grndstaLatitude
+key outputFile replace D:GS_LONGITUDE grndstaLongitude
+key outputFile replace D:GS_ALTITUDE  grndstaAltitude
+
+key outputFile replace D:EM_LATITUDE  emitterLatitude
+key outputFile replace D:EM_LONGITUDE emitterLongitude
+key outputFile replace D:EM_ALTITUDE  emitterAltitude
+
+endmacro

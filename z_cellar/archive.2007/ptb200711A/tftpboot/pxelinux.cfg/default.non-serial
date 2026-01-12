@@ -1,0 +1,35 @@
+#-------------------------------------------------------------------------------
+# PXE Boot up configuration file.
+# LILO type format.
+#-------------------------------------------------------------------------------
+default linux-RHEL4U2-install
+
+prompt 1
+timeout 5
+display boot/boot.msg
+F1 boot/boot.msg
+F2 boot/options.msg
+F3 boot/general.msg
+F4 boot/param.msg
+F5 boot/rescue.msg
+F7 boot/snake.msg
+
+label isolinux
+  kernel isolinux/vmlinuz
+  append initrd=isolinux/initrd.img ramdisk_size=65011712 text
+
+label isolinux.200502A
+  kernel isolinux/vmlinuz.200502A.smp
+  append initrd=isolinux/initrd.200502A.smp.img ramdisk_size=65011712 text
+
+label linux-soir
+  kernel isolinuxSOIR/vmlinuz-2.4.20-31.9.smpbm.200411A
+  append initrd=soirlinux/initrdSOIR.img ramdisk_size=65011712
+
+label linux-RHEL3U3-install
+  kernel isolinuxRHEL3U3/vmlinuz
+  append initrd=isolinuxRHEL3U3/initrd.img ramdisk_size=65011712 text
+
+label linux-RHEL4U2-install
+  kernel isolinuxRHEL4U2/vmlinuz
+  append initrd=isolinuxRHEL4U2/initrd.img ramdisk_size=65011712 text askmethod

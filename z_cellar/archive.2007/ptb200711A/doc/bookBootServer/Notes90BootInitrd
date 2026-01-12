@@ -1,0 +1,181 @@
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+# NotesBootInitrd.
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+This process is link to what ever kernel is going to be used.  This is a string
+to identify which kernel mod is being used.  It will have to updated per use.
+
+export VERSION="2"
+export PATCHLEVEL="4"
+export SUBLEVEL="21"
+export EXTRAVERSION="27.0.2.EL"
+export CUSTMVERSION="27.0.2.200502A.smp"
+export LINUXCUR=linux-$VERSION.$PATCHLEVEL.$SUBLEVEL-$EXTRAVERSION
+export LINUXNEW=linux-$VERSION.$PATCHLEVEL.$SUBLEVEL-$CUSTMVERSION
+export TempDirName=$VERSION.$PATCHLEVEL.$SUBLEVEL-$CUSTMVERSION
+
+Create a 64 Meg ramdisk image:
+
+    dd if=/dev/zero of=initrd bs=1k count=65536
+    dd if=/dev/zero of=initrd bs=1k count=131072
+    mke2fs -m 0 -N 2000 -F initrd
+
+Create a mount point for the ramdisk image:
+
+    mkdir /mnt/mp4initrd
+
+Mount the ramdisk image:
+
+    mount -o loop initrd /mnt/mp4initrd
+
+Change directories to to the ramdisk image:
+
+    cd /mnt/mp4initrd
+
+Create directories and links:
+
+    mkdir /mnt/mp4initrd/bin
+    mkdir /mnt/mp4initrd/dev
+    mkdir /mnt/mp4initrd/etc
+    mkdir /mnt/mp4initrd/lib
+    mkdir /mnt/mp4initrd/loopfs
+    mkdir /mnt/mp4initrd/mnt
+    mkdir /mnt/mp4initrd/proc
+    mkdir /mnt/mp4initrd/sysroot
+
+    ln -s bin sbin
+
+Populate the bin directory with the following programs:
+
+    cp /bin/bash      /mnt/mp4initrd/bin/
+    cp /bin/cat       /mnt/mp4initrd/bin/
+    cp /bin/chmod     /mnt/mp4initrd/bin/
+    cp /bin/chown     /mnt/mp4initrd/bin/
+    cp /bin/cp        /mnt/mp4initrd/bin/
+    cp /bin/dd        /mnt/mp4initrd/bin/
+    cp /bin/df        /mnt/mp4initrd/bin/
+    cp /usr/bin/du    /mnt/mp4initrd/bin/
+    cp /bin/gzip      /mnt/mp4initrd/bin/
+    cp /bin/kill      /mnt/mp4initrd/bin/
+    cp /bin/ls        /mnt/mp4initrd/bin/
+    cp /bin/mkdir     /mnt/mp4initrd/bin/
+    cp /bin/mount     /mnt/mp4initrd/bin/
+    cp /bin/mv        /mnt/mp4initrd/bin/
+    cp /bin/ping      /mnt/mp4initrd/bin/
+    cp /bin/rm        /mnt/mp4initrd/bin/
+    cp /bin/sleep     /mnt/mp4initrd/bin/
+    cp /bin/tar       /mnt/mp4initrd/bin/
+    cp /bin/umount    /mnt/mp4initrd/bin/
+    cp /bin/vi        /mnt/mp4initrd/bin/
+    cp /sbin/ifconfig /mnt/mp4initrd/bin/
+    cp /sbin/init     /mnt/mp4initrd/bin/
+    cp /sbin/insmod   /mnt/mp4initrd/bin/
+    cp /sbin/lsmod    /mnt/mp4initrd/bin/
+    cp /sbin/mingetty /mnt/mp4initrd/bin/
+    cp /sbin/mke2fs   /mnt/mp4initrd/bin/
+    cp /sbin/mkswap   /mnt/mp4initrd/bin/
+    cp /sbin/nash     /mnt/mp4initrd/bin/
+    cp /sbin/portmap  /mnt/mp4initrd/bin/
+    cp /sbin/sfdisk   /mnt/mp4initrd/bin/
+    cp /sbin/shutdown /mnt/mp4initrd/bin/
+
+    cd ./bin
+    ln -s nash  modprobe
+    cd ..
+
+Populate the lib directory the following way:
+
+    cp -pd /lib/ld*.so   /mnt/mp4initrd/lib
+    cp -pd /lib/ld*.so.* /mnt/mp4initrd/lib
+    cp -pd /lib/lib*.so  /mnt/mp4initrd/lib
+    cp -pd /lib/lib*.so* /mnt/mp4initrd/lib
+    cp -pd /usr/lib/libwrap.so.* /mnt/mp4initrd/lib
+
+    cp /lib/modules/$TempDirName/kernel/drivers/scsi/3w-xxxx.o         /mnt/mp4initrd/lib/
+    cp /lib/modules/$TempDirName/kernel/drivers/scsi/dpt_i2o.o         /mnt/mp4initrd/lib/
+    cp /lib/modules/$TempDirName/kernel/drivers/scsi/aic7xxx/aic7xxx.o /mnt/mp4initrd/lib/
+    cp /lib/modules/$TempDirName/kernel/fs/ext3/ext3.o                 /mnt/mp4initrd/lib/
+    cp /lib/modules/$TempDirName/kernel/fs/jbd/jbd.o                   /mnt/mp4initrd/lib/
+    cp /lib/modules/$TempDirName/kernel/drivers/md/lvm-mod.o           /mnt/mp4initrd/lib/
+    cp /lib/modules/$TempDirName/kernel/drivers/scsi/scsi_mod.o        /mnt/mp4initrd/lib/
+    cp /lib/modules/$TempDirName/kernel/drivers/scsi/sd_mod.o          /mnt/mp4initrd/lib/
+    cp /lib/modules/$TempDirName/kernel/drivers/net/e1000/e1000.o      /mnt/mp4initrd/lib/
+    cp /lib/modules/$TempDirName/kernel/drivers/net/e100/e100.o        /mnt/mp4initrd/lib/
+    cp /lib/modules/$TempDirName/kernel/drivers/addon/qla2200/qla*.o   /mnt/mp4initrd/lib/
+
+Populate the dev directory the following way:
+
+    cp -pdr /dev/console /mnt/mp4initrd/dev
+    cp -pdr /dev/null    /mnt/mp4initrd/dev
+    cp -pdr /dev/ram1    /mnt/mp4initrd/dev
+    cp -pdr /dev/hda     /mnt/mp4initrd/dev
+    cp -pdr /dev/hda1    /mnt/mp4initrd/dev
+    cp -pdr /dev/hda2    /mnt/mp4initrd/dev
+    cp -pdr /dev/hda3    /mnt/mp4initrd/dev
+    cp -pdr /dev/hda4    /mnt/mp4initrd/dev
+    cp -pdr /dev/hdb     /mnt/mp4initrd/dev
+    cp -pdr /dev/hdb1    /mnt/mp4initrd/dev
+    cp -pdr /dev/hdb2    /mnt/mp4initrd/dev
+    cp -pdr /dev/hdb3    /mnt/mp4initrd/dev
+    cp -pdr /dev/hdb4    /mnt/mp4initrd/dev
+    cp -pdr /dev/sda     /mnt/mp4initrd/dev
+    cp -pdr /dev/sda1    /mnt/mp4initrd/dev
+    cp -pdr /dev/sda2    /mnt/mp4initrd/dev
+    cp -pdr /dev/sda3    /mnt/mp4initrd/dev
+    cp -pdr /dev/sda4    /mnt/mp4initrd/dev
+    cp -pdr /dev/sda5    /mnt/mp4initrd/dev
+    cp -pdr /dev/sdb     /mnt/mp4initrd/dev
+    cp -pdr /dev/sdb1    /mnt/mp4initrd/dev
+    cp -pdr /dev/sdb2    /mnt/mp4initrd/dev
+    cp -pdr /dev/sdb3    /mnt/mp4initrd/dev
+    cp -pdr /dev/sdb4    /mnt/mp4initrd/dev
+    cp -pdr /dev/sdb5    /mnt/mp4initrd/dev
+    cp -pdr /dev/tty0    /mnt/mp4initrd/dev
+    cp -pdr /dev/tty1    /mnt/mp4initrd/dev
+    cp -pdr /dev/tty2    /mnt/mp4initrd/dev
+    cp -pdr /dev/tty3    /mnt/mp4initrd/dev
+    cp -pdr /dev/tty4    /mnt/mp4initrd/dev
+
+    mknod /mnt/mp4initrd/dev/ram    b 1 1
+    mknod /mnt/mp4initrd/dev/systty c 4 0
+
+Create the following directories in the "mnt" directory:
+
+    mkdir /mnt/mp4initrd/mnt/mp4nfs
+    mkdir /mnt/mp4initrd/mnt/mp4sda1
+    mkdir /mnt/mp4initrd/mnt/mp4sda2
+    mkdir /mnt/mp4initrd/mnt/mp4sda3
+    mkdir /mnt/mp4initrd/mnt/mp4sda4
+    mkdir /mnt/mp4initrd/mnt/mp4sdb1
+    mkdir /mnt/mp4initrd/mnt/mp4sdb2
+    mkdir /mnt/mp4initrd/mnt/mp4sdb3
+    mkdir /mnt/mp4initrd/mnt/mp4sdb4
+    mkdir /mnt/mp4initrd/mnt/mp4hda1
+    mkdir /mnt/mp4initrd/mnt/mp4hda2
+    mkdir /mnt/mp4initrd/mnt/mp4hda3
+    mkdir /mnt/mp4initrd/mnt/mp4hda4
+
+Create the following directories in the "etc" directory:
+
+    mkdir /mnt/mp4initrd/etc/rc.d
+
+Copy the "inittab" file:
+
+    cp /home/steswd/steswd/tftpboot/inittab /mnt/mp4initrd/etc/
+
+Copy the "rc.sysinit" file:
+
+    cp /home/steswd/steswd/tftpboot/rc.sysinit /mnt/mp4initrd/etc/rc.d/
+
+Copy the "linuxrc" file:
+
+    cp /home/steswd/steswd/tftpboot/linuxrc /mnt/mp4initrd/
+
+    cd
+
+    umount /mnt/mp4initrd
+
+    mv initrd initrd.200603A
+
+    gzip initrd.200603A -S .img

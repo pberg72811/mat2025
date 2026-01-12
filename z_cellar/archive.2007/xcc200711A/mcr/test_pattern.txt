@@ -1,0 +1,87 @@
+!!----------------------------------------UNCLASSIFIED-------------------------------------------
+!! File: test_pattern.txt                                                                       -
+!!                                                                                              -
+!! Desc: This macro tests the iccpattern primitive.                                             -
+!!                                                                                              -
+!! Args: NONE  - No input arguments.              <A:>                                          -
+!!                                                                                              -
+!! Swch: None                                                                                   -
+!!                                                                                              -
+!! Hist : When       Who  What                                                                  -
+!!        08/24/2006 ptb  Initial Code.                                                         -
+!!                                                                                              -
+!! Examples: test_pattern                                                                           -
+!!                                                                                              -
+!!01.0 Description                                                                              -
+!!02.0 Requirements                                                                             -
+!!03.0 Interfaces                                                                               -
+!!04.0 Design Description                                                                       -
+!!05.0 Unit Code                                                                                -
+!!06.0 Unit Test Plan                                                                           -
+!!07.0 Test Results                                                                             -
+!!08.0 Build Procedures                                                                         -
+!!09.0 Notes                                                                                    -
+!!10.0 Reviewers.                                                                               -
+!!-----------------------------------------------------------------------------------------------
+startmacro 
+
+!! clean the screen
+!!-----------------------------------------------------------------------------------------------
+  os reset
+
+!! create test ramp
+!!-----------------------------------------------------------------------------------------------
+  SAY "========================================================================="
+  SAY "Creating ramp file."
+  SAY "========================================================================="
+  ramp test_data1 si 32 -12 1
+
+  mergefile test_data1 test_data1
+  mergefile test_data1 test_data1
+  mergefile test_data1 test_data1
+  mergefile test_data1 test_data1
+  mergefile test_data1 test_data1
+  mergefile test_data1 test_data1
+  mergefile test_data1 test_data1
+  mergefile test_data1 test_data1
+
+!! Check the pattern.
+!!-----------------------------------------------------------------------------------------------
+  SAY "========================================================================="
+  SAY "Checking pattern."
+  SAY "Should be no errors."
+  SAY "========================================================================="
+  iccpattern test_data1 32 pattern_slips
+
+  results pattern_slips  
+
+!! Create pattern slip.
+!!-----------------------------------------------------------------------------------------------
+  SAY "========================================================================="
+  SAY "Creating pattern slip."
+  SAY "========================================================================="
+  const gap si 3 0
+  
+  mergefile gap test_data1
+
+  mergefile test_data1 test_data1
+
+!! Check the pattern.
+!!-----------------------------------------------------------------------------------------------
+  SAY "========================================================================="
+  SAY "Checking pattern."
+  SAY "Should be one error."
+  SAY "========================================================================="
+  iccpattern test_data1 32 pattern_slips
+
+  results pattern_slips  
+
+  SAY "========================================================================="
+  SAY "DONE!."
+  SAY "========================================================================="
+
+endmacro
+
+
+
+

@@ -1,0 +1,306 @@
+#!/usr/bin/perl
+#------------------------------------------------------------------------------------------------
+# File: perlMake                                                                                -
+# Desc: This perl script takes the resposibility of performing "make" in various directories    -
+#       of the form:                                                                            -
+#                                      /---------\                                              -
+#                                      | TREEDIR |                                              -
+#                                      \---------/                                              -
+#                                                                                               -
+#          /-------\  /-------\  /-------\  /-------\  /-------\  /------\   /------\           -
+#          |  asm  |  |  exe  |  |  jev  |  |  lib  |  |  oct  |  | pyt  |   | test |           -
+#          \-------/  \-------/  \-------/  \-------/  \-------/  \------/   \------/           -
+#                                                                                               -
+#       Where TREEDIR is the software developement directory to use.                            -
+#       AND                                                                                     -
+#       Each subdirectory asm, exe, jev, lib, oct, pyt and test can have many subdirectories.   -
+#                                                                                               -
+# Args: command - all, asm, clean, exe, jev, lib, oct, pyt, test.                               -
+#       TREEDIR - What software developement folder to use                                      -
+#                                                                                               -
+# Hist: When       Who  What                                                                    -
+#       09/12/2003 ptb  Initial Code.                                                           -
+#       02/26/2006 ptb  Update.                                                                 -
+#       03/31/2006 ptb  Made more general for use in X-Midas developement.                      -
+#                                                                                               -
+# Examples:                                                                                     -
+#                                                                                               -
+#01.0 Description                                                                               -
+#02.0 Requirements                                                                              -
+#03.0 Interfaces                                                                                -
+#04.0 Design Description                                                                        -
+#05.0 Unit Code                                                                                 -
+#06.0 Unit Test Plan                                                                            -
+#07.0 Test Results                                                                              -
+#08.0 Build Procedures                                                                          -
+#09.0 Notes                                                                                     -
+#10.0 Reviewers.                                                                                -
+#------------------------------------------------------------------------------------------------
+$NARG        = scalar(@ARGV);
+if ( $NARG ne 2 )
+{
+  print("Number of arguments in not equal to 2.\n");
+  print("perl perlMake command treedir\n");
+  exit(0);
+}
+
+$SCRIPT_NAME = $0;
+$COMMAND     = $ARGV[0]; #all, asm, clean, exe, jev, lib, oct, pyt, test
+$TREEDIR     = $ARGV[1];
+
+# Check and handles command.
+#------------------------------------------------------------------------------------------------
+$asmFlag = 0; $exeFlag = 0; $jevFlag = 0; $libFlag = 0; $octFlag = 0; $pytFlag = 0; $testFlag =0;
+
+if    ( $COMMAND eq "all")
+{
+  $asmFlag = 1;
+  $exeFlag = 1;
+  $jevFlag = 1;
+  $libFlag = 1;
+  $octFlag = 1;
+  $pytFlag = 1;
+  $testFlag =1;
+  $COMMAND = ""
+}
+elsif ( $COMMAND eq "asm" )  {$asmFlag = 1; $COMMAND="";}
+elsif ( $COMMAND eq "clean")
+{
+  $asmFlag = 1;
+  $exeFlag = 1;
+  $jevFlag = 1;
+  $libFlag = 1;
+  $octFlag = 1;
+  $pytFlag = 1;
+  $testFlag =1;
+  $COMMAND = "clean"
+}
+elsif ( $COMMAND eq "exe" )  {$exeFlag = 1; $COMMAND="";}
+elsif ( $COMMAND eq "jev" )  {$jevFlag = 1; $COMMAND="";}
+elsif ( $COMMAND eq "lib" )  {$libFlag = 1; $COMMAND="";}
+elsif ( $COMMAND eq "oct" )  {$octFlag = 1; $COMMAND="";}
+elsif ( $COMMAND eq "pyt" )  {$pytFlag = 1; $COMMAND="";}
+elsif ( $COMMAND eq "test" ) {$testFlag = 1; $COMMAND="";}
+else
+{
+  $asmFlag = 1;
+  $exeFlag = 1;
+  $jevFlag = 1;
+  $libFlag = 1;
+  $octFlag = 1;
+  $pytFlag = 1;
+  $testFlag =1;
+  $COMMAND = ""
+}
+
+# Do the libraries (lib).
+#------------------------------------------------------------------------------------------------
+if ($libFlag && chdir("$TREEDIR/lib")) {
+  opendir(DIRID, '.');
+  while ( $dirEntry = readdir(DIRID) ) {
+    if ( ($dirEntry ne ".")   &&
+	 ($dirEntry ne "..")  &&
+	 ($dirEntry ne "CVS") &&
+	 (cfs($dirEntry) eq "DIR") ) {
+      print("********************************************************************************\n");
+      print("$dirEntry\n");
+      chdir($dirEntry);
+      print("(lib) $dirEntry\n");
+      system("make depend");
+      system("make $COMMAND");
+      if (cfs("Makefile2") eq "FIL") {
+	system("make -f Makefile2 $COMMAND");
+      }
+      if (cfs("Makefile3") eq "FIL") {
+	system("make -f Makefile3 $COMMAND");
+      }
+      chdir("..");
+    }
+  }
+  closedir(DIRID);
+}
+
+# Do the assembly (asm).
+#------------------------------------------------------------------------------------------------
+if ($asmFlag && chdir("$TREEDIR/asm")) {
+
+print("HEY!\n");
+
+  opendir(DIRID, '.');
+  while ( $dirEntry = readdir(DIRID) ) {
+    if ( ($dirEntry ne ".")   &&
+	 ($dirEntry ne "..")  &&
+	 ($dirEntry ne "CVS") &&
+	 (cfs($dirEntry) eq "DIR") ) {
+      print("********************************************************************************\n");
+      print("$dirEntry\n");
+      chdir($dirEntry);
+      print("(asm) $dirEntry\n");
+      system("make depend");
+      system("make $COMMAND");
+      if (cfs("Makefile2") eq "FIL") {
+	system("make -f Makefile2 $COMMAND");
+      }
+      if (cfs("Makefile3") eq "FIL") {
+	system("make -f Makefile3 $COMMAND");
+      }
+      chdir("..");
+    }
+  }
+  closedir(DIRID);
+}
+
+# Do the executables (exe).
+#------------------------------------------------------------------------------------------------
+if ($exeFlag && chdir("$TREEDIR/exe")) {
+  opendir(DIRID, '.');
+  while ( $dirEntry = readdir(DIRID) ) {
+    if ( ($dirEntry ne ".")   &&
+	 ($dirEntry ne "..")  &&
+	 ($dirEntry ne "CVS") &&
+	 (cfs($dirEntry) eq "DIR") ) {
+      print("********************************************************************************\n");
+      print("$dirEntry\n");
+      chdir($dirEntry);
+      print("(exe) $dirEntry\n");
+      system("make depend");
+      system("make $COMMAND");
+      if (cfs("Makefile2") eq "FIL") {
+	system("make -f Makefile2 $COMMAND");
+      }
+      if (cfs("Makefile3") eq "FIL") {
+	system("make -f Makefile3 $COMMAND");
+      }
+      chdir("..");
+    }
+  }
+  closedir(DIRID);
+}
+
+# Do the Java Classes (jev).
+#------------------------------------------------------------------------------------------------
+if ($jevFlag && chdir("$TREEDIR/jev")) {
+  opendir(DIRID, '.');
+  while ( $dirEntry = readdir(DIRID) ) {
+    if ( ($dirEntry ne ".")   &&
+	 ($dirEntry ne "..")  &&
+	 ($dirEntry ne "CVS") &&
+	 (cfs($dirEntry) eq "DIR") ) {
+      print("********************************************************************************\n");
+      print("$dirEntry\n");
+      chdir($dirEntry);
+      print("(jev) $dirEntry\n");
+      system("make $COMMAND");
+      if (cfs("Makefile2") eq "FIL") {
+	system("make -f Makefile2 $COMMAND");
+      }
+      if (cfs("Makefile3") eq "FIL") {
+	system("make -f Makefile3 $COMMAND");
+      }
+      chdir("..");
+    }
+  }
+  closedir(DIRID);
+}
+
+# Do the octaves (oct).
+#------------------------------------------------------------------------------------------------
+if ($octFlag && chdir("$TREEDIR/oct")) {
+  opendir(DIRID, '.');
+  while ( $dirEntry = readdir(DIRID) ) {
+    if ( ($dirEntry ne ".")   &&
+	 ($dirEntry ne "..")  &&
+	 ($dirEntry ne "CVS") &&
+	 (cfs($dirEntry) eq "DIR") ) {
+      print("********************************************************************************\n");
+      print("$dirEntry\n");
+      chdir($dirEntry);
+      print("(oct) $dirEntry\n");
+      system("make depend");
+      system("make $COMMAND");
+      if (cfs("Makefile2") eq "FIL") {
+	system("make -f Makefile2 $COMMAND");
+      }
+      if (cfs("Makefile3") eq "FIL") {
+	system("make -f Makefile3 $COMMAND");
+      }
+      chdir("..");
+    }
+  }
+  closedir(DIRID);
+}
+
+# Do the Python libraries (pyt).
+#------------------------------------------------------------------------------------------------
+if ($pytFlag && chdir("$TREEDIR/pyt")) {
+  opendir(DIRID, '.');
+  while ( $dirEntry = readdir(DIRID) ) {
+    if ( ($dirEntry ne ".")   &&
+	 ($dirEntry ne "..")  &&
+	 ($dirEntry ne "CVS") &&
+	 (cfs($dirEntry) eq "DIR") ) {
+      print("********************************************************************************\n");
+      print("$dirEntry\n");
+      chdir($dirEntry);
+      chdir("src");
+      print("(pyt) $dirEntry\n");
+      system("make depend");
+      system("make $COMMAND");
+      if (cfs("Makefile2") eq "FIL") {
+	system("make -f Makefile2 $COMMAND");
+      }
+      if (cfs("Makefile3") eq "FIL") {
+	system("make -f Makefile3 $COMMAND");
+      }
+      chdir("..");
+      chdir("..");
+    }
+  }
+  closedir(DIRID);
+}
+
+# Do the test directory.
+#------------------------------------------------------------------------------------------------
+if ($testFlag && chdir("$TREEDIR/test")) {
+  opendir(DIRID, '.');
+  while ( $dirEntry = readdir(DIRID) ) {
+    if ( ($dirEntry ne ".")   &&
+	 ($dirEntry ne "..")  &&
+	 ($dirEntry ne "CVS") &&
+	 (cfs($dirEntry) eq "DIR") ) {
+      print("********************************************************************************\n");
+      print("$dirEntry\n");
+      chdir($dirEntry);
+      print("(test) $dirEntry\n");
+      system("make depend");
+      system("make $COMMAND");
+      if (cfs("Makefile2") eq "FIL") {
+	system("make -f Makefile2 $COMMAND");
+      }
+      if (cfs("Makefile3") eq "FIL") {
+	system("make -f Makefile3 $COMMAND");
+      }
+      chdir("..");
+    }
+  }
+  closedir(DIRID);
+}
+
+# Done.
+#------------------------------------------------------------------------------------------------
+print("\n");
+$COMMAND = uc($COMMAND);
+print("********************************************************************************\n");
+print("BUILD DONE WITH COMMAND \"$COMMAND\" FOR $TREEDIR\n");
+print("********************************************************************************\n");
+print("\n");
+
+# Subroutine to check file statistics "cfs".
+#------------------------------------------------------------------------------------------------
+sub cfs{
+  ($dev, $ino, $mode, $nlink, $uid, $gid, $rdev) = stat($_[0]);
+  if(int($mode/1000)==16)   { $answer = "DIR";} #This is a directory.
+  elsif(int($mode/1000)==33){ $answer = "FIL";} #This is a file.
+  else                      { $answer = "DNE";} #This does not exist.
+  return $answer;
+}

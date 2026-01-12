@@ -1,0 +1,78 @@
+!!----------------------------------------UNCLASSIFIED-------------------------------------------
+!! File: test_pattern.txt                                                                       -
+!!                                                                                              -
+!! Desc: This macro tests the iccpattern primitive.                                             -
+!!                                                                                              -
+!! Args: NONE  - No input arguments.              <A:>                                          -
+!!                                                                                              -
+!! Swch: None                                                                                   -
+!!                                                                                              -
+!! Hist : When       Who  What                                                                  -
+!!        08/24/2006 ptb  Initial Code.                                                         -
+!!                                                                                              -
+!! Examples: test_pattern                                                                           -
+!!                                                                                              -
+!!01.0 Description                                                                              -
+!!02.0 Requirements                                                                             -
+!!03.0 Interfaces                                                                               -
+!!04.0 Design Description                                                                       -
+!!05.0 Unit Code                                                                                -
+!!06.0 Unit Test Plan                                                                           -
+!!07.0 Test Results                                                                             -
+!!08.0 Build Procedures                                                                         -
+!!09.0 Notes                                                                                    -
+!!10.0 Reviewers.                                                                               -
+!!-----------------------------------------------------------------------------------------------
+startmacro 
+
+!! clean the screen
+!!-----------------------------------------------------------------------------------------------
+  os reset
+
+!! Create first test case.
+!!-----------------------------------------------------------------------------------------------
+  SAY "========================================================================="
+  SAY "Create first test case SNR=??"
+  SAY "========================================================================="
+  iccawgnoise noisefile sb 1024*1024*4 10 4e6
+
+  iccsiggen   sinfile   sb 1024*1024*4 0.25e6 20 0.0 4e6
+
+  fcalc temp1 sinfile noisefile +
+
+  iccsnr temp1(1:4k*10) xxx 4k snr_value1
+
+!! Create second test case.
+!!-----------------------------------------------------------------------------------------------
+  SAY "========================================================================="
+  SAY "Create second test case SNR=??"
+  SAY "========================================================================="
+  iccawgnoise noisefile sb 1024*1024*4 50 4e6
+
+  iccsiggen   sinfile   sb 1024*1024*4 0.50e6 20 0.0 4e6
+
+  fcalc temp2 sinfile noisefile +
+
+  iccsnr temp2(1:4k*10) xxx 4k snr_value2
+
+!! Create third test case.
+!!-----------------------------------------------------------------------------------------------
+  SAY "========================================================================="
+  SAY "Create third test case SNR=??"
+  SAY "========================================================================="
+  iccawgnoise noisefile si 1024*1024*4 500 4e6
+
+  iccsiggen   sinfile   si 1024*1024*4 1e6 2000 0.0 4e6
+
+  fcalc temp3 sinfile noisefile +
+
+  iccsnr temp3(1:4k*10) xxx 4k snr_value3
+
+  SAY "========================================================================="
+  SAY "DONE!."
+  SAY "TEST RUN 1 SNR is ^snr_value1"
+  SAY "TEST RUN 2 SNR is ^snr_value2"
+  SAY "TEST RUN 3 SNR is ^snr_value3"
+  SAY "========================================================================="
+
+endmacro

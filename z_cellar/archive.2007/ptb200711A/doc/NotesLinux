@@ -1,0 +1,93 @@
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+# NotesLinux.
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+
+tcpdump:.......................Logs tcp traffic.
+
+netstat:.......................Shows what deamons are running.
+
+Linux firewall: ...............Will effect telnet, ftp, etc.
+
+Starting in Xwindows: .........Modify the /etc/iniccab.
+                               Look for id:3:initdefault or id:3:initdefault.
+
+mtab:..........................Automagically mount by adding this to /etc/mtab:
+                               /dev/hda5 /mnt/win00 vfat rw 0 0
+
+fdisk( windows 98):............Hidden command /MBR.  Resets the master boot record (MBR).
+
+Format a floppy:.............../sbin/mke2fs /dev/fd0
+
+*.img file:....................Use "dd if=boot.img of=/dev/fd0 bs=72k"
+                               to install a file calledboot.img onto a floppy.
+
+Save you neck:.................Using Redhat boot disk, type 
+                               "linux single root=/dev/hda7 initrd="
+
+/etc/sysctl.conf:..............Use "kernel.shmmax=0x10000000" to set shared memory
+                               limits to 256M.
+
+dmesg | grep BIOS:.............Will show BIOS-provided physical RAM map.
+
+/proc/meminfo:.................Shows system memory information.
+
+Set the time:..................Use as root "date -u 10302010". (MMDDYYMM format.)
+
+SMP shutdown:..................Symetric MultiProcessor(SMP), add "apm=power-off" to lilo or grub.
+
+Redhat 7.2 install on Dell 530.
+Boot from CD.
+At "boot:" prompt type "text".
+Language Selection:.............English.
+Key board selection:............US.
+Mouse Selection:................Microsoft intelli-mouse (PS/2).
+RedHat Linux:...................OK.
+Installation Type:..............Workstation.
+Disk Partition setup:...........Disk Druid.
+Partitions:.....................Need a "/", "/boot", "/swap", "/data1".
+Boot Loader Config:.............LILO.
+Boot Loader Config:............."/dev/hda MBR".
+Boot Loader Config:............."hdd=ide-scsi" and set "Force use of LBA32".
+Boot Loader Config:.............Add boot lable "dos".
+Network:........................bootp/dhcp
+Firewall:.......................No firewall.
+Language:.......................English.
+Time zone:......................Hardware set to GMT.
+Root Password:..................Pick one.
+Add users:......................Add one.
+Package:........................Gnome, Software dev.  Select individual.
+
+Amuse/Games:
+Amuse/Graphics:
+Application:
+Application/Comm.:
+Application/Database:
+Application/Editors:............hexedit, nedit, xemacs*.
+Application/Emulators:
+Application/Engineering:........gnuplot, octave.
+Application/file:
+Application/Internet:...........tcpdump.
+Application/multimedia:.........Mesa.
+Application/Productive:
+Application/publishing:.........enscript, freetype-utils.
+Application/system:.............bindconf, gnome-linuxconf, linuxconf, macutils.
+Application/Text:
+Dev/debug:
+Dev/language:...................compact egcc*, gcc*, nasm, nasm-doc
+Dev/lib:........................blas, compact*, lapack.
+Dev/system:.....................Kernel source.
+Dev/tools:......................Electric fence.
+Doc:............................bash-doc, blas-man, kernel-doc, lapack-man
+System Environment/Base:
+System/ Daemon:.................bind, no sendmail
+System/Kernel:..................None.
+System/Libs:
+System/Shell:
+User Interface/Desktop:
+User Interface/X:
+User Interface/X hardware:
+
+Package Dependancies:...........Install to satisfy.
+Video:..........................O.K.

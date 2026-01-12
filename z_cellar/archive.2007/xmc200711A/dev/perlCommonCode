@@ -1,0 +1,119 @@
+#!/usr/bin/perl
+#2345678901234567890123456789012345678901234567890123456789012345678901234567890
+#-------------------------------------------------------------------------------
+# Use:
+#
+# First test with:
+#   perl $STESWD/dev/perlCommonCode programFile.c
+#
+# Make changes permenate with:
+#   perl -i $STESWD/dev/perlCommonCode programFile.c
+#-------------------------------------------------------------------------------
+# Initialize the code line counter.
+#-------------------------------------------------------------------------------
+$nCodeLines = 0;
+$codeLine   = 0;
+
+#-------------------------------------------------------------------------------
+# Step through each line of the "*.pre" file.
+#-------------------------------------------------------------------------------
+while (<>)
+  {
+
+    #---------------------------------------------------------------------------
+    # If PERL_PREPROCESS line is found save of the code line.
+    #---------------------------------------------------------------------------
+    if(/PERL_PREPROCESS_START/)      # We can reset the common code by handling 
+    {                                # a start condition.
+      $nCodeLines=0;                 # Init nCodeLines.
+      $codeLine=0;                   # Init codeLine.
+      print("$_");		     # Print back the original line.
+    }
+    elsif(/PERL_PREPROCESS/)
+    {
+      $temp = $_;                     #Copy $_ to $temp.
+      $temp =~ s/PERL_PREPROCESS_START//;   #Get rid of PERL_PREPROCESS.
+      $temp =~ s/PERL_PREPROCESS//;   #Get rid of PERL_PREPROCESS.
+      $codeLine[$nCodeLines] = $temp; #Set code line equal to $temp.
+      $nCodeLines++;		      #Increment the code line count.
+      print("$_");		      #Print back the original line.
+    }
+    #---------------------------------------------------------------------------
+    # If COMMON_CODE line is found write out all code lines.
+    #---------------------------------------------------------------------------
+    elsif(/COMMON_CODE_ASM/)
+      {
+        s/  COMMON_CODE/COMMON_CODE/;               #Get rid of two of the leading spaces.
+        s/COMMON_CODE/COMMON-CODE/;                 #Change "Common_Code" to prevent double changing.
+        $CCLR = $_;                                 #Create a COMMON_CODE Line Remainder (CCLR).
+        chomp($CCLR);                               #Chomping.
+        print(";------------------------------- ");
+        print("$CCLR START.\n");                    #Print CCLR to mark start of COMMON_CODE.
+        @whogi = split(' ',$_);                     #Split the line to get possible arguments.
+                                                    #
+	for($ii=0; $ii<$nCodeLines; $ii++)          #Print out each code line while making
+	  {                                         #possible substitutions.
+            $temp = $codeLine[$ii];                 #.
+                                                    #
+            chomp($whogi[1]);                       #
+            $temp =~ s/XXXXX/$whogi[1]/g;           #
+            $temp =~ s/\?01/$whogi[1]/g;            #
+                                                    #
+            chomp($whogi[2]);                       #
+            $temp =~ s/YYYYY/$whogi[2]/g;           #
+            $temp =~ s/\?02/$whogi[2]/g;            #
+                                                    #
+            chomp($whogi[3]);                       #
+            $temp =~ s/ZZZZZ/$whogi[3]/g;           #
+            $temp =~ s/\?03/$whogi[3]/g;            #
+                                                    #
+	    print("$temp");                         #
+	  }                                         #
+        print(";------------------------------- ");
+	print("$CCLR  STOP.\n");                  #Print CCLR to mark end of COMMON_CODE.
+     }
+
+    #---------------------------------------------------------------------------
+    # If COMMON_CODE line is found write out all code lines.
+    #---------------------------------------------------------------------------
+    elsif(/COMMON_CODE/)
+      {
+        s/  COMMON_CODE/COMMON_CODE/;               #Get rid of two of the leading spaces.
+        s/COMMON_CODE/COMMON-CODE/;                 #Change "Common_Code" to prevent double changing.
+        $CCLR = $_;                                 #Create a COMMON_CODE Line Remainder (CCLR).
+        chomp($CCLR);                               #Chomping.
+        print("//------------------------------- ");
+        print("$CCLR START.\n");                    #Print CCLR to mark start of COMMON_CODE.
+        @whogi = split(' ',$_);                     #Split the line to get possible arguments.
+                                                    #
+	for($ii=0; $ii<$nCodeLines; $ii++)          #Print out each code line while making
+	  {                                         #possible substitutions.
+            $temp = $codeLine[$ii];                 #.
+                                                    #
+            chomp($whogi[1]);                       #
+            $temp =~ s/XXXXX/$whogi[1]/g;           #
+                                                    #
+            chomp($whogi[2]);                       #
+            $temp =~ s/YYYYY/$whogi[2]/g;           #
+                                                    #
+            chomp($whogi[3]);                       #
+            $temp =~ s/ZZZZZ/$whogi[3]/g;           #
+                                                    #
+	    print("$temp");                         #
+	  }                                         #
+        print("//------------------------------- ");
+	print("$CCLR  STOP.\n");                  #Print CCLR to mark end of COMMON_CODE.
+     }
+
+    #---------------------------------------------------------------------------
+    # Else just write out the line.
+    #---------------------------------------------------------------------------
+    else
+      {
+	print("$_");
+      }
+
+    #---------------------------------------------------------------------------
+    # Done.
+    #---------------------------------------------------------------------------
+  }

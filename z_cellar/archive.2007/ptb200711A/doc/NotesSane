@@ -1,0 +1,22 @@
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+# NotesSane
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+
+
+Try "xsane" as root.
+
+
+Download ".gz" version.
+
+Follow quick install in README file.
+
+make sure you are root when you perform "make install".
+
+as root /usr/local/bin/sane-find-scanner
+
+
+[root@localhost bin]# scanimage --mode Gray -d umax > /home/steswd/passport.png
+[root@localhost bin]# scanimage --mode Color -d umax > /home/steswd/passport2.png
+

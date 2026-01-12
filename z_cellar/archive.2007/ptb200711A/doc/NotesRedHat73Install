@@ -1,0 +1,299 @@
+Notes on RedHat 7.3 installation, ICE kernel mods, and XMidas (06/06/02)
+*****************************************************
+** Notes compliments of Rich Holley, Zeta Corporation.
+*****************************************************
+-----------------------------------------------------------------------------
+
+*******************************
+*** RedHat 7.3 Installation ***
+*******************************
+
+1) Hardware configuration:
+	DISK-0: IDE-0 (Primary Master)	 : WD1200JB 120GB
+	CDROM:	IDE-0 (Primary Slave)	 : CD/DVD Writer/Reader
+	DISK-1:	IDE-1 (Secondary Master) : WD1200JB 120GB
+	DISK-2:	IDE-1 (Secondary Slave)	 : WD1200JB 120GB
+
+2) OS Installation 
+	... Language          = English
+	... Keyboard          = Generic, US English, Enable Dead Keys
+	... Mouse             = Generic 3 Button PS/2
+	... Installation Type = Custom
+
+3) Disk Partitioning
+	... Choose manually partition with disk druid
+
+Device		SZ(MB)	Mount	Type	Comment
+---------------	-------	-------	-------	--------------------
+/dev/hda1	   125	/boot	ext3	boot partition
+/dev/hda2	 10001	/	ext3	10GB root partition
+/dev/hda3	  2047	SWAP	swap	2GB linux swap partition
+/dev/hda4	102297	/data0	ext2	placeholder for LVM
+
+/dev/hdc1	108000	/data1a	ext2	placeholder for LVM	
+/dev/hdc2	  6473	/data2a	ext2	placeholder for LVM
+	
+/dev/hdd1	108000	/data1b	ext2	placeholder for LVM
+/dev/hdd2	  6473	/data2b	ext2	placeholder for LVM
+
+NOTE1:
+"hda","hdc", and "hdd" data partitions must be changed to LVM stripe set after
+installation.
+
+4) Boot Loader Config
+	... Choose LILO as boot loader
+	... Install boot loader on MBR
+
+5) Network Configuration
+	... Do not use DHCP
+	... Enable both network devices at boot and assign IP addresses
+	... IP        = 
+	... Netmask   = 
+	... Network   = 
+	... Broadcast = 
+	... Set HOSTNAME
+
+6) Firewall Configuration
+	... Security = HIGH
+	... Customize = Enable SSH, Telnet, Mail, FTP 
+
+7) Time Zone Selection
+	... Choose UTC Offset
+	... Be certain to set "System clock is UTC" and "locale is UTC".
+
+8) Account Configuration
+	... Set root password
+	... Create XMIDAS account
+
+9) Package Selection
+	... Select "Everything" at bottom of package list
+	... Total size will be about 3.6GB
+
+10) Graphics Configuration
+	... Choose monitor and resolution
+	... Choose KDE as default desktop, TEXT for login
+
+11) After RH7.3 installation, reboot system
+
+
+*******************************
+***   RedHat 7.3 Patches    ***
+*******************************
+
+1) Insert Updates CD and perform system patches
+	... mount /mnt/cdrom
+	... as ROOT, source patch_RH73.cmd
+	... re-source 3 times to satisfy all dependencies
+
+2) Edit /etc/lilo.conf to boot patched kernel
+	... add 2.4.18-4 kernel as default
+	... enable DMA for IDE drives in /etc/sysconfig/harddisks
+	... run "lilo" after configuration update
+
+3) Run ldconfig 
+
+4) Reboot system
+
+
+*******************************************
+*** Kernel Modifications for ICE/XMidas ***
+*******************************************
+
+1) Create an "ICE" version of kernel source
+	... Dual-Xeon-CPU, ATA-100, or DRI video card use linux-2.4.19-10-ac2
+	... For other computers, simply use RH 7.3 linux-2.4.18-4
+	... Change to kernel source directory and install kernel sources
+		cd /usr/src
+		install appropriate kernel sources under either
+			/usr/src/linux-2.4.19-ice -OR-
+			/usr/src/linux-2.4.18-ice
+	... Change symbolic links for linux to point to new kernel source
+		cd /usr/src/
+		ln -sf linux-2.4.19-ice linux-2.4 -AND-
+		ln -sf linux-2.4.19-ice linux
+
+2) Edit mem.c to enable direct memory read/write 
+	... vi /usr/src/linux-2.4.19-ice/drivers/char/mem.c
+	... search for "open_port"
+	... change function to ALWAYS return "0" value
+
+3) Build the modified kernel
+	... cd /usr/src/linux-2.4.18-4-ice
+	... make mrproper
+	... make clean
+	... edit Makefile (set EXTRAVERSION to = -ice)
+	... make xconfig
+		- load configs/kernel-2.4.18-4-i686-smp
+		- disable amateur radio, ISDN, BlueTooth, IEEE1394, oldcdrom
+		- save and exit
+	... make dep 2>&1 | tee make_dep.log
+	... make bzImage 2>&1 | tee make_bzImage.log
+	... make modules 2>&1 | tee make_modules.log
+	... make modules_install 2>&1 | tee make_modules_install.log
+
+4) Install new kernel
+	... Copy new System.map and vmlinuz to /boot
+	cp /usr/src/linux-2.4.19-ice/System.map ./System.map-2.4.19-ice
+	cp /usr/src/linux-2.4.19-ice/arch/i386/boot/bzImage ./vmlinuz-2.4.19-ice
+	... Make initial ramdrive file
+	 	cd /boot
+		mkinitrd -v --with=lvm-mod ./initrd-2.4.19-ice.img 2.4.19-ice
+	... Add new kernel to lilo.conf
+		create entries for "ice" boot and "midas" boot
+		"ice" boot will need "append mem=256M" or the like
+	... Update master boot record
+		/sbin/lilo
+	... reboot
+
+
+************************************
+*** Create Logical Volumes (LVM) ***
+************************************
+
+1) Unmount data partitions
+	- umount /data0, /data1a, /data1b, /data2a, /data2b
+
+2) Edit /etc/fstab and remove entries for data partitions
+
+3) List current partitions and change types of data disks to "8e"
+	- /sbin/sfdisk -l /dev/hda
+	- /sbin/sfdisk --change-id /dev/hda 4 8e
+	- /sbin/sfdisk -l /dev/hda
+	- repeat for each device
+
+4) Reboot
+
+5) Create lvm configuration tables, physical volumes, and volume groups
+	- /sbin/insmod lvm-mod
+  	- vgscan -v
+  	- pvcreate -v -ff /dev/hda4 /dev/hdc1 /dev/hdc2 /dev/hdd1 /dev/hdd2
+  	- vgcreate vg0 /dev/hda4
+	- vgcreate vg1 /dev/hdc1 /dev/hdd1
+	- vgcreate vg2 /dev/hdc2 /dev/hdd1
+
+6) Create logical volumes
+	- vgscan 
+  	- pvscan (add up PV sizes for size specification below) 
+	- lvcreate -v -L  99800M -i 1 -I 4 -n lv0 vg0  (single stripe)
+	- lvcreate -v -L 210800M -i 2 -I 4 -n lv1 vg1  (dual stripe)
+	- lvcreate -v -L  12600M -i 2 -I 4 -n lv2 vg2  (dual stripe)
+
+7) For automounting, must edit rc.sysinit script for LVM mounting
+	- remove check for "/proc/lvm" in conditional
+
+8) Remove old mount points, create new mount points, make filesystems
+	- rmdir /data0a /data1a /data1b /data2a /data2b
+	- mkdir /data0 /data1 /data2
+	- mke2fs -v -b 4096 -j -T largefile4 /dev/vg0/lv0
+	- mke2fs -v -b 4096 -j -T largefile4 /dev/vg1/lv1
+	- mke2fs -v -b 4096 -j -T largefile4 /dev/vg2/lv2
+	- edit /etc/fstab and add /data0, /data1, /data2 automounts
+
+10) Reboot
+
+
+***********************************
+*** Build and Install GCC 3.1.0 *** *** Can Be Ignored. ptb ITT. ***               
+***********************************
+
+1) Create source and binary directories
+	... mkdir /opt/gcc-3.1.0-source
+	... mkdir /opt/gcc-3.1.0
+
+2) Configure and clean the source
+	- /bin/bash
+	- ./configure --prefix=/opt/gcc-3.1.0 --exec-prefix=/opt/gcc-3.1.0 \
+              --program-suffix=-3.1.0 --enable-threads=posix
+	- make distclean
+	- ./configure --prefix=/opt/gcc-3.1.0 --exec-prefix=/opt/gcc-3.1.0 \
+            --program-suffix=-3.1.0 --enable-threads=posix
+	- make bootstrap 2>&1 | tee make_bootstrap.log
+	- make install 2>&1 | tee make_install.log
+
+3) Update shared library cache/configuration
+
+
+********************************
+*** Build and Install XMIDAS ***
+********************************
+
+1) Install Promula C/Fortran converter
+	... su root
+	... cd /
+	... tar xzvf /mnt/cdrom/X-Midas/PFC_Compiler/pfc614b.tar.gz
+	... rpm -ivh /mnt/cdrom/X-Midas/PFC_Compiler/ld.so
+	... rpm -ivh /mnt/cdrom/X-Midas/PFC_Compiler/libc-5.3.12
+	... /sbin/ldconfig
+	... type "pfc"; should get "Enter command: "
+
+2) Install and build X-Midas
+	... su xmidas
+	... mkdir /opt/xmidas, /opt/xmidas/localopts
+	... mkdir /opt/xm364, /opt/xm364/xm
+	... cd /opt/xmidas, ln -sf /opt/xm364/xm ./xm
+	... setenv XMDISK /opt/xmidas
+	... cd /opt/xm364/xm
+	... tar xzvf /mnt/cdrom/X-Midas/xm364/xm364.tgz
+	... cd $XMDISK/xm/unix; make clean; make 
+	... cd $XMDISK/xm/unix/linx; make clean; make
+	... source xminstall
+
+****************************************
+*** Install and build ICE. ptb ITT   ***
+****************************************
+
+Need description of installing ICE.
+
+****************************
+*** Other notes. ptb ITT ***
+****************************
+
+When installing the ".4" kernel:
+  Do not trash the old ".3" kernel.
+  Make sure you update "lilo.conf" and run "/sbin/lilo".
+
+Useful command: hdparm -tT /dev/sda
+
+Important to build kernel from pre-existing config file like the ones found in "/usr/src/linux/configs".  The config file for this build is saved in "steswd/unx".
+
+Important to build kernel in /usr/src/linux-2.4-X-X as root.
+
+Important to build kernel and then make sure there is a link /usr/src/linux->linux-2.4.X-X.
+
+Might need to install the LVM package.
+
+Nice to do a "chmod o+x /sbin/shutdown" to let other folks shutdown. (??)
+
+Put options is $XMDISK/xm/sitemods/unix/xmstart.
+
+Xpriority files in XMidas need to be "root rw" everyone else "r".
+
+********************************
+*** /etc/rc.sysint. ptb ITT. ***
+********************************
+
+Bug in /etc/rc.sysint causes set up for LVM to get messed up.  You need to modify the LVM sections to look like the following:
+
+### Start Example ###
+
+# LVM initialization
+if [ -x /sbin/vgchange -a -f /etc/lvmtab ]; then
+        action $"Setting up Logical Volume Management:" /sbin/vgscan && /sbin/vgchange -a y
+fi
+
+### End Example ###
+
+*****************************************************
+*** Notes to setup system memory for ICE. ptb ITT ***
+*****************************************************
+
+/etc/lilo.conf:             append="mem=1024M hdb=ide-scsi"
+
+$XMDISK/xm/cfg/diskunx.cfg: /data/ramdisk/  RAM  /dev/mem  1040M  992M
+
+$XMAREA_ICE/drv/lnx/icepic: # RAM For the OS in Mbytes
+$XMAREA_ICE/drv/lnx/icepic: ram_start=1040
+$XMAREA_ICE/drv/lnx/icepic: # RAMDISK RAM in Mbytes
+$XMAREA_ICE/drv/lnx/icepic: ram_sized=992
+$XMAREA_ICE/drv/lnx/icepic: # Mappable RAM in Mbytes (at least 4 for PIC self tests)
+$XMAREA_ICE/drv/lnx/icepic: ram_sizem=16

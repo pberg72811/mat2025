@@ -1,0 +1,91 @@
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+# NotesXMidas.
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+
+#-------------------------------------------------------------------------------
+# XMidas shared memory.
+#-------------------------------------------------------------------------------
+To boost shared memory limits to 256M add
+
+     kernel.shmmax = 0x10000000
+
+to the "/etc/sysctl.conf" file.
+
+#-------------------------------------------------------------------------------
+# XMidas install.
+#-------------------------------------------------------------------------------
+Follow the "unix_install_brief.txt" file under the "$XMDISK/xm/hlp" directory.
+
+Make sure you are root for step 5.
+
+Make sure you do step 7.
+
+Might want to copy the "midas_cshrc.sample" file under "$XMDISK/xm/unix/linx/midas_cshrc.sample" 
+to "/etc/midas.cshrc"
+
+  cp $XMDIKS/xm/unix/linx/midas_cshrc.sample /etc/midas.cshrc
+
+Edit the lines at the bottom of the file
+
+    if (! $?prompt) then
+      set path = ( $XMDISK/xm/unix/linx $XMDISK/xm/unix $XMDISK/xm/util $path )
+    endif
+
+To look like
+
+    #if (! $?prompt) then
+      set path = ( $XMDISK/xm/unix/linx $XMDISK/xm/unix $XMDISK/xm/util $path )
+    #endif
+
+#-------------------------------------------------------------------------------
+# XMidas and DDD.
+#-------------------------------------------------------------------------------
+For debugging primitives under LINUX it is preferable to be running version 364 or
+newer.
+
+First thing is to add a line to set the environment variable "XM_DEBUGGER" in the 
+"xmstartup.txt" file.
+
+     $setenv XM_DEBUGGER   "ddd -d $XMAREA/lib/dbgLib -d /home/steswd/steswd/host"
+
+Be sure to save the change and perform the "mtranslate" command on "xmstartup.txt"
+
+     mtrans %xmstartup
+
+Second things is to build your primitive so that it can invoke the debugger.
+
+     xmbld some_primitive cld
+
+If you are creating a new primitive make sure to modify the "commands.cfg" file
+accordingly.
+
+Lastly, run the primitive.  DDD will get kick off when the primitive starts.
+
+
+#-------------------------------------------------------------------------------
+# Older notes on debugging.
+#-------------------------------------------------------------------------------
+For debugging primitive under Linux it is preferable to be running a newer version of X-Midas(364)
+
+Under xm364 use the following procedure:
+
+Example using a primitive called JUNK in the user option tree
+
+1) Set X-Midas debugger environmental variable
+	X-Midas> setenv XM_DEBUGGER "gdb -d $XMAREA/lib/dbgLib -d $XMAREA_USER/host"
+	
+	or place this next line in the ".cshrc" file
+
+	XM_DEBUGGER=ddd -d /opt/xmidas/xm/lib/dbgLib -d /home/bergman/steswd/host
+
+2) Build the primitive with debug
+	X-Midas> xmbld junk cld h user
+
+3) Run the primitive
+	X-Midas> junk/dbg
+
+4) Set the break point at "mh$junk_" and run.
+
+5) Happy debugging.

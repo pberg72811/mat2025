@@ -1,0 +1,4 @@
+ 1031  nasm -f elf -g  test.asm
+ 1032  gcc testRun.c -o testRun test.o -g
+ 1033  ddd testRun
+

@@ -1,0 +1,47 @@
+!!-----------------------------------------------------------------------------------------------
+!! Macro: buildopt
+!!
+!! Descr: This is the buildopt macro for the XCC option tree.
+!! Hist : When       Who  What
+!!        11/08/2005 ptb  Initial Code.
+!!        03/30/2006 ptb  Created for XCC option tree.
+!!-----------------------------------------------------------------------------------------------
+!! OptDepend: NONE
+!!-----------------------------------------------------------------------------------------------
+startmacro u:option
+
+!! Need to make sure macros dependancies are taken care of.
+!!-----------------------------------------------------------------------------------------------
+xmpath xmpy xcc sys ice
+
+!! Clean out option tree if told to.
+!!-----------------------------------------------------------------------------------------------
+if /CLEAN gt 0 then
+  xmdir mcr ^option                         !! Go to the "mcr" directory of the option tree.
+  os "$XMAREA_XMC/bin/clean_xmidas_macros"  !! Call the clean macros script in XMC.
+  os cd ..                                  !! Go up one directory
+  os pwd
+  os find . -name "*.a"   -exec rm -rf '{}' ';'  !! Clean out files in entire option tree.
+  os find . -name "*.o"   -exec rm -rf '{}' ';'  !! Clean out files in entire option tree.
+  os find . -name "*.so"  -exec rm -rf '{}' ';'  !! Clean out files in entire option tree.
+  os find . -name "*.oc"  -exec rm -rf '{}' ';'  !! Clean out files in entire option tree.
+  os find . -name "*.pyc" -exec rm -rf '{}' ';'  !! Clean out files in entire option tree.
+  os find . -name "*.exe" -exec rm -rf '{}' ';'  !! Clean out files in entire option tree.
+  os find . -name "*.fpp" -exec rm -rf '{}' ';'  !! Clean out files in entire option tree.
+  os find . -name "c_*.c" -exec rm -rf '{}' ';'  !! Clean out files in entire option tree.
+  os find . -name "make.dep*" -exec rm -rf '{}' ';'  !! Clean out files in entire option tree.
+  say "******************************"
+  say "The $XMAREA_^option is now clean."
+  say "******************************"
+
+!! Else build the libraries and run xm build command for primitives.
+!!-----------------------------------------------------------------------------------------------
+else
+  xmdir lib ^option                        !! Go to the "lib" directory of the option tree
+  os cd ..                                 !! Go to the directory above.
+  os xmcm lib .                            !! X-Midas common make.
+                                           !! Done with libraries.
+  xmbld * cld ,, ^option                   !! Now perform an X-Midas build on the primitives.
+endif
+
+endmacro

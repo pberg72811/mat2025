@@ -1,0 +1,1050 @@
+xccMatrixComposite.o: xccMatrixComposite.c \
+  /opt/xmopts/xcc/inc/vector_utils.h /opt/xmopts/xmc/inc/xmc.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stdarg.h \
+  /usr/include/stdio.h /usr/include/features.h /usr/include/sys/cdefs.h \
+  /usr/include/gnu/stubs.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stddef.h \
+  /usr/include/bits/types.h /usr/include/bits/wordsize.h \
+  /usr/include/bits/typesizes.h /usr/include/libio.h \
+  /usr/include/_G_config.h /usr/include/wchar.h /usr/include/bits/wchar.h \
+  /usr/include/gconv.h /usr/include/bits/stdio_lim.h \
+  /usr/include/bits/sys_errlist.h /usr/include/stdlib.h \
+  /usr/include/sys/types.h /usr/include/time.h /usr/include/endian.h \
+  /usr/include/bits/endian.h /usr/include/sys/select.h \
+  /usr/include/bits/select.h /usr/include/bits/sigset.h \
+  /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/bits/sched.h \
+  /usr/include/alloca.h /usr/include/string.h /usr/include/unistd.h \
+  /usr/include/bits/posix_opt.h /usr/include/bits/confname.h \
+  /usr/include/getopt.h /usr/include/ctype.h /usr/include/X11/Xlib.h \
+  /usr/include/X11/X.h /usr/include/X11/Xfuncproto.h \
+  /usr/include/X11/Xosdefs.h /usr/include/X11/Xutil.h \
+  /usr/include/X11/Xos.h /usr/include/fcntl.h /usr/include/bits/fcntl.h \
+  /usr/include/sys/time.h /usr/include/X11/Xarch.h \
+  /usr/include/X11/Xatom.h /opt/xmopts/xmc/inc/xmcDataTypes.h \
+  /opt/xmopts/xmc/inc/xmcDebug.h /opt/xmopts/xmc/inc/xmc3DTypes.h \
+  /opt/xmopts/xmc/inc/xmcMathStuff.h /usr/include/math.h \
+  /usr/include/bits/huge_val.h /usr/include/bits/mathdef.h \
+  /usr/include/bits/mathcalls.h /opt/xmopts/xmc/inc/xmcTimeStuff.h \
+  /opt/xmopts/xmc/inc/xmcComplexTypes.h \
+  /opt/xmopts/xmc/inc/xmcPhysicsStuff.h
+xccvAdd.o: xccvAdd.c /opt/xmopts/xcc/inc/vector_utils.h \
+  /opt/xmopts/xmc/inc/xmc.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stdarg.h \
+  /usr/include/stdio.h /usr/include/features.h /usr/include/sys/cdefs.h \
+  /usr/include/gnu/stubs.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stddef.h \
+  /usr/include/bits/types.h /usr/include/bits/wordsize.h \
+  /usr/include/bits/typesizes.h /usr/include/libio.h \
+  /usr/include/_G_config.h /usr/include/wchar.h /usr/include/bits/wchar.h \
+  /usr/include/gconv.h /usr/include/bits/stdio_lim.h \
+  /usr/include/bits/sys_errlist.h /usr/include/stdlib.h \
+  /usr/include/sys/types.h /usr/include/time.h /usr/include/endian.h \
+  /usr/include/bits/endian.h /usr/include/sys/select.h \
+  /usr/include/bits/select.h /usr/include/bits/sigset.h \
+  /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/bits/sched.h \
+  /usr/include/alloca.h /usr/include/string.h /usr/include/unistd.h \
+  /usr/include/bits/posix_opt.h /usr/include/bits/confname.h \
+  /usr/include/getopt.h /usr/include/ctype.h /usr/include/X11/Xlib.h \
+  /usr/include/X11/X.h /usr/include/X11/Xfuncproto.h \
+  /usr/include/X11/Xosdefs.h /usr/include/X11/Xutil.h \
+  /usr/include/X11/Xos.h /usr/include/fcntl.h /usr/include/bits/fcntl.h \
+  /usr/include/sys/time.h /usr/include/X11/Xarch.h \
+  /usr/include/X11/Xatom.h /opt/xmopts/xmc/inc/xmcDataTypes.h \
+  /opt/xmopts/xmc/inc/xmcDebug.h /opt/xmopts/xmc/inc/xmc3DTypes.h \
+  /opt/xmopts/xmc/inc/xmcMathStuff.h /usr/include/math.h \
+  /usr/include/bits/huge_val.h /usr/include/bits/mathdef.h \
+  /usr/include/bits/mathcalls.h /opt/xmopts/xmc/inc/xmcTimeStuff.h \
+  /opt/xmopts/xmc/inc/xmcComplexTypes.h \
+  /opt/xmopts/xmc/inc/xmcPhysicsStuff.h
+xccvBarrelShift.o: xccvBarrelShift.c /opt/xmopts/xcc/inc/vector_utils.h \
+  /opt/xmopts/xmc/inc/xmc.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stdarg.h \
+  /usr/include/stdio.h /usr/include/features.h /usr/include/sys/cdefs.h \
+  /usr/include/gnu/stubs.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stddef.h \
+  /usr/include/bits/types.h /usr/include/bits/wordsize.h \
+  /usr/include/bits/typesizes.h /usr/include/libio.h \
+  /usr/include/_G_config.h /usr/include/wchar.h /usr/include/bits/wchar.h \
+  /usr/include/gconv.h /usr/include/bits/stdio_lim.h \
+  /usr/include/bits/sys_errlist.h /usr/include/stdlib.h \
+  /usr/include/sys/types.h /usr/include/time.h /usr/include/endian.h \
+  /usr/include/bits/endian.h /usr/include/sys/select.h \
+  /usr/include/bits/select.h /usr/include/bits/sigset.h \
+  /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/bits/sched.h \
+  /usr/include/alloca.h /usr/include/string.h /usr/include/unistd.h \
+  /usr/include/bits/posix_opt.h /usr/include/bits/confname.h \
+  /usr/include/getopt.h /usr/include/ctype.h /usr/include/X11/Xlib.h \
+  /usr/include/X11/X.h /usr/include/X11/Xfuncproto.h \
+  /usr/include/X11/Xosdefs.h /usr/include/X11/Xutil.h \
+  /usr/include/X11/Xos.h /usr/include/fcntl.h /usr/include/bits/fcntl.h \
+  /usr/include/sys/time.h /usr/include/X11/Xarch.h \
+  /usr/include/X11/Xatom.h /opt/xmopts/xmc/inc/xmcDataTypes.h \
+  /opt/xmopts/xmc/inc/xmcDebug.h /opt/xmopts/xmc/inc/xmc3DTypes.h \
+  /opt/xmopts/xmc/inc/xmcMathStuff.h /usr/include/math.h \
+  /usr/include/bits/huge_val.h /usr/include/bits/mathdef.h \
+  /usr/include/bits/mathcalls.h /opt/xmopts/xmc/inc/xmcTimeStuff.h \
+  /opt/xmopts/xmc/inc/xmcComplexTypes.h \
+  /opt/xmopts/xmc/inc/xmcPhysicsStuff.h
+xccvConj.o: xccvConj.c /opt/xmopts/xcc/inc/vector_utils.h \
+  /opt/xmopts/xmc/inc/xmc.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stdarg.h \
+  /usr/include/stdio.h /usr/include/features.h /usr/include/sys/cdefs.h \
+  /usr/include/gnu/stubs.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stddef.h \
+  /usr/include/bits/types.h /usr/include/bits/wordsize.h \
+  /usr/include/bits/typesizes.h /usr/include/libio.h \
+  /usr/include/_G_config.h /usr/include/wchar.h /usr/include/bits/wchar.h \
+  /usr/include/gconv.h /usr/include/bits/stdio_lim.h \
+  /usr/include/bits/sys_errlist.h /usr/include/stdlib.h \
+  /usr/include/sys/types.h /usr/include/time.h /usr/include/endian.h \
+  /usr/include/bits/endian.h /usr/include/sys/select.h \
+  /usr/include/bits/select.h /usr/include/bits/sigset.h \
+  /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/bits/sched.h \
+  /usr/include/alloca.h /usr/include/string.h /usr/include/unistd.h \
+  /usr/include/bits/posix_opt.h /usr/include/bits/confname.h \
+  /usr/include/getopt.h /usr/include/ctype.h /usr/include/X11/Xlib.h \
+  /usr/include/X11/X.h /usr/include/X11/Xfuncproto.h \
+  /usr/include/X11/Xosdefs.h /usr/include/X11/Xutil.h \
+  /usr/include/X11/Xos.h /usr/include/fcntl.h /usr/include/bits/fcntl.h \
+  /usr/include/sys/time.h /usr/include/X11/Xarch.h \
+  /usr/include/X11/Xatom.h /opt/xmopts/xmc/inc/xmcDataTypes.h \
+  /opt/xmopts/xmc/inc/xmcDebug.h /opt/xmopts/xmc/inc/xmc3DTypes.h \
+  /opt/xmopts/xmc/inc/xmcMathStuff.h /usr/include/math.h \
+  /usr/include/bits/huge_val.h /usr/include/bits/mathdef.h \
+  /usr/include/bits/mathcalls.h /opt/xmopts/xmc/inc/xmcTimeStuff.h \
+  /opt/xmopts/xmc/inc/xmcComplexTypes.h \
+  /opt/xmopts/xmc/inc/xmcPhysicsStuff.h
+xccvConvert.o: xccvConvert.c /opt/xmopts/xcc/inc/vector_utils.h \
+  /opt/xmopts/xmc/inc/xmc.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stdarg.h \
+  /usr/include/stdio.h /usr/include/features.h /usr/include/sys/cdefs.h \
+  /usr/include/gnu/stubs.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stddef.h \
+  /usr/include/bits/types.h /usr/include/bits/wordsize.h \
+  /usr/include/bits/typesizes.h /usr/include/libio.h \
+  /usr/include/_G_config.h /usr/include/wchar.h /usr/include/bits/wchar.h \
+  /usr/include/gconv.h /usr/include/bits/stdio_lim.h \
+  /usr/include/bits/sys_errlist.h /usr/include/stdlib.h \
+  /usr/include/sys/types.h /usr/include/time.h /usr/include/endian.h \
+  /usr/include/bits/endian.h /usr/include/sys/select.h \
+  /usr/include/bits/select.h /usr/include/bits/sigset.h \
+  /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/bits/sched.h \
+  /usr/include/alloca.h /usr/include/string.h /usr/include/unistd.h \
+  /usr/include/bits/posix_opt.h /usr/include/bits/confname.h \
+  /usr/include/getopt.h /usr/include/ctype.h /usr/include/X11/Xlib.h \
+  /usr/include/X11/X.h /usr/include/X11/Xfuncproto.h \
+  /usr/include/X11/Xosdefs.h /usr/include/X11/Xutil.h \
+  /usr/include/X11/Xos.h /usr/include/fcntl.h /usr/include/bits/fcntl.h \
+  /usr/include/sys/time.h /usr/include/X11/Xarch.h \
+  /usr/include/X11/Xatom.h /opt/xmopts/xmc/inc/xmcDataTypes.h \
+  /opt/xmopts/xmc/inc/xmcDebug.h /opt/xmopts/xmc/inc/xmc3DTypes.h \
+  /opt/xmopts/xmc/inc/xmcMathStuff.h /usr/include/math.h \
+  /usr/include/bits/huge_val.h /usr/include/bits/mathdef.h \
+  /usr/include/bits/mathcalls.h /opt/xmopts/xmc/inc/xmcTimeStuff.h \
+  /opt/xmopts/xmc/inc/xmcComplexTypes.h \
+  /opt/xmopts/xmc/inc/xmcPhysicsStuff.h
+xccvConvertN.o: xccvConvertN.c /opt/xmopts/xcc/inc/vector_utils.h \
+  /opt/xmopts/xmc/inc/xmc.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stdarg.h \
+  /usr/include/stdio.h /usr/include/features.h /usr/include/sys/cdefs.h \
+  /usr/include/gnu/stubs.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stddef.h \
+  /usr/include/bits/types.h /usr/include/bits/wordsize.h \
+  /usr/include/bits/typesizes.h /usr/include/libio.h \
+  /usr/include/_G_config.h /usr/include/wchar.h /usr/include/bits/wchar.h \
+  /usr/include/gconv.h /usr/include/bits/stdio_lim.h \
+  /usr/include/bits/sys_errlist.h /usr/include/stdlib.h \
+  /usr/include/sys/types.h /usr/include/time.h /usr/include/endian.h \
+  /usr/include/bits/endian.h /usr/include/sys/select.h \
+  /usr/include/bits/select.h /usr/include/bits/sigset.h \
+  /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/bits/sched.h \
+  /usr/include/alloca.h /usr/include/string.h /usr/include/unistd.h \
+  /usr/include/bits/posix_opt.h /usr/include/bits/confname.h \
+  /usr/include/getopt.h /usr/include/ctype.h /usr/include/X11/Xlib.h \
+  /usr/include/X11/X.h /usr/include/X11/Xfuncproto.h \
+  /usr/include/X11/Xosdefs.h /usr/include/X11/Xutil.h \
+  /usr/include/X11/Xos.h /usr/include/fcntl.h /usr/include/bits/fcntl.h \
+  /usr/include/sys/time.h /usr/include/X11/Xarch.h \
+  /usr/include/X11/Xatom.h /opt/xmopts/xmc/inc/xmcDataTypes.h \
+  /opt/xmopts/xmc/inc/xmcDebug.h /opt/xmopts/xmc/inc/xmc3DTypes.h \
+  /opt/xmopts/xmc/inc/xmcMathStuff.h /usr/include/math.h \
+  /usr/include/bits/huge_val.h /usr/include/bits/mathdef.h \
+  /usr/include/bits/mathcalls.h /opt/xmopts/xmc/inc/xmcTimeStuff.h \
+  /opt/xmopts/xmc/inc/xmcComplexTypes.h \
+  /opt/xmopts/xmc/inc/xmcPhysicsStuff.h
+xccvConvolve.o: xccvConvolve.c /opt/xmopts/xcc/inc/vector_utils.h \
+  /opt/xmopts/xmc/inc/xmc.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stdarg.h \
+  /usr/include/stdio.h /usr/include/features.h /usr/include/sys/cdefs.h \
+  /usr/include/gnu/stubs.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stddef.h \
+  /usr/include/bits/types.h /usr/include/bits/wordsize.h \
+  /usr/include/bits/typesizes.h /usr/include/libio.h \
+  /usr/include/_G_config.h /usr/include/wchar.h /usr/include/bits/wchar.h \
+  /usr/include/gconv.h /usr/include/bits/stdio_lim.h \
+  /usr/include/bits/sys_errlist.h /usr/include/stdlib.h \
+  /usr/include/sys/types.h /usr/include/time.h /usr/include/endian.h \
+  /usr/include/bits/endian.h /usr/include/sys/select.h \
+  /usr/include/bits/select.h /usr/include/bits/sigset.h \
+  /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/bits/sched.h \
+  /usr/include/alloca.h /usr/include/string.h /usr/include/unistd.h \
+  /usr/include/bits/posix_opt.h /usr/include/bits/confname.h \
+  /usr/include/getopt.h /usr/include/ctype.h /usr/include/X11/Xlib.h \
+  /usr/include/X11/X.h /usr/include/X11/Xfuncproto.h \
+  /usr/include/X11/Xosdefs.h /usr/include/X11/Xutil.h \
+  /usr/include/X11/Xos.h /usr/include/fcntl.h /usr/include/bits/fcntl.h \
+  /usr/include/sys/time.h /usr/include/X11/Xarch.h \
+  /usr/include/X11/Xatom.h /opt/xmopts/xmc/inc/xmcDataTypes.h \
+  /opt/xmopts/xmc/inc/xmcDebug.h /opt/xmopts/xmc/inc/xmc3DTypes.h \
+  /opt/xmopts/xmc/inc/xmcMathStuff.h /usr/include/math.h \
+  /usr/include/bits/huge_val.h /usr/include/bits/mathdef.h \
+  /usr/include/bits/mathcalls.h /opt/xmopts/xmc/inc/xmcTimeStuff.h \
+  /opt/xmopts/xmc/inc/xmcComplexTypes.h \
+  /opt/xmopts/xmc/inc/xmcPhysicsStuff.h
+xccvCopy.o: xccvCopy.c /opt/xmopts/xcc/inc/vector_utils.h \
+  /opt/xmopts/xmc/inc/xmc.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stdarg.h \
+  /usr/include/stdio.h /usr/include/features.h /usr/include/sys/cdefs.h \
+  /usr/include/gnu/stubs.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stddef.h \
+  /usr/include/bits/types.h /usr/include/bits/wordsize.h \
+  /usr/include/bits/typesizes.h /usr/include/libio.h \
+  /usr/include/_G_config.h /usr/include/wchar.h /usr/include/bits/wchar.h \
+  /usr/include/gconv.h /usr/include/bits/stdio_lim.h \
+  /usr/include/bits/sys_errlist.h /usr/include/stdlib.h \
+  /usr/include/sys/types.h /usr/include/time.h /usr/include/endian.h \
+  /usr/include/bits/endian.h /usr/include/sys/select.h \
+  /usr/include/bits/select.h /usr/include/bits/sigset.h \
+  /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/bits/sched.h \
+  /usr/include/alloca.h /usr/include/string.h /usr/include/unistd.h \
+  /usr/include/bits/posix_opt.h /usr/include/bits/confname.h \
+  /usr/include/getopt.h /usr/include/ctype.h /usr/include/X11/Xlib.h \
+  /usr/include/X11/X.h /usr/include/X11/Xfuncproto.h \
+  /usr/include/X11/Xosdefs.h /usr/include/X11/Xutil.h \
+  /usr/include/X11/Xos.h /usr/include/fcntl.h /usr/include/bits/fcntl.h \
+  /usr/include/sys/time.h /usr/include/X11/Xarch.h \
+  /usr/include/X11/Xatom.h /opt/xmopts/xmc/inc/xmcDataTypes.h \
+  /opt/xmopts/xmc/inc/xmcDebug.h /opt/xmopts/xmc/inc/xmc3DTypes.h \
+  /opt/xmopts/xmc/inc/xmcMathStuff.h /usr/include/math.h \
+  /usr/include/bits/huge_val.h /usr/include/bits/mathdef.h \
+  /usr/include/bits/mathcalls.h /opt/xmopts/xmc/inc/xmcTimeStuff.h \
+  /opt/xmopts/xmc/inc/xmcComplexTypes.h \
+  /opt/xmopts/xmc/inc/xmcPhysicsStuff.h
+xccvCos.o: xccvCos.c /opt/xmopts/xcc/inc/vector_utils.h \
+  /opt/xmopts/xmc/inc/xmc.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stdarg.h \
+  /usr/include/stdio.h /usr/include/features.h /usr/include/sys/cdefs.h \
+  /usr/include/gnu/stubs.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stddef.h \
+  /usr/include/bits/types.h /usr/include/bits/wordsize.h \
+  /usr/include/bits/typesizes.h /usr/include/libio.h \
+  /usr/include/_G_config.h /usr/include/wchar.h /usr/include/bits/wchar.h \
+  /usr/include/gconv.h /usr/include/bits/stdio_lim.h \
+  /usr/include/bits/sys_errlist.h /usr/include/stdlib.h \
+  /usr/include/sys/types.h /usr/include/time.h /usr/include/endian.h \
+  /usr/include/bits/endian.h /usr/include/sys/select.h \
+  /usr/include/bits/select.h /usr/include/bits/sigset.h \
+  /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/bits/sched.h \
+  /usr/include/alloca.h /usr/include/string.h /usr/include/unistd.h \
+  /usr/include/bits/posix_opt.h /usr/include/bits/confname.h \
+  /usr/include/getopt.h /usr/include/ctype.h /usr/include/X11/Xlib.h \
+  /usr/include/X11/X.h /usr/include/X11/Xfuncproto.h \
+  /usr/include/X11/Xosdefs.h /usr/include/X11/Xutil.h \
+  /usr/include/X11/Xos.h /usr/include/fcntl.h /usr/include/bits/fcntl.h \
+  /usr/include/sys/time.h /usr/include/X11/Xarch.h \
+  /usr/include/X11/Xatom.h /opt/xmopts/xmc/inc/xmcDataTypes.h \
+  /opt/xmopts/xmc/inc/xmcDebug.h /opt/xmopts/xmc/inc/xmc3DTypes.h \
+  /opt/xmopts/xmc/inc/xmcMathStuff.h /usr/include/math.h \
+  /usr/include/bits/huge_val.h /usr/include/bits/mathdef.h \
+  /usr/include/bits/mathcalls.h /opt/xmopts/xmc/inc/xmcTimeStuff.h \
+  /opt/xmopts/xmc/inc/xmcComplexTypes.h \
+  /opt/xmopts/xmc/inc/xmcPhysicsStuff.h
+xccvCrossProduct.o: xccvCrossProduct.c /opt/xmopts/xcc/inc/vector_utils.h \
+  /opt/xmopts/xmc/inc/xmc.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stdarg.h \
+  /usr/include/stdio.h /usr/include/features.h /usr/include/sys/cdefs.h \
+  /usr/include/gnu/stubs.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stddef.h \
+  /usr/include/bits/types.h /usr/include/bits/wordsize.h \
+  /usr/include/bits/typesizes.h /usr/include/libio.h \
+  /usr/include/_G_config.h /usr/include/wchar.h /usr/include/bits/wchar.h \
+  /usr/include/gconv.h /usr/include/bits/stdio_lim.h \
+  /usr/include/bits/sys_errlist.h /usr/include/stdlib.h \
+  /usr/include/sys/types.h /usr/include/time.h /usr/include/endian.h \
+  /usr/include/bits/endian.h /usr/include/sys/select.h \
+  /usr/include/bits/select.h /usr/include/bits/sigset.h \
+  /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/bits/sched.h \
+  /usr/include/alloca.h /usr/include/string.h /usr/include/unistd.h \
+  /usr/include/bits/posix_opt.h /usr/include/bits/confname.h \
+  /usr/include/getopt.h /usr/include/ctype.h /usr/include/X11/Xlib.h \
+  /usr/include/X11/X.h /usr/include/X11/Xfuncproto.h \
+  /usr/include/X11/Xosdefs.h /usr/include/X11/Xutil.h \
+  /usr/include/X11/Xos.h /usr/include/fcntl.h /usr/include/bits/fcntl.h \
+  /usr/include/sys/time.h /usr/include/X11/Xarch.h \
+  /usr/include/X11/Xatom.h /opt/xmopts/xmc/inc/xmcDataTypes.h \
+  /opt/xmopts/xmc/inc/xmcDebug.h /opt/xmopts/xmc/inc/xmc3DTypes.h \
+  /opt/xmopts/xmc/inc/xmcMathStuff.h /usr/include/math.h \
+  /usr/include/bits/huge_val.h /usr/include/bits/mathdef.h \
+  /usr/include/bits/mathcalls.h /opt/xmopts/xmc/inc/xmcTimeStuff.h \
+  /opt/xmopts/xmc/inc/xmcComplexTypes.h \
+  /opt/xmopts/xmc/inc/xmcPhysicsStuff.h
+xccvDiv.o: xccvDiv.c /opt/xmopts/xcc/inc/vector_utils.h \
+  /opt/xmopts/xmc/inc/xmc.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stdarg.h \
+  /usr/include/stdio.h /usr/include/features.h /usr/include/sys/cdefs.h \
+  /usr/include/gnu/stubs.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stddef.h \
+  /usr/include/bits/types.h /usr/include/bits/wordsize.h \
+  /usr/include/bits/typesizes.h /usr/include/libio.h \
+  /usr/include/_G_config.h /usr/include/wchar.h /usr/include/bits/wchar.h \
+  /usr/include/gconv.h /usr/include/bits/stdio_lim.h \
+  /usr/include/bits/sys_errlist.h /usr/include/stdlib.h \
+  /usr/include/sys/types.h /usr/include/time.h /usr/include/endian.h \
+  /usr/include/bits/endian.h /usr/include/sys/select.h \
+  /usr/include/bits/select.h /usr/include/bits/sigset.h \
+  /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/bits/sched.h \
+  /usr/include/alloca.h /usr/include/string.h /usr/include/unistd.h \
+  /usr/include/bits/posix_opt.h /usr/include/bits/confname.h \
+  /usr/include/getopt.h /usr/include/ctype.h /usr/include/X11/Xlib.h \
+  /usr/include/X11/X.h /usr/include/X11/Xfuncproto.h \
+  /usr/include/X11/Xosdefs.h /usr/include/X11/Xutil.h \
+  /usr/include/X11/Xos.h /usr/include/fcntl.h /usr/include/bits/fcntl.h \
+  /usr/include/sys/time.h /usr/include/X11/Xarch.h \
+  /usr/include/X11/Xatom.h /opt/xmopts/xmc/inc/xmcDataTypes.h \
+  /opt/xmopts/xmc/inc/xmcDebug.h /opt/xmopts/xmc/inc/xmc3DTypes.h \
+  /opt/xmopts/xmc/inc/xmcMathStuff.h /usr/include/math.h \
+  /usr/include/bits/huge_val.h /usr/include/bits/mathdef.h \
+  /usr/include/bits/mathcalls.h /opt/xmopts/xmc/inc/xmcTimeStuff.h \
+  /opt/xmopts/xmc/inc/xmcComplexTypes.h \
+  /opt/xmopts/xmc/inc/xmcPhysicsStuff.h
+xccvSwapEndian.o: xccvSwapEndian.c /opt/xmopts/xcc/inc/vector_utils.h \
+  /opt/xmopts/xmc/inc/xmc.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stdarg.h \
+  /usr/include/stdio.h /usr/include/features.h /usr/include/sys/cdefs.h \
+  /usr/include/gnu/stubs.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stddef.h \
+  /usr/include/bits/types.h /usr/include/bits/wordsize.h \
+  /usr/include/bits/typesizes.h /usr/include/libio.h \
+  /usr/include/_G_config.h /usr/include/wchar.h /usr/include/bits/wchar.h \
+  /usr/include/gconv.h /usr/include/bits/stdio_lim.h \
+  /usr/include/bits/sys_errlist.h /usr/include/stdlib.h \
+  /usr/include/sys/types.h /usr/include/time.h /usr/include/endian.h \
+  /usr/include/bits/endian.h /usr/include/sys/select.h \
+  /usr/include/bits/select.h /usr/include/bits/sigset.h \
+  /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/bits/sched.h \
+  /usr/include/alloca.h /usr/include/string.h /usr/include/unistd.h \
+  /usr/include/bits/posix_opt.h /usr/include/bits/confname.h \
+  /usr/include/getopt.h /usr/include/ctype.h /usr/include/X11/Xlib.h \
+  /usr/include/X11/X.h /usr/include/X11/Xfuncproto.h \
+  /usr/include/X11/Xosdefs.h /usr/include/X11/Xutil.h \
+  /usr/include/X11/Xos.h /usr/include/fcntl.h /usr/include/bits/fcntl.h \
+  /usr/include/sys/time.h /usr/include/X11/Xarch.h \
+  /usr/include/X11/Xatom.h /opt/xmopts/xmc/inc/xmcDataTypes.h \
+  /opt/xmopts/xmc/inc/xmcDebug.h /opt/xmopts/xmc/inc/xmc3DTypes.h \
+  /opt/xmopts/xmc/inc/xmcMathStuff.h /usr/include/math.h \
+  /usr/include/bits/huge_val.h /usr/include/bits/mathdef.h \
+  /usr/include/bits/mathcalls.h /opt/xmopts/xmc/inc/xmcTimeStuff.h \
+  /opt/xmopts/xmc/inc/xmcComplexTypes.h \
+  /opt/xmopts/xmc/inc/xmcPhysicsStuff.h
+xccvFill.o: xccvFill.c /opt/xmopts/xcc/inc/vector_utils.h \
+  /opt/xmopts/xmc/inc/xmc.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stdarg.h \
+  /usr/include/stdio.h /usr/include/features.h /usr/include/sys/cdefs.h \
+  /usr/include/gnu/stubs.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stddef.h \
+  /usr/include/bits/types.h /usr/include/bits/wordsize.h \
+  /usr/include/bits/typesizes.h /usr/include/libio.h \
+  /usr/include/_G_config.h /usr/include/wchar.h /usr/include/bits/wchar.h \
+  /usr/include/gconv.h /usr/include/bits/stdio_lim.h \
+  /usr/include/bits/sys_errlist.h /usr/include/stdlib.h \
+  /usr/include/sys/types.h /usr/include/time.h /usr/include/endian.h \
+  /usr/include/bits/endian.h /usr/include/sys/select.h \
+  /usr/include/bits/select.h /usr/include/bits/sigset.h \
+  /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/bits/sched.h \
+  /usr/include/alloca.h /usr/include/string.h /usr/include/unistd.h \
+  /usr/include/bits/posix_opt.h /usr/include/bits/confname.h \
+  /usr/include/getopt.h /usr/include/ctype.h /usr/include/X11/Xlib.h \
+  /usr/include/X11/X.h /usr/include/X11/Xfuncproto.h \
+  /usr/include/X11/Xosdefs.h /usr/include/X11/Xutil.h \
+  /usr/include/X11/Xos.h /usr/include/fcntl.h /usr/include/bits/fcntl.h \
+  /usr/include/sys/time.h /usr/include/X11/Xarch.h \
+  /usr/include/X11/Xatom.h /opt/xmopts/xmc/inc/xmcDataTypes.h \
+  /opt/xmopts/xmc/inc/xmcDebug.h /opt/xmopts/xmc/inc/xmc3DTypes.h \
+  /opt/xmopts/xmc/inc/xmcMathStuff.h /usr/include/math.h \
+  /usr/include/bits/huge_val.h /usr/include/bits/mathdef.h \
+  /usr/include/bits/mathcalls.h /opt/xmopts/xmc/inc/xmcTimeStuff.h \
+  /opt/xmopts/xmc/inc/xmcComplexTypes.h \
+  /opt/xmopts/xmc/inc/xmcPhysicsStuff.h
+xccvFlip.o: xccvFlip.c /opt/xmopts/xcc/inc/vector_utils.h \
+  /opt/xmopts/xmc/inc/xmc.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stdarg.h \
+  /usr/include/stdio.h /usr/include/features.h /usr/include/sys/cdefs.h \
+  /usr/include/gnu/stubs.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stddef.h \
+  /usr/include/bits/types.h /usr/include/bits/wordsize.h \
+  /usr/include/bits/typesizes.h /usr/include/libio.h \
+  /usr/include/_G_config.h /usr/include/wchar.h /usr/include/bits/wchar.h \
+  /usr/include/gconv.h /usr/include/bits/stdio_lim.h \
+  /usr/include/bits/sys_errlist.h /usr/include/stdlib.h \
+  /usr/include/sys/types.h /usr/include/time.h /usr/include/endian.h \
+  /usr/include/bits/endian.h /usr/include/sys/select.h \
+  /usr/include/bits/select.h /usr/include/bits/sigset.h \
+  /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/bits/sched.h \
+  /usr/include/alloca.h /usr/include/string.h /usr/include/unistd.h \
+  /usr/include/bits/posix_opt.h /usr/include/bits/confname.h \
+  /usr/include/getopt.h /usr/include/ctype.h /usr/include/X11/Xlib.h \
+  /usr/include/X11/X.h /usr/include/X11/Xfuncproto.h \
+  /usr/include/X11/Xosdefs.h /usr/include/X11/Xutil.h \
+  /usr/include/X11/Xos.h /usr/include/fcntl.h /usr/include/bits/fcntl.h \
+  /usr/include/sys/time.h /usr/include/X11/Xarch.h \
+  /usr/include/X11/Xatom.h /opt/xmopts/xmc/inc/xmcDataTypes.h \
+  /opt/xmopts/xmc/inc/xmcDebug.h /opt/xmopts/xmc/inc/xmc3DTypes.h \
+  /opt/xmopts/xmc/inc/xmcMathStuff.h /usr/include/math.h \
+  /usr/include/bits/huge_val.h /usr/include/bits/mathdef.h \
+  /usr/include/bits/mathcalls.h /opt/xmopts/xmc/inc/xmcTimeStuff.h \
+  /opt/xmopts/xmc/inc/xmcComplexTypes.h \
+  /opt/xmopts/xmc/inc/xmcPhysicsStuff.h
+xccvMax.o: xccvMax.c /opt/xmopts/xcc/inc/vector_utils.h \
+  /opt/xmopts/xmc/inc/xmc.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stdarg.h \
+  /usr/include/stdio.h /usr/include/features.h /usr/include/sys/cdefs.h \
+  /usr/include/gnu/stubs.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stddef.h \
+  /usr/include/bits/types.h /usr/include/bits/wordsize.h \
+  /usr/include/bits/typesizes.h /usr/include/libio.h \
+  /usr/include/_G_config.h /usr/include/wchar.h /usr/include/bits/wchar.h \
+  /usr/include/gconv.h /usr/include/bits/stdio_lim.h \
+  /usr/include/bits/sys_errlist.h /usr/include/stdlib.h \
+  /usr/include/sys/types.h /usr/include/time.h /usr/include/endian.h \
+  /usr/include/bits/endian.h /usr/include/sys/select.h \
+  /usr/include/bits/select.h /usr/include/bits/sigset.h \
+  /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/bits/sched.h \
+  /usr/include/alloca.h /usr/include/string.h /usr/include/unistd.h \
+  /usr/include/bits/posix_opt.h /usr/include/bits/confname.h \
+  /usr/include/getopt.h /usr/include/ctype.h /usr/include/X11/Xlib.h \
+  /usr/include/X11/X.h /usr/include/X11/Xfuncproto.h \
+  /usr/include/X11/Xosdefs.h /usr/include/X11/Xutil.h \
+  /usr/include/X11/Xos.h /usr/include/fcntl.h /usr/include/bits/fcntl.h \
+  /usr/include/sys/time.h /usr/include/X11/Xarch.h \
+  /usr/include/X11/Xatom.h /opt/xmopts/xmc/inc/xmcDataTypes.h \
+  /opt/xmopts/xmc/inc/xmcDebug.h /opt/xmopts/xmc/inc/xmc3DTypes.h \
+  /opt/xmopts/xmc/inc/xmcMathStuff.h /usr/include/math.h \
+  /usr/include/bits/huge_val.h /usr/include/bits/mathdef.h \
+  /usr/include/bits/mathcalls.h /opt/xmopts/xmc/inc/xmcTimeStuff.h \
+  /opt/xmopts/xmc/inc/xmcComplexTypes.h \
+  /opt/xmopts/xmc/inc/xmcPhysicsStuff.h
+xccvMean.o: xccvMean.c /opt/xmopts/xcc/inc/vector_utils.h \
+  /opt/xmopts/xmc/inc/xmc.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stdarg.h \
+  /usr/include/stdio.h /usr/include/features.h /usr/include/sys/cdefs.h \
+  /usr/include/gnu/stubs.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stddef.h \
+  /usr/include/bits/types.h /usr/include/bits/wordsize.h \
+  /usr/include/bits/typesizes.h /usr/include/libio.h \
+  /usr/include/_G_config.h /usr/include/wchar.h /usr/include/bits/wchar.h \
+  /usr/include/gconv.h /usr/include/bits/stdio_lim.h \
+  /usr/include/bits/sys_errlist.h /usr/include/stdlib.h \
+  /usr/include/sys/types.h /usr/include/time.h /usr/include/endian.h \
+  /usr/include/bits/endian.h /usr/include/sys/select.h \
+  /usr/include/bits/select.h /usr/include/bits/sigset.h \
+  /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/bits/sched.h \
+  /usr/include/alloca.h /usr/include/string.h /usr/include/unistd.h \
+  /usr/include/bits/posix_opt.h /usr/include/bits/confname.h \
+  /usr/include/getopt.h /usr/include/ctype.h /usr/include/X11/Xlib.h \
+  /usr/include/X11/X.h /usr/include/X11/Xfuncproto.h \
+  /usr/include/X11/Xosdefs.h /usr/include/X11/Xutil.h \
+  /usr/include/X11/Xos.h /usr/include/fcntl.h /usr/include/bits/fcntl.h \
+  /usr/include/sys/time.h /usr/include/X11/Xarch.h \
+  /usr/include/X11/Xatom.h /opt/xmopts/xmc/inc/xmcDataTypes.h \
+  /opt/xmopts/xmc/inc/xmcDebug.h /opt/xmopts/xmc/inc/xmc3DTypes.h \
+  /opt/xmopts/xmc/inc/xmcMathStuff.h /usr/include/math.h \
+  /usr/include/bits/huge_val.h /usr/include/bits/mathdef.h \
+  /usr/include/bits/mathcalls.h /opt/xmopts/xmc/inc/xmcTimeStuff.h \
+  /opt/xmopts/xmc/inc/xmcComplexTypes.h \
+  /opt/xmopts/xmc/inc/xmcPhysicsStuff.h
+xccvMin.o: xccvMin.c /opt/xmopts/xcc/inc/vector_utils.h \
+  /opt/xmopts/xmc/inc/xmc.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stdarg.h \
+  /usr/include/stdio.h /usr/include/features.h /usr/include/sys/cdefs.h \
+  /usr/include/gnu/stubs.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stddef.h \
+  /usr/include/bits/types.h /usr/include/bits/wordsize.h \
+  /usr/include/bits/typesizes.h /usr/include/libio.h \
+  /usr/include/_G_config.h /usr/include/wchar.h /usr/include/bits/wchar.h \
+  /usr/include/gconv.h /usr/include/bits/stdio_lim.h \
+  /usr/include/bits/sys_errlist.h /usr/include/stdlib.h \
+  /usr/include/sys/types.h /usr/include/time.h /usr/include/endian.h \
+  /usr/include/bits/endian.h /usr/include/sys/select.h \
+  /usr/include/bits/select.h /usr/include/bits/sigset.h \
+  /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/bits/sched.h \
+  /usr/include/alloca.h /usr/include/string.h /usr/include/unistd.h \
+  /usr/include/bits/posix_opt.h /usr/include/bits/confname.h \
+  /usr/include/getopt.h /usr/include/ctype.h /usr/include/X11/Xlib.h \
+  /usr/include/X11/X.h /usr/include/X11/Xfuncproto.h \
+  /usr/include/X11/Xosdefs.h /usr/include/X11/Xutil.h \
+  /usr/include/X11/Xos.h /usr/include/fcntl.h /usr/include/bits/fcntl.h \
+  /usr/include/sys/time.h /usr/include/X11/Xarch.h \
+  /usr/include/X11/Xatom.h /opt/xmopts/xmc/inc/xmcDataTypes.h \
+  /opt/xmopts/xmc/inc/xmcDebug.h /opt/xmopts/xmc/inc/xmc3DTypes.h \
+  /opt/xmopts/xmc/inc/xmcMathStuff.h /usr/include/math.h \
+  /usr/include/bits/huge_val.h /usr/include/bits/mathdef.h \
+  /usr/include/bits/mathcalls.h /opt/xmopts/xmc/inc/xmcTimeStuff.h \
+  /opt/xmopts/xmc/inc/xmcComplexTypes.h \
+  /opt/xmopts/xmc/inc/xmcPhysicsStuff.h
+xccvMul.o: xccvMul.c /opt/xmopts/xcc/inc/vector_utils.h \
+  /opt/xmopts/xmc/inc/xmc.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stdarg.h \
+  /usr/include/stdio.h /usr/include/features.h /usr/include/sys/cdefs.h \
+  /usr/include/gnu/stubs.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stddef.h \
+  /usr/include/bits/types.h /usr/include/bits/wordsize.h \
+  /usr/include/bits/typesizes.h /usr/include/libio.h \
+  /usr/include/_G_config.h /usr/include/wchar.h /usr/include/bits/wchar.h \
+  /usr/include/gconv.h /usr/include/bits/stdio_lim.h \
+  /usr/include/bits/sys_errlist.h /usr/include/stdlib.h \
+  /usr/include/sys/types.h /usr/include/time.h /usr/include/endian.h \
+  /usr/include/bits/endian.h /usr/include/sys/select.h \
+  /usr/include/bits/select.h /usr/include/bits/sigset.h \
+  /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/bits/sched.h \
+  /usr/include/alloca.h /usr/include/string.h /usr/include/unistd.h \
+  /usr/include/bits/posix_opt.h /usr/include/bits/confname.h \
+  /usr/include/getopt.h /usr/include/ctype.h /usr/include/X11/Xlib.h \
+  /usr/include/X11/X.h /usr/include/X11/Xfuncproto.h \
+  /usr/include/X11/Xosdefs.h /usr/include/X11/Xutil.h \
+  /usr/include/X11/Xos.h /usr/include/fcntl.h /usr/include/bits/fcntl.h \
+  /usr/include/sys/time.h /usr/include/X11/Xarch.h \
+  /usr/include/X11/Xatom.h /opt/xmopts/xmc/inc/xmcDataTypes.h \
+  /opt/xmopts/xmc/inc/xmcDebug.h /opt/xmopts/xmc/inc/xmc3DTypes.h \
+  /opt/xmopts/xmc/inc/xmcMathStuff.h /usr/include/math.h \
+  /usr/include/bits/huge_val.h /usr/include/bits/mathdef.h \
+  /usr/include/bits/mathcalls.h /opt/xmopts/xmc/inc/xmcTimeStuff.h \
+  /opt/xmopts/xmc/inc/xmcComplexTypes.h \
+  /opt/xmopts/xmc/inc/xmcPhysicsStuff.h
+xccvMulSum.o: xccvMulSum.c /opt/xmopts/xcc/inc/vector_utils.h \
+  /opt/xmopts/xmc/inc/xmc.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stdarg.h \
+  /usr/include/stdio.h /usr/include/features.h /usr/include/sys/cdefs.h \
+  /usr/include/gnu/stubs.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stddef.h \
+  /usr/include/bits/types.h /usr/include/bits/wordsize.h \
+  /usr/include/bits/typesizes.h /usr/include/libio.h \
+  /usr/include/_G_config.h /usr/include/wchar.h /usr/include/bits/wchar.h \
+  /usr/include/gconv.h /usr/include/bits/stdio_lim.h \
+  /usr/include/bits/sys_errlist.h /usr/include/stdlib.h \
+  /usr/include/sys/types.h /usr/include/time.h /usr/include/endian.h \
+  /usr/include/bits/endian.h /usr/include/sys/select.h \
+  /usr/include/bits/select.h /usr/include/bits/sigset.h \
+  /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/bits/sched.h \
+  /usr/include/alloca.h /usr/include/string.h /usr/include/unistd.h \
+  /usr/include/bits/posix_opt.h /usr/include/bits/confname.h \
+  /usr/include/getopt.h /usr/include/ctype.h /usr/include/X11/Xlib.h \
+  /usr/include/X11/X.h /usr/include/X11/Xfuncproto.h \
+  /usr/include/X11/Xosdefs.h /usr/include/X11/Xutil.h \
+  /usr/include/X11/Xos.h /usr/include/fcntl.h /usr/include/bits/fcntl.h \
+  /usr/include/sys/time.h /usr/include/X11/Xarch.h \
+  /usr/include/X11/Xatom.h /opt/xmopts/xmc/inc/xmcDataTypes.h \
+  /opt/xmopts/xmc/inc/xmcDebug.h /opt/xmopts/xmc/inc/xmc3DTypes.h \
+  /opt/xmopts/xmc/inc/xmcMathStuff.h /usr/include/math.h \
+  /usr/include/bits/huge_val.h /usr/include/bits/mathdef.h \
+  /usr/include/bits/mathcalls.h /opt/xmopts/xmc/inc/xmcTimeStuff.h \
+  /opt/xmopts/xmc/inc/xmcComplexTypes.h \
+  /opt/xmopts/xmc/inc/xmcPhysicsStuff.h
+xccvQuickSort.o: xccvQuickSort.c /opt/xmopts/xcc/inc/vector_utils.h \
+  /opt/xmopts/xmc/inc/xmc.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stdarg.h \
+  /usr/include/stdio.h /usr/include/features.h /usr/include/sys/cdefs.h \
+  /usr/include/gnu/stubs.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stddef.h \
+  /usr/include/bits/types.h /usr/include/bits/wordsize.h \
+  /usr/include/bits/typesizes.h /usr/include/libio.h \
+  /usr/include/_G_config.h /usr/include/wchar.h /usr/include/bits/wchar.h \
+  /usr/include/gconv.h /usr/include/bits/stdio_lim.h \
+  /usr/include/bits/sys_errlist.h /usr/include/stdlib.h \
+  /usr/include/sys/types.h /usr/include/time.h /usr/include/endian.h \
+  /usr/include/bits/endian.h /usr/include/sys/select.h \
+  /usr/include/bits/select.h /usr/include/bits/sigset.h \
+  /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/bits/sched.h \
+  /usr/include/alloca.h /usr/include/string.h /usr/include/unistd.h \
+  /usr/include/bits/posix_opt.h /usr/include/bits/confname.h \
+  /usr/include/getopt.h /usr/include/ctype.h /usr/include/X11/Xlib.h \
+  /usr/include/X11/X.h /usr/include/X11/Xfuncproto.h \
+  /usr/include/X11/Xosdefs.h /usr/include/X11/Xutil.h \
+  /usr/include/X11/Xos.h /usr/include/fcntl.h /usr/include/bits/fcntl.h \
+  /usr/include/sys/time.h /usr/include/X11/Xarch.h \
+  /usr/include/X11/Xatom.h /opt/xmopts/xmc/inc/xmcDataTypes.h \
+  /opt/xmopts/xmc/inc/xmcDebug.h /opt/xmopts/xmc/inc/xmc3DTypes.h \
+  /opt/xmopts/xmc/inc/xmcMathStuff.h /usr/include/math.h \
+  /usr/include/bits/huge_val.h /usr/include/bits/mathdef.h \
+  /usr/include/bits/mathcalls.h /opt/xmopts/xmc/inc/xmcTimeStuff.h \
+  /opt/xmopts/xmc/inc/xmcComplexTypes.h \
+  /opt/xmopts/xmc/inc/xmcPhysicsStuff.h
+xccvRamp.o: xccvRamp.c /opt/xmopts/xcc/inc/vector_utils.h \
+  /opt/xmopts/xmc/inc/xmc.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stdarg.h \
+  /usr/include/stdio.h /usr/include/features.h /usr/include/sys/cdefs.h \
+  /usr/include/gnu/stubs.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stddef.h \
+  /usr/include/bits/types.h /usr/include/bits/wordsize.h \
+  /usr/include/bits/typesizes.h /usr/include/libio.h \
+  /usr/include/_G_config.h /usr/include/wchar.h /usr/include/bits/wchar.h \
+  /usr/include/gconv.h /usr/include/bits/stdio_lim.h \
+  /usr/include/bits/sys_errlist.h /usr/include/stdlib.h \
+  /usr/include/sys/types.h /usr/include/time.h /usr/include/endian.h \
+  /usr/include/bits/endian.h /usr/include/sys/select.h \
+  /usr/include/bits/select.h /usr/include/bits/sigset.h \
+  /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/bits/sched.h \
+  /usr/include/alloca.h /usr/include/string.h /usr/include/unistd.h \
+  /usr/include/bits/posix_opt.h /usr/include/bits/confname.h \
+  /usr/include/getopt.h /usr/include/ctype.h /usr/include/X11/Xlib.h \
+  /usr/include/X11/X.h /usr/include/X11/Xfuncproto.h \
+  /usr/include/X11/Xosdefs.h /usr/include/X11/Xutil.h \
+  /usr/include/X11/Xos.h /usr/include/fcntl.h /usr/include/bits/fcntl.h \
+  /usr/include/sys/time.h /usr/include/X11/Xarch.h \
+  /usr/include/X11/Xatom.h /opt/xmopts/xmc/inc/xmcDataTypes.h \
+  /opt/xmopts/xmc/inc/xmcDebug.h /opt/xmopts/xmc/inc/xmc3DTypes.h \
+  /opt/xmopts/xmc/inc/xmcMathStuff.h /usr/include/math.h \
+  /usr/include/bits/huge_val.h /usr/include/bits/mathdef.h \
+  /usr/include/bits/mathcalls.h /opt/xmopts/xmc/inc/xmcTimeStuff.h \
+  /opt/xmopts/xmc/inc/xmcComplexTypes.h \
+  /opt/xmopts/xmc/inc/xmcPhysicsStuff.h
+xccvRand.o: xccvRand.c /opt/xmopts/xcc/inc/vector_utils.h \
+  /opt/xmopts/xmc/inc/xmc.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stdarg.h \
+  /usr/include/stdio.h /usr/include/features.h /usr/include/sys/cdefs.h \
+  /usr/include/gnu/stubs.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stddef.h \
+  /usr/include/bits/types.h /usr/include/bits/wordsize.h \
+  /usr/include/bits/typesizes.h /usr/include/libio.h \
+  /usr/include/_G_config.h /usr/include/wchar.h /usr/include/bits/wchar.h \
+  /usr/include/gconv.h /usr/include/bits/stdio_lim.h \
+  /usr/include/bits/sys_errlist.h /usr/include/stdlib.h \
+  /usr/include/sys/types.h /usr/include/time.h /usr/include/endian.h \
+  /usr/include/bits/endian.h /usr/include/sys/select.h \
+  /usr/include/bits/select.h /usr/include/bits/sigset.h \
+  /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/bits/sched.h \
+  /usr/include/alloca.h /usr/include/string.h /usr/include/unistd.h \
+  /usr/include/bits/posix_opt.h /usr/include/bits/confname.h \
+  /usr/include/getopt.h /usr/include/ctype.h /usr/include/X11/Xlib.h \
+  /usr/include/X11/X.h /usr/include/X11/Xfuncproto.h \
+  /usr/include/X11/Xosdefs.h /usr/include/X11/Xutil.h \
+  /usr/include/X11/Xos.h /usr/include/fcntl.h /usr/include/bits/fcntl.h \
+  /usr/include/sys/time.h /usr/include/X11/Xarch.h \
+  /usr/include/X11/Xatom.h /opt/xmopts/xmc/inc/xmcDataTypes.h \
+  /opt/xmopts/xmc/inc/xmcDebug.h /opt/xmopts/xmc/inc/xmc3DTypes.h \
+  /opt/xmopts/xmc/inc/xmcMathStuff.h /usr/include/math.h \
+  /usr/include/bits/huge_val.h /usr/include/bits/mathdef.h \
+  /usr/include/bits/mathcalls.h /opt/xmopts/xmc/inc/xmcTimeStuff.h \
+  /opt/xmopts/xmc/inc/xmcComplexTypes.h \
+  /opt/xmopts/xmc/inc/xmcPhysicsStuff.h
+xccvRandN.o: xccvRandN.c /opt/xmopts/xcc/inc/vector_utils.h \
+  /opt/xmopts/xmc/inc/xmc.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stdarg.h \
+  /usr/include/stdio.h /usr/include/features.h /usr/include/sys/cdefs.h \
+  /usr/include/gnu/stubs.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stddef.h \
+  /usr/include/bits/types.h /usr/include/bits/wordsize.h \
+  /usr/include/bits/typesizes.h /usr/include/libio.h \
+  /usr/include/_G_config.h /usr/include/wchar.h /usr/include/bits/wchar.h \
+  /usr/include/gconv.h /usr/include/bits/stdio_lim.h \
+  /usr/include/bits/sys_errlist.h /usr/include/stdlib.h \
+  /usr/include/sys/types.h /usr/include/time.h /usr/include/endian.h \
+  /usr/include/bits/endian.h /usr/include/sys/select.h \
+  /usr/include/bits/select.h /usr/include/bits/sigset.h \
+  /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/bits/sched.h \
+  /usr/include/alloca.h /usr/include/string.h /usr/include/unistd.h \
+  /usr/include/bits/posix_opt.h /usr/include/bits/confname.h \
+  /usr/include/getopt.h /usr/include/ctype.h /usr/include/X11/Xlib.h \
+  /usr/include/X11/X.h /usr/include/X11/Xfuncproto.h \
+  /usr/include/X11/Xosdefs.h /usr/include/X11/Xutil.h \
+  /usr/include/X11/Xos.h /usr/include/fcntl.h /usr/include/bits/fcntl.h \
+  /usr/include/sys/time.h /usr/include/X11/Xarch.h \
+  /usr/include/X11/Xatom.h /opt/xmopts/xmc/inc/xmcDataTypes.h \
+  /opt/xmopts/xmc/inc/xmcDebug.h /opt/xmopts/xmc/inc/xmc3DTypes.h \
+  /opt/xmopts/xmc/inc/xmcMathStuff.h /usr/include/math.h \
+  /usr/include/bits/huge_val.h /usr/include/bits/mathdef.h \
+  /usr/include/bits/mathcalls.h /opt/xmopts/xmc/inc/xmcTimeStuff.h \
+  /opt/xmopts/xmc/inc/xmcComplexTypes.h \
+  /opt/xmopts/xmc/inc/xmcPhysicsStuff.h
+xccvRead.o: xccvRead.c /opt/xmopts/xcc/inc/vector_utils.h \
+  /opt/xmopts/xmc/inc/xmc.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stdarg.h \
+  /usr/include/stdio.h /usr/include/features.h /usr/include/sys/cdefs.h \
+  /usr/include/gnu/stubs.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stddef.h \
+  /usr/include/bits/types.h /usr/include/bits/wordsize.h \
+  /usr/include/bits/typesizes.h /usr/include/libio.h \
+  /usr/include/_G_config.h /usr/include/wchar.h /usr/include/bits/wchar.h \
+  /usr/include/gconv.h /usr/include/bits/stdio_lim.h \
+  /usr/include/bits/sys_errlist.h /usr/include/stdlib.h \
+  /usr/include/sys/types.h /usr/include/time.h /usr/include/endian.h \
+  /usr/include/bits/endian.h /usr/include/sys/select.h \
+  /usr/include/bits/select.h /usr/include/bits/sigset.h \
+  /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/bits/sched.h \
+  /usr/include/alloca.h /usr/include/string.h /usr/include/unistd.h \
+  /usr/include/bits/posix_opt.h /usr/include/bits/confname.h \
+  /usr/include/getopt.h /usr/include/ctype.h /usr/include/X11/Xlib.h \
+  /usr/include/X11/X.h /usr/include/X11/Xfuncproto.h \
+  /usr/include/X11/Xosdefs.h /usr/include/X11/Xutil.h \
+  /usr/include/X11/Xos.h /usr/include/fcntl.h /usr/include/bits/fcntl.h \
+  /usr/include/sys/time.h /usr/include/X11/Xarch.h \
+  /usr/include/X11/Xatom.h /opt/xmopts/xmc/inc/xmcDataTypes.h \
+  /opt/xmopts/xmc/inc/xmcDebug.h /opt/xmopts/xmc/inc/xmc3DTypes.h \
+  /opt/xmopts/xmc/inc/xmcMathStuff.h /usr/include/math.h \
+  /usr/include/bits/huge_val.h /usr/include/bits/mathdef.h \
+  /usr/include/bits/mathcalls.h /opt/xmopts/xmc/inc/xmcTimeStuff.h \
+  /opt/xmopts/xmc/inc/xmcComplexTypes.h \
+  /opt/xmopts/xmc/inc/xmcPhysicsStuff.h
+xccvRound.o: xccvRound.c /opt/xmopts/xcc/inc/vector_utils.h \
+  /opt/xmopts/xmc/inc/xmc.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stdarg.h \
+  /usr/include/stdio.h /usr/include/features.h /usr/include/sys/cdefs.h \
+  /usr/include/gnu/stubs.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stddef.h \
+  /usr/include/bits/types.h /usr/include/bits/wordsize.h \
+  /usr/include/bits/typesizes.h /usr/include/libio.h \
+  /usr/include/_G_config.h /usr/include/wchar.h /usr/include/bits/wchar.h \
+  /usr/include/gconv.h /usr/include/bits/stdio_lim.h \
+  /usr/include/bits/sys_errlist.h /usr/include/stdlib.h \
+  /usr/include/sys/types.h /usr/include/time.h /usr/include/endian.h \
+  /usr/include/bits/endian.h /usr/include/sys/select.h \
+  /usr/include/bits/select.h /usr/include/bits/sigset.h \
+  /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/bits/sched.h \
+  /usr/include/alloca.h /usr/include/string.h /usr/include/unistd.h \
+  /usr/include/bits/posix_opt.h /usr/include/bits/confname.h \
+  /usr/include/getopt.h /usr/include/ctype.h /usr/include/X11/Xlib.h \
+  /usr/include/X11/X.h /usr/include/X11/Xfuncproto.h \
+  /usr/include/X11/Xosdefs.h /usr/include/X11/Xutil.h \
+  /usr/include/X11/Xos.h /usr/include/fcntl.h /usr/include/bits/fcntl.h \
+  /usr/include/sys/time.h /usr/include/X11/Xarch.h \
+  /usr/include/X11/Xatom.h /opt/xmopts/xmc/inc/xmcDataTypes.h \
+  /opt/xmopts/xmc/inc/xmcDebug.h /opt/xmopts/xmc/inc/xmc3DTypes.h \
+  /opt/xmopts/xmc/inc/xmcMathStuff.h /usr/include/math.h \
+  /usr/include/bits/huge_val.h /usr/include/bits/mathdef.h \
+  /usr/include/bits/mathcalls.h /opt/xmopts/xmc/inc/xmcTimeStuff.h \
+  /opt/xmopts/xmc/inc/xmcComplexTypes.h \
+  /opt/xmopts/xmc/inc/xmcPhysicsStuff.h
+xccvSin.o: xccvSin.c /opt/xmopts/xcc/inc/vector_utils.h \
+  /opt/xmopts/xmc/inc/xmc.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stdarg.h \
+  /usr/include/stdio.h /usr/include/features.h /usr/include/sys/cdefs.h \
+  /usr/include/gnu/stubs.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stddef.h \
+  /usr/include/bits/types.h /usr/include/bits/wordsize.h \
+  /usr/include/bits/typesizes.h /usr/include/libio.h \
+  /usr/include/_G_config.h /usr/include/wchar.h /usr/include/bits/wchar.h \
+  /usr/include/gconv.h /usr/include/bits/stdio_lim.h \
+  /usr/include/bits/sys_errlist.h /usr/include/stdlib.h \
+  /usr/include/sys/types.h /usr/include/time.h /usr/include/endian.h \
+  /usr/include/bits/endian.h /usr/include/sys/select.h \
+  /usr/include/bits/select.h /usr/include/bits/sigset.h \
+  /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/bits/sched.h \
+  /usr/include/alloca.h /usr/include/string.h /usr/include/unistd.h \
+  /usr/include/bits/posix_opt.h /usr/include/bits/confname.h \
+  /usr/include/getopt.h /usr/include/ctype.h /usr/include/X11/Xlib.h \
+  /usr/include/X11/X.h /usr/include/X11/Xfuncproto.h \
+  /usr/include/X11/Xosdefs.h /usr/include/X11/Xutil.h \
+  /usr/include/X11/Xos.h /usr/include/fcntl.h /usr/include/bits/fcntl.h \
+  /usr/include/sys/time.h /usr/include/X11/Xarch.h \
+  /usr/include/X11/Xatom.h /opt/xmopts/xmc/inc/xmcDataTypes.h \
+  /opt/xmopts/xmc/inc/xmcDebug.h /opt/xmopts/xmc/inc/xmc3DTypes.h \
+  /opt/xmopts/xmc/inc/xmcMathStuff.h /usr/include/math.h \
+  /usr/include/bits/huge_val.h /usr/include/bits/mathdef.h \
+  /usr/include/bits/mathcalls.h /opt/xmopts/xmc/inc/xmcTimeStuff.h \
+  /opt/xmopts/xmc/inc/xmcComplexTypes.h \
+  /opt/xmopts/xmc/inc/xmcPhysicsStuff.h
+xccvSinT.o: xccvSinT.c /opt/xmopts/xcc/inc/vector_utils.h \
+  /opt/xmopts/xmc/inc/xmc.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stdarg.h \
+  /usr/include/stdio.h /usr/include/features.h /usr/include/sys/cdefs.h \
+  /usr/include/gnu/stubs.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stddef.h \
+  /usr/include/bits/types.h /usr/include/bits/wordsize.h \
+  /usr/include/bits/typesizes.h /usr/include/libio.h \
+  /usr/include/_G_config.h /usr/include/wchar.h /usr/include/bits/wchar.h \
+  /usr/include/gconv.h /usr/include/bits/stdio_lim.h \
+  /usr/include/bits/sys_errlist.h /usr/include/stdlib.h \
+  /usr/include/sys/types.h /usr/include/time.h /usr/include/endian.h \
+  /usr/include/bits/endian.h /usr/include/sys/select.h \
+  /usr/include/bits/select.h /usr/include/bits/sigset.h \
+  /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/bits/sched.h \
+  /usr/include/alloca.h /usr/include/string.h /usr/include/unistd.h \
+  /usr/include/bits/posix_opt.h /usr/include/bits/confname.h \
+  /usr/include/getopt.h /usr/include/ctype.h /usr/include/X11/Xlib.h \
+  /usr/include/X11/X.h /usr/include/X11/Xfuncproto.h \
+  /usr/include/X11/Xosdefs.h /usr/include/X11/Xutil.h \
+  /usr/include/X11/Xos.h /usr/include/fcntl.h /usr/include/bits/fcntl.h \
+  /usr/include/sys/time.h /usr/include/X11/Xarch.h \
+  /usr/include/X11/Xatom.h /opt/xmopts/xmc/inc/xmcDataTypes.h \
+  /opt/xmopts/xmc/inc/xmcDebug.h /opt/xmopts/xmc/inc/xmc3DTypes.h \
+  /opt/xmopts/xmc/inc/xmcMathStuff.h /usr/include/math.h \
+  /usr/include/bits/huge_val.h /usr/include/bits/mathdef.h \
+  /usr/include/bits/mathcalls.h /opt/xmopts/xmc/inc/xmcTimeStuff.h \
+  /opt/xmopts/xmc/inc/xmcComplexTypes.h \
+  /opt/xmopts/xmc/inc/xmcPhysicsStuff.h
+xccvSub.o: xccvSub.c /opt/xmopts/xcc/inc/vector_utils.h \
+  /opt/xmopts/xmc/inc/xmc.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stdarg.h \
+  /usr/include/stdio.h /usr/include/features.h /usr/include/sys/cdefs.h \
+  /usr/include/gnu/stubs.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stddef.h \
+  /usr/include/bits/types.h /usr/include/bits/wordsize.h \
+  /usr/include/bits/typesizes.h /usr/include/libio.h \
+  /usr/include/_G_config.h /usr/include/wchar.h /usr/include/bits/wchar.h \
+  /usr/include/gconv.h /usr/include/bits/stdio_lim.h \
+  /usr/include/bits/sys_errlist.h /usr/include/stdlib.h \
+  /usr/include/sys/types.h /usr/include/time.h /usr/include/endian.h \
+  /usr/include/bits/endian.h /usr/include/sys/select.h \
+  /usr/include/bits/select.h /usr/include/bits/sigset.h \
+  /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/bits/sched.h \
+  /usr/include/alloca.h /usr/include/string.h /usr/include/unistd.h \
+  /usr/include/bits/posix_opt.h /usr/include/bits/confname.h \
+  /usr/include/getopt.h /usr/include/ctype.h /usr/include/X11/Xlib.h \
+  /usr/include/X11/X.h /usr/include/X11/Xfuncproto.h \
+  /usr/include/X11/Xosdefs.h /usr/include/X11/Xutil.h \
+  /usr/include/X11/Xos.h /usr/include/fcntl.h /usr/include/bits/fcntl.h \
+  /usr/include/sys/time.h /usr/include/X11/Xarch.h \
+  /usr/include/X11/Xatom.h /opt/xmopts/xmc/inc/xmcDataTypes.h \
+  /opt/xmopts/xmc/inc/xmcDebug.h /opt/xmopts/xmc/inc/xmc3DTypes.h \
+  /opt/xmopts/xmc/inc/xmcMathStuff.h /usr/include/math.h \
+  /usr/include/bits/huge_val.h /usr/include/bits/mathdef.h \
+  /usr/include/bits/mathcalls.h /opt/xmopts/xmc/inc/xmcTimeStuff.h \
+  /opt/xmopts/xmc/inc/xmcComplexTypes.h \
+  /opt/xmopts/xmc/inc/xmcPhysicsStuff.h
+xccvSum.o: xccvSum.c /opt/xmopts/xcc/inc/vector_utils.h \
+  /opt/xmopts/xmc/inc/xmc.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stdarg.h \
+  /usr/include/stdio.h /usr/include/features.h /usr/include/sys/cdefs.h \
+  /usr/include/gnu/stubs.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stddef.h \
+  /usr/include/bits/types.h /usr/include/bits/wordsize.h \
+  /usr/include/bits/typesizes.h /usr/include/libio.h \
+  /usr/include/_G_config.h /usr/include/wchar.h /usr/include/bits/wchar.h \
+  /usr/include/gconv.h /usr/include/bits/stdio_lim.h \
+  /usr/include/bits/sys_errlist.h /usr/include/stdlib.h \
+  /usr/include/sys/types.h /usr/include/time.h /usr/include/endian.h \
+  /usr/include/bits/endian.h /usr/include/sys/select.h \
+  /usr/include/bits/select.h /usr/include/bits/sigset.h \
+  /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/bits/sched.h \
+  /usr/include/alloca.h /usr/include/string.h /usr/include/unistd.h \
+  /usr/include/bits/posix_opt.h /usr/include/bits/confname.h \
+  /usr/include/getopt.h /usr/include/ctype.h /usr/include/X11/Xlib.h \
+  /usr/include/X11/X.h /usr/include/X11/Xfuncproto.h \
+  /usr/include/X11/Xosdefs.h /usr/include/X11/Xutil.h \
+  /usr/include/X11/Xos.h /usr/include/fcntl.h /usr/include/bits/fcntl.h \
+  /usr/include/sys/time.h /usr/include/X11/Xarch.h \
+  /usr/include/X11/Xatom.h /opt/xmopts/xmc/inc/xmcDataTypes.h \
+  /opt/xmopts/xmc/inc/xmcDebug.h /opt/xmopts/xmc/inc/xmc3DTypes.h \
+  /opt/xmopts/xmc/inc/xmcMathStuff.h /usr/include/math.h \
+  /usr/include/bits/huge_val.h /usr/include/bits/mathdef.h \
+  /usr/include/bits/mathcalls.h /opt/xmopts/xmc/inc/xmcTimeStuff.h \
+  /opt/xmopts/xmc/inc/xmcComplexTypes.h \
+  /opt/xmopts/xmc/inc/xmcPhysicsStuff.h
+xccvZero.o: xccvZero.c /opt/xmopts/xcc/inc/vector_utils.h \
+  /opt/xmopts/xmc/inc/xmc.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stdarg.h \
+  /usr/include/stdio.h /usr/include/features.h /usr/include/sys/cdefs.h \
+  /usr/include/gnu/stubs.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stddef.h \
+  /usr/include/bits/types.h /usr/include/bits/wordsize.h \
+  /usr/include/bits/typesizes.h /usr/include/libio.h \
+  /usr/include/_G_config.h /usr/include/wchar.h /usr/include/bits/wchar.h \
+  /usr/include/gconv.h /usr/include/bits/stdio_lim.h \
+  /usr/include/bits/sys_errlist.h /usr/include/stdlib.h \
+  /usr/include/sys/types.h /usr/include/time.h /usr/include/endian.h \
+  /usr/include/bits/endian.h /usr/include/sys/select.h \
+  /usr/include/bits/select.h /usr/include/bits/sigset.h \
+  /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/bits/sched.h \
+  /usr/include/alloca.h /usr/include/string.h /usr/include/unistd.h \
+  /usr/include/bits/posix_opt.h /usr/include/bits/confname.h \
+  /usr/include/getopt.h /usr/include/ctype.h /usr/include/X11/Xlib.h \
+  /usr/include/X11/X.h /usr/include/X11/Xfuncproto.h \
+  /usr/include/X11/Xosdefs.h /usr/include/X11/Xutil.h \
+  /usr/include/X11/Xos.h /usr/include/fcntl.h /usr/include/bits/fcntl.h \
+  /usr/include/sys/time.h /usr/include/X11/Xarch.h \
+  /usr/include/X11/Xatom.h /opt/xmopts/xmc/inc/xmcDataTypes.h \
+  /opt/xmopts/xmc/inc/xmcDebug.h /opt/xmopts/xmc/inc/xmc3DTypes.h \
+  /opt/xmopts/xmc/inc/xmcMathStuff.h /usr/include/math.h \
+  /usr/include/bits/huge_val.h /usr/include/bits/mathdef.h \
+  /usr/include/bits/mathcalls.h /opt/xmopts/xmc/inc/xmcTimeStuff.h \
+  /opt/xmopts/xmc/inc/xmcComplexTypes.h \
+  /opt/xmopts/xmc/inc/xmcPhysicsStuff.h
+xccvsAdd.o: xccvsAdd.c /opt/xmopts/xcc/inc/vector_utils.h \
+  /opt/xmopts/xmc/inc/xmc.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stdarg.h \
+  /usr/include/stdio.h /usr/include/features.h /usr/include/sys/cdefs.h \
+  /usr/include/gnu/stubs.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stddef.h \
+  /usr/include/bits/types.h /usr/include/bits/wordsize.h \
+  /usr/include/bits/typesizes.h /usr/include/libio.h \
+  /usr/include/_G_config.h /usr/include/wchar.h /usr/include/bits/wchar.h \
+  /usr/include/gconv.h /usr/include/bits/stdio_lim.h \
+  /usr/include/bits/sys_errlist.h /usr/include/stdlib.h \
+  /usr/include/sys/types.h /usr/include/time.h /usr/include/endian.h \
+  /usr/include/bits/endian.h /usr/include/sys/select.h \
+  /usr/include/bits/select.h /usr/include/bits/sigset.h \
+  /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/bits/sched.h \
+  /usr/include/alloca.h /usr/include/string.h /usr/include/unistd.h \
+  /usr/include/bits/posix_opt.h /usr/include/bits/confname.h \
+  /usr/include/getopt.h /usr/include/ctype.h /usr/include/X11/Xlib.h \
+  /usr/include/X11/X.h /usr/include/X11/Xfuncproto.h \
+  /usr/include/X11/Xosdefs.h /usr/include/X11/Xutil.h \
+  /usr/include/X11/Xos.h /usr/include/fcntl.h /usr/include/bits/fcntl.h \
+  /usr/include/sys/time.h /usr/include/X11/Xarch.h \
+  /usr/include/X11/Xatom.h /opt/xmopts/xmc/inc/xmcDataTypes.h \
+  /opt/xmopts/xmc/inc/xmcDebug.h /opt/xmopts/xmc/inc/xmc3DTypes.h \
+  /opt/xmopts/xmc/inc/xmcMathStuff.h /usr/include/math.h \
+  /usr/include/bits/huge_val.h /usr/include/bits/mathdef.h \
+  /usr/include/bits/mathcalls.h /opt/xmopts/xmc/inc/xmcTimeStuff.h \
+  /opt/xmopts/xmc/inc/xmcComplexTypes.h \
+  /opt/xmopts/xmc/inc/xmcPhysicsStuff.h
+xccvsDiv.o: xccvsDiv.c /opt/xmopts/xcc/inc/vector_utils.h \
+  /opt/xmopts/xmc/inc/xmc.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stdarg.h \
+  /usr/include/stdio.h /usr/include/features.h /usr/include/sys/cdefs.h \
+  /usr/include/gnu/stubs.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stddef.h \
+  /usr/include/bits/types.h /usr/include/bits/wordsize.h \
+  /usr/include/bits/typesizes.h /usr/include/libio.h \
+  /usr/include/_G_config.h /usr/include/wchar.h /usr/include/bits/wchar.h \
+  /usr/include/gconv.h /usr/include/bits/stdio_lim.h \
+  /usr/include/bits/sys_errlist.h /usr/include/stdlib.h \
+  /usr/include/sys/types.h /usr/include/time.h /usr/include/endian.h \
+  /usr/include/bits/endian.h /usr/include/sys/select.h \
+  /usr/include/bits/select.h /usr/include/bits/sigset.h \
+  /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/bits/sched.h \
+  /usr/include/alloca.h /usr/include/string.h /usr/include/unistd.h \
+  /usr/include/bits/posix_opt.h /usr/include/bits/confname.h \
+  /usr/include/getopt.h /usr/include/ctype.h /usr/include/X11/Xlib.h \
+  /usr/include/X11/X.h /usr/include/X11/Xfuncproto.h \
+  /usr/include/X11/Xosdefs.h /usr/include/X11/Xutil.h \
+  /usr/include/X11/Xos.h /usr/include/fcntl.h /usr/include/bits/fcntl.h \
+  /usr/include/sys/time.h /usr/include/X11/Xarch.h \
+  /usr/include/X11/Xatom.h /opt/xmopts/xmc/inc/xmcDataTypes.h \
+  /opt/xmopts/xmc/inc/xmcDebug.h /opt/xmopts/xmc/inc/xmc3DTypes.h \
+  /opt/xmopts/xmc/inc/xmcMathStuff.h /usr/include/math.h \
+  /usr/include/bits/huge_val.h /usr/include/bits/mathdef.h \
+  /usr/include/bits/mathcalls.h /opt/xmopts/xmc/inc/xmcTimeStuff.h \
+  /opt/xmopts/xmc/inc/xmcComplexTypes.h \
+  /opt/xmopts/xmc/inc/xmcPhysicsStuff.h
+xccvsMul.o: xccvsMul.c /opt/xmopts/xcc/inc/vector_utils.h \
+  /opt/xmopts/xmc/inc/xmc.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stdarg.h \
+  /usr/include/stdio.h /usr/include/features.h /usr/include/sys/cdefs.h \
+  /usr/include/gnu/stubs.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stddef.h \
+  /usr/include/bits/types.h /usr/include/bits/wordsize.h \
+  /usr/include/bits/typesizes.h /usr/include/libio.h \
+  /usr/include/_G_config.h /usr/include/wchar.h /usr/include/bits/wchar.h \
+  /usr/include/gconv.h /usr/include/bits/stdio_lim.h \
+  /usr/include/bits/sys_errlist.h /usr/include/stdlib.h \
+  /usr/include/sys/types.h /usr/include/time.h /usr/include/endian.h \
+  /usr/include/bits/endian.h /usr/include/sys/select.h \
+  /usr/include/bits/select.h /usr/include/bits/sigset.h \
+  /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/bits/sched.h \
+  /usr/include/alloca.h /usr/include/string.h /usr/include/unistd.h \
+  /usr/include/bits/posix_opt.h /usr/include/bits/confname.h \
+  /usr/include/getopt.h /usr/include/ctype.h /usr/include/X11/Xlib.h \
+  /usr/include/X11/X.h /usr/include/X11/Xfuncproto.h \
+  /usr/include/X11/Xosdefs.h /usr/include/X11/Xutil.h \
+  /usr/include/X11/Xos.h /usr/include/fcntl.h /usr/include/bits/fcntl.h \
+  /usr/include/sys/time.h /usr/include/X11/Xarch.h \
+  /usr/include/X11/Xatom.h /opt/xmopts/xmc/inc/xmcDataTypes.h \
+  /opt/xmopts/xmc/inc/xmcDebug.h /opt/xmopts/xmc/inc/xmc3DTypes.h \
+  /opt/xmopts/xmc/inc/xmcMathStuff.h /usr/include/math.h \
+  /usr/include/bits/huge_val.h /usr/include/bits/mathdef.h \
+  /usr/include/bits/mathcalls.h /opt/xmopts/xmc/inc/xmcTimeStuff.h \
+  /opt/xmopts/xmc/inc/xmcComplexTypes.h \
+  /opt/xmopts/xmc/inc/xmcPhysicsStuff.h
+xccvsSub.o: xccvsSub.c /opt/xmopts/xcc/inc/vector_utils.h \
+  /opt/xmopts/xmc/inc/xmc.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stdarg.h \
+  /usr/include/stdio.h /usr/include/features.h /usr/include/sys/cdefs.h \
+  /usr/include/gnu/stubs.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stddef.h \
+  /usr/include/bits/types.h /usr/include/bits/wordsize.h \
+  /usr/include/bits/typesizes.h /usr/include/libio.h \
+  /usr/include/_G_config.h /usr/include/wchar.h /usr/include/bits/wchar.h \
+  /usr/include/gconv.h /usr/include/bits/stdio_lim.h \
+  /usr/include/bits/sys_errlist.h /usr/include/stdlib.h \
+  /usr/include/sys/types.h /usr/include/time.h /usr/include/endian.h \
+  /usr/include/bits/endian.h /usr/include/sys/select.h \
+  /usr/include/bits/select.h /usr/include/bits/sigset.h \
+  /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/bits/sched.h \
+  /usr/include/alloca.h /usr/include/string.h /usr/include/unistd.h \
+  /usr/include/bits/posix_opt.h /usr/include/bits/confname.h \
+  /usr/include/getopt.h /usr/include/ctype.h /usr/include/X11/Xlib.h \
+  /usr/include/X11/X.h /usr/include/X11/Xfuncproto.h \
+  /usr/include/X11/Xosdefs.h /usr/include/X11/Xutil.h \
+  /usr/include/X11/Xos.h /usr/include/fcntl.h /usr/include/bits/fcntl.h \
+  /usr/include/sys/time.h /usr/include/X11/Xarch.h \
+  /usr/include/X11/Xatom.h /opt/xmopts/xmc/inc/xmcDataTypes.h \
+  /opt/xmopts/xmc/inc/xmcDebug.h /opt/xmopts/xmc/inc/xmc3DTypes.h \
+  /opt/xmopts/xmc/inc/xmcMathStuff.h /usr/include/math.h \
+  /usr/include/bits/huge_val.h /usr/include/bits/mathdef.h \
+  /usr/include/bits/mathcalls.h /opt/xmopts/xmc/inc/xmcTimeStuff.h \
+  /opt/xmopts/xmc/inc/xmcComplexTypes.h \
+  /opt/xmopts/xmc/inc/xmcPhysicsStuff.h
+xccvWrite.o: xccvWrite.c /opt/xmopts/xcc/inc/vector_utils.h \
+  /opt/xmopts/xmc/inc/xmc.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stdarg.h \
+  /usr/include/stdio.h /usr/include/features.h /usr/include/sys/cdefs.h \
+  /usr/include/gnu/stubs.h \
+  /usr/lib/gcc/i386-redhat-linux/3.4.3/include/stddef.h \
+  /usr/include/bits/types.h /usr/include/bits/wordsize.h \
+  /usr/include/bits/typesizes.h /usr/include/libio.h \
+  /usr/include/_G_config.h /usr/include/wchar.h /usr/include/bits/wchar.h \
+  /usr/include/gconv.h /usr/include/bits/stdio_lim.h \
+  /usr/include/bits/sys_errlist.h /usr/include/stdlib.h \
+  /usr/include/sys/types.h /usr/include/time.h /usr/include/endian.h \
+  /usr/include/bits/endian.h /usr/include/sys/select.h \
+  /usr/include/bits/select.h /usr/include/bits/sigset.h \
+  /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/bits/sched.h \
+  /usr/include/alloca.h /usr/include/string.h /usr/include/unistd.h \
+  /usr/include/bits/posix_opt.h /usr/include/bits/confname.h \
+  /usr/include/getopt.h /usr/include/ctype.h /usr/include/X11/Xlib.h \
+  /usr/include/X11/X.h /usr/include/X11/Xfuncproto.h \
+  /usr/include/X11/Xosdefs.h /usr/include/X11/Xutil.h \
+  /usr/include/X11/Xos.h /usr/include/fcntl.h /usr/include/bits/fcntl.h \
+  /usr/include/sys/time.h /usr/include/X11/Xarch.h \
+  /usr/include/X11/Xatom.h /opt/xmopts/xmc/inc/xmcDataTypes.h \
+  /opt/xmopts/xmc/inc/xmcDebug.h /opt/xmopts/xmc/inc/xmc3DTypes.h \
+  /opt/xmopts/xmc/inc/xmcMathStuff.h /usr/include/math.h \
+  /usr/include/bits/huge_val.h /usr/include/bits/mathdef.h \
+  /usr/include/bits/mathcalls.h /opt/xmopts/xmc/inc/xmcTimeStuff.h \
+  /opt/xmopts/xmc/inc/xmcComplexTypes.h \
+  /opt/xmopts/xmc/inc/xmcPhysicsStuff.h

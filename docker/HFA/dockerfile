@@ -1,0 +1,47 @@
+FROM ubuntu:24.04
+
+RUN apt update
+RUN apt install -y curl
+RUN apt install -y htop
+RUN apt install -y ncal
+RUN apt install -y dos2unix
+RUN apt install -y x11-apps
+RUN apt install -y dumb-init
+RUN apt install -y libsecret-1-0
+
+RUN useradd epsilon
+RUN usermod -d /home/epsilon epsilon
+RUN usermod -g users epsilon
+RUN usermod -s /bin/bash epsilon
+
+RUN mkdir /home/epsilon
+RUN chown epsilon:users /home/epsilon
+RUN chown epsilon:users /opt
+
+COPY requirements.txt /tmp/requirements.txt
+COPY example.bashrc.user /home/epsilon/.bashrc
+
+RUN chown epsilon:users /home/epsilon/.bashrc
+RUN dos2unix /home/epsilon/.bashrc
+
+USER epsilon
+
+RUN whoami
+
+RUN cd ~
+RUN /home/epsilon/.bashrc
+# RUN mv .bashrc original.bashrc
+# RUN ln -s example.bashrc.user .bashrc
+# RUN /bin/bash source /home/epsilon/.bashrc
+
+RUN curl -sSL https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -o /tmp/miniconda.sh
+
+RUN bash /tmp/miniconda.sh -b -p /opt/conda
+
+ENV PATH=/opt/conda/bin:$PATH 
+
+RUN conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main
+RUN conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r
+RUN conda create -n myenv --file /tmp/requirements.txt -y -c conda-forge
+
+CMD ["/bin/cal"]

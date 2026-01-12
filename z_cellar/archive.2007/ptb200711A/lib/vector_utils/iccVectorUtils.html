@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+	<TITLE></TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 1.0.1  (Linux)">
+	<META NAME="CREATED" CONTENT="20010927;9544500">
+	<META NAME="CHANGED" CONTENT="20030306;22292800">
+	<STYLE>
+	<!--
+		P { font-family: "Courier", monospace; font-size: 12pt }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="en-US">
+<P ALIGN=CENTER STYLE="margin-top: 0.43cm; page-break-after: avoid"><FONT FACE="Times New Roman, serif"><FONT SIZE=4 STYLE="font-size: 16pt"><B>vector_utils</B></FONT></FONT></P>
+<P><B>vector_utils funtions</B> provide a set of routines for
+performing vector math functions.  These functions follow a common
+vector calling protocol. The protocol followed usually takes the
+form:</P>
+<P STYLE="margin-bottom: 0cm"><FONT SIZE=2>vectorFunction1( FLT32
+*pointerToSourceArray1, INT32 sourceArray1StepIndex,</FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT SIZE=2>FLT32
+*pointerToSourceArray2, INT32 sourceArray2StepIndex,</FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT SIZE=2>FLT32
+*pointerToDestinationArray, INT32 destinationArray StepIndex,</FONT></P>
+<P STYLE="margin-bottom: 0cm"><FONT SIZE=2>UNT32
+numberOfElementsToProcess);</FONT></P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm"><FONT SIZE=3>The functions for vector
+add, vector subtract, vector multiply, vector divide ,  all fit this
+form exactly. Other vector funtions, though, would just be a
+variation of this theme.</FONT></P>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Vector convert
+routines.</B> Convert from one data type to another.</FONT></P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT SIZE=2>VOID
+	iccvINT16ToFLT32( INT16 *a, INT32 i, FLT32 *b, INT32 j, UNT32 n );</FONT></P>
+</UL>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Vector convolve
+routines.</B></FONT></P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT SIZE=2>FLT32
+	iccvConvolveFLT32( FLT32 *a, INT32 i, FLT32 *b, INT32 j, UNT32 n);</FONT></P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT SIZE=2>FLT64
+	iccvConvolveFLT64( FLT64 *a, INT32 i, FLT64 *b, INT32 j, UNT32 n);</FONT></P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT SIZE=2>FLT96
+	iccvConvolveFLT96( FLT96 *a, INT32 i, FLT96 *b, INT32 j, UNT32 n);</FONT></P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT SIZE=2>INT08
+	iccvConvolveINT08( INT08 *a, INT32 i, INT08 *b, INT32 j, UNT32 n);</FONT></P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT SIZE=2>INT16
+	iccvConvolveINT16( INT16 *a, INT32 i, INT16 *b, INT32 j, UNT32 n);</FONT></P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT SIZE=2>INT32
+	iccvConvolveINT32( INT32 *a, INT32 i, INT32 *b, INT32 j, UNT32 n);</FONT></P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT SIZE=2>INT64
+	iccvConvolveINT64( INT64 *a, INT32 i, INT64 *b, INT32 j, UNT32 n);</FONT></P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT SIZE=2>UNT08
+	iccvConvolveUNT08( UNT08 *a, INT32 i, UNT08 *b, INT32 j, UNT32 n);</FONT></P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT SIZE=2>UNT16
+	iccvConvolveUNT16( UNT16 *a, INT32 i, UNT16 *b, INT32 j, UNT32 n);</FONT></P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT SIZE=2>UNT32
+	iccvConvolveUNT32( UNT32 *a, INT32 i, UNT32 *b, INT32 j, UNT32 n);</FONT></P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT SIZE=2>UNT64
+	iccvConvolveUNT64( UNT64 *a, INT32 i, UNT64 *b, INT32 j, UNT32 n);</FONT></P>
+</UL>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Vector copy routines.</B></FONT></P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT SIZE=2>VOID iccvCopyFLT32(
+	FLT32 *a, INT32 i, FLT32 *b, INT32 j, UNT32 n);</FONT></P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT SIZE=2>VOID iccvCopyFLT64(
+	FLT64 *a, INT32 i, FLT64 *b, INT32 j, UNT32 n);</FONT></P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT SIZE=2>VOID iccvCopyFLT96(
+	FLT96 *a, INT32 i, FLT96 *b, INT32 j, UNT32 n);</FONT></P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT SIZE=2>VOID iccvCopyINT08(
+	INT08 *a, INT32 i, INT08 *b, INT32 j, UNT32 n);</FONT></P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT SIZE=2>VOID iccvCopyINT16(
+	INT16 *a, INT32 i, INT16 *b, INT32 j, UNT32 n);</FONT></P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT SIZE=2>VOID iccvCopyINT32(
+	INT32 *a, INT32 i, INT32 *b, INT32 j, UNT32 n);</FONT></P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT SIZE=2>VOID iccvCopyINT64(
+	INT64 *a, INT32 i, INT64 *b, INT32 j, UNT32 n);</FONT></P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT SIZE=2>VOID iccvCopyUNT08(
+	UNT08 *a, INT32 i, UNT08 *b, INT32 j, UNT32 n);</FONT></P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT SIZE=2>VOID iccvCopyUNT16(
+	UNT16 *a, INT32 i, UNT16 *b, INT32 j, UNT32 n);</FONT></P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT SIZE=2>VOID iccvCopyUNT32(
+	UNT32 *a, INT32 i, UNT32 *b, INT32 j, UNT32 n);</FONT></P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT SIZE=2>VOID iccvCopyUNT64(
+	UNT64 *a, INT32 i, UNT64 *b, INT32 j, UNT32 n);</FONT></P>
+</UL>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Vector Discrete Fourier
+Transform routines.</B></FONT></P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT SIZE=2>void
+	iccvDFTrFLT32(FLT32 *iData, FLT32 *oData, UNT32 n);</FONT></P>
+</UL>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm"><FONT SIZE=2><B>Vector Fast Fourier
+Transform routines.</B></FONT></P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT SIZE=2>VOID
+	iccvFFTrFLT32(FLT32 *inData, FLT32 *outData, UNT32 nElements);</FONT></P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT SIZE=2>VOID
+	iccvFFTcFLT32(FLT32 *inData, FLT32 *outData, UNT32 nElements);</FONT></P>
+	<LI><P STYLE="margin-bottom: 0cm"><FONT SIZE=2>VOID
+	iccvIFFTFLT32(FLT32 *inData, FLT32 *outData, UNT32 nElements);</FONT></P>
+</UL>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P>Data types used in this description can be found in <A HREF="../../sys/iccDataTypes.h">iccDataTypes.h</A></P>
+<P ALIGN=LEFT><SPAN STYLE="text-decoration: none">Header file for
+vector_utils is found in </SPAN><A HREF="vector_utils.h">vector_utils.h</A></P>
+</BODY>
+</HTML>

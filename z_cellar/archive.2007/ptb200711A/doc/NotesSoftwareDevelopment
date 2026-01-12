@@ -1,0 +1,81 @@
+#------------------------------------------------------------------------------------------------
+#------------------------------------------------------------------------------------------------
+# NotesSoftwareDevelopment.
+#------------------------------------------------------------------------------------------------
+#------------------------------------------------------------------------------------------------
+
+
+Software Development will try to adhere to the following layered approach were higher level 
+programming languages draw from the lower level programming languages.
+
+
+
+/------\ /--------\ /---------------\ /---------\ /-------\ /--------\
+| Java | | Python | | Matlab/Octave | | FORTRAN | | C/C++ | | XMidas |
+\------/ \--------/ \---------------/ \---------/ \-------/ \--------/
+   ^         ^              ^              ^          ^         ^
+   |         |              |              |          |         |
+/--------------------------------------------------------------------\
+|                            "C" Libraries                           |
+\--------------------------------------------------------------------/
+                                  ^
+                                  |
+/--------------------------------------------------------------------\
+|                Assembly Language (Machine specific)                |
+\--------------------------------------------------------------------/
+
+A primary focus will be to create an X-Midas option tree.
+
+A primary focus will be to build up X-Midas primitives and macros in a modular fashion to make
+code re-use more probable.
+
+A primary focus will be to create a "C" library that can commonly be used by the various "High"
+level programming languages.
+
+A primary focus will be to comment code to make it understandable by a "casual" observer.
+(The STESWD option tree source code will be used as an example.)
+
+A primary focus will be to have an X-Midas explain file for each primitive and macro.
+(The STESWD option tree source code will be used as an example.)
+
+A primary focus will be to have test scripts developed to test each primitive and macro.
+This can be a simple set of commands that is found in the explain file. 
+(The STESWD option tree source code will be used as an example.)
+
+X-Midas macros will be written in either XMPY or the X-Midas macro language.
+
+X-Midas primitives will be written in either C++ or XMPY.
+
+The X-Midas build commands, "xmbopt" and "xmbld", will be the primary way to build an X-Midas
+option tree and X-Midas primitives and macros.
+
+Development tools will be allowed that do not interfere with the X-Midas build process being the
+primary build method and the X-Midas option tree directory structure being the primary directory
+structure.
+
+Redhat version : Redhat Enterprise Linux Workstation 3.3(RHEL WS 3.3) or higher.
+X-Midas version: X-Midas 3.3.9 or higher.
+XMPY version   : XMPY 2.10.2   or higher.
+XMPYQT version : XMPYQT 1.0.4  or higher.
+SPOT version   : spot 1.2.1    or higher.
+
+
+X-Midas option tree directory structure will have the general following form:
+
+Archive
+cfg
+dat
+doc
+exp
+host
+lib
+mcr
+
+Other directories made be added if needed.
+
+
+
+steswd200511
+ene001
+bfg001
+sbs001

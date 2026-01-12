@@ -1,0 +1,83 @@
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+# NotesCVS_RSH.
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+
+You can use CVS with RSH if you have the rsh-sever installed.
+
+Put the following in the ".bashrc" file:
+	export CVS_RSH=rsh
+
+RedHat 7.3 and 8.0 disk 2 has the rsh-server.
+
+Use "rpm -i" to intall the rsh-server.
+
+Go to /etc/xinetd.d/rsh file and change "disable = yes" to "disable = no"
+
+Reboot or restart xinetd.  "/usr/bin/redhat-config-services"
+
+You need to have a ".rhosts" file in the target user directory.
+
+You need to have ".rhosts" file permissions set so that others "o" do not have write permission.
+
+Example .rhosts file:
+
+	10.0.1.140 bergman
+	10.0.1.141 bergman
+	10.0.1.142 bergman
+	10.0.1.143 bergman
+	10.0.1.144 bergman
+	10.0.1.145 bergman
+
+Look at /var/log/messages for helpful info.
+
+
+You can use CVS with SSH if you have the sshd server installed.
+
+Put the following in the ".bashrc" file:
+        export CVS_RSH=ssh
+
+You will have to type a password unless you get the ssh-agent going.
+
+If there are problems check the /var/log files!!!!
+
+#-------------------------------------------------------------------------------
+# Importing.
+#-------------------------------------------------------------------------------
+     cd /home/steswd/steswd
+     cvs import -m "New Version of STESWD." steswd200305A ITT start
+
+#-------------------------------------------------------------------------------
+# Exporting.
+#-------------------------------------------------------------------------------
+     cvs export -D today ene001
+     cvs export -D today bfg001
+
+# Export
+#-------------------------------------------------------------------------------
+cvs -d "steswd@10.103.53.101:/basestation/ittcvs" export -D now bdw200607A  bfg200607A  bms200607A  ged200607A  rds200607A  sdds200607A  spg200607A  steswd200607A  xmc200607A
+
+# Check out
+#-------------------------------------------------------------------------------
+cvs -d "steswd@10.103.53.101:/basestation/ittcvs" checkout bdw200607A  bfg200607A  bms200607A  ged200607A  rds200607A  sdds200607A  spg200607A  steswd200607A  xmc200607A
+
+# Compare checked out version with repository on local machine.
+#-------------------------------------------------------------------------------
+# While in directory with checkout code.
+cvs -qn update
+
+# Compare checked out version with repository on remote machine.
+#-------------------------------------------------------------------------------
+# While in directory with checkout code.
+cvs -d "steswd@10.103.53.101:/basestation/ittcvs" -qn update
+
+# Commit changes on local machine.
+#-------------------------------------------------------------------------------
+# While in directory with checkout code.
+cvs commit -m "Updates."
+
+# Commit changes on remote machine.
+#-------------------------------------------------------------------------------
+# While in directory with checkout code.
+cvs -d "steswd@10.103.53.101:/basestation/ittcvs" commit -m "Updates."

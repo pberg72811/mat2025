@@ -1,0 +1,16 @@
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+# NotesMozilla
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+On Linux, Mozilla requires JRE 1.4.2 or later.
+
+If you installed the Java Runtime Environment 5.0 Update 6, this plugin is
+/usr/java/jrel.5.0_6/plugin/i386/ns7/libjavaplugin_oji.so - and to install it
+for Mozilla (including Mozilla Firefox), do the following:
+
+Open a terminal
+Change to your Mozilla (or Mozilla Firefox) plugins directory
+Issue the following command:
+
+ln -s /usr/java/jdk/jre/plugin/i386/ns7/libjavaplugin_oji.so

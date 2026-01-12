@@ -1,0 +1,65 @@
+perl -i -p -e 's/\([A-Za-z][A-Za-z]\)//g;' Hosea.txt
+perl -i -p -e 's/\([A-Za-z]\)//g;'         Hosea.txt
+
+
+Hosea 14
+Israel's Future Blessing
+    1Return, O Israel, to the LORD your God,
+         For you have stumbled because of your iniquity.
+    2Take words with you and return to the LORD.
+         Say to Him, "Take away all iniquity
+         And receive us graciously,
+         That we may present the fruit of our lips.
+    3"Assyria will not save us,
+         We will not ride on horses;
+         Nor will we say again, 'Our god,'
+         To the work of our hands;
+         For in You the orphan finds mercy."
+    4I will heal their apostasy,
+         I will love them freely,
+         For My anger has turned away from them.
+    5I will be like the dew to Israel;
+         He will blossom like the lily,
+         And he will take root like the cedars of Lebanon.
+    6His shoots will sprout,
+         And his beauty will be like the olive tree
+         And his fragrance like the cedars of Lebanon.
+    7Those who live in his shadow
+         Will again raise grain,
+         And they will blossom like the vine.
+         His renown will be like the wine of Lebanon.
+    8O Ephraim, what more have I to do with idols?
+         It is I who answer and look after you
+         I am like a luxuriant cypress;
+         From Me comes your fruit.
+    9Whoever is wise, let him understand these things;
+         Whoever is discerning, let him know them
+         For the ways of the LORD are right,
+         And the righteous will walk in them,
+         But transgressors will stumble in them.
+
+
+106 Nahum 3:4
+All because of the many harlotries of the harlot,The charming one, the mistress of sorceries,Who sells nations by her harlotriesAnd families by her sorceries.
+
+
+107 Hebrews 11:31
+By faith Rahab the harlot did not perish along with those who were disobedient, after she had welcomed the spies in peace.
+
+108 James 2:25
+In the same way, was not Rahab the harlot also justified by works when she received the messengers and sent them out by another way?
+
+109 Revelation 17:1
+[ The Doom of Babylon ] Then one of the seven angels who had the seven bowls came and spoke with me, saying, "Come here, I will show you the judgment of the great harlot who sits on many waters,
+
+110 Revelation 17:5
+and on her forehead a name was written, a mystery, " BABYLON THE GREAT, THE MOTHER OF HARLOTS AND OF THE ABOMINATIONS OF THE EARTH."
+
+111 Revelation 17:15
+And he said to me, "The waters which you saw where the harlot sits, are peoples and multitudes and nations and tongues.
+
+112 Revelation 17:16
+"And the ten horns which you saw, and the beast, these will hate the harlot and will make her desolate and naked, and will eat her flesh and will burn her up with fire.
+
+113 Revelation 19:2
+BECAUSE HIS JUDGMENTS ARE TRUE AND RIGHTEOUS; for He has judged the great harlot who was corrupting the earth with her immorality, and HE HAS AVENGED THE BLOOD OF HIS BOND-SERVANTS ON HER."

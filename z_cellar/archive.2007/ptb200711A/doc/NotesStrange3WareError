@@ -1,0 +1,27 @@
+[root@rec102 root]# sfdisk /dev/sdb < partitionTable
+Checking that no-one is using this disk right now ...
+OK
+
+Disk /dev/sdb: 212808 cylinders, 255 heads, 63 sectors/track
+
+sfdisk: ERROR: sector 0 does not have an msdos signature
+ /dev/sdb: unrecognized partition
+Old situation:
+No partitions found
+New situation:
+Units = sectors of 512 bytes, counting from 0
+
+   Device Boot    Start       End   #sectors  Id  System
+/dev/sdb1            63 3418760519 3418760457  83  Linux
+/dev/sdb2             0         -          0   0  Empty
+/dev/sdb3             0         -          0   0  Empty
+/dev/sdb4             0         -          0   0  Empty
+Warning: no primary partition is marked bootable (active)
+This does not matter for LILO, but the DOS MBR will not boot this disk.
+Successfully wrote the new partition table
+
+Re-reading the partition table ...
+
+If you created or changed a DOS partition, /dev/foo7, say, then use dd(1)
+to zero the first 512 bytes:  dd if=/dev/zero of=/dev/foo7 bs=512 count=1
+(See fdisk(8).)

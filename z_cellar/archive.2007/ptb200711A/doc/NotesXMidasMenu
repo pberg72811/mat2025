@@ -1,0 +1,485 @@
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+# NotesXMidasMenu.
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+
+ABLOCKAVG;BET- Asysnchronously block averages data
+ABSCISSA     - alters abscissa fields in file header
+ACQMOD       - prompts for data acquisition parameters stored in the header
+ADD          - adds corresponding elements of two input files
+ADP_ARCHIVE;A- Macro which aquires PRE-D data from PIC card or socket
+ADP_CONFIGURE-  Macro which performs various functions on a configuration file
+ADP_DET_MAIL;-
+ADP_SOICUT;AD- (short line describing ADP_SOICUT's function)
+ADP_SOIPROCES-
+ADVISORY     - causes a macro to issue a JSIS-complaint advisory message
+AMFSYNC;DSP  - performs bit synchronization on the output of AMFDIFF or other
+APP;BETA     - Emulates the XX AMBIGUITY PLANE PROCESSOR.
+ARCHIVE      - send all textual screen output to specified file or device
+ASK          - prompts for a keyboard entry of results parameter value
+ATMIC;BETA   - Single channel TransMultiplexer Interference Canceller (TMIC)
+ATTACH       - Attaches a detached header to a Midas data file
+AUDIOCD      - Controls a CDROM device with an audio CD
+AUENCODER;DSP- Primitive which converts linear signed 16-bit input data to
+AUTOENE;STE  -
+AUTOENE16TUNE-
+AUXILIARY    - sets X-Midas auxiliary disk/path assignments for data files
+BEEP         - controls terminal beeper function
+BETA;BETA    -
+BFGCONTROL;ST-  Send control message to the BFG.
+BFGSENDDIRCOS-  Establish a socket and send direction cosines to the BFG.
+BIEXPSVI     - smooth with a a bi-exponential window with user-specified widt
+BIT2WORD;BETA- converts data from an input file to an output file where
+BITCOLLE;BETA- collect bits from input, realign word boundaries, skip preface
+BITMASK      - creates/edits/tests bit masks
+BITSET;BETA  - creates output by setting bits in input data
+BITXTRCT;BETA- Takes each bit from the input data file and expands it to a
+BLOCKAVG     - averages blocks of data
+BLOCKDEC;ADP - Frame-based block data decimator. Takes <BLOCKSIZE> elements
+BLUE2XTALK;XM- Convert BLUE files/pipes to CrossTalk Fifos or Pipes
+BOOLEAN      - performs boolean operation on 1 or 2 bit streams
+BPSKDEMOD;DSP- Coherent demodulator for BPSK signals. Output is a file
+BREAK        - exits nearest enclosing WHILE or LOOP
+BROWSE       - enters a command browser for getting all kinds of command help
+BUILDOPT;XMPY- Builds the XMPY option tree
+CALCULATOR   - implements a reverse polish pocket calculator.
+CALL         - Invoke a macro SUBROUTINE
+CATEGORY     - display commands according to category
+CHECKOUT;XMPY- copies necessary files of system command into given option area
+CIRCCORL     - Circular correlates one/two input signals
+CLKCMD       - send commands to the STL3116 via ethernet
+CMA;DSP      - Takes a nominal T/2 or T/4 resampled complex baseband
+CNTLTHIN     - thins a data file based on values in a control file
+COMMENT      - accepts comments to add to file header
+COMPARE      - compare two data files
+CONCATENATE  - concatenates a string to a string result
+CONFIGURE    - performs X-Midas configuration functions
+CONJUGATE    - produces complex conjugates of type classes 1000 or 2000 data.
+CONSTANT     - creates a TYPE CLASS 1000 data file with constant values
+CONTINUE     - continues with next iteration of nearest enclosing WHILE or LOOP
+CONTOUR      - performs various contouring functions on Midas files
+CONTROL      - Old name for the WIDGET command
+CONTROLSEXAMP-
+CONVERT      - Converts a Midas file data and or header to other formats
+CONVOLVE     - convolves input file with impulse response
+COPYHEADER   - copies header information from reference file to output file
+CORRELATE    - performs time domain auto-correlation or cross-correlation
+CRAYIF       - controls the client side of the Cray interface
+CSP;BETA     - Compute Cyclic Spectral Plane for bauded single channel signal I
+CSPPOST;BETA - second stage of processing after the CSP primitive
+CSYNC;BETA   - synchronizes asynchronous burst data
+CXBASEBAND;DS- (short line describing CXBASEBAND's function)
+CXCNVRT;BETA - converts between real and complex forms of data (Nyquist rate li
+CXTUNE;BETA  - Shifts frequency of a complex input file.
+CXTUNE2K;BETA- Shifts frequency of a complex type 2000 input file.
+CYCLODETECT;A- (short line describing CYCLODETECT's function)
+CYCLOFUNC;DSP- Primitive which takes a time domain input signal
+CYCSIGDET;ADP- (short line describing CYCSIGDET's function)
+DARRAY       - divides each element of <input> into a constant
+DATAIMPORT   - puts Midas header on a non-Midas data file
+DATALIST     - lists data elements of a Midas file
+DATES        - converts date/time to various representations and date component
+DBLOG        - converts data to dB
+DCLMAP       - Maps DCLMIDAS commands to XMIDAS commands
+DCLMCONV     - converts DCL Midas macro to X-Midas
+DEBUG        - turns ON/OFF the debug modes of X-Midas
+DECATENATE   - removes substring from an ASCII results parameter
+DEFAULTS     - show the command line syntax with defaults for the named command
+DEIMPULSE;DSP- Primitive which corrects points which lie outside the local
+DEMODFSK;DSP - (short line describing DEMODFSK's function)
+DEMOS        - A collection of demo macros/primitives
+DEMUX        - decomposes complex file into separate real and imag output files
+DETACH       - Creates a detached header or sets the detached default settings
+DETECT       - Detect input into AM, FM, and PM
+DIF1000;BETA - takes the first difference of input file data
+DIF2000;BETA - Takes 1st difference of input file
+DIGTC        - extracts digital time code from SMS/SDN data
+DIVIDE       - divides file 1 by corresponding elements of file 2
+DPCO         - Double precision Phase/frequency/chirp-Controlled Oscillator
+DR300_TTUNER - TUNER - graphical Tera Tuner controller for the DR-30X
+DSM          - DataStream Manager (Controls the Data Stream Managers)
+DSMCLIENT    - Fires off a datastream manager in local mode
+DSMODULE     - define or show a DataStream Module for a statically linked engin
+DT202_TTUNER - TUNER - graphical Tera Tuner controller for the DT-202
+DT300_TTUNER - TUNER - graphical Tera Tuner controller for the DT-30x
+DT700_TTUNER - graphical Tera Tuner controller for the DT-70x
+DUAL5000     - Computes measurements between two type 5000 files
+DUALTMIC;BETA- DUAL channel TransMultiplexer Interference Canceller (TMIC)
+DUMPFILEHEADE- Goes to a specified directory and dumps the headers of all file
+DYNZOOM      - Dynamic zoom utility
+EDITLIST     - generic editor for choosing multiple items from a list
+EFSVI;DSP    - implements an Enhanced Frame Synchronous Video Integrator
+ELSE         - starts macro block to be executed when IF/ELSEIF conditions fail
+ELSEIF       - starts macro block to be executed when prior IF conditions fail
+EMERGENCY    - causes a macro to issue a JSIS-compliant emergency message
+ENDIF        - end an IF block
+ENDLOOP      - end a LOOP block
+ENDMD;BETA   - demodulates PSK data using Kline's enhanced homodyne approach.
+ENDMODE      - terminate current Midas macro level
+ENDSUSPEND   - terminates macro suspend mode
+ENDWHILE     - end a WHILE block
+ENERPT;ADP   - (short line describing ENERPT's function)
+ENHOMOD;BETA - demodulates PSK data using Kline's enhanced homodyne approach.
+ENVELOPE     - detect the envelope of a pre-D signal
+ENVIRONMENT  - Returns/Sets information in current X-Midas environment
+ERASE        - deletes Midas files
+ERMIF        - Embeded/Enhanced RMI handles communication with remote processor
+ERROR        - causes a macro to terminate with an error
+EXIT         - exit from X-Midas environment back to operating system
+EXPLAIN      - gives an explanation of a Midas command
+EXPORT       - exports results parameters to the operating system environment
+F3000;DSP    - create Type 3000 file structure
+FANIN        - collates records from multiple input files to a single output fi
+FANOUT       - decommutates records from an input file into multiple output fil
+FASTCONVOLVE;- Uses FFT convolution algorithm to filter data
+FASTCORL;DSP - executes overlap-save FFT block cross-correlation
+FASTCYCLO;DSP- Primitive which takes a time domain input signal
+FASTFILTER   - Uses FFT convolution algorithm to filter data
+FCALCULATOR  - implements a reverse polish pocket calculator on a vector
+FCREATE      - creates a MIDAS header and allocates space for MIDAS data file.
+FFT          - computes the Fourier transform of an input file.
+FILEARCHIVE;A- Primitive which reads an input pipe and creates archive
+FILECMD;DSP  - Primitive which performs various file operations. It
+FILELIST     - Produces a listing of Midas files on Midas auxiliaries
+FILEMERGE;DSP- Primitive which takes the output of FILES (type XA)
+FILES        - Quick version of FILELIST using the MORE filter and columns
+FILETRANSP   - transpose rows and columns of a type 1000 or 2000 file
+FILTDEC;DSP  - FIR filter with decimation
+FIND         - finds file and returns its full path name
+FINDARCHIVE;A- Returns the filename(s) of all files in a directory which
+FINDMTCH;BETA- used to find occurrences of <value> in file <input>.
+FINTERLEAVE;B- Interleaves up to 16 input files
+FIRGEN;DSP   - designs an FIR filter using the window method; may also
+FIRHLBRT     - creates a Hilbert transform impulse response
+FIRLIN;BETA  - Calculate filter taps using linear programming
+FIRPARKS     - designs linear phase FIR filter using Parks-McClellan algorithm
+FIRPOLY;BETA - Generate polynomials for use with tapgen primitive
+FIRSTPRIM;STE- first test primitive.  Just copies data from one file to another
+FIRWIND      - designs a FIR filter using the window method.
+FLIP;DSP     - reverses the order of data in a Midas file
+FLIPTMIC;BETA- Single channel Interference Canceller using spectral flip
+FMTI2B;ADP   - Simple primitive to convert SI/CI data to SB/CB data using MSB
+FNAME        - forms a full filename from X-Midas components
+FORALL       - performs a Midas command for a list of items or counter index
+FREQSHIFT;BET- frequency shifts complex data
+FSKDEMOD;DSP - (short line describing FSKDEMOD's function)
+FSKSIM       - Gererates a binary FSK modulated output file with phase continui
+FSTATISTICS  - determines file statistics
+FSVA         - implements a Frame Synchronous Video Averager (Integrator)
+FSVI         - implements a Frame Synchronous Video Integrator
+FTMIC;BETA   - Single channel Transmultiplexer Interference Canceller (TMIC)
+GATE         - gates input data and stores results in output file (** SEE PRIFU
+GENEXPLAIN;XM- Generates explain files for macros, host and datastream commands
+GENMSGINC;XMP- generates include files for primitives that do message passing
+GENPKTSINC   - Primitive to generate packetdef.inc and packetdecl.inc files
+GETDISPLAYINF- Returns X-Windows display information
+GETHOST;DSP  - Primitive which uses the standard Unix C-functions "gethostbynam
+GETVALUE     - extracts a single results parameter from a Midas file.
+GO           - Continues execution of a macro in suspend mode
+GOTO         - unconditionally transfers macro program control
+GROUP        - creates a Type 3000 or 5000 file from other files or results par
+HARDLIMIT    - clips the input data between given limits (** SEE LIMIT **)
+HEADERMOD    - modifies a MIDAS file header
+HELP         - outputs on-line help on library routines, switches, and file qua
+HILBERT      - generate Hilbert transform of data file
+HISTOGRAM    - computes the histogram of input data
+HISTORY      - displays command history
+HOMEPATH     - sets X-Midas user home directory
+HOMOGENIZE   - interpolates Type 3000 data to uniformly-sampled Type 1000 data
+HPSPEC;DSP   - (short line describing HPSPEC's function)
+HPSTEP       - send single command or periodically step a GPIB device via seria
+HSHFTDEC     - Hilbert, frequency shift, and decimate
+HW           - Utility for controlling Hardware devices
+HWCONFIG     - Confiuration utility for HW control software
+HWDRIVER     - Driver for controlling Hardware devices
+ICCPHASEDETEC-
+ICCPNGEN;STE -  Create a MA return PN sequence.
+ICCQNOISE;STE-
+ICCSAMPLETEST-
+ICCSOURCEFILE-
+ICCTUNEUP;STE-
+ICCVADDINT08;-
+ICCVADDINT16;-
+ICCXP15;STE  -
+IF           - implements a logical block if-then-else function in a macro
+IMFFT        - performs multiple inverse FFTs
+IMPORT       - imports results parameters from the operating system environment
+INACTIVE     - causes a macro to issue a JSIS-compliant inactive informational
+INFO         - causes a macro to issue an informational message
+INT1000;BETA - finds the integral over an interval of a Type 1000 file
+INTERLEAVE   - interleaves two files into a single file
+INTERPOLATE  - Interpolates data to a uniformly sampled file
+INVFFT       - computes the inverse FFT of an input file
+JPMAPDEF;BETA- interactively build a map control file for use with JPMAPPER
+JPMAPPER;BETA- select values from file based on a map reference file
+JUMP         - Invoke a macro PROCEDURE
+KAISWIND;DSP - Primitive which generates a minimal order time-domain
+KEYWORD      - facility for displaying and changing keyword fields in a file he
+LABEL        - provides a reference point for GOTOs
+LIMIT        - clips or thresholds data
+LINRANGE;BETA- linearly scales a file between given max/min values
+LISSAJOUS    - generate pretty plots from Lissajous functions
+LOADCONSTANTS- Loads the X-Midas constants into the results table
+LOCATION     - Creates a single entry type 5000 file with a Geodetic frame of r
+LOCTHIN;BETA - allows thinning of data based on a file of index or abscissa
+LOGAMP;ADP   - (short line describing LOGAMP's function)
+LOGARITHM    - takes logarithm of each element in data file
+LOGRANGE;BETA- take 10log10 of a file and scale result between given max/min
+LOOP         - implements a do loop within a macro
+LOOPBACK;STE -
+LRS          - creates a linear recursive sequence
+MAGNITUDE    - gets magnitude of a complex or real file
+MAKELIST;DSP - Primitive which creates an ASCII output file (type TA)
+MAPMAN       - Map manipulator for Midas maps
+MAPWORD;BETA - threshold and combine soft decisions to hard decision data words
+MARRAY       - multiplies each element of <input> by a constant.
+MASK         - correlates an input signal against a set of masks
+MASTER       - sets up an X-Midas session as a controller
+MAXMIN       - scans <file> to determine maximum and minimum ordinate values.
+MAXPSD;ADP   - Simple primitive to do "max-hold" function on PSD data for XRTPL
+MAXUBIQ;DSP  -
+MBUTEST;STE  -
+MEDIANFILT   - median filters a data file
+MEDIT        - opens macro file for editing, then preprocesses the macro
+MENU         - displays or changes availability of X-midas commands
+MERGEFILE    - merges an input file to the end of an output file
+MESSAGE      - sends or gets a message from the global message queue
+MFFT         - performs multiple FFTs with overlap, windowing, and single cell
+MFILE        - interface to M$FILE text file processor
+MISO;DSP     - Multiple-Input-Single-Output primitive.
+MLIST        - lists a macro
+MODE;BETA    - Computes the mode for Midas data files.
+MODULO       - performs the MODULO function on a data file
+MORPH        - Performs a Morphological operation on a file
+MPOLY        - evaluates polynomial fit on data in a piecewise manner
+MSGMASK      - creates/edits/tests masks specifying info primitive should pass
+MTRANSLATE   - translates macro text to executable form
+MULT2000     - multiplication of the values in a type class 2000 file
+MULTIPLY     - multiplies corresponding elements of two input files
+MUX          - combines separate real and imaginary files into one complex file
+NEWRATE      - synchronously or asynchronously resamples an input file
+NNINIT;BETA  - Generate initialization files for neural net
+NNLEARN;BETA - Neural net back error propagation model
+NNRUN;BETA   - Run neural net after training
+NOOP;ADP     - copies an input to an output
+NORMALIZE    - Normalizes an input file by frames
+OS           - sends an operating system command to the appropriate OS
+PADDEL;BETA  - copy values with block deletion
+PADINS;BETA  - copy file with a block of values inserted at indicated locations
+PARRAY       - adds a constant to each element of <input>.
+PARSE        - Parses a command and returns components in results parameters
+PASSFILT     - create a bandpass filter
+PAUSE        - pauses for specified time, or forces macro into Suspend mode
+PCASIGDET;ADP- (short line describing PCASIGDET's function)
+PCMDECODE;DSP- Decodes a PCM bit stream into linear 16-bit sampled data
+PEAKLOCATE;BE- locates peak in a data file
+PEAKPICK     - picks peak from each PRI segment of input data
+PHASE        - gets phase of a complex file
+PHASEST;DSP  - Primitive which filters a spectral component (such as
+PIC;ICE      - Peripheral Interconnect Component access/test macro
+PICDRIVER;ICE- Peripheral Interconnect Component driver routines
+PICFUNC;ICE  - ICE-PIC Enhanced Functions Primitive
+PICMEASURE;IC- Performs multichannel correlation for testing timecode measureme
+PICPLAY;STE  - (short line describing PICPLAY's function)
+PICRECORD;STE- (short line describing PICRECORD's function)
+PICTUNER;ICE - Uses hardware to Tuner/Filter/Decimate from/to files
+PIPE         - runs a piped macro without interactive controls window
+PIPEARCHIVE;D- Archive data from a pipe into a file
+PIPEDELAY;DSP- (short line describing PIPEDELAY's function)
+PIPEFUNC;DSP - Primitive which reads input pipe or file and fans it out
+PLL;BETA     - Implements a general purpose phase lock loop.
+PNDETECT;ADP - (short line describing PNDETECT's function)
+PNSCAN;ADP   -
+POLAR        - does rectangular to polar conversion, with phase in degrees
+POLLTC       - Poll time code reader or CPU time
+POLYEVAL     - evaluates a polynomial using previously stored coefficients
+POLYFIT      - fits a polynomial to data
+POLYPHASE    - emulates TMIC input filters, but with symmetric coefficients
+PRIEXPAND;BET- Expands samples by a specified index
+PRIFUNC      - Cyclically alters an X-Midas file or pipe
+PRITHIN      - cyclically thins input data and stores results in output file
+PROTECT      - sets protect flag in a Midas file
+PSDENGINE;DSP- Two-channel spectrum generator. Similar to the UBIQUITOUS
+PSK;BETA     - creates a phase-shift-keyed modulated data file
+PSKDEMOD;DSP - demodulate binary or quaternary differential PSK
+PULSE        - create a pulse of specified width and position
+PWSIZE;BETA  - finds pulse width sizes in a data file
+PY;XMPY      - Small stub primitive
+PYENV;XMPY   - Set up user environment for using and building with the XMPY opt
+QSORT        - sorts type 1000, 2000, 3000, and 5000 files using C library quic
+RAMP         - creates an array data file filled with ramp values.
+RANDOM;DSP   - Generates random numbers/strings. Essentially the same as the
+RATELIMIT;BET-  Limits the change of input data over a specified range
+READID       - sets X-Midas read path identification string
+REALTIME;STE -
+RECALL       - recalls a previously entered command line
+REFORMAT     - changes the data format of an existing MIDAS file.
+RELEASE      - Lists the current X-Midas release notes
+REMOVE       - removes one or more results parameters from the results table
+RESAMPF;BETA - generates a type 2001 file for resampling filter
+RESET;XMPY   - Resets the environment after pipes or macro hose up
+RESULTS      - handles creation and display of results parameters
+RETURN       - Returns from a macro, procedure, subroutine, or control section
+RGATE;BETA   - performs a "replacement-gating" operation.  It takes an input fi
+RMIF         - Remote Midas InterFace handles communication with remote process
+ROWPKPK;BETA - output peak value in each row of Type 2000/1000 data
+RQFSHIFT     - performs Real Quick Frequency SHIFT with optional filter, block
+RSM          - Remote Session Manager (Controls the Remote Sessions)
+RTHISTOGRAM;D- A real-time version of HISTOGRAM. This routine averages N blocks
+RTLISS       - generate real-time Lissajous plots
+RTLISSD      -
+SAM          - Utility for controlling SnapShot Memory and its Patch Panels
+SAMDRIVER    - Primitive driver for the SAM macro
+SARRAY       - subtracts each element of <input> from a constant.
+SAVE         - renames file from .TMP to .PRM (or to specified name, extension)
+SAY          - echoes a text line to the terminal
+SBTUNER      - subband tuner: input -> filter, decimate, tune -> output
+SD350        - software emulation of a spectral dynamics display (XPIPE demo)
+SEDIT        - Edits a string and writes it to a results parameter
+SETNODE      - determines session node for X-Windows displays
+SETSEED      - sets the random number generator seed to a new value
+SIMPLEDISPLAY-
+SIMPLEPLAY;ST-
+SIMPLERECORD;-
+SIMPLESCAN;ST-
+SINCOSINE    - creates sinusoidal data files
+SINKFILE;ADP - Interactively Output data from a Midas file/pipe to a FILE
+SINKMBX      - Writes a Midas file/pipe to a VMS mailbox
+SINKMSG      - transfers messages to readers in a given range over a socket
+SINKPIC;ICE  - Syncronize a PIC playback from a Midas file/pipe
+SINKSAM      - Syncronize a SAM playback from a Midas file/pipe
+SINKSB       - writes data from a Midas file/pipe into a SoundBlaster compatibl
+SINKSOCKET   - Write to a socket from a Midas file/pipe
+SKIP         - moves past macro commands/controls without executing/using them
+SLAVE        - fields commands from a MASTER primitive and has them executed
+SMOOTH       - smooths data file using rectangular filter
+SOCKETMSG    - connects the message queues of two X-Midas sessions
+SOUNDER      - runs a SOUNDBLASTER spectrum analyzer / mixer / AudioCD controll
+SOURCEFILE;AD- Interactively input data from a FILE to a Midas file/pipe
+SOURCEMBX    - Reads VMS mailbox data into a Midas file/pipe
+SOURCEMSG    - reads messages off a socket and posts them to a message queue
+SOURCEPIC;ICE- Synchronize a PIC acquisition into a Midas file/pipe
+SNAPPER;ICE  - simple snapshot/analysis/archive/playback macro for a single ICE
+SOURCESAM    - Syncronize a SAM acquisition into a Midas file/pipe
+SOURCESB     - read data from a SoundBlaster compatible card into a Midas file/
+SOURCESOCKET - Read from a socket to a Midas file/pipe
+SPECTRA      - performs spectral analysis of two input channels
+SPLICE       - extract/insert subrecords/components to/from type 3000/5000 file
+SPLIT        - extracts subrecords/components from type 3000/5000/6000 files
+SRL496RD;BETA- convert non-MIDAS SRL496 data file to MIDAS file(s)
+STATEVECTOR  - grab a set of state vectors from name source & convert to 5000
+STATISTICS   - determines statistics of data file
+STATUS       - outputs the header information of a Midas file
+STEP         - executes next macro command and reenters Suspend mode
+STL3116_SET  - Basic MSL setup macro for the STL3116 clock generator
+STOPWATCH;DSP- Simple timer primitive
+SUBTRACT     - subtracts file 2 from file 1
+SURFDEMO     - Macro to demonstrate use of XRTSURFace
+SVICMD       - send commands to STL SVI
+SWITCH       - Define static switches or get a switch value into a results para
+SYNCPLOT     - Converts sync file and plots output.
+SYNTAX       - show the command line syntax for the named command
+SYSCON       - causes a macro to issue a JSIS-compliant syscon informational me
+T3FILTER;DSP - Primitive which filters a type 3000 input file. All
+TAPGEN;BETA  - Generate tape for polyphase filter.
+TBL;XMPY     - facility for displaying and modifying tables in xtalk or on disk
+TCCMD        - send commands to Metalize time code reader
+TESTCMA;DSP  - (short line describing TESTCMA's function)
+TEST_CYCLOFUN- (short line describing TEST_CYCLOFUNC's function)
+TEST_FASTCYCL- (short line describing TEST_FASTCYCLO's function)
+TEST_PIPEFUNC- (short line describing TEST_PIPEFUNC's function)
+THIN         - copies logical elements from one file to another
+TIMECODE     - set and retrieve time code
+TIMER        - implements various timer functions in X-Midas (not like DCLMidas
+TIMEX        - perform various time transfer functions
+TRACK        - creates Type 5000 position and/or velocity files from NORAD inpu
+TRACKSUB;DSP - implements a tracking bandpass filter and subharmonic generator
+TRANSFFT     - performs a corner turning operation on a 2-D complex table
+TRANSFILTER;D- (short line describing TRANSFILTER's function)
+TRANSFORM    - transforms data between different reference frames,
+TRANSPOSE    - performs column/row translation
+TRAP         - branches on exceptions within a macro
+TTCMD        - send commands to Tera Tuner
+TTUNER       - graphical Tera Tuner controller.
+TUTOR        - present User's Guide / Primitive Programmer's Guide in tutorial
+TWODLIST;BETA- lists a rectangular subset of 2-D (Type 2000) data file
+TWODTHIN     - extracts rectangular subset of 2-D (Type 2000) data file
+TYPEOF       - Gets type and other information of a specified result parameter
+UBIQUITOUS   - creates frequency vs. time spectral output for two channels
+UNGROUP      - split subrecords from type 3000/5000/6000 files into separate fi
+UNIFORM      - creates file of uncorrelated uniformly distributed random number
+UNITS        - list numeric codes for header units and component type names
+UNIVERSE     - shows X-Midas's view of the universe
+UNPROTECT    - clears protect flag in a Midas file
+UNPYENV;XMPY - Tear down user environment set up by PYENV
+UNWRAP       - unwraps/wraps data with optional differencing
+UPDATE       - update user command configuration file
+UPSAMPLE     - upsamples a real input file by given upsampling factor
+UPZERO       - upsamples a file by inserting zeros
+USERID       - sets X-Midas user identification string
+VALUE        - Displays the values of specified results parameters
+VERIFY       - turns ON/OFF the verify modes of X-Midas
+WARNING      - causes a macro to issue a warning message
+WAVEFORM     - creates signal waveforms of various shapes
+WHILE        - implements a logical do-while loop function in a macro
+WHITENOISE   - creates an array of Gaussian white noise random value
+WIDGET       - Creates a standalone widget
+WINDOW       - creates a specified window for FFT based functions
+WRAP         - wraps data so it lies within specified range
+WRITEID      - sets X-Midas write path identification string
+XATMPLOT     - Asynchronous Time, Message plotter
+XAUDIOCD     - A simple X-windows interface to an audio CD changer
+XBHOST;XMPY  - low level OS utility that builds and links HOST primitives
+XBLIB        - Builds the X-Midas libraries and intrinsics.
+XCALL        - Recognizer verb for running X-Widgets and sending events to wind
+XCFGEDIT     - XWindow-based configuration parameter editor
+XCNTRL       - Primitive for running control section driven macro
+XCOLORMAP    - Interactive colormap routine for X-Windows environment.
+XCONTROL     - Recognizer verb in macro controls section for creating control p
+XDATALIST    - X-Windows based X-Midas file viewer/editor/monitor
+XDRWFIR;BETA - an interactive filter generation primitive for X-Windows termina
+XENVIRONMENT - Macro to adjust X-Windows environment settings
+XFPP         - XMidas Fortran PreProcessor
+XGEO         - geosphere map and geolocation macro utilizing X-Geoplot
+XGEOEVENT    - dialog box to modify  XGEOPLOT event records
+XGEOPLOT     - Xwindows based geolocation and plotting routine
+XMBACKUP     - is used to create a backup saveset (.BCK for VMS) or tar
+XMBLD;XMPY   - Builds X-Midas primitives and macros
+XMBLIB;XMPY  - build user libraries
+XMBOPT;XMPY  - Builds an X-Midas option tree
+XMCHECKPROC  - Checks if an X-Midas process is running
+XMDIR        - Change or display the current working directory as X-Midas sees
+XMESSAGE     - a message queue monitor for X-Windows terminals
+XMKILL       - Kills an X-Midas Process
+XMLISTPROCS  - Displays a list of current X-Midas processes
+XMOPT        - performs functions for manipulating options trees
+XMPATH       - Configures dictionary to resemble hierarchical search path
+XMPROCLIST   - Creates a type 3000 file with a list of current processes
+XMREMOTES    - Converts the REMOTES.CFG database into OS specific procedures
+XMRESTORE    - is used to restore a backup saveset (.BCK for VMS) or tar
+XMSGLOG      - Graphical display of all messages from within a macro
+XMULTIPANEL;X- window for grouping multiple X-Midas graphics primitives
+XMVER        - displays current version of X-Midas or an X-Midas option tree
+XP3D         - Generic 3D plotter for special X-Midas files
+XPANEL       - draws a bare window with facilities for overlaying other windows
+XPC          - X-Midas Preprocess and Compile utility
+XPIPE        - Primitive for running a piped macro with graphical feedback
+XPIPEMONITOR;- a pipe monitor for X-Windows terminals
+XPLOT        - a generic Midas file plotter for X-Windows terminals
+XQMONITOR;XMP-
+XRASTER      - Midas file raster plotter for X-Windows terminals
+XRTDISPLAY   - Real time results parameter display for X-Windows terminals
+XRTPLOT      - Real time Midas file plotter for X-Windows terminals
+XRTRASTER    - Real time Midas file raster plotter for X-Windows terminals
+XRTSAMVIEW   - Graphical representation of SAM usage by XMidas files
+XRTSURFACE   - Plot Type 2000 data in a surface plot orientation
+XSCAPE       - Browser interface to X-Midas
+XSCOPE;BETA  - Real time Midas oscilloscope emulator
+XSEARCH      - demo macro patterned after a signal search algorithm
+XTEXT        - A generic ASCII text display
+XTUTOR       - presents step-by-step graphical tutorial on X-widgets and displa
+XVIEW        - Graphical interface to BROWSE, HELP and EXPLAIN
+XWINDOW      - sets the X-Windows default screen, window size, and placement
+ZONE;BETA    - selects data that is within a specified zone of a data file
+ZPIPE        - Transfers XMIDAS pipes between computers

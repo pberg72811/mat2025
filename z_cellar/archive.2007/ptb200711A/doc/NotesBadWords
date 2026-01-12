@@ -1,0 +1,50 @@
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+# NotesBadWords
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+    export TIMESTAMP=`date +%m%d%G_%I%M`
+    export CURRENTSTESWD='/opt/cvs/steswd200505A'
+    export CURRENTRELEASE='siteDelivery'$TIMESTAMP
+
+    cp $CURRENTSTESWD $CURRENTRELEASE -r
+
+    cd $CURRENTRELEASE
+
+    rm -rf Archive/
+    rm -rf tftpboot/
+    rm -rf zmisc/
+
+    rm -rf doc/bookAsm
+    rm -rf doc/bookDigiPort
+    rm -rf doc/bookDsp
+    rm -rf doc/bookIntel
+    rm -rf doc/bookPygtk
+    rm -rf doc/bookSound
+    rm -rf doc/bookSystran
+
+    cd ..
+    tar -cvf $CURRENTRELEASE.tar $CURRENTRELEASE
+
+
+Create an upper case list of single dirty words.
+
+    cat dirtyWords.txt | awk '{ if(NF==1) printf("%s\n",toupper($0)); }' > DW1
+    dos2unix DW1
+
+Create an upper case list of dirty phrases.
+
+    cat dirtyWords.txt | awk '{ if(NF >1) printf("%s\n",toupper($0)); }' > DW2
+    dos2unix DW2
+
+Check the file of interest for dirty single words.
+
+    cat /mnt/cdrom/$CURRENTRELEASE.tar | asciiDump -v > bigDump
+
+    cat bigDump | badWordCheck DW1 > temp
+
+    cat temp | sort > badWordDump
+
+Check the file of interest for dirty phrases.
+
+    perl ~/steswd/src/badWordCheck/src/badWordsCheck.pl theFileOfInterest DW2

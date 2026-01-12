@@ -1,0 +1,123 @@
+!!----------------------------------------UNCLASSIFIED-------------------------------------------
+!! File: simpledisplay.txt                                                                      -
+!!                                                                                              -
+!! Desc: This macro performs a simple display of time series data.                              -
+!!                                                                                              -
+!! Args: fileName   - File to play out             <A:>                                         -
+!!       nFFT       - FFT size.                    <L:>                                         -
+!!       fftOverlap - Overlap for FFT.             <D:>                                         -
+!!       nAve       - Number of spectral averages. <L:>                                         -
+!!                                                                                              -
+!! Swch: savePSD                                                                                -
+!!       SDDS                                                                                   -
+!!       DC                                                                                     -
+!!                                                                                              -
+!! Hist : When       Who  What                                                                  -
+!!        11/19/2002 ptb  Initial Code.                                                         -
+!!        04/01/2003 ptb  Added fft overlap control.                                            -
+!!        07/25/2003 ptb  Added psdfile save control.                                           -
+!!        09/13/2005 ptb  Added SDDS and AC_or_DC switch.                                       -
+!!                                                                                              -
+!! Note:                                                                                        -
+!!                                                                                              -
+!! Examples:                                                                                    -
+!!                                                                                              -
+!!01.0 Description                                                                              -
+!!02.0 Requirements                                                                             -
+!!03.0 Interfaces                                                                               -
+!!04.0 Design Description                                                                       -
+!!05.0 Unit Code                                                                                -
+!!06.0 Unit Test Plan                                                                           -
+!!07.0 Test Results                                                                             -
+!!08.0 Build Procedures                                                                         -
+!!09.0 Notes                                                                                    -
+!!10.0 Reviewers.                                                                               -
+!!----------------------------------------UNCLASSIFIED-------------------------------------------
+startmacro a:fileName["simpledisplay"] & !! File to play out and record.
+           d:nFFT[4*1024]              & !! FFT size.
+	   d:fftOverlap[0.0]           & !! Overlap for FFT.
+	   l:nAve[10]                    !! Number of spectral averages.
+
+!! Handle switches.
+!!-----------------------------------------------------------------------------------------------
+switch savePSD  l:swpsd  get
+switch SDDS     l:sdds   get
+switch DC       l:DC     get
+
+!! Do we save a psd or not?
+!!-----------------------------------------------------------------------------------------------
+if swpsd gt 0 then
+  results psdFileMode 2
+  results psdFileModeName "Saving PSD"
+else
+  results psdFileMode 9
+  results psdFileModeName "Not Saving PSD"
+endif
+
+!! Do we have AC or DC coupling?
+!!-----------------------------------------------------------------------------------------------
+if DC gt 0 then
+  results AC_or_DC "DC"
+else
+  results AC_or_DC AC
+endif
+
+!! Feedback statements.
+!!-----------------------------------------------------------------------------------------------
+say ""
+say "File name   is ^fileName"
+say "nFFT size   is ^nFFT"
+say "fftOverlap  is ^fftOverlap"
+say "nAve        is ^nAve"
+say "psdFileMode is ^psdFileMode ^psdFileModeName"
+say "AC_or_DC    is ^AC_or_DC"
+
+say ""
+
+!! Start piping.
+!!-----------------------------------------------------------------------------------------------
+say "Starting pipe."
+xpipe/setup/xn="SimpleDisplay" on
+
+!!!!!!xmultipanel/xs=100/mname="simpletest" 3 4 5
+
+!! Set up the source file.
+!!-----------------------------------------------------------------------------------------------
+if SDDS gt 0 then
+  sourcefile/replay=1/tl=1M ^fileName _streamOA(ps=4M)
+  blockdec/tl=1M _streamOA(29:) _streamO(ps=4M) 1 512 28
+  headermod _streamO ,, sb
+else
+ sourcefile/replay=1/tl=1M ^fileName _streamO(ps=4M)
+endif
+
+!! Perform time series to frequency convertion.
+!!-----------------------------------------------------------------------------------------------
+ubiquitous/pipeprio=3 &
+_streamO(ps=4M) _freqSeries(ps=4M) ^nFFT hann ^fftOverlap AC_or_DC ^nAve
+
+!! Plot time series.
+!!-----------------------------------------------------------------------------------------------
+xrtplot/auto=3/autol=20/grid/fast/xs=3/xn="Time Series of ^fileName" &
+_streamO(ps=4M) -500 10000
+
+!! Plot power spectrum.
+!!-----------------------------------------------------------------------------------------------
+xrtplot/auto=3/autol=2/grid/fast/xs=4/xn="Power Spectrum of ^fileName" &
+_freqSeries(ps=4M) ,,, log
+
+!! Plot water fall.
+!!-----------------------------------------------------------------------------------------------
+xrtraster/auto=2/autol=2/fast/stretch/bs/xs=5/xc=5/xn="Spectral Waterfall of ^fileName" &
+_freqSeries(ps=4M)
+
+!! Save power spectral density file base on "psdFIleMode".
+!!-----------------------------------------------------------------------------------------------
+sinkfile/replay=psdFileMode _freqSeries psdfile
+
+!! Done.
+!!-----------------------------------------------------------------------------------------------
+pipe off
+ 
+endmacro
+ 

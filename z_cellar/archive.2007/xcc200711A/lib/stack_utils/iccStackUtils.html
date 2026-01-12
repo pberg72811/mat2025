@@ -1,0 +1,263 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=iso-8859-1">
+	<TITLE></TITLE>
+	<META NAME="GENERATOR" CONTENT="StarOffice/5.2 (Linux)">
+	<META NAME="CREATED" CONTENT="20010927;9544500">
+	<META NAME="CHANGEDBY" CONTENT="Paul Bergman">
+	<META NAME="CHANGED" CONTENT="20010927;10312800">
+	<STYLE>
+	<!--
+		TD P { font-family: "Courier", monospace; font-size: 12pt }
+		P { font-family: "Courier", monospace; font-size: 12pt }
+	-->
+	</STYLE>
+</HEAD>
+<BODY>
+<P ALIGN=CENTER STYLE="margin-top: 0.17in; page-break-after: avoid"><FONT FACE="Times New Roman, serif"><FONT SIZE=4 STYLE="font-size: 16pt"><B>stack_utils</B></FONT></FONT></P>
+<P><B>stack_utils</B> provides a set of functions for the creation,
+operation, and destruction of stacks.</P>
+<P>A stack is the combination of an allocated segment of data memory
+plus an index counter. The data is treated as a &quot;First In Last
+Out&quot;, FILO, buffer. The way to add data to the stack is to place
+values in the data memory one at a time and increment the index
+counter each time. This procedure is call &quot;pushing&quot;. The
+way to retreive data is to read the data value at the point indicated
+by the index counter and then decrement the counter. This procedure
+is called &quot;poping&quot;.</P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=2><B>Creation</B> <SPAN STYLE="font-weight: medium">of
+an iccStack is done with the <B>iccStackInitXXXYY</B> funcitons.</SPAN></FONT></P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in"><FONT FACE="Courier, monospace"><FONT SIZE=2>iccStackFLT32_t
+	*iccStackInitFLT32( UNT32 size, CCHAR *name );</FONT></FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT FACE="Courier, monospace"><FONT SIZE=2>iccStackFLT64_t
+	*iccStackInitFLT64( UNT32 size, CCHAR *name );</FONT></FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT FACE="Courier, monospace"><FONT SIZE=2>iccStackFLT96_t
+	*iccStackInitFLT96( UNT32 size, CCHAR *name );</FONT></FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT FACE="Courier, monospace"><FONT SIZE=2>iccStackINT08_t
+	*iccStackInitINT08( UNT32 size, CCHAR *name );</FONT></FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT FACE="Courier, monospace"><FONT SIZE=2>iccStackINT16_t
+	*iccStackInitINT16( UNT32 size, CCHAR *name );</FONT></FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT FACE="Courier, monospace"><FONT SIZE=2>iccStackINT32_t
+	*iccStackInitINT32( UNT32 size, CCHAR *name );</FONT></FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT FACE="Courier, monospace"><FONT SIZE=2>iccStackINT64_t
+	*iccStackInitINT64( UNT32 size, CCHAR *name );</FONT></FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT FACE="Courier, monospace"><FONT SIZE=2>iccStackUNT08_t
+	*iccStackInitUNT08( UNT32 size, CCHAR *name );</FONT></FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT FACE="Courier, monospace"><FONT SIZE=2>iccStackUNT16_t
+	*iccStackInitUNT16( UNT32 size, CCHAR *name );</FONT></FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT FACE="Courier, monospace"><FONT SIZE=2>iccStackUNT32_t
+	*iccStackInitUNT32( UNT32 size, CCHAR *name );</FONT></FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT FACE="Courier, monospace"><FONT SIZE=2>iccStackUNT64_t
+	*iccStackInitUNT64( UNT32 size, CCHAR *name );</FONT></FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT FACE="Courier, monospace"><FONT SIZE=2>iccStackVOIDP_t
+	*iccStackInitVOIDP( UNT32 size, CCHAR *name );</FONT></FONT></P>
+</UL>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT SIZE=2><B>Pushing</B> values on
+to an iccStack is done with the <B>iccStackPushXXXYY</B> functions.</FONT></P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>INT32
+	iccStackPushFLT32 ( iccStackFLT32_t *p, FLT32 value );</FONT></P>
+</UL>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>INT32
+	iccStackPushFLT64 ( iccStackFLT64_t *p, FLT64 value );</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>INT32
+	iccStackPushFLT96 ( iccStackFLT96_t *p, FLT96 value );</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>INT32
+	iccStackPushINT08 ( iccStackINT08_t *p, INT08 value );</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>INT32
+	iccStackPushINT16 ( iccStackINT16_t *p, INT16 value );</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>INT32
+	iccStackPushINT32 ( iccStackINT32_t *p, INT32 value );</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>INT32
+	iccStackPushINT64 ( iccStackINT64_t *p, INT64 value );</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>INT32
+	iccStackPushUNT08 ( iccStackUNT08_t *p, UNT08 value );</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>INT32
+	iccStackPushUNT16 ( iccStackUNT16_t *p, UNT16 value );</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>INT32
+	iccStackPushUNT32 ( iccStackUNT32_t *p, UNT32 value );</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>INT32
+	iccStackPushUNT64 ( iccStackUNT64_t *p, UNT64 value );</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>INT32
+	iccStackPushVOIDP ( iccStackVOIDP_t *p, VOID *value );</FONT></P>
+</UL>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><FONT SIZE=2><B>Poping</B>
+values off an iccStack is done with the <B><SPAN STYLE="font-style: normal">iccStackPopXXXYY</SPAN></B>
+functions.</FONT></P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>INT32
+	iccStackPopFLT32 ( iccStackFLT32_t *p, FLT32 *value );</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>INT32
+	iccStackPopFLT64 ( iccStackFLT64_t *p, FLT64 *value );</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>INT32
+	iccStackPopFLT96 ( iccStackFLT96_t *p, FLT96 *value );</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>INT32
+	iccStackPopINT08 ( iccStackINT08_t *p, INT08 *value );</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>INT32
+	iccStackPopINT16 ( iccStackINT16_t *p, INT16 *value );</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>INT32
+	iccStackPopINT32 ( iccStackINT32_t *p, INT32 *value );</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>INT32
+	iccStackPopINT64 ( iccStackINT64_t *p, INT64 *value );</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>INT32
+	iccStackPopUNT08 ( iccStackUNT08_t *p, UNT08 *value );</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>INT32
+	iccStackPopUNT16 ( iccStackUNT16_t *p, UNT16 *value );</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>INT32
+	iccStackPopUNT32 ( iccStackUNT32_t *p, UNT32 *value );</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>INT32
+	iccStackPopUNT64 ( iccStackUNT64_t *p, UNT64 *value );</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>INT32
+	iccStackPopVOIDP ( iccStackVOIDP_t *p, VOID **value );</FONT></P>
+</UL>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><FONT SIZE=2><B>Flipping</B>
+the values of an iccStack is done with the <B>iccStackFlipXXXYY</B>
+functions.</FONT></P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>INT32
+	iccStackFlipFLT32( iccStackFLT32_t *p );</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>INT32
+	iccStackFlipFLT64( iccStackFLT64_t *p );</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>INT32
+	iccStackFlipFLT96( iccStackFLT96_t *p );</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>INT32
+	iccStackFlipINT08( iccStackINT08_t *p );</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>INT32
+	iccStackFlipINT16( iccStackINT16_t *p );</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>INT32
+	iccStackFlipINT32( iccStackINT32_t *p );</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>INT32
+	iccStackFlipINT64( iccStackINT64_t *p );</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>INT32
+	iccStackFlipUNT08( iccStackUNT08_t *p );</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>INT32
+	iccStackFlipUNT16( iccStackUNT16_t *p );</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>INT32
+	iccStackFlipUNT32( iccStackUNT32_t *p );</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>INT32
+	iccStackFlipUNT64( iccStackUNT64_t *p );</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>INT32
+	iccStackFlipVOIDP( iccStackVOIDP_t *p );</FONT></P>
+</UL>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><FONT SIZE=2><B>Copying</B>
+the values of one iccStack to another iccStack is dones with the
+<B>iccStackCopyXXXYY</B> functions.</FONT></P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>INT32
+	iccStackCopyFLT32 ( iccStackFLT32_t *p2Src, iccStackFLT32_t *p2Des
+	);</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>INT32
+	iccStackCopyFLT64 ( iccStackFLT64_t *p2Src, iccStackFLT64_t *p2Des
+	);</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>INT32
+	iccStackCopyFLT96 ( iccStackFLT96_t *p2Src, iccStackFLT96_t *p2Des
+	);</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>INT32
+	iccStackCopyINT08 ( iccStackINT08_t *p2Src, iccStackINT08_t *p2Des
+	);</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>INT32
+	iccStackCopyINT16 ( iccStackINT16_t *p2Src, iccStackINT16_t *p2Des
+	);</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>INT32
+	iccStackCopyINT32 ( iccStackINT32_t *p2Src, iccStackINT32_t *p2Des
+	);</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>INT32
+	iccStackCopyINT64 ( iccStackINT64_t *p2Src, iccStackINT64_t *p2Des
+	);</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>INT32
+	iccStackCopyUNT08 ( iccStackUNT08_t *p2Src, iccStackUNT08_t *p2Des
+	);</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>INT32
+	iccStackCopyUNT16 ( iccStackUNT16_t *p2Src, iccStackUNT16_t *p2Des
+	);</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>INT32
+	iccStackCopyUNT32 ( iccStackUNT32_t *p2Src, iccStackUNT32_t *p2Des
+	);</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>INT32
+	iccStackCopyUNT64 ( iccStackUNT64_t *p2Src, iccStackUNT64_t *p2Des
+	);</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>INT32
+	iccStackCopyVOIDP ( iccStackVOIDP_t *p2Src, iccStackVOIDP_t *p2Des
+	);</FONT></P>
+</UL>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><FONT SIZE=2><B>Clearing</B>
+the values of an iccStack is dones with the <B>iccStackClearXXXYY</B>
+functions.</FONT></P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>VOID
+	iccStackClearFLT32( iccStackFLT32_t *p );</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>VOID
+	iccStackClearFLT64( iccStackFLT64_t *p );</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>VOID
+	iccStackClearFLT96( iccStackFLT96_t *p );</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>VOID
+	iccStackClearINT08( iccStackINT08_t *p );</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>VOID
+	iccStackClearINT16( iccStackINT16_t *p );</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>VOID
+	iccStackClearINT32( iccStackINT32_t *p );</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>VOID
+	iccStackClearINT64( iccStackINT64_t *p );</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>VOID
+	iccStackClearUNT08( iccStackUNT08_t *p );</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>VOID
+	iccStackClearUNT16( iccStackUNT16_t *p );</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>VOID
+	iccStackClearUNT32( iccStackUNT32_t *p );</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>VOID
+	iccStackClearUNT64( iccStackUNT64_t *p );</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>VOID
+	iccStackClearVOIDP( iccStackVOIDP_t *p );</FONT></P>
+</UL>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><BR>
+</P>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><FONT SIZE=2><B>Destruction</B>
+of an iccStack is done with the <B>iccStackTermXXXYY</B> funcitons.</FONT></P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>VOID
+	iccStackTermFLT32( iccStackFLT32_t *p );</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>VOID
+	iccStackTermFLT64( iccStackFLT64_t *p );</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>VOID
+	iccStackTermFLT96( iccStackFLT96_t *p );</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>VOID
+	iccStackTermINT08( iccStackINT08_t *p );</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>VOID
+	iccStackTermINT16( iccStackINT16_t *p );</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>VOID
+	iccStackTermINT32( iccStackINT32_t *p );</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>VOID
+	iccStackTermINT64( iccStackINT64_t *p );</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>VOID
+	iccStackTermUNT08( iccStackUNT08_t *p );</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>VOID
+	iccStackTermUNT16( iccStackUNT16_t *p );</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>VOID
+	iccStackTermUNT32( iccStackUNT32_t *p );</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>VOID
+	iccStackTermUNT64( iccStackUNT64_t *p );</FONT></P>
+	<LI><P STYLE="margin-bottom: 0in"><FONT SIZE=2>VOID
+	iccStackTermVOIDP( iccStackVOIDP_t *p );</FONT></P>
+</UL>
+<P ALIGN=LEFT STYLE="margin-bottom: 0in"><BR>
+</P>
+<P>Data types used in this description can be found in
+<A HREF="../../sys/iccDataTypes.h">iccDataTypes.h</A></P>
+<P ALIGN=LEFT><SPAN STYLE="text-decoration: none">Header file for
+stack_utils is found in
+</SPAN><A HREF="stack_utils.h">stack_utils.h</A></P>
+</BODY>
+</HTML>

@@ -1,0 +1,20 @@
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+# NotesRSZeroFill
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+The following is a copy of an e-mail sent by Scott Ramsey to Griffin Myers and Steve Weisman.
+
+The answer on the virtual fill is actually a mixture of what you did originally and what I thought needed to be done.  And it is completely undocumented.
+
+The virtual fill is added in a message in two places.  Fill necessary to make the length a multiple of 5 bytes goes at the end of the final virtual fill frame, and will appear after the final message data byte in the generated EDR (this is not per CCSDS, which actually removes virtual fill to a 1 byte boundary).  Additional fill necessary to increase the length from a multiple of 5 bytes up to the full frame size (1115 bytes) goes at the front of the final virtual fill frame (per CCSDS).
+
+An example is a hypothetical frame size of 1 byte which when encoded will look like this (prior to 5-way interleaving):
+
+Zeros(1110 bytes) | Data (1 byte) | Zeros (4 bytes)
+
+And when transmitted will look like this:
+
+FSS(4 bytes) | Data (1 byte) | Zeros (4 bytes) | Parity (160 bytes) | FSS ( 4 bytes ) |  FSS ( 4 bytes )
+
+The external documentation does not describe this adequately at all.  I will try to update our internal documentation to capture this nuance, but in the meantime I think this email is correct.

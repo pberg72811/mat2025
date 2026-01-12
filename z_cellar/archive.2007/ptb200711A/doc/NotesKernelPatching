@@ -1,0 +1,67 @@
+Extract and Patch
+
+Once you have retrieved the kernel sources and patches, you will need to extract them and apply the patches. The pristine 2.4.x and 2.6.x sources can be built as a regular, unprivileged user and this is recommended. [3]
+
+We will begin by creating a directory to hold all the source tarballs and patches, then proceed to extract the sources. For these examples we will assume that you have previously downloaded an earlier release of the kernel and will now need to patch to bring it up to the current version.
+
+			$ mkdir src
+			$ cd src
+		
+
+If your Linux sources are in BZIP compressed format (that is, end with a .bz2 extenstion, then use the following command:
+
+			$ tar xfvj /path/to/linux-2.6.0-test7.tar.bz2
+		
+
+Otherwise, use the options for GZIP compressed data:
+
+			$ tar xfvz /path/to/linux-2.6.0-test7.tar.gz
+		
+
+You should see a list of filenames scroll by as they are being extracted. Verify that the new kernel source directory is created:
+
+			$ ls -l
+		
+
+		total 4
+		drwxr-xr-x   18 kwan   users   4096 Oct  8 15:24 linux-2.6.0-test7
+		-rw-r--r--    1 kwan   users 276260 Nov 15 02:05 patch-2.6.0-test8.gz
+		-rw-r--r--    1 kwan   users 126184 Nov 15 02:07 patch-2.6.0-test9.gz
+		
+
+Next we must apply the patches in order. Patch files are created by the diff program, and can selectively modify one or more files by adding, deleting, or modifying lines in the source code. Because they contain only the differences between files it is usually a lot faster (and better for the Internet in general) if you patch to the current release. (TBF unclear). Appendix TBF shows a typical patch file. Like the kernel sources, the patch files are also compressed.
+
+			$ gunzip patch-2.6.0-test8.gz
+			$ gunzip patch-2.6.0-test9.gz
+			$ ls -l
+		
+
+		-rw-r--r--    1 kwan  users  1072806 Nov 15 02:05 patch-2.6.0-test8
+		-rw-r--r--    1 kwan  users   486902 Nov 15 02:07 patch-2.6.0-test9
+		
+
+Once the patches are uncompressed we can apply them to the kernel sources. Remember that it is important to apply them in order.
+
+			$ cd linux-2.6.0-test7
+			$ patch -p1 <../patch-2.6.0.test8
+			$ patch -p1 <../patch-2.6.0.test9
+		
+
+If it is successful you will see messages similar to the following scroll by:
+
+		patching file Documentation/filesystems/jfs.txt
+		patching file Documentation/filesystems/xfs.txt
+		patching file Documentation/ia64/fsys.txt
+		patching file Documentation/ide.txt
+		patching file Documentation/x86_64/boot-options.txt
+		patching file Makefile
+		
+
+If unsuccessful you will get a warning and be prompted for a file to patch. If this occurs, press Ctrl-C to break out of the patch utility and verify that you are using the correct patch and applying them in the correct order.
+
+Once all the patches are applied you might consider backing up the directory.
+
+			$ cd ..
+			$ mv linux-2.6.0-test7 linux-2.6.0-test9
+			$ tar cfvj linux-2.6.0-test9.tar.bz2 linux-2.6.0-test9
+		

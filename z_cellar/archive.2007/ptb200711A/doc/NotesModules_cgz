@@ -1,0 +1,35 @@
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+# NotesModules_cgz
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+Customizing modules on a linux boot disc
+
+"modules.cgz" is a gzip'ed cpio archive. It's probably burried inside your initrd.img.
+The easiest way (actually, that may not be true. this works. don't know if it's 
+the easiest..) to work with it is(*):
+
+    * First, uncompress initrd. gzip -dc initrd.img > /tmp/initrd
+    * mount, the uncompressed initrd: 
+        mount -o loop /tmp/initrd /mnt/initrd
+    * uncompress the modules.cgz: 
+        gzip -dc /mnt/initrd/modules/modules.cgz | cpio -id 
+      Note that the -d option of cpio creates leading directories as needed. you'll 
+      probably end up with a directory similar to 2.4.20-8BOOT in your current 
+      directory. This is what you want to tinker with..
+    * Add/remove things to your heart's content (keep in mind size, etc. it's got
+      to fit back on a floppy so don't go too crazy).
+    * put the modules.cgz back together again: 
+        find . | cpio -o -H crc | gzip -c9 > modules.cgz
+    * put the initrd.img back together again: 
+      cp modules.cgz /mnt/initrd/modules/ && umount /mnt/initrd && gzip -c9 /tmp/initrd > /tmp/initrd.img
+
+It's not that bad once you get your head around it all. If you still don't get it, 
+try googling for it. There are quite a few sites explaining this in far more 
+detail than here. This is more to job my non-existent memory :)
+
+notes
+* This assumes you've got an initrd to work with. if not, mount your bootdisk
+over loopback, mount -o loop bootdisk.img /mnt/floppy You'll find initrd in /mnt/floppy.
+Last modified 24/09/03
+nessim.kisserli@rhul.ac.uk
