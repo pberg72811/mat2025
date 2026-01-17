@@ -1,6 +1,0 @@
-cat Suntrust_200809.csv   > Suntrust_Total.csv
-cat Suntrust_200810p.csv >> Suntrust_Total.csv
-
-mv Suntrust_Total.csv Suntrust_Total200809.csv
-
-sort -t , -k 2 -n Suntrust_Total200809.csv
