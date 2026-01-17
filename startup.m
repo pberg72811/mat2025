@@ -17,13 +17,12 @@ if isfolder(dataDir), addpath(dataDir); end      %
 mat25Dir = strcat(git_Dir,"\mat2025");           % MAT2025 directory.
 if isfolder(mat25Dir), addpath(mat25Dir); end    %
 
-addpath("adsb");
 addpath("app");
 addpath("blue");
 addpath("docker");
 addpath("dsp");
-addpath("earth");
 addpath("hdf5");
+addpath("heliocentric");
 addpath("iono");
 addpath("mex");
 addpath("res"); 
