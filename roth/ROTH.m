@@ -34,7 +34,9 @@ classdef ROTH < handle
     % C  is the speed of light
     % v  is the velocity of source
     %---------------------------------------------------------------------------------------------
-      fo = ( fc * UNIVERSE.C./(UNIVERSE.C + slantVelocity) ) - fc;
+      % fo = ( fc * UNIVERSE.C./(UNIVERSE.C + slantVelocity) ) - fc;
+      tmp = 2.0 .* slantVelocity ./ UNIVERSE.C;
+      fo = tmp .* fc;
     end
 
     %---------------------------------------------------------------------------------------------
