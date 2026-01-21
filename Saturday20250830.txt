@@ -1,0 +1,12 @@
+46.34180053770885, -67.81790421480055
+9.333MHz
+500000 watt
+https://en.wikipedia.org/wiki/WBCQ_(SW)
+935 miles away.
+
+CODAR
+https://ioos.noaa.gov/project/hf-radar/
+https://hfradar.ioos.us/hfrnet/
+
+http://gyre.umeoce.maine.edu/gomoos/codar/
+https://p5.neracoos.org/projects/surfacecurrents.html
