@@ -29,6 +29,7 @@ addpath("res");
 addpath("roth"); 
 addpath("sgp");
 addpath("utl");
+addpath("vsphere");
 addpath("wsl");
 
 dispTopOfPathList();
