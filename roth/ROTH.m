@@ -17,7 +17,7 @@ classdef ROTH < handle
       beamData_ = zeros(nSamples, 1);
 
       for ii = 1:nSamples
-        beamData_(ii) = sum( elementData(ii,:) .* phaseWeights );
+        beamData_(ii) = sum( elementData(ii,:) .* phaseWeights);
       end
 
     end
@@ -150,8 +150,6 @@ classdef ROTH < handle
         elementAlt_)
     % Perform inverse beamforming.
     %---------------------------------------------------------------------------------------------
-      lambda = UNIVERSE.C/ROP.Fc;                                    %  Calculate wave length.
-
       nElements = length(elementLat_);                               % Number of elements.
       nSamplesPerSweep = ROP.Fs * ROP.Tau;                           % Calculate samples/sweep.
       nSamples = length(radarReturn_);                               % Number of return samples.
@@ -163,24 +161,31 @@ classdef ROTH < handle
 
       azPlus = azimuth_ + antennaOrientation;                        % Adjust target azimuth.
 
-      ii = 1;                                                        % Calculate antenna
-      jj = nElements;                                                % element separation
-      [x0, y0, z0] = geodetic2ecef( wgs84Ellipsoid, ...              % based on element 
-        elementLat_(ii), elementLon_(ii), elementAlt_(ii) );         % latitudes and 
-      [x1, y1, z1] = geodetic2ecef( wgs84Ellipsoid, ...              % longitudes.
-        elementLat_(jj), elementLon_(jj), elementAlt_(jj) );         % 
-      separation = ...                                               % 
-        sqrt( (x0-x1)^2 +  (y0-y1)^2 + (z0-z1)^2 )./nElements;       % 
+      % ii = 1;                                                        % Calculate antenna
+      % jj = nElements;                                                % element separation
+      % [x0, y0, z0] = geodetic2ecef( wgs84Ellipsoid, ...              % based on element 
+      %   elementLat_(ii), elementLon_(ii), elementAlt_(ii) );         % latitudes and 
+      % [x1, y1, z1] = geodetic2ecef( wgs84Ellipsoid, ...              % longitudes.
+      %   elementLat_(jj), elementLon_(jj), elementAlt_(jj) );         % 
+      % separation = ...                                               % 
+      %   sqrt( (x0-x1)^2 +  (y0-y1)^2 + (z0-z1)^2 )./nElements;       % 
+      % 
+      % strt = nElements./2 - 0.5;                                     % Calculate element offset.
+      % stop = strt;                                                   %
+      % elementNumber = -strt:1.0:stop;                                %
+      % 
+      % elementDisplacement = elementNumber .* separation;             % Calculate phase weights.
+      % term1 = 2.0 .* pi .* elementDisplacement;                      %
+      % elementPhaseOffset = term1 .* sind(azPlus) ./ lambda;          %
+      % elementPhaseWeight = ...                                       %
+      %   cos(elementPhaseOffset) + sin(elementPhaseOffset)*1i;        %
 
-      strt = nElements./2 - 0.5;                                     % Calculate element offset.
-      stop = strt;                                                   %
-      elementNumber = -strt:1.0:stop;                                %
-
-      elementDisplacement = elementNumber .* separation;             % Calculate phase weights.
-      term1 = 2.0 .* pi .* elementDisplacement;                      %
-      elementPhaseOffset = term1 .* sind(azPlus) ./ lambda;          %
-      elementPhaseWeight = ...                                       %
-        cos(elementPhaseOffset) + sin(elementPhaseOffset)*1i;        %
+      elementPhaseWeight = ROTH.calculatePhaseWeights( ...
+        azPlus, ...
+        ROP.Fc, ...
+        elementLat_, ...
+        elementLon_, ...
+        elementAlt_);
 
       elementData = zeros(nSamples,nElements);                       % Initialize element buffer.
 
